@@ -1,0 +1,24 @@
+Imagen
+
+\begin{figure}[htbp]
+    \center
+    \includegraphics[scale=0.06]{img/EjDensidadBivariable.png}
+    \caption{Una función de densidad variable}
+\end{figure}
+
+Ejemplo:
+\begin{theorem}
+    This is a theorem.
+\end{theorem}
+
+Cosas:
+\begin{proposition}
+    This is a proposition.
+\end{proposition}
+
+\begin{principle}
+    This is a principle.
+\end{principle}
+
+Citation:
+\cite{nombre}.
