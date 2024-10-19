@@ -1,0 +1,38 @@
+\section{Distribuciones asociadas a un vector ordenado}
+
+
+Sean $X_1, X_2, \dots, X_n$ v.a. cuando las ordenamos las denotamos por
+
+\[ X_{(1)}, X_{(2)}, \dots, X_{(n)} \]
+
+El vector $(X_{(1)}, X_{(2)}, \dots, X_{(n)})$ es un estadístico $n$-dimensional puesto que es función de la muestra, aunque en este caso el estadístico
+no reduce la dimensión de ella. Este vector recibe el nombre de \textbf{estadístico ordenado}. \\
+A su coordenada $X_{(i)}$ la llamaremos \textbf{estadístico ordenado $i$-esimo}. \\
+
+La \textbf{distribución conjunta} del estadístico ordenado en el caso continuo: \\
+Sean $X_1, X_2, \dots, X_n$ v.a.i.i.d. con distribución $F$ continua y sea $f$ su función de densidad, la función de densidad que define la distribución $n$-dimensional
+del vector $T = (X_{(1)}, X_{(2)}, \dots, X_{(n)})$ es el siguiente producto
+
+\[ f_T=(x_1, x_2, \dots, x_n) = n!f(x_1)f(x_2)\dotsb f(x_n) \qquad \text{si} \quad x_1 < x_2 < \dots < x_n \]
+
+\subsection{Distribución del máximo}
+
+Sean $X_1, X_2, \dots, X_n$ v.a.i.i.d. con distribución $F$, la función de distribución de $X_{(n)}$ es
+
+\[ F_{X_{(n)}}(x)=F(x)^n \]
+
+y su función de densidad de $X_{(n)}$ es
+
+\[ f_{X_{(n)}}(x)=nf(x)F(x)^{n-1} \]
+
+\newpage
+
+\subsection{Distribución del mínimo}
+
+Sean $X_1, X_2, \dots, X_n$ v.a.i.i.d. con distribución $F$, la función de distribución de $X_{(1)}$ es
+
+\[ F_{X_{(1)}}(x)=1 - (1 - F(x))^n \]
+
+y su función de densidad de $X_{(1)}$ es
+
+\[ f_{X_{(1)}}(x)=nf(x)(1 - F(x))^{n-1} \]

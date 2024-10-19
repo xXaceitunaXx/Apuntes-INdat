@@ -1,0 +1,103 @@
+\section{La Esperanza Condicionada como v.a.}
+
+
+Al hablar de distribuciones condicionadas, tiene sentido plantearse cómo se incorpora a la esperanza de una variable información sobre el comportamiento de otra
+o vector aleatorio asociado a ella. Por simplificar trataremos el caso bivariante. \\
+Supongamos que $(X,Y)$ es un vector aleatorio bidimensional. La esperanza de la variable $Y$ es una caracteristica propia de la distribución de $Y$, en principio, $P_Y$.
+Si conocemos que $X = x$, el modelo asociado a $Y$ pasará a estar dado por la distribución condicionada $P_{Y/X = x}$. 
+
+\newpage
+
+Al valor esperado de $Y$ en este modelo se le llama esperanza de $Y$ condicionada por $X=x$ y se denota
+
+\[ E\left( Y \bigg{/} X = x \right) \]
+
+Recordando lo estudiado sobre las distribuciones condicionadas, es fácil darse cuenta que, en el caso discreto, la forma de calcular la esperanza condicionada
+está dada por la siguiente expresión:
+
+\[ E\left( Y \bigg{/} X = x \right) = \sum_yyP\left(Y=y\bigg{/X=x}\right) = \sum_yy\frac{p(x,y)}{p_X(x)} \]
+
+mientras que en el aso continuo la regla de cálculo para la esperanza condicionada está dada por la siguiente expresión
+
+\[ E\left( Y \bigg{/} X = x \right) = \int yf_{Y/X=x}(y)dy = \int y\frac{f(x,y)}{f_X(x)}dy \]
+
+Sea $(X,Y)$ vector aleatorio. La función $\phi(x) \equiv E\left( Y \bigg{/} X = x \right)$ está bien definida en el conjunto de posibles valores de $X$ y, por tanto,
+tiene sentido calcular $\phi(X)$. A esta variable aleatoria se le suele denotar como
+
+\[ E\left( Y \bigg{/} X \right) \]
+
+y habitualmente nos referimos a ella como ``esperanza de $Y$ ''. //
+$\phi(X)$ es una nueva variable aleatoria de la que se puede calcular su distribución, esperanza, varianza, etc. Por ejemplo, en el caso discreto, teniendo en cuenta
+la expresión correspondiente para $E\left( Y \bigg{/} X = x \right)$,
+
+\[ E(\phi(X)) = \sum_x \left( \sum_y y\frac{p(x,y)}{p_X(x)} \right) p_X(x) = \sum_{x,y}yp(x,y) = E(Y) \]
+
+La esperanza condicionada tiene las siguientes \textbf{propiedades}:
+\begin{itemize}
+    \item Si $a,b \in \mathbf{R}$ entonces
+        \[ E\left( aY_1 \bigg{/} X \right) = aE\left( Y_1 \bigg{/} X \right) + bE\left( Y_2 \bigg{/} X \right) \]
+    \item $E\left( E\left( Y \bigg{/} \right) \right) = E(Y)$
+    \item Para cualquier función $g$
+        \[ E\left( g(X)Y \bigg{/} X \right) = g(X)E\left( Y \bigg{/} X \right) \]
+\end{itemize}
+
+\newpage
+
+\subsection{Curva de regresión de \textit{Y} sobre \textit{X}}
+
+Sea $(X,Y)$ un vector aleatorio nos planteamos el problema de encontrar una función $f$ que minimice el valor
+
+\[ E(Y - f(X))^2 \]
+
+Si tomamos la notación anterior para $\phi(x)$, entonces, de la tercera propiedad de la esperanza condicionada se deduce que
+
+\[ E(Y -f(X))^2 = E(Y - \phi(X))^2 + E(\phi(X) - f(X))^2 \]
+
+lo que significa que el valor mínimo de $E(Y - f(X))^2$ se alcanza cuando $f = \phi$. \\
+Claro que $\phi(X) = E\left( Y \bigg{/} X \right)$. Esto significa que $\phi(X)$ es la variable aleatoria función de $X$ que
+mejor aproxima a $Y$ en el sentido de los mínimos cuadrados. Por esta razón, nos referimos en ocasiones a $\phi(X)$ como la
+\textit{curva de regresión de $Y$ sobre $X$}. \\
+
+\subsection{Recta de regresión de \textit{Y} sobre \textit{X}}
+
+Sea $(X,Y)$ un vector aleatorio nos planteamos el problema de encontrar $a,b \in \mathbb{R}$ que minimicen el valor
+
+\[ E(Y - aX - b)^2 \]
+
+Se puede ver que este error, como función de $b$ se minimiza cuando $b = E(Y) - aE(X)$. Entonces la función a minimizar es
+
+\[ Var(Y - aX) = Var(Y) + a^2Var(X) - 2aCov(X,Y) \]
+
+y el mínimo se alcanza en $a = \frac{Cov(X,Y)}{Var(X)} = \rho_{X,Y}\frac{\sigma_Y}{\sigma_X}$. Por lo tanto la función a minimizar será
+
+\[ E(Y) + \rho_{X,Y}\frac{\sigma_Y}{\sigma_X}(X - E(X)) \]
+
+que es la variable aletoria función lineal de $X$ que mejor representa a $Y$ en el sentido del error cuadrático. A esta variable
+se la llama \textit{rectra de regresión de $Y$ sobre $X$}.
+
+\subsection{Ejemplos}
+
+Ejemplos \textbf{discretos}:
+\begin{itemize}
+    \item Vector multinomial. Las condicionadas son vinomiales y la curva de regresión es una recta
+    \item Cálculos a partir de una tabla cruzada
+\end{itemize}
+Ejemplos \textbf{continuos}:
+\begin{itemize}
+    \item Vector Normal. Las condicionadas son normales y la curva de regresión es una recta.
+    \item Cálculos a partir de $f(x,y)$
+\end{itemize}
+
+\subsection{La varianza condicionada como v.a.}
+
+Sea $(X,Y)$ un vector aleatorio, definimos la v.a. en función de $X$:
+
+\[ Var\left( Y \bigg{/} X \right) = E\left( \left( Y - E \left( Y \bigg{/} X \right) \right)^2 \bigg{/} X \right)\]
+
+tambien podemos calcularla como:
+
+\[ Var\left( Y \bigg{/} X \right) = E\left( Y^2 \bigg{/} X \right) - \left( E\left( Y \bigg{/} X \right) \right)^2 \]
+
+ademas se verifica la siguiente igualdad:
+
+\[ Var(Y) = E\left( Var\left( Y \bigg{/} X \right) \right) + Var\left( E\left( Y \bigg{/} X \right) \right) \]

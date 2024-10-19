@@ -1,0 +1,21 @@
+\section{Distribución multinomial}
+
+
+Dado un experimento aleatorio con $k$ resultados posibles, de tal modo que la probabilidad de cada resultado $p_1, p_2, \dots, p_k$ se mantiene constante,
+un vector aleatorio $(X_1, X_2, \dots, X_k)$ sigue distribución multinomial si cada $X_{i}$ representa el número de veces que ocurre el resultado $i$-esimo
+en $n$ repeticiones independientes del experimento. \\
+Dados $0 \leq x_1, x_2, \dots, x_k \leq n$ y $0 \leq p_1, p_2, \dots, p_k \leq 1$ con $\sum_{i = 1}^{k}x_i = n$ y $\sum_{i = 1}^{k}p_i = 1$, si 
+$(X_1, X_2, \dots, X_k)$ sigue distribución multinomial, tenemos
+
+\[ P(X_1 = x_1, X_2 = x_2,\dots,X_k = x_k) = \frac{n!}{x_{1}!x_{2}!\cdots x_{k}!}p_{1}^{x_1}p_{2}^{x_2}\cdots p_{k}^{x_k}\]
+
+Propiedades:
+\begin{itemize}
+    \item Todas las distribuciones marginales de un vector multinomial son multinomiales (binomiales en su caso)
+    \item Todas las distribuciones condicionales de un vector multinomial son multinomiales (binomiales en su caso)
+\end{itemize}
+Por ejemplo, podemos decir que, si $(X_1,\dots,X_k)\thicksim\mathcal{M}(n;p_1,\dots,p_k)$ entonces:
+\begin{itemize}
+    \item $X_i\thicksim b(n, p_i),\quad i = 1,\dots,k$
+    \item $X_1 + \cdots + X_i\thicksim b(n, p_1 + \cdots + p_k), \quad i = 1, \dots, k$
+\end{itemize}

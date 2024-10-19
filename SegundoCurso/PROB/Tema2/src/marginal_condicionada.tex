@@ -1,0 +1,190 @@
+\section{Distribuciones marginales y condicionadas}
+
+
+\subsection{Distribuciones marginales}
+
+A la distrubución de cada variable de las que componen un vector aleatorio se le denomina \textit{distribución marginal}.
+Dado el vector aleatorio $(X, Y)$ podemos hablar de la \textit{distribución marginal de $X$} y de la \textit{distribución marginal de $Y$}. \\
+\subsubsection{Variables discretas} 
+Dadas $X$ e $Y$ variables discretas con función de probabilidad conjunta $p(x, y)$, las funciones de probabilidad 
+marginales de ambas variables son:
+
+\[ p_{X}(x) = P(X = x) = \sum_{y}P(X = x, Y = y) = \sum_{y}p(x, y) \]
+\[ p_{Y}(y) = P(Y = y) = \sum_{y}P(X = x, Y = y) = \sum_{x}p(x, y) \] 
+
+\begin{theorem}
+    Podemos obtener la distribución marginal de $X$ a partir de la tabla con la función de masa de probabilidad 
+    conjunta sumando los valores por filas. Análogamente, sumando los valores de las columnas obtendremos la de $Y$:
+
+    \begin{center}
+        \begin{tabular}{|l|ccccccc|c|}
+        \hline
+        \diagbox{X}{Y} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & $P_{X}$\\
+            \hline
+            2 & \(\frac{1}{28}\) & 0 & 0 & 0 & 0 & 0 & 0 & \(\frac{1}{28}\) \\
+            3 & \(\frac{1}{28}\) & \(\frac{1}{28}\) & 0 & 0 & 0 & 0 & 0 & \(\frac{2}{28}\) \\
+            4 & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & 0 & 0 & 0 & 0 & \(\frac{3}{28}\) \\
+            5 & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & 0 & 0 & 0 & \(\frac{4}{28}\) \\
+            6 & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & 0 & 0 & \(\frac{5}{28}\) \\
+            7 & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & 0 & \(\frac{6}{28}\) \\
+            7 & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{1}{28}\) & \(\frac{7}{28}\) \\
+            \hline
+            $P_{Y}$ & \(\frac{7}{28}\) & \(\frac{6}{28}\) & \(\frac{5}{28}\) & \(\frac{4}{28}\) & \(\frac{3}{28}\) & \(\frac{2}{28}\) & \(\frac{1}{28}\) & \\
+            \hline
+        \end{tabular}     
+    \end{center}
+
+        Por tanto
+
+        \[ P(X = 3) = p_{X}(3) = \frac{3}{28} \]
+
+        \[ P(Y = 2) = p_{Y}(2) = \frac{6}{28} \]
+
+\end{theorem}
+
+\newpage
+
+\subsection{Variables continuas}
+Dadas $X$ e $Y$ variables continuas con función de densidad conjunta $f(x, y)$, las funciones de densidad marginales
+de ambas variables son
+
+\[ f_{X}(x) = \int_{-\infty}^{\infty} f(x, y)dy \]
+\[ f_{Y}(y) = \int_{-\infty}^{\infty} f(x, y)dx \]
+
+\begin{theorem}
+    Continuando con el vector $(X, Y)$ del ejemplo continuo anterior cuya densidad conjunta uniforme sobre el 
+    círculo unidad era
+
+    \[f(x, y) = \left\{
+        \begin{array}{rcr}
+            \frac{1}{\pi}   & si    & x^2 + y^2 \leq 1 \\
+            0               & si    & x^2 + y^2 > 1
+        \end{array}
+    \right\}\]
+
+    La densidad marginal para $X$ es:
+
+    \[ f_{X}(x) = \int_{-\sqrt{1 - x^2}}^{\sqrt{1 - x^2}} f(x, y) dy = \int_{-\sqrt{1 - x^2}}^{\sqrt{1 - x^2}} \frac{dy}{\pi} = \frac{2}{\pi} \sqrt{1 - x^2}, \quad -1 < x < 1 \]
+
+\end{theorem}
+
+\subsection{Distribuciones condicionadas}
+
+La idea de una probabilidad condicionada se puede incorporar a los modelos de vectores aleatorios. Supongamos que el experimento
+de interés se recoge en el vector aleatorio $X = (X_a, X_b)$ del que sabemos que el subvector $X_a$ toma el valor $x_a$. \\
+El grado de creencia en los sucesos relativos a la otra parte del experimento, $X_b$, se verá modificado. A la distribución de $X_b$
+modificada para incorporar esta información la llamaremos \textit{distribución de $X_b$ condicionada a $X_a$}.
+En esta sección se estudiará la manera en la que se actualiza la distrubución de un vector aleatorio en estas circunstancias, 
+considerando por separado los casos discreto y continuo. 
+\subsubsection{Caso discreto}
+Las distribuciones condicionadas se obtienen a partir de la definición de probabilidad condicionada
+de sucesos. Supongamos por ejemplo que ha ocurrido ($X_a$ = $x_a$). La probabilidad de que ($X_b$ = $x_b$)
+será
+\[ P\left( {X_{b} = x_{b}} \bigg{/} {X_{a} = x_{a}} \right) = \frac{P(X_{a} = x_{a}, X_{b} = x_{b})}{P(X_{a} = x_{a})} = \frac{p(x_{a}, x_{b})}{p_{x_{a}}(x_{a})} \]
+
+A la función de masa de probabilidad que incorpora la información ($X_a$ = $x_a$) se le llama \textit{función de masa de probabilidad condicionada por $x_a$}
+y se denota $p(x_b|x_a)$, es decir 
+
+\[ p\left( {x_b} \bigg{/} {x_a} \right) = P\left( {X_{b} = x_{b}} \bigg{/} {X_{a} = x_{a}} \right) \]
+
+\newpage
+
+Esta función está bien definida para 
+
+\[ P(X_{a} = x_{a}) > 0 \qquad p\left(x_b \bigg{/} x_a\right) = \frac{p(x_a, x_b)}{p_{x_{a}}(x_a)} \]
+
+Esta última igualdad reescrita de la forma siguiente
+
+\[ p(x_a, x_b) =  p_{x_a}(x_a)p\left( x_b \bigg{/} x_a \right)\]
+
+o, equivalente, en la forma
+
+\[ P(X_a = x_a, X_b = x_b) = P(X_a = x_a)P\left( X_b = x_b \bigg{/} X_a = x_a \right) \]
+
+se conoce como \textit{``Regla de la multiplicación''}. Esta regla nos permite obtener la distribución conjunta
+a partir de las distribuciones marginales y condicionadas.
+
+\begin{theorem}
+    
+    Se lanza un dado. Lllamaremos $X$ al resultado obtenido. A continuación se lanzan $X$ monedas. Representaremos por $Y$
+    el número de caras obtenidas. Calcula la distribución de $X$, la distribución de $Y$ condicionada por $X$, la distribución
+    conjunta de $(X, Y)$ y la distribución marginal de $Y$. \\
+    Obviamente la dsitribución de $X$ es $P(X = i) = \frac{1}{6},\quad i = 1,2,\dots, 6$. Si se lanzan $i$ monedas, el número
+    de resultados diferentes que podemos obtener es $2^{i}$ (Combinatoria de $i$ elementos tomados de $2$ en $2$). \\
+    De esas $2^{i}$ posibilidades, en $\binom{i}{j}$ se registran $j$ caras. Asumiendo que las monedas no estan sesgadas
+    podemos aplicar la \textit{Regla de Laplace} para obtener
+
+    \[ P\left( Y = j \bigg{/} X = i \right) = \binom{i}{j}\frac{1}{2^{i}} \]
+
+    para $0 \leq j \leq i$. La distribución conjunta es, por tanto,
+
+    \[ P(X = i, Y = j) = P(X = i) P\left( Y = j \bigg{/} X = i \right) = \frac{1}{6}\binom{i}{j}\frac{1}{2^{i}} \]
+
+    para $i = 1,2,\dots,6$ y $0 \leq j \leq i$. Podemos expresar la distribución conjunta en la siguiente tabla:
+
+    \begin{center}
+        \begin{tabular}{l|ccccccc}
+        \diagbox{X}{Y} & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+            \hline
+            1 & \(\frac{1}{6}\frac{1}{2}\) & \(\frac{1}{6}\frac{1}{2}\) & 0 & 0 & 0 & 0 & 0 \\
+            2 & \(\frac{1}{6}\frac{1}{4}\) & \(\frac{1}{6}\frac{5}{4}\) & \(\frac{1}{6}\frac{1}{4}\) & 0 & 0 & 0 & 0 \\
+            3 & \(\frac{1}{6}\frac{1}{8}\) & \(\frac{1}{6}\frac{3}{8}\) & \(\frac{1}{6}\frac{3}{8}\) & \(\frac{1}{6}\frac{1}{8}\) & 0 & 0 & 0 \\
+            4 & \(\frac{1}{6}\frac{1}{16}\) & \(\frac{1}{6}\frac{4}{16}\) & \(\frac{1}{6}\frac{6}{16}\) & \(\frac{1}{6}\frac{4}{16}\) & \(\frac{1}{6}\frac{1}{16}\) & 0 & 0 \\
+            5 & \(\frac{1}{6}\frac{1}{32}\) & \(\frac{1}{6}\frac{5}{32}\) & \(\frac{1}{6}\frac{10}{32}\) & \(\frac{1}{6}\frac{10}{32}\) & \(\frac{1}{6}\frac{5}{32}\) & \(\frac{1}{6}\frac{1}{32}\) & 0 \\
+            6 & \(\frac{1}{6}\frac{1}{64}\) & \(\frac{1}{6}\frac{6}{64}\) & \(\frac{1}{6}\frac{15}{64}\) & \(\frac{1}{6}\frac{20}{64}\) & \(\frac{1}{6}\frac{15}{64}\) & \(\frac{1}{6}\frac{6}{64}\) & \(\frac{1}{6}\frac{1}{64}\) \\
+            \hline
+            $P(Y)$ & $0.1641$ & $0.3125$ & $0.2578$ & $0.1667$ & $0.0755$ & $0.0208$ & $0.0026$ \\
+        \end{tabular}
+    \end{center}
+
+    Sumando por columnas obtendremos la distribución marginal de Y, recogida en el margen inferior de la tabla
+
+
+\end{theorem}
+
+\subsubsection{Caso continuo}
+En el caso continuo la distribución condicionada es también continua. A la función de densidad correspondiente se le llama función
+de densidad condicionada y se denota mediante cualquiera de los dos simbolos siguientes:
+
+\[ f\left( x_a \bigg{/} x_b \right) \quad \text{o} \quad f_{X_b / X_a = x_a}(x_b) \]
+
+Cualquiera de los dos representa la densidad el vector aleatorio $X_b$ cuando se incorpora al modelo de información consistente en
+que $X_a$ toma el valor $x_a$. \\
+Se puede comprobar que la densidad condicionada se calcula de forma análoga a la función de densidad condicionada del caso discreto:
+
+\[ f\left( x_a \bigg{/} x_b \right) = \frac{f(x_a, x_b)}{f_{X_a}}(x_a) \]
+
+es decir, que la densidad condicionada se obtiene dividiendo la densidad conjunta por la densidad marginal de la variable (o vector)
+por la que condicionamos. \\
+Igual que en el caso discreto, reescribir convenientemente la igualdad anterior nos conduce a una nueva \textit{``Regla de la multiplicación''}:
+
+\[ f(x_a, x_b) = f_{X_a}(x_a)f\left( x_a \bigg{/} x_b \right) \]
+
+\begin{theorem}
+    
+    Consideremos el experimento aleatorio consistente en elegir un punto al azar, $x$, en el intervalo $(0, 1)$. Una vez elegido $x$ escogemos
+    otro punto $y$ al azar en el intervalo $(0, x)$. Llamemos $(X, Y)$ al vector aleatorio cuyas coordenadas son los puntos elegidos por el 
+    procedimiento anterior. Calcular
+    \begin{enumerate}[a)]
+        \item la densidad conjunta de $(X, Y)$
+        \item la densidad marginal de $Y$
+        \item la probabilidad de que $Y$ tome un valor menor que $0.8$
+    \end{enumerate}
+
+    // Falta la resolución de a)
+
+    Teniendo $f(x, y) = \frac{1}{x}$ función de densidad conjunta, podemos calcular la densidad marginal de $Y$:
+
+    \[ f_{Y}(y) = \int_{y}^{1}f(x, y)dx = \int_{y}^{1}\frac{1}{x}dx = -\log{y}, \quad 0 < y < 1 \]
+
+    La función de distribución asociada a Y es
+
+    \[ F_{Y}(y) = \int_{0}^{y}f_{y}(t)dt = y(1 - \log_{y}), \quad 0 < y < 1 \]
+
+    La probabilidad que se pide en el apartado c) es fácil de calcular a partir de $F_{Y}$:
+
+    \[ P(Y < 0.8) = F_{Y}(0.8) = 0.8(1 - \log{0.8}) \approx 0.9785 \]
+
+\end{theorem}
+
+\newpage

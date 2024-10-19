@@ -1,0 +1,46 @@
+\section{Transformaciones de vectores aleatorios}
+
+
+Dado el vector aleatorio $X = (X_1, X_2, \dots, X_n)$ con función de densidad conjunta $f_X(x_1, x_2, \dots, x_n)$, lo tranformamos
+en otro vector aleatorio $Y = (Y_1, Y_2, \dots, Y_n)$ con la misma dimensión
+
+\[ \left( \begin{matrix}
+    Y_1 = g_1(X_1,X_2,\dots,X_n) \\
+    Y_2 = g_2(X_1,X_2,\dots,X_n) \\
+    \vdots \\
+    Y_n = g_n(X_1,X_2,\dots,X_n)
+\end{matrix} \right) \]
+
+de tal modo que existan transformadas inversas. La función de densidad continua será
+
+\[ f_Y(y_1, y_2, \dots, y_n) = f_X(g^{-1}(y_1, y_2, \dots, y_n))|J| \quad \text{donde} \quad J = 
+\left| \begin{matrix}
+    \frac{dx_1}{dy_1} & \frac{dx_1}{dy_2} & \cdots & \frac{dx_1}{dy_n} \\
+    \frac{dx_2}{dy_1} & \frac{dx_2}{dy_2} & \cdots & \frac{dx_2}{dy_n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \frac{dx_n}{dy_1} & \frac{dx_n}{dy_2} & \cdots & \frac{dx_n}{dy_n}
+\end{matrix} \right| \]
+
+
+\newpage
+
+\subsection{Convolución}
+
+Si $X$ e $Y$ son variables aleatorias idependientes con funciones de densidad $f_X(x)$ y $f_Y(y)$, respectivamente, entonces la función de densidad de 
+$Z = X + Y$ es
+
+\[ f_Z(z) = \int_{-\infty}^{\infty}f_{X}(z - x)f_{Y}(x)dx \]
+
+\subsection{Transformaciones lineales}
+
+Dado $X$ un vector aleatorio $n$-dimensional y $u$ un vector en $\mathbb{R}^n$, la variable aleatoria $Y = u^tX$ cumple
+
+\[ E[Y] = E[u^tX] = u^tE[X] \]
+\[ Var[Y] = Var[u^tX] = u^t\Sigma_Xu \]
+
+Dado $X$ un vector aleatorio $n$-dimensional y $A$ una matriz $m \times n$-dimensional, el vector aleatorio $Y = AX$($m$-dimensional) cumple
+
+\[ E[Y] = E[AX] = AE[X] \]
+\[ \Sigma_Y = E[(AX - AE[X])(AX - AE[X])^t] = A\Sigma_XA^t \]
+
+\newpage

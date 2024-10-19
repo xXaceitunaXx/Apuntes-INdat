@@ -1,0 +1,148 @@
+\section{Características de un vector aleatorio}
+
+
+\subsection{Esperanza}
+
+El vector de medias de $X$ es el vector cuyas componentes son las esperanzas de cada componente de $X$
+
+\[ E[X] = \left( \begin{matrix}
+    E[X_1] \\
+    E[X_2] \\
+    \vdots \\
+    E[X_n] 
+\end{matrix} \right) \]
+
+\subsection{Covarianza}
+
+Cuando tenemos que estudiar la variación conjunta de dos variables aleatorias que forman un vector aleatorio,
+la descripción individual de cada una de las variables por medio de los correspondientes parámetros poblacionales
+resulta insuficiente como resumen numérico del vector aleatorio pues no informa de un aspecto tan importante
+como es la asociación entre las dos variables. \\
+Las versiones poblacionales de las medidas de asociación que se manejan en Estadística Descriptiva nos servirán
+ahora para cuantificar la asociación entre variables aleatorias estudiadas sobre la misma población. \\
+
+\textbf{Covarianza:} La covarianza de dos variables aleatorias $X$ e $Y$ se denota $Cov(X, Y)$ ó $\sigma_{X,Y}$
+y se define como el valor medio de los productos cruzados de las distancias de los valores de cada una de las
+variables respecto a su media, es decir
+
+\[ Cov(X, Y) = \sigma_{X, Y} = E[(X - E[X])(Y - E[Y])] \]
+
+\newpage
+
+Para el \textit{Caso discreto} tenemos
+\begin{itemize}
+    \item $\Omega = \{(x_i, y_j)/ i, j = 1, 2, \dots\} \subset \mathbb{R}^2$
+    \item f.m.p: $p(x_i, y_j)$
+\end{itemize}
+
+\[ \sigma_{X, Y} = \displaystyle\sum_{i,j}(x_i - \mu_{X})(y_j - \mu_{Y})p(x_i, y_j) \]
+
+En cambio para el \textit{Caso continuo} tenemos
+\begin{itemize}
+    \item $\Omega = \subset \mathbb{R}^2$
+    \item f.dens: $f(x, y)$
+\end{itemize}
+
+\[ \sigma_{X, Y} = \int (x - E[X])(y - E[Y])f(x, y)dx \]
+
+Dada la definición de covarianza de un vector podemos realizar las siguientes observaciones:
+
+\begin{itemize}
+    \item La varianza indica el sentido de la asociación a través del signo:
+    \begin{enumerate}
+        \item $Cov(X, Y) > 0 \Rightarrow$ asociación lineal creciente
+        \item $Cov(X, Y) < 0 \Rightarrow$ asociación lineal decreciente
+        \item $Cov(X, Y) = 0 \Rightarrow$ indica la ausencia de asociación lineal. En particular, si $(X, Y)$ son variables aleatorias independientes
+                se prueba facilmente que $E[XY] = E[X]E[Y]$, con lo que $Cov(X, Y) = 0$
+    \end{enumerate}
+    \item La covarianza es invariante por cambios de localización de las variables, pero no por cambios de escala:
+     
+    \[ (X, Y) \text{vector aleatorio,} \quad (X', Y') = (aX + b, cY + d), a, c > 0 \implies \]
+    \[ \implies Cov(X', Y') = acCov(X, Y) \]
+
+    \item La covarianza no se puede usar directamente como medida de asociación lineal porque su valor depende de las unidades de medida de las variables.
+\end{itemize}
+
+La covarianza tiene las siguientes \textbf{propiedades}:
+\begin{itemize}
+    \item $Cov(X, Y) = E[XY] - E[X]E[Y]$
+    \item si $X$ e $Y$ son independientes, entonces $Cov(X, Y) = 0$
+    \item $Cov(X, Y) = 0$ no garantiza que $X$ e $Y$ sean independientes
+    \item $Cov(X, X) = Var(X)$
+    \item $Cov(aX + b, cY + d) = acCov(X, Y),\quad a, c >0$
+    \item $Cov(\sum_{i}X_i, \sum_{j}Y_j) = \sum_{i}\sum_{j}Cov(X_i, Y_j)$
+    \item $Var(X + Y) = Var(X) + Var(Y) + 2Cov(X, Y)$
+    \item $Var(\sum_{i}X_i) = \sum_{i}Var(X_i) + \sum_i\sum_kCov(X_i, X_k)$
+\end{itemize}
+
+\newpage
+
+\subsection{Correlación}
+
+El \textbf{Coeficiente de Correlación} es una medida de asociación lineal entre variables aleatorias que se define a partir de la covarianza
+y evitando los inconvenientes de esta: 
+
+\[ \rho(X, Y) = \rho_{X, Y} = \frac{Cov(X, Y)}{\sqrt{Var(X)Var(Y)}} = \frac{\sigma_{X, Y}}{\sigma_X\sigma_Y} \]
+
+Dada la definición de correlación de un vector podemos realizar las siguientes observaciones: 
+
+\begin{itemize}
+    \item El coeficiente de correlación es invariante por cambios de locaclización y escala en las variables:
+    
+    \[ (X, Y) \text{vector aleatorio}, (X', Y') = (aX + b, cY + d), a, c > 0 \implies \]
+    \[ \implies \rho(X', Y') = \rho(X, Y) \]
+
+    \item El coeficiente de correlación es adimensional, no tiene unidades. De hecho, el coeficiente de correlación es igual a la covarianza
+            de las variables tipificadas:
+
+    \[ (X, Y) \text{vector aleatorio}, \quad Z_{X} = \frac{X - \mu_{X}}{\sigma_X}, Z_{Y} = \frac{Y - \mu_Y}{\sigma_Y} \implies \]
+    \[ \implies \rho(X, Y) = Cov(Z_X, Z_Y) \]
+
+    \item El valor del coeficiente de correlación está acotado:
+    
+    \[ |\rho(X, Y)| \leq 1 \]
+
+
+\end{itemize}
+
+La correlación tiene las siguientes \textbf{propiedades}:
+\begin{itemize}
+    \item Si $X$ e $Y$ son independientes, entonces $\rho(X, Y) = 0$
+    \item $\rho(X, Y) = 0$ no garantiza que $X$ e $Y$ sean independientes
+    \item $|\rho(X, Y)| \leq 1$
+    \item Si $a, c > 0$, entonces $\rho(aX + b, cY + d) = \rho(X, Y)$
+    \item $|\rho(X, X)| = 1$
+    \item Si $a > 0$ entonces $|\rho(X, aX + b)| = 1$
+\end{itemize}
+
+\newpage
+
+\subsection{Matriz de covarianzas}
+
+La matriz de varianzas y covarianzas, o simplemente matriz de covarianzas, es simetrica y semidefinida positiva. Se define como
+
+\[ \Sigma_{X} = \left( \begin{matrix}
+        Var[X_1] & Cov(X_1, X_2) & \cdots & Cov(X_1, X_n) \\
+        Cov(X_2, X_1) & Var[X_2] & \cdots & Cov(X_2, X_n) \\
+        \vdots & \vdots & \ddots & \vdots \\
+        Cov(X_n, X_1) & Cov(X_n, X_2) & \cdots & Var[X_n]
+\end{matrix} \right) \]
+
+\subsection{Matriz de correlaciones}
+
+La matriz de correlaciones es simetrica y semidefinida positiva. Se define como
+
+\[ R_{X} = \left( \begin{matrix}
+        1 & \rho(X_1, X_2) & \cdots & \rho(X_1, X_n) \\
+        \rho(X_2, X_1) & 1 & \cdots & \rho(X_2, X_n) \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \rho(X_n, X_1) & \rho(X_n, X_2) & \cdots & 1
+\end{matrix} \right) \]
+
+\subsection{Características numéricas de la distribución multinomial}
+
+\begin{itemize}
+    \item Medias: $\mu_{X_i} = E[X_i] = np_i$
+    \item Varianzas: $\sigma_{X_i}^2 = Var[X_i] = np_i(1 - p_i)$
+    \item Covarianzas: $\sigma_{X_i, X_j} = Cov(X_i, X_j) = -np_ip_j$
+\end{itemize}

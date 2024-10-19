@@ -1,0 +1,33 @@
+\section{Independencia entre variables aleatorias}
+
+
+Dos variable aleatorias $X$ e $Y$ se dicen \textit{independientes} si el conocimiento del valor que toma una, no nos aporta información sobre el valor 
+que tomará la otra. \\
+Para cualesquiera $A, B \subset \mathbb{R}$,
+
+\[ P((X \in A) \cap (Y \in B)) = P(X \in A)P(Y \in B) \]
+
+Equivalentemente, para cualesquiera $x, y \in \mathbb{R}$
+
+\[ P((X \leq x) \cap (Y \leq y)) = P(X \leq x)P(Y \leq y) \]
+
+\newpage
+
+\textbf{Propiedad:} Si $X$ e $Y$ son independientes, entonces
+
+\[ Var[X + Y] = Var[X] + Var[Y] \]
+
+\begin{itemize}
+    \item Variables aleatorias \textbf{discretas} son Indep. si
+    \begin{enumerate}
+        \item $p(y | x) = p_{Y}(y) \qquad \text{para cualesquiera $x, y$ o bien}$
+        \item $p(x | y) = p_{X}(x) \qquad \text{para cualesquiera $x, y$ o bien}$
+        \item $p(x, y) = p(x | y)p_{Y}(y) = p_{X}(x)p_{Y}(y) $
+    \end{enumerate}
+    \item Variables aleatorias \textbf{continuas} son Indep. si
+    \begin{enumerate}
+        \item $f(y | x) = f_{Y}(y) \qquad \text{para cualesquiera $x, y$ o bien}$
+        \item $f(x | y) = f_{X}(x) \qquad \text{para cualesquiera $x, y$ o bien}$
+        \item $f(x, y) = f(x | y)f_{Y}(y) = f_{X}(x)f_{Y}(y) $
+    \end{enumerate}
+\end{itemize}
