@@ -1,0 +1,103 @@
+\input{preamble}
+\input{format}
+\input{commands}
+
+\begin{document}
+
+\begin{Large}
+    \textsf{\textbf{Ejercicio Normal}}
+
+    Entrega práctica 2
+\end{Large}
+
+\vspace{1ex}
+
+\textsf{\textbf{Alumno:}} \text{Juan Horrillo Crespo}, \href{mailto:juan.horrillo22@estudiantes.uva.es}{\texttt{juan.horrillo22@estudiantes.uva.es}}
+
+\vspace{1ex}
+
+Sean $X_1, X_2, \dots, X_n$ variables aleatorias idependientes igualmente distribuidas donde $X_i \thicksim N(\mu, \sigma)$ y consideramos $\theta = (\mu, \sigma)$.
+
+Lemas:
+\begin{enumerate}
+    \item El EMV de la distribución normal es $\hat{\theta} = (\overline{X}, S)$
+    \item $\begin{pmatrix}\overline{X}\\S\end{pmatrix} \thicksim N\begin{pmatrix}S^2/n & 0\\0 & S^2/n\end{pmatrix}$
+    \item Sea $\hat{p}$ EMV de $p$. Sea $g(\hat{p})$ una función del parámetro. \\ Entonces $g(\hat{p}) \thicksim N(g(p), G(\hat{p})\widehat{Var(p)}G(\hat{p})')$
+\end{enumerate}
+
+\begin{problem}{}{test_hipotesis}
+Contrastar $H_0\text{:}\quad \frac{\mu}{\sigma} = 1$
+\end{problem}
+
+Formalizamos el contraste de hipotesis:
+
+\[
+    H_0\text{:}\quad \frac{\mu}{\sigma} = 1
+\]
+
+\[
+    H_1\text{:}\quad \frac{\mu}{\sigma} \neq 1
+\]
+
+Estamos ante un caso de inferencia multiparamétrica pues tenemos una hipótesis compuesta. Usaremos el test de Wald para realizar el contraste.
+
+Para ello definiremos una función $g$ que transforme nuestro espacio paramétrico a $\mathbb{R}$ con el objetivo de calcular
+el estadístico de Wald.
+
+
+Como la hipotesis a realizar es que $\frac{\mu}{\sigma} = 1$, podemos reescribirla como $\mu = \sigma$, y de forma inmediata $\mu - \sigma = 0$.
+
+Por ello definimos $g$ de la siguente manera:
+
+\[
+    g: \theta \longrightarrow \mathbb{R} \text{ donde } g(\theta) = \mu - \sigma
+\]
+
+Reescribimos la hipótesis para nuestra función $g$:
+
+\[
+    H_0\text{:}\quad g(\theta) = 0
+\]
+
+\newpage
+
+Hallamos la distribución de la función del parámetro utilizando el $\Delta$-método
+
+\[
+    G(\theta) = \begin{pmatrix}\frac{\partial g(\theta)}{\partial \mu}  & \frac{\partial g(\theta)}{\partial \sigma}\end{pmatrix} = \begin{pmatrix}1 & -1\end{pmatrix}
+\]
+
+\[
+    g(\theta) \thicksim N(g(\theta_0),G(\theta)\widehat{Var(\theta)}G(\theta)') = N\left(0, \begin{pmatrix}1 & -1\end{pmatrix} \frac{S^2}{n} \begin{pmatrix}1 \\ -1\end{pmatrix}\right) =
+\]
+
+\[
+    = N(0, \frac{3S^2}{2n})
+\]
+
+Finalmente calculamos el estadístico de Wald y calculamos el p-valor:
+
+\[
+    W_{\text{obs}} = (\overline{X} - S)^2 \frac{2n}{3S^2} \overset{H_0}{\thicksim} \chi^2_1
+\]
+
+\vspace{2ex}
+
+\Large{Implementamos la solución en R}
+
+\begin{lstlisting}
+# Definimos una funcion que nos calcula el p-valor para un n, una 
+# media muestral y una varianza muestral
+
+norm2_pvalue <- function(n, Xs, S) {
+    var_emv <- S^2 / n
+    G <- matrix(c(1, -1), 1, 2)
+    est_var_gtheta <- G %*% var_emv %*% t(G)
+
+    W_obs <- (Xs - S)^2 * 2 * n / (3 * S^2)
+
+    return(1 - pchisq(Q_Wobs, 1))
+}
+\end{lstlisting}
+
+\end{document}
