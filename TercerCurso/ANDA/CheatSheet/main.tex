@@ -118,7 +118,31 @@
     \item $\sum_{i=1}^{k}\sqrt{\lambda_i}v_iu_i'=\sum_{i=1}^{k}Xu_iu_i'=X\sum_{i=1}^{k}u_iu_i'=XUU'=X$ por tanto podemos reconstruir la matriz original a partir de los autovalores y autovectores de $X'X$ o $XX'$.
     \item Si nos quedamos con las primeras $q$ componentes podemos reproducir los datos de forma aproximada: $\tilde{X}=\sum_{i=1}^{q}\sqrt{\lambda_i}v_iu_i'=X\tilde{U}\tilde{U}'$.
     \item La inercia recogida con $\tilde{X}$ con respecto a la original es $\frac{tr(\tilde{X}'\tilde{X})}{tr(X'X)}$.
-    \item
+    \item Denotamos $G_\alpha = X'v_\alpha = \sqrt{\lambda_\alpha}u_\alpha$ a la proyección de las variables sobre el eje $\alpha$.
+    \item En un análisis normado $Corr(X_j,F_\alpha)=G_{j\alpha}$
+    \item Contribuciones absolutas (a la inercia explicada por cada eje): Se definen como $c.a.(j,\alpha) = \frac{G^2_{j\alpha}}{\lambda_\alpha}=u^2_{j\alpha}$. Nos dice lo que ha contribuido la variable $j$ a la definición del eje $\alpha$.
+    \item $\sum_{j=1}^{k}c.a.(j,\alpha)=1$
+    \item Contribuciones relativas (cosenos cuadrados): Se definen como $c.r.(j,\alpha)=\cos^2(j,\alpha)=\frac{G^2_{j\alpha}}{d^2(j,G)}=\frac{G^2_{j\alpha}}{Var(j)}$. Nos informan de la calida de la representación de la variable en la dimensión correspondiente.
+    \item Si el análisis es normado entonces $Var(j)=1$ con lo que $c.r.(j,\alpha)=\cos^2(j,\alpha)=G^2_{j\alpha}$ o lo que es lo mismo $c.r.(j,\alpha)=\cos^2(j,\alpha)=Corr^2(X_j,F_\alpha)$.
+    \item $\sum_{\alpha=1}^{k}c.r.(j,\alpha)=1$
+    \item Factor tamaño: Al no estar la nube de variables centrada podría ocurrir que todas las coordenadas de las variables de un eje tengan el mismo signo. Cuando esto ocurre en el primer eje se dice que es un factor de tamaño, pues si nos movemos por él, todas las variables crecerán y las observaciones serán más grandes, por tanto teniendo mayor "tamaño".
+    \item Variables Ilustrativas Continuas: Para posicionarlas se proyectan sobre los ejes igual que cualquier otra variable \[G^+_{j\alpha}=Corr(X^+_j,F_\alpha)\] si el analisis es normado y \[G^+_{j\alpha}=Var(X^+_j)Corr(X^+_j,F_\alpha)\]. La calidad de representación sobre el eje $\alpha$ será \[\cos^2(j^+,\alpha)=Corr^2(X^+_j,F_\alpha)\]. El superíndice $+$ indica que se trata de una variable ilustrativa.
+    \item La suma de los cosenos cuadrados puede ser menor que 1.
+    \item No tiene sentido calcular contribuciones a los ejes pues no han participado en la determinación de los mismos.
+    \item Variables Ilustrativas Nominales: Lo que se hace es calcular los individuos promedio de cada una de las clases y proyectarlos sobre el análisis como el resto de los individuos.
+    \item Individuos Ilustrativos: Se proyectan como el resto de individuos. Puede calcularse la calidad de su representación pero no tendrán contribuciones a los ejes.
+    \item Representaciones Simultáneas: La fila j de la matriz U contiene las proyecciones de la variable j sobre los ejes. El punto variable j puede representarse en la nube de puntos individuo. Este punto es el extremo del vector que define la dirección de crecimiento de la variable j en la nube de los individuos.
+    \item Algunas consideraciones al respecto:
+          \begin{enumerate}
+              \item Sólo la dirección de las variables cuenta en la interpretación conjunta con los individuos.
+              \item Estas proyecciones estarán dentro del círculo unidad y cuanto más cerca esté el punto de la circunferencia mejor representada estará la dirección de crecimiento en el espacion en el que se trabaja.
+              \item Los individuos próximos al centro de la representación tomarán valores cercanos a la media de la variable y los que estén lejos del centro en la dirección de crecimiento tomarán valores altos en esa variable.
+          \end{enumerate}
+    \item Técnicas de validación de la estabilidad:
+          \begin{enumerate}
+              \item Perturbación aleatoria de los datos: Se genera un nuevo conjunto de datos $x_{ij}=x_{ij}+N(0,K\sigma_j)$ donde $x_{ij}$ son los datos iniciales, $\sigma_j$ la desviación típìca de $j$. $K$ mide el nivel de perturbación. Se calculan las correlaciones de los ejes de los ejes de estos datos con los ejes de los datos originales. Habrá estabilidad si cada eje tiene una correlación alta con el eje del mismo orden de los datos originales.
+              \item  Bootstrap: Se generan muestras bootstrap a partir del conjunto de datos original. Se efectua el ACP para cada subconjunto. Se pueden entonces construir distribuciones bootstrap para los autovalores y para las correlaciones entre los ejes iniciales y los ejes bootstrap y valorar su estabilidad.
+          \end{enumerate}
 \end{itemize}
 
 \newpage
