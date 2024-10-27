@@ -106,6 +106,19 @@
     \item $\sum_{i=1}^{n}c.a.(i,\alpha)=1$ por lo que si un punto tiene contribuciones mucho más altas que el resto podemos dudar de la estabilidad del eje, ya que puede estar excesivamente condicionado por ese punto.
     \item Contribuciones relativas (cosenos cuadrados): Se definen como $c.r.(i,\alpha)=\cos^2(i,\alpha)=\frac{(x_i'u_\alpha)^2}{d^2(i,G)}$. Nos dicen como de cerca (o lejos) esta un punto de cada eje. Sirve para saber si un punto está mejor o peor representado en un eje o conjunto de ejes.
     \item $\sum_{\alpha=1}^{k}\cos^2(i,\alpha)=1$
+    \item Análisis de la nube de variables: Análisis como el anterior pero sobre la matriz transpuesta $X'_{(k\times n)}$. Por tanto buscamos un vector $v\in\mathbb{R}^n$
+    \item Como $(X'X)_{(k\times k)}$ tiene el mismo rango que $(XX')_{(n\times n)}$, $XX'$ tendrá solo $k$ autovalores mayores que 0.
+    \item Sea $\lambda_i$ autovalor de $X'X$ y $\mu_i$ autovalor de $XX'$ entonces $\lambda_i = \mu_i$.
+    \item Sea $v_i$ autovector de $XX'$, entonces $v_i = \frac{1}{\sqrt{\lambda_i}}Xu_i$.
+    \item Sea $u_i$ autovector de $X'X$, entonces $u_i = \frac{1}{\sqrt{\lambda_i}}X'v_i$.
+    \item De lo que se deduce que $\sqrt{\lambda_i}u_i = X'v_i$
+    \item Si se usa la matriz $\frac{1}{n-1}X'X$ las formulas correctas serán:
+          \[v_i=\frac{1}{\sqrt{(n-1)\lambda_i}}Xu_i \quad u_i=\frac{1}{\sqrt{(n-1)\lambda_i}}X'v_i\]
+    \item $X=V\Delta^\frac{1}{2}U'$.
+    \item $\sum_{i=1}^{k}\sqrt{\lambda_i}v_iu_i'=\sum_{i=1}^{k}Xu_iu_i'=X\sum_{i=1}^{k}u_iu_i'=XUU'=X$ por tanto podemos reconstruir la matriz original a partir de los autovalores y autovectores de $X'X$ o $XX'$.
+    \item Si nos quedamos con las primeras $q$ componentes podemos reproducir los datos de forma aproximada: $\tilde{X}=\sum_{i=1}^{q}\sqrt{\lambda_i}v_iu_i'=X\tilde{U}\tilde{U}'$.
+    \item La inercia recogida con $\tilde{X}$ con respecto a la original es $\frac{tr(\tilde{X}'\tilde{X})}{tr(X'X)}$.
+    \item
 \end{itemize}
 
 \newpage
