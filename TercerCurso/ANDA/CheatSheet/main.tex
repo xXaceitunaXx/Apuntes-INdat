@@ -147,13 +147,54 @@
 
 \newpage
 
+\section{Análisis de Correspondencias}
+
+\begin{itemize}
+    \item Se realiza sobre variables categóricas. Se quiere estudiar relaciones entre las variables y las categorías de las mismas.
+    \item Test $\chi^2$ de independencia: \[H_0:p_{ij}=p_{i+}\times p_{+j}, \quad \forall i=1,\dots,r,j=1;\dots,c\] donde \[\chi^2 = \sum_{i=1}^{r}\sum_{j=1}^{c}\frac{(n_{ij}-\frac{n_{i+}n_{+j}}{n_{++}})^2}{\frac{n_{i+}n_{+j}}{n_{++}}}=\sum_{i=1}^{r}\sum_{j=1}^{c}\frac{(Obs_{ij}-Esp_{ij})^2}{Esp_{ij}}\thicksim \chi^2_{(r-1),(c-1)}\]
+    \item Perfiles fila y columna: Son las distribuciones condicionadas por filas y columnas. \[\text{Perfiles Fila: }\begin{pmatrix}\frac{n_{i1}}{n_{i+}}, & \cdots, & \frac{n_{ic}}{n_{i+}}\end{pmatrix}, \quad \forall i=1,\dots,r\] \[\text{Perfiles Columna: }\begin{pmatrix}\frac{n_{1j}}{n_{+j}}, & \cdots, & \frac{n_{rj}}{n_{+j}}\end{pmatrix}', \quad \forall j=1,\dots,c\]
+    \item Si consideramos las frecuencias relativas $f_{ij}=\frac{n_{ij}}{n_{++}}$, $f_{i+}=\frac{n_{i+}}{n_{++}}$ y $f_{+j}=\frac{n_{+j}}{n_{++}}$ entonces: \[\text{Perfiles Fila: }\begin{pmatrix}\frac{f_{i1}}{f_{i+}}, & \cdots, & \frac{f_{ic}}{f_{i+}}\end{pmatrix}, \quad \forall i=1,\dots,r\] \[\text{Perfiles Columna: }\begin{pmatrix}\frac{f_{1j}}{f_{+j}}, & \cdots, & \frac{f_{rj}}{f_{+j}}\end{pmatrix}', \quad \forall j=1,\dots,c\]
+    \item Centros de Gravedad de las nubes: \[\text{Para los perfiles fila: }\begin{pmatrix}f_{+1}, & \cdots, & f_{+r}\end{pmatrix}\] \[\text{Para los perfiles columna: }\begin{pmatrix}f_{1+}, & \cdots, & f_{c+}\end{pmatrix}\]
+    \item Distancia $\chi^2$: Se utiliza para medir las distancias entre perfiles. \[\text{Distancia entre perfiles fila: }d^2_{\chi^2}(i,i')=\sum_{j=1}^{c}\frac{1}{f_{+j}}(\frac{f_{ij}}{f_{i+}}-\frac{f_{i'j}}{f_{i'+}})^2\] \[\text{Distancia entre perfiles columna: }d^2_{\chi^2}(j,j')=\sum_{i=1}^{c}\frac{1}{f_{i+}}(\frac{f_{ij}}{f_{+j}}-\frac{f_{ij'}}{f_{+j'}})^2\]
+    \item Inercia Total: La inercia total define como $I_t=\sum_{i=1}^{r}\text{peso}(\text{fila}_i)d^2_{\chi^2}(\text{fila}_i,G_{\text{filas}})$ o también $I_t=\sum_{j=1}^{c}\text{peso}(\text{columna}_j)d^2_{\chi^2}(\text{columna}_j,G_{\text{columnas}})$
+    \item $I_t=\frac{\chi^2}{n_{++}}$
+    \item $F_{(r\times c)}=(f_{ij})$ matriz de las frecuencias relativas.
+    \item $D_c=diag(f_{+1},\dots,f_{+c})$ y $D_r=diag(f_{1+},\dots,f_{r+})$ matrices diagonales que contienen las distribuciones marginales.
+    \item Distancia entre perfiles fila: \[d^2_{\chi^2}(x,y)=(x-y)'D_c^{-1}(x-y)\] Distancia entre perfiles columna: \[d^2_{\chi^2}(x,y)=(x-y)'D_r^{-1}(x-y)\]
+    \item $A=D_c^{-1}F'D_r^{-1}FD_c^{-1}$
+    \item Para los perfiles fila, el vector $u$ que maximiza la inercia explicada es el autovector correspondiente al mayor autovalor de $D_cA=F'D_r^{-1}FD_c^{-1}$.
+    \item Para los perfiles columna, el vector $u$ que maximiza la inercia explicada es el autovector correspondiente al mayor autovalor de $FD_c^{-1}F'D_r^{-1}$.
+    \item Los autovalores asociados a las matrices correspondientes a los perfiles fila y columna son los mismos.
+    \item En perfiles fila denominaremos:
+          \begin{itemize}
+              \item Eje principal $\alpha$, $u_\alpha$, al autovector asociado al autovalor $\lambda_\alpha$.
+              \item Factor $\alpha$, $\varphi_\alpha=D_c^{-1}u_\alpha$
+              \item Las proyecciones sobre el eje principal $u_\alpha$ se calculan como $\hat{u}_\alpha=(D_r^{-1}F)\varphi_\alpha$.
+          \end{itemize}
+          En perfiles columna denominaremos:
+          \begin{itemize}
+              \item Eje principal $\alpha$, $v_\alpha$, al autovector asociado al autovalor $\lambda_\alpha$.
+              \item Factor $\alpha$, $\psi_\alpha=D_r^{-1}v_\alpha$
+              \item Las proyecciones sobre el eje principal $v_\alpha$ se calculan como $\hat{v}_\alpha=(D_c^{-1}F')\psi_\alpha$.
+          \end{itemize}
+    \item Relaciones de transición: \[v_\alpha=\frac{1}{\lambda_\alpha}FD_c^{-1}u_\alpha \quad \psi_\alpha=\frac{1}{\lambda_\alpha}D_r^{-1}F\varphi_\alpha\] Reciprocramente tenemos \[u_\alpha=\frac{1}{\lambda_\alpha}F'D_r^{-1}v_\alpha \quad \varphi_\alpha=\frac{1}{\lambda_\alpha}D_c^{-1}F'\psi_\alpha\]
+    \item Las proyecciones sobre el autovector vector fila/columna promedio son siempre $\overline{1}$.
+    \item Contribuciones absolutas (a la inercia explicada por cada eje): Del perfil fila $i$ al eje $\alpha$ \[c.a.(i,\alpha)=f_{i+}\psi^2_{\alpha i}\] Del perfil columna $j$ al eje $\alpha$ \[c.a.(j,\alpha)=f_{+j}\varphi^2_{\alpha i}\]
+    \item Contribuciones relativas (cosenos cuadrados): Del perfil fila $i$ al eje $\alpha$ \[c.r.(i,\alpha)=\frac{\hat{\psi}^2_{\alpha i}}{\sum_{\alpha}\hat{\psi}^2_{\alpha i}}\] Del perfil columna $j$ al eje $\alpha$ \[c.r.(j,\alpha)=\frac{\hat{\varphi}^2_{\alpha j}}{\sum_{\alpha}\hat{\varphi}^2_{\alpha j}}\]
+    \item Mismos criterios de interpretación de resultados que en el ACP.a
+\end{itemize}
+
+\newpage
+
 % ------------------------------------------------------------------------------
 % Reference and Cited Works
 % ------------------------------------------------------------------------------
 
 \begin{thebibliography}{9}
-    \bibitem{misc}
+    \bibitem{diapo1}
     Miguel Alejandro Fernández, \\ \textit{Diapositivas Análisis por Componentes Principales}. \\ Universidad de Valladolid, 2024.
+    \bibitem{diapo2}
+    Miguel Alejandro Fernández, \\ \textit{Diapositivas Análisis de Correspondencias}. \\ Universidad de Valladolid, 2024.
 \end{thebibliography}
 
 % \bibliographystyle{IEEEtran}
