@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Center</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <h1>Download Center</h1>
+    
+    <div id="filters">
+        <input type="text" id="searchBar" placeholder="Search...">
+        
+        <select id="gradeFilter">
+            <option value="">All Grades</option>
+            <option value="Grade1">Grade 1</option>
+            <option value="Grade2">Grade 2</option>
+            <!-- Add more grades as needed -->
+        </select>
+        
+        <select id="subjectFilter">
+            <option value="">All Subjects</option>
+            <option value="Math">Math</option>
+            <option value="Science">Science</option>
+            <!-- Add more subjects as needed -->
+        </select>
+    </div>
+    
+    <ul id="fileList"></ul>
+    
+    <script src="js/scripts.js"></script>
+</body>
+</html>
