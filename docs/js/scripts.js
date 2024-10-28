@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Mock data to simulate PDF list (since direct directory access isn't available)
     const pdfFiles = [
-        { name: "Entrega2Tema1.pdf", grade: 3, subject: "INFE2", path: "bin/Entrega2Tema1.pdf" },
-        { name: "ApuntesTema2Prob.pdf", grade: 2, subject: "PROB", path: "bin/ApuntesTema2Prob.pdf" },
+        { name: "Entrega2Tema1.pdf", grade: "3", subject: "INFE2", path: "https://github.com/xXaceitunaXx/Apuntes-INdat/tree/WebPage/BinEntrega2Tema1.pdf" },
+        { name: "ApuntesTema2Prob.pdf", grade: "2", subject: "PROB", path: "https://github.com/xXaceitunaXx/Apuntes-INdat/tree/WebPage/BinApuntesTema2Prob.pdf" },
         // Add more entries as needed
     ];
 
