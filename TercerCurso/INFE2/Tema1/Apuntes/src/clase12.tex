@@ -16,10 +16,34 @@ basada en el desarrollo de Taylor.\\
 Partimos de un valor inicial "razonable" del parámetro: $\theta_0$ y aproximamos la función por el desarrollo de Taylor.
 
 $$\frac{\partial}{\partial\theta}ln(L(\theta,x))\approx\frac{\partial}{\partial\theta}ln(L(\theta_0,x))+H(\theta_0,x)(\theta-\theta_0)$$
-
 Siendo $H(\theta_0,x)=\Big{\{}\frac{d^2}{d\theta_i d\theta_j}ln(L(\theta,x))\Big{\}}_{i,j}$ la matriz Hessiana de la función de log-verosimilitud. \\
 
-Esto es váido para todo $\theta$ y despejando se obtiene el siguiente resultado:
+Este resultado es váido para todo $\theta$ y se deduce:
+
+$$\frac{\partial}{\partial\theta}ln(L(\hat\theta,x))\approx\frac{\partial}{\partial\theta}ln(L(\theta_0,x))+H(\theta_0,x)(\hat\theta-\theta_0)$$
+
+Despejando obtenemos lo siguiente:
+
+$$\hat\theta=\theta_0-H(\theta_0,x)^{-1}\frac{\partial}{\partial\theta}ln(L(\theta_0,x))=\theta^{(1)}$$
+
+Si repetimos k veces el paso anterior llegaremos a $\theta^{(k)}$, por lo que la fórmula de actualización del algoritmo en la siguiente iteración será:
+
+$$\theta^{(k+1)}=\theta^{(k)}-H(\theta^{(k)},x)^{-1}\frac{\partial}{\partial\theta}ln(L(\theta^{(k)},x))$$
+
+Es importante la elección del punto inicial para evitar convergencia a \textbf{óptimos locales}. \pagebreak
+
+\subsection*{Algoritmo EM (\textit{Expectation-maximization})}
+
+Utilizado en situaciones donde los datos que tenemos se pueden considerar \textbf{incompletos} (censurados). 
+Es decir, cuando el experimento tiene dos variables aleatorias $Y$ y $B$ pero solamente se observa $Y=y$. $B$ no se observa y los datos completos serán $X=(Y,B)$. 
+
+Sean $X_1, X_2,...,X_n$ v.a.i.i.d, con $P_\theta\ \theta\in\Theta\subseteq \mathbb{R}^s$ con $X_i=(Y_i,B_i)$ y función de densidad $f(x,\theta)=f(y,b,\theta)$ donde solo $Y_1,...,Y_n$ se observan con función de densidad $g(Y,\theta)$.
+En este contexto:
+\begin{itemize}
+    \item f es la función de densidad de los datos \textbf{completos}.
+    \item g es la función de densidad de los datos \textbf{observados}.
+\end{itemize}
+
 
 
 
