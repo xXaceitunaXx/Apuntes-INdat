@@ -1,0 +1,25 @@
+
+\section{Maximización de la verosimilitud}
+
+En la mayoría de casos el EMV se obtiene de forma explícita. Sin embargo, en muchos casos prácticos la ecuación (o ecuaciones) de verosimilitud son muy complejas.
+Por ejemplo, para obtener el EMV en R podemos utilizar la función \textit{optim}. En teoría veremos dos algoritmos distintos: el de \textbf{Newton-Raphson} y el \textbf{algoritmo EM}. 
+
+\subsection*{Algoritmo de Newton-Raphson (NR)}
+
+Está basado en la aproximación analítica de la función objetivo vía la aproximación lineal de su derivada. \\
+
+Sean $X_1, X_2,...,X_n$ v.a.i.i.d, con $P_\theta\ \theta\in\Theta\subseteq \mathbb{R}^s$ y $\theta=(\theta_1,...,\theta_s)$ donde la función objetivo es $l(\theta,x)=ln(L(\theta,x))$.
+El algoritmo NR busca el máximo de la log-verosimilitud a través de la aproximación de su derivada: 
+$$\frac{\partial}{\partial\theta}ln(L(\theta,x))=\Big(\frac{\partial}{\partial\theta_1}ln(L(\theta,x)),...,\frac{\partial}{\partial\theta_s}ln(L(\theta,x))\Big)$$
+basada en el desarrollo de Taylor.\\
+
+Partimos de un valor inicial "razonable" del parámetro: $\theta_0$ y aproximamos la función por el desarrollo de Taylor.
+
+$$\frac{\partial}{\partial\theta}ln(L(\theta,x))\approx\frac{\partial}{\partial\theta}ln(L(\theta_0,x))+H(\theta_0,x)(\theta-\theta_0)$$
+
+Siendo $H(\theta_0,x)=\Big{\{}\frac{d^2}{d\theta_i d\theta_j}ln(L(\theta,x))\Big{\}}_{i,j}$ la matriz Hessiana de la función de log-verosimilitud. \\
+
+Esto es váido para todo $\theta$ y despejando se obtiene el siguiente resultado:
+
+
+
