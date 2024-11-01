@@ -70,12 +70,57 @@
 % ------------------------------------------------------------------------------
 
 
-\newpage
+
+\subsubsection*{Ejercicio 1}
+$X_1, \dots, X_n$ v.a.i.i.d. $\quad E(X_i)=\mu,\quad Var(X_i)=\sigma^2 \quad \forall i=1 \dots n$
+\setlength{\parskip}{1em}
+
+b) $T(X_1,\dots,X_n)=\frac{T(X_1 + \dots + X_{\frac{n}{2}})}{\frac{n}{2}}$\\
+$T(X_1,\dots,X_n) \xrightarrow{P} \mu \quad$ El estimador es consistente
+
+c) $T(X_1,\dots,X_n)=X_1$\\
+El estimador no es consistente ya que $X_1$ no depende de n. Lo mínimo para que
+pueda converger es que dependa de n.
+
+d) $T(X_1,\dots,X_n)=2 \cdot \sum_{i=1}^{n}\frac{i \cdot X_i}{n \cdot (n+1)}$\\
+No podemos usar la ley de los grandes números porque $X_1, 2 \cdot X_2, 3 \cdot X_3$ no son v.a.i.i.d. Usaremos la convergencia en media cuadrática.
+
+\[
+T_n(x) \xrightarrow{m.c.} \mu 
+\left\{
+\begin{array}{l}
+    E(T_n(X)) \xrightarrow[n \to \infty]{} \mu \\
+    Var(T_n(X)) \xrightarrow[n \to \infty]{} 0
+\end{array}
+\right.
+\]
+\(
+E(T_n(x))=\frac{2}{n \cdot (n+1)} \cdot E((\sum_{i=1}^{n} i) \cdot X_i)
+=\frac{2}{n \cdot (n+1)} \cdot (\sum_{i=1}^{n} i) \cdot  E(X_i)=
+\frac{2 \cdot \mu}{n \cdot (n+1)} \cdot \sum_{i=1}^{n} i \\
+=\frac{2 \cdot \mu}{n \cdot (n+1)} \frac{n \cdot (n+1)}{2}= \mu
+\)
+
+Se cumple que la media tiende a mu cuando n tiende a infinito.
+
+\(
+Var(T_n(x))=\frac{4}{n^2 \cdot (n+1)^2} \cdot \sum_{i=1}^{n} Var(i\cdot X_i)
+= \frac{4}{n^2 \cdot (n+1)^2} \cdot \sigma^2 \cdot \sum_{i=1}^{n} i^2 \\
+= \frac{4}{n^2 \cdot (n+1)^2} \cdot \sigma^2 \cdot \frac{n \cdot (n+1) \cdot (2n+1)}{6}
+=\frac{2}{3}\cdot \frac{2n+1}{n^2+n} \sigma^2 \xrightarrow[n \to \infty]{} 0
+\)
+
+Se cumple que la media tiende a 0 cuando n tiende a infinito.
+
+El estimador es consistente.
+
+\subsubsection*{Ejercicio 3}
+
 
 % ------------------------------------------------------------------------------
 % Reference and Cited Works
 % ------------------------------------------------------------------------------
-
+\newpage
 \begin{thebibliography}{9}
     \bibitem{diapos1}
     ¿Quién?, \\ \textit{¿Qué?}. \\ ¿Dónde?.
