@@ -131,5 +131,8 @@ Sean $X_1,\dots,X_n$ v.a.i.i.d. tal que $E(X_i)=\mu$ y $Var(X_i)=\sigma^2 < \inf
 \end{itemize}
 
 Resulta útil aplicar el $\Delta$-método cuando queremos aproximar la distribución de una función no lineal de un estimador que es asintoticamente normal.\\
-Sean $X_1,\dots,X_n$ v.a.i.i.d. donde su distribución es $P_\theta$ tal que $\theta \in \Theta \subseteq \mathbb{R}$ y sea uan función $g:\Theta \to \mathbb{R}$ con derivada no nula. Si $T_n(X)$ es CAN para $\theta$ tal que...
-% no me da tiempo a seguir xd
+Sean $X_1,\dots,X_n$ v.a.i.i.d. donde su distribución es $P_\theta$ tal que $\theta \in \Theta \subseteq \mathbb{R}$ y sea uan función $g:\Theta \to \mathbb{R}$ con derivada no nula. Si $T_n(X)$ es CAN para $\theta$ tal que $\sqrt{n}(|T_n(X)-\theta|)\overset{L}{\to}N(0,V^2_t(\theta))$ entonces
+
+\[
+    \sqrt{n}(|g(T_n(X))-g(\theta)|)\overset{L}{\to}N(0,V^2_t(\theta)g'(\theta)^2)
+\]
