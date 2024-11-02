@@ -91,10 +91,24 @@ $$L(p,\lambda,b,y)\propto\prod_{i=1}^{n}p^{b_i}\Big[(1-p)e^{-\lambda}\frac{\lamb
 $$ln(L(p,\lambda,b,y))=ln(p)\sum b_i+(n-\sum b_i)ln(1-p)-\lambda(n-\sum b_i)+ln(\lambda)\sum y_i(1-b_i)$$\\\ \\
 \underline{Paso 1, Esperanza:} Dados $p_0$ y $\lambda_0$ sustituir $b_i$ por $E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)$:
 $$E_{p_0,\lambda_0}\Big(ln(L(p_0,\lambda_0,b,y))\Big/Y_1,...,Y_n\Big)=ln(p)\Bigg[\sum E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Bigg]+ln(1-p)\Bigg[n-\sum E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Bigg]$$
+$$-\lambda\Bigg[n-\sum E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Bigg]+ln(\lambda)\Bigg[\sum y_i\Big(1-E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Big)\Bigg]$$
+Si tenemos que $b^*_i=E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)$ entonces, haciendo uso de la definición de esperanza y Teorema de Bayes:
+$$b^*_i=P\Big(B_i=1\Big/Y=y\Big)(1)+P\Big(B_i=0\Big/Y=y\Big)(0)=P\Big(B_i=1\Big/Y=y\Big)=$$
+$$=\frac{P_{p_0,\lambda_0}(B_i=1)P\Big(Y_i=y_i\Big/B_i=1\Big)}{P_{p_0,\lambda_0}(B_i=1)P\Big(Y_i=y_i\Big/B_i=1\Big)+P_{p_0,\lambda_0}(B_i=0)P\Big(Y_i=y_i\Big/B_i=0\Big)}=\begin{cases}
+    \frac{p_0}{p_0+(1-p_0)e^{-\lambda_0}} & \text{si } y_i=0 \\
+    0 & \text{si }y_i \neq 0
+\end{cases}$$
+Sea $b^{*}=\sum_{i=0}^{n}b^{*}_i$, al ser $p_0$ y $\lambda_0$ constantes, $b^{*}$ será \textbf{una constante} y tenemos que:
+$$E_{p_0,\lambda_0}\Big(ln(L(p_0,\lambda_0,b,y))\Big/Y_1,...,Y_n\Big)=b^{*}ln(p)+(n-b^{*})ln(1-p)-\lambda(n-b^{*})+\sum y_i(1-b^{*})ln(\lambda)$$
+\pagebreak
 
+\noindent\underline{Paso 2, Maximización:} Una vez tenemos la expresión para la esperanza, derivamos y buscamos el máximo en función de cada una de las variables:
+$$\begin{cases}
+    \frac{\partial}{\partial p}\ E_{p_0,\lambda_0}\Big(ln(L(p_0,\lambda_0,b,y))\Big/Y_1,...,Y_n\Big)=(...)=\frac{b^{*}}{p}-\frac{n-b^{*}}{1-p}=0\\
+    \frac{\partial}{\partial \lambda}\ E_{p_0,\lambda_0}\Big(ln(L(p_0,\lambda_0,b,y))\Big/Y_1,...,Y_n\Big)=(...)=(n-b^{*})+\frac{\sum y_i(1-b_i^{*})}{\lambda}=0
+\end{cases}$$
 
-
-
+La solución de este sistema serán los valores $p^{(1)}$ y $\lambda^{(1)}$, a partir de los cuales podemos repetir el proceso de forma iterativa.
 
 
 
