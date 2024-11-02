@@ -8,10 +8,13 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
+\usepackage[english, spanish]{babel}
 \usepackage{framed}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tcolorbox}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\pgfplotsset{compat=1.18}
 
 \colorlet{LightGray}{White!90!Periwinkle}
 \colorlet{LightOrange}{Orange!15}
@@ -30,6 +33,8 @@
 \declaretheoremstyle[name=Principle,]{prcpsty}
 \declaretheorem[style=prcpsty,numberlike=theorem]{principle}
 \tcolorboxenvironment{principle}{colback=LightGreen}
+
+\pgfmathdeclarefunction{gauss}{2}{\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}}
 
 \setstretch{1.2}
 \geometry{
@@ -69,6 +74,7 @@
 
 % ------------------------------------------------------------------------------
 
+\include{src/clase1}
 
 \newpage
 
