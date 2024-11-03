@@ -1,1 +1,45 @@
-\subsubsection{Intervalos de confianza y contrástes de hipótesis en el caso uniparamétrico}
+\subsubsection{Intervalos de confianza y contrastes de hipótesis uniparamétricos}
+
+Ya hemos visto como estimar el EMV en el caso uniparamétrico. Ahora vamos a ver como se hacen los intervalos de confianza y los contrastes de hipótesis.
+
+\hspace{-1cm}\noindent\begin{tabular}{r}
+    \textbf{Ejemplo}  \\ \hline \ \\
+\end{tabular}\\
+Sean $X_1\dots X_n\sim B(\theta)$ con $0<\theta < 1$, $f(x,\theta)=\theta^x(1-\theta)^{1-x}$, $E(X)=\theta$\ y\ \ $Var(X)=\theta(1-\theta)$
+
+Recordemos que el EMV para $X\sim B(\theta)$ es $\hat\theta_n=\overline{X}$
+$$I_1(\theta)=-E\Big(\frac{\partial^2}{\partial\theta^2}ln(f(x,\theta))\Big)=\frac{\theta^2-2\theta^2+\theta}{\theta^2(1-\theta)^2}=\frac{1}{\theta(1-\theta)}$$
+
+Por lo tanto: 
+$$\sqrt{n}(\overline{X}-\theta)\overset{\mathcal{L}}{\longrightarrow}N\big(0,\theta(1-\theta)\big)$$
+
+Usando esta distribución asintótica podemos construir \textbf{intervalos de confianza} para $\theta$.
+$$P_\theta\Bigg(\underbrace{\frac{\sqrt{n}|\overline{X}-\theta|}{\sqrt{\theta(1-\theta)}}}_{N(0,1)}<\zeta_{1-\frac{\alpha}{2}}\Bigg)=1-\alpha$$
+
+Buscamos el cuantil $\zeta_{1-\frac{\alpha}{2}}$ que hace que la probabilidad sea $1-\alpha$
+$$P_\theta\Bigg(-\zeta_{1-\frac{\alpha}{2}}<\frac{\sqrt{n}(\overline{X}-\theta)}{\sqrt{\theta(1-\theta)}}<\zeta_{1-\frac{\alpha}{2}}\Bigg)=1-\alpha$$
+
+Utilizamos la información de Fischer $I_n(\theta)=\frac{n}{\theta(1-\theta)}$ para depejar $\theta$
+$$P_\theta\Bigg(-\zeta_{1-\frac{\alpha}{2}}<\frac{(\overline{X}-\theta)}{\sqrt{\frac{1}{I_n(\theta)}}}<\zeta_{1-\frac{\alpha}{2}}\Bigg)=1-\alpha$$
+$$P_\theta\Bigg(\overline{X}-\zeta_{1-\frac{\alpha}{2}}\sqrt{\frac{1}{I_n(\theta)}}<\theta<\overline{X}+\zeta_{1-\frac{\alpha}{2}}\sqrt{\frac{1}{I_n(\theta)}}\Bigg)=1-\alpha$$
+
+    \textit{\textbf{Definición:}} La \textbf{Información de Fischer observada }se traduce en sustituir la información de Fischer esperada por su EMV. Como $\hat\theta_n$ es CAN para $\theta$, se tiene que
+    $$If_{obs}\overset{p}{\longrightarrow}If_{esp}$$
+
+\noindent En nuestro caso particular consiste en reemplazar $I_n(\theta)=\frac{n}{\theta(1-\theta)}$ por $I_n(\hat\theta)=\frac{n}{\overline{X}(1-\overline{X})}$, luego:
+$$P_\theta\Bigg(\overline{X}-\zeta_{1-\frac{\alpha}{2}}\sqrt{\frac{\overline{X}(1-\overline{X})}{n}}<\theta<\overline{X}+\zeta_{1-\frac{\alpha}{2}}\sqrt{\frac{\overline{X}(1-\overline{X})}{n}}\Bigg)=1-\alpha$$
+
+Este tipo de inferencia basada en la verosimilitud se llama \textbf{inferencia de Wald}.\\
+
+Para los contrastes de hipótesis vamos a definir tres estadísticos que nos sirven para hacer inferencia basada en la varosimilitud.
+
+
+
+
+
+
+
+
+
+
+
