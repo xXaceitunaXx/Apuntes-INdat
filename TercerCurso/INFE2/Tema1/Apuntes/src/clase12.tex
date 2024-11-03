@@ -1,0 +1,115 @@
+
+\section{Maximización de la verosimilitud}
+
+En la mayoría de casos el EMV se obtiene de forma explícita. Sin embargo, en muchos casos prácticos la ecuación (o ecuaciones) de verosimilitud son muy complejas.
+Por ejemplo, para obtener el EMV en R podemos utilizar la función \textit{optim}. En teoría veremos dos algoritmos distintos: el de \textbf{Newton-Raphson} y el \textbf{algoritmo EM}. 
+
+\subsection*{Algoritmo de Newton-Raphson (NR)}
+
+Está basado en la aproximación analítica de la función objetivo vía la aproximación lineal de su derivada. \\
+
+Sean $X_1, X_2,...,X_n$ v.a.i.i.d, con $P_\theta\ \theta\in\Theta\subseteq \mathbb{R}^s$ y $\theta=(\theta_1,...,\theta_s)$ donde la función objetivo es $l(\theta,x)=ln(L(\theta,x))$.
+El algoritmo NR busca el máximo de la log-verosimilitud a través de la aproximación de su derivada: 
+$$\frac{\partial}{\partial\theta}ln(L(\theta,x))=\Big(\frac{\partial}{\partial\theta_1}ln(L(\theta,x)),...,\frac{\partial}{\partial\theta_s}ln(L(\theta,x))\Big)$$
+basada en el desarrollo de Taylor.\\
+
+Partimos de un valor inicial "razonable" del parámetro: $\theta_0$ y aproximamos la función por el desarrollo de Taylor.
+
+$$\frac{\partial}{\partial\theta}ln(L(\theta,x))\approx\frac{\partial}{\partial\theta}ln(L(\theta_0,x))+H(\theta_0,x)(\theta-\theta_0)$$
+Siendo $H(\theta_0,x)=\Big{\{}\frac{d^2}{d\theta_i d\theta_j}ln(L(\theta,x))\Big{\}}_{i,j}$ la matriz Hessiana de la función de log-verosimilitud. \\
+
+Este resultado es váido para todo $\theta$ y se deduce:
+
+$$\frac{\partial}{\partial\theta}ln(L(\hat\theta,x))\approx\frac{\partial}{\partial\theta}ln(L(\theta_0,x))+H(\theta_0,x)(\hat\theta-\theta_0)$$
+
+Despejando obtenemos lo siguiente:
+
+$$\hat\theta=\theta_0-H(\theta_0,x)^{-1}\frac{\partial}{\partial\theta}ln(L(\theta_0,x))=\theta^{(1)}$$
+
+Si repetimos k veces el paso anterior llegaremos a $\theta^{(k)}$, por lo que la fórmula de actualización del algoritmo en la siguiente iteración será:
+
+$$\theta^{(k+1)}=\theta^{(k)}-H(\theta^{(k)},x)^{-1}\frac{\partial}{\partial\theta}ln(L(\theta^{(k)},x))$$
+
+Es importante la elección del punto inicial para evitar convergencia a \textbf{óptimos locales}. \pagebreak
+
+\subsection*{Algoritmo EM (\textit{Expectation-maximization})}
+
+Utilizado en situaciones donde los datos que tenemos se pueden considerar \textbf{incompletos} (censurados). 
+Es decir, cuando el experimento tiene dos variables aleatorias $Y$ y $B$ pero solamente se observa $Y=y$. $B$ no se observa y los datos completos serán $X=(Y,B)$. 
+
+Sean $X_1, X_2,...,X_n$ v.a.i.i.d, con $P_\theta\ \theta\in\Theta\subseteq \mathbb{R}^s$ con $X_i=(Y_i,B_i)$ y función de densidad $f(x,\theta)=f(y,b,\theta)$ donde solo $Y_1,...,Y_n$ se observan con función de densidad $g(Y,\theta)$.
+En este contexto:
+\begin{itemize}
+    \item f es la función de densidad de los datos \textbf{completos}.
+    \item g es la función de densidad de los datos \textbf{observados}.
+\end{itemize}
+Ambas densidades dependen de $\theta$ pero la densidad de $X$ depende también de $B$, datos que no hemos observado. En estos casos, el EMV lo obtendremos \textbf{siempre} de los \textbf{datos observados}.
+\\
+
+La función de verosimilitud de los datos observados es:
+$$L(Y_1,...,Y_n,\theta)\propto \prod_{i=1}^{n}g(Y_i,\theta)$$ $$ln(L(Y,\theta))=\sum_{i=1}^{n}ln(g(Y_i,\theta))$$ Y el EMV será (como siempre): $\hat\theta=\underset{\theta}{arg\ max}[ln(L(Y,\theta))]$
+\\
+
+Sin embargo, hay situaciones en las que es difícil resolver y plantear las ecuaciones de verosimilitud. El algoritmo EM nos permite calcular la función de verosimilitud a partir de los datos completos cuando es complicado hacerlo a partir de los observados.
+$$L(X_1,...,X_n,\theta)=L((Y_1,B_1),...,(Y_n,B_n),\theta)=\prod_{i=i}^{n}f(Y_i,B_i,\theta)$$
+
+El algoritmo EM obtiene un valor aproximado del EMV que es el máximo de los datos observados a partir del EMV de los datos completos.
+
+\subsubsection*{Desarrollo del algoritmo EM}
+Se puede calcular la esperanza de $ln(L(X,\theta))$ condicionada a $Y=y$ dado un valor de $\theta$. A partir de un \textbf{valor inicial} $\theta_0$, el algoritmo establece dos pasos:
+\begin{enumerate}
+    \item \textbf{Esperanza (expectation):} Calcular $E_{\theta_0}\Big(ln(L(X,\theta))\big/Y\Big)$ y sustituir la probabilidad de los valores no observados por el valor esperado condicionado a lo observado.
+    \item \textbf{Maximización (maximization):} Obtener $\theta^{(n)}$ en el punto en el que se alcanza el máximo en la log-verosimilitud habiendo sustituido la expresión anterior.
+\end{enumerate} 
+Este proceso se repite \textbf{iterativamente} $k$ veces. 
+
+\pagebreak
+
+\hspace{-1cm}\noindent\begin{tabular}{r}
+    \textbf{Ejemplo}  \\ \hline \ \\
+\end{tabular}
+
+\textit{Este ejemplo es el de la mixtura de la práctica 3 del laboratorio}.\\
+Sean $f_1(Y)=P_p(Y=y)=\begin{cases}
+    1 & \text{si } y=0 \\
+    0 & \text{si } y \neq 0
+\end{cases}$ y $f_2(Y)=P_\lambda(Y=y)=e^{-\lambda}\frac{\lambda^y}{y!}$, $y=0,1,...$
+
+\ \\
+Primero obtenemos las fórmulas de adecuación del algoritmo para $p$ y $\lambda$.
+\begin{itemize}
+    \item Datos observados: $Y_i$
+    \item Datos completos: $X_i=(Y_i,B_i)$
+    \item $B_i$ son datos NO observados
+\end{itemize}
+Función de densidad conjunta: $ f(x,p,\lambda)=f(y,b,p,\lambda)=\begin{cases}
+    p & \text{si } b_i=1\ y\ y_i=0 \\
+    (1-p)e^{-\lambda}\frac{\lambda^y}{y!} & \text{si } b_i=0\ y\ y_i \neq 0
+\end{cases} $
+
+$$L(p,\lambda,b,y)\propto\prod_{i=1}^{n}p^{b_i}\Big[(1-p)e^{-\lambda}\frac{\lambda^y}{y!}\Big]^{1-b_i}=p^{\sum b_i}(1-p)^{n-\sum b_i}e^{-\lambda(n-\sum b_i)}\lambda^{\sum y_i(1-b_i)}$$
+$$ln(L(p,\lambda,b,y))=ln(p)\sum b_i+(n-\sum b_i)ln(1-p)-\lambda(n-\sum b_i)+ln(\lambda)\sum y_i(1-b_i)$$\\\ \\
+\underline{Paso 1, Esperanza:} Dados $p_0$ y $\lambda_0$ sustituir $b_i$ por $E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)$:
+$$E_{p_0,\lambda_0}\Big(ln(L(p_0,\lambda_0,b,y))\Big/Y_1,...,Y_n\Big)=ln(p)\Bigg[\sum E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Bigg]+ln(1-p)\Bigg[n-\sum E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Bigg]$$
+$$-\lambda\Bigg[n-\sum E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Bigg]+ln(\lambda)\Bigg[\sum y_i\Big(1-E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Big)\Bigg]$$
+Si tenemos que $b^*_i=E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)$ entonces, haciendo uso de la definición de esperanza y Teorema de Bayes:
+$$b^*_i=P\Big(B_i=1\Big/Y=y\Big)(1)+P\Big(B_i=0\Big/Y=y\Big)(0)=P\Big(B_i=1\Big/Y=y\Big)=$$
+$$=\frac{P_{p_0,\lambda_0}(B_i=1)P\Big(Y_i=y_i\Big/B_i=1\Big)}{P_{p_0,\lambda_0}(B_i=1)P\Big(Y_i=y_i\Big/B_i=1\Big)+P_{p_0,\lambda_0}(B_i=0)P\Big(Y_i=y_i\Big/B_i=0\Big)}=\begin{cases}
+    \frac{p_0}{p_0+(1-p_0)e^{-\lambda_0}} & \text{si } y_i=0 \\
+    0 & \text{si }y_i \neq 0
+\end{cases}$$
+Sea $b^{*}=\sum_{i=0}^{n}b^{*}_i$, al ser $p_0$ y $\lambda_0$ constantes, $b^{*}$ será \textbf{una constante} y tenemos que:
+$$E_{p_0,\lambda_0}\Big(ln(L(p_0,\lambda_0,b,y))\Big/Y_1,...,Y_n\Big)=b^{*}ln(p)+(n-b^{*})ln(1-p)-\lambda(n-b^{*})+\sum y_i(1-b^{*})ln(\lambda)$$
+\pagebreak
+
+\noindent\underline{Paso 2, Maximización:} Una vez tenemos la expresión para la esperanza, derivamos y buscamos el máximo en función de cada una de las variables:
+$$\begin{cases}
+    \frac{\partial}{\partial p}\ E_{p_0,\lambda_0}\Big(ln(L(p_0,\lambda_0,b,y))\Big/Y_1,...,Y_n\Big)=(...)=\frac{b^{*}}{p}-\frac{n-b^{*}}{1-p}=0\\
+    \frac{\partial}{\partial \lambda}\ E_{p_0,\lambda_0}\Big(ln(L(p_0,\lambda_0,b,y))\Big/Y_1,...,Y_n\Big)=(...)=(n-b^{*})+\frac{\sum y_i(1-b_i^{*})}{\lambda}=0
+\end{cases}$$
+
+La solución de este sistema serán los valores $p^{(1)}$ y $\lambda^{(1)}$, a partir de los cuales podemos repetir el proceso de forma iterativa.
+
+
+
+
