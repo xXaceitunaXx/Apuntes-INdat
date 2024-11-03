@@ -1,0 +1,137 @@
+\setlength{\parskip}{1em}
+
+Vamos a profundizar un poco en las condiciones de regularidad de Craner-Rao:
+
+Sea X=$(X_1,\dots,X_n)$ m.a.s de $P_\theta,\theta \in \Theta \subseteq \mathbb{R}$
+,con densidad f(x,$\theta)$ y con $T_n(x)$ como estimador insesgado de g($\theta$).
+
+\[
+E(T_n(x)=g(\theta)) \to g(\theta)=\int_x T_n(x) f(x,\theta) \,dx
+\]
+
+$g(\theta)$ es diferenciable resoecto a $\theta$ bajo el signo integral y podemos intercambiar derivada e integral
+
+\subsection{Cota de Craner-Rao}
+
+Sea $X_,\dots,X_n$ m.a.s $P_\theta,\theta \in \Theta \subseteq \mathbb{R}$ con densidad
+$f(x,\theta)$ y sea $T_n(x)$ un estimador insesgado de $g(\theta)$ con Var$(T_n(x)) < \infty$
+y que verifica las condiciones de regularidad de Craner-Rao, entonces:
+\[
+Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
+\]
+
+\textbf{Demostración:}
+
+Consideremos $Cov(T_n(x),S_x(\theta))=E(T_n(x)\cdot S_x(\theta))$
+
+\(
+\\ Cov(T_n(x)S_x(\theta))=\int_x T_n(x) \cdot S_x(\theta) \cdot f(x,\theta) \,dx
+=\int_x T_n(x) \cdot \frac{d}{d \theta} \log f(x,\theta) \cdot f(x,\theta) \,dx
+\\=\int_x T_n(x) \cdot \frac{\frac{d}{d \theta f(x,\theta)}}{f(x,\theta)} \cdot f(x,\theta) \,dx
+=\int_x T_n(x) \cdot \frac{d}{d \theta} f(x,\theta)\,dx
+= \frac{d}{d \theta} \int_x T_n(x) f(x,\theta) \,dx
+=\frac{d}{d \theta} E(T_n(x))
+\\ \text{(Como }T_n(x) \text{ es insesgado:)}
+\\ =\frac{d}{d \theta} g(\theta)=g'(\theta)
+\)
+
+Usamos la desigualdad de Cauchy-Schwarz que relaciona varianza y covarianza 
+
+$cov(X,Y)=\sqrt{Var(X) \cdot Var(Y)}$
+
+entonces,
+
+\(
+(g'(\theta)^2)=(cov(T_n(x)\cdot S_x(\theta)))^2 \leq Var(T_n(x)) \cdot Var(S_x(\theta))
+=Var(T_n(x)) \cdot n \cdot I_{x_1}(\theta)
+\)
+
+\[
+Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
+\]
+
+La varianza de un estimador insesgado es como mínimo $\frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}$
+
+Nota: Bajo las mismas condiciones de regularidad de Craner-Rao puede estiamrse
+en el caso que $T_n(x)$ sea un estimador de $\theta$ con $Var(T_n(x))<\infty$
+
+\[
+Var(T_n(x)) \geq \frac{1}{n \cdot I_{x_1}(\theta)}= \frac{1}{I_n(\theta)}
+\]
+
+
+La demostración es anaáloga a la anterior.
+
+\subsubsection*{Ejemplo}
+
+
+\(
+X_1,\dots,X_n \sim B(p) \quad p \in (0,1)
+\\I_n(\theta)=n \cdot I_{x_1}(\theta)=\frac{n}{p(1-p)}
+\)
+
+Si quiero estimar p, ¿cuál es la cota CR para cualquier estimador insesgado de P?
+
+\(
+Var(T_n(x)) \geq \frac{1}{n \cdot I_{x_1}(p)}=\frac{p(1-p)}{n}
+\)
+
+Supongamos que nuestro estimador para p es $\bar{X}$
+
+$Var(\frac{\sum_{i=1}^{n}}{n})=\frac{1}{n^2}Var(\sum_{i=1}^{n} x_i)
+=\frac{n \cdot p(1-p)}{n^2}=\frac{p(1-p)}{n}$
+
+\noindent\rule{\textwidth}{0.5pt} % Línea de ancho completo y grosor ajustado
+
+Hemos visto que,como consecuencia del Teorema Central del Limite,  la velocidad de convergencia de los errores a cero es del orden $\frac{1}{\sqrt{n}}$
+
+Si $X_1,\dots,X_n$ i.i.d. $P_\theta \in P,\theta \in \Theta \subseteq \mathbb{R}$ y f($x,\theta$)
+verifica las condiciones de regularidad de Craner-Rao, es decir, si la familia es regular.
+
+$\sqrt{n}(T_n(x)-g(\theta)) \xrightarrow{L} N(0,V_T^2(\theta))$
+
+donde $V_T^2(\theta)$ es la varianza asintótica del estimador y $\sqrt{n}$ es la normalización
+adecuada como consecuencia del TCL.
+
+Es equivalente, $T_n(x) \simeq N(g(\theta),\frac{V_T^2(\theta)}{n})$
+
+Bajo esas condiciones de regularidad, la varianza $\frac{V_T^2(\theta)}{n}$
+cumple también la cota de Craner-Rao
+
+\subsubsection*{Ejemplo:}
+
+\(
+X_1,\dots,X_n \quad i.i.d \quad U(0,\theta) \quad \theta>0
+\\f(x,\theta)= \frac{1}{\theta} \quad
+\)
+(Ejercicio 3b)
+
+Se demuestra que $X_{(n)}$ es un estimador consistente para $\theta$, pero la velocidad de convergencia no es $\frac{1}{\sqrt{n}}$
+
+\subsection{Estimador CAN y asintóticamente eficiente (AE)}
+
+Sea $X_1,\dots,X_n$ m.a.s. de $P_\theta, \theta \in \Theta \subseteq \mathbb{R}$
+ con densidad $f(x,\theta)$ y $T_n(x)$ estimador insestado de g($\theta$) con una Var($T_n(x))<\infty$
+ y que verifica las condiciones de regularidad DE Craner-Rao, entonces:
+
+\[
+Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
+\]
+
+,es decir,
+
+\[
+\frac{V_T^2(\theta)}{n} \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
+\]
+\[
+V_T^2(\theta) \geq \frac{(g'(\theta))^2}{I_{x_1}(\theta)}
+\]
+
+Concretamente un estimador CAN será mejor cuanto menor sea la varianza asintótica. 
+Si la varianza del estimador original es igual a la cota de CRaner-Rao, decimos que $T_n(x)$ es CAN y asintóticamente eficiente (AE)
+
+
+
+
+
+
