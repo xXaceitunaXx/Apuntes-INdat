@@ -1,0 +1,70 @@
+\setlength{\parskip}{1em}
+% Creo que el caso multiparamétrico como seccion empieza en la clase 7.
+% Aun asi lo voy a poner como si empezara una subsección
+
+\subsection{Caso multiparamétrico}
+
+Situacion:
+
+\(
+X_1,\dots,X_n \quad i.i.d. \quad P_\theta,\theta \in \Theta \subseteq \mathbb{R}^s 
+\\ \text{El parámetro s-dimensional es } \theta = (\theta_1,\dots,\theta_s) \quad s \geq 1
+\\ \text{ con familia de densidad }\{ f(x,\theta),\theta_0 \in \Theta\}
+\)
+
+Igualmente podemos escribir
+
+\begin{itemize}
+    \item Función de verosimilitud: $L(\theta,X_1,\dots,X_n)=\prod^{n}_{i=1} f(x_i,\theta)$
+    \item Función de log-verosimilitud: $l(\theta,X_1,\dots,X_n)=\sum^{n}_{i=1} \log f(x_i,\theta)$
+    \item Vector/función score: $S(\theta,X_1,\dots,X_n)=S(X,\theta)=\frac{d}{d \theta} \log L(\theta,X)
+    = (\frac{d}{d \theta} \log L(\theta_1,X),\dots,\frac{d}{d \theta} \log L(\theta,X))$
+\end{itemize}
+
+Ahora nos preguntamos, ¿cual es la cantidad de información de Fisher que tendremos en el caso multiparamétrico?.
+Para averiguarlo recurrrimos a la matriz Hessiana, que recordamos que es la matriz s x s de las derivadas parciales de segundo orden
+
+\(
+I_{ij}(\theta)=E_\theta(-\frac{d^2}{d \theta_i d \theta_j} log L(\theta,X))
+=E(\frac{d}{d \theta_i} log L(\theta,X),\frac{d}{d \theta_j} log L(\theta,X))
+\)
+
+\(
+H(\theta,X)=\{ \frac{d^2}{d \theta_i d \theta_j}log L(\theta,X) \}^s 
+=
+\begin{pmatrix}
+    \frac{d^2}{d \theta_1^2}log L(\theta,X) & \dots & \frac{d^2}{d \theta_1 d \theta_s}log L(\theta,X) \\
+    \vdots & \ddots & \vdots \\
+    \frac{d^2}{d \theta_s d \theta_1}log L(\theta,X) & \dots & \frac{d^2}{d \theta_s^2}log L(\theta,X)
+\end{pmatrix}
+\)
+
+Sabiendo esto, $I(\theta)$,matriz de información esperada(que recordemos que es la matriz de covarianzas del vectir score) será:
+\[
+I(\theta) = E_\theta(-H(\theta,X))
+\]
+Además de esto tendremos tambíen la matriz de información de Fisher observada
+
+\subsubsection{EMV en el caso multiparamétrico}
+
+$\hat{\theta}=\hat(\theta_n)=(\hat(\theta_1),\dots,\hat(\theta_s))'$ es el EMV para $\theta=(\theta_1,\dots,\theta_s)$
+si es la solución al siguiente sistema de ecuaciones:
+
+\[
+\begin{matrix}
+    \frac{d}{d \theta_1} log L(\theta,X)=0 \\
+    \dots \\
+    \frac{d}{d \theta_s} log L(\theta,X)=0
+\end{matrix}
+\]
+
+Estas ecuaciones son las denominadas \textbf{ecuaciones de verosimilitud}.
+
+\subsubsection*{}
+
+
+
+
+
+
+
