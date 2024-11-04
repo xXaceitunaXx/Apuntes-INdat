@@ -60,8 +60,28 @@ si es la solución al siguiente sistema de ecuaciones:
 
 Estas ecuaciones son las denominadas \textbf{ecuaciones de verosimilitud}.
 
-\subsubsection*{}
+\subsubsection*{Propiedades asintóticas del EMV multiparamétrico}
 
+En la situación $X_1,\dots,X_n$ i.i.d. $P_\theta, \theta \in \Theta \subseteq \mathbb{R}^s s\geq1$
+y bajo las siguientes condiciones de regularidad:
+
+\begin{enumerate}
+    \item $\Theta$ es un intervalo de $\mathbb{R}^s$
+    \item El soporte de f no depende de $\theta$. $\{x:f(x,\theta)>0\}$ no depende de $\theta$.
+    \item $\frac{d}{d \theta_j} f(x,\theta)$ existe y es finita $\forall j=1,\dots,s \quad \theta \in \Theta$
+    \item La matriz de información de Fisher (IF($\theta$)) es definida positiva (si $\forall X \neq A, \quad X^T \cdot A \cdot X >0$)
+    \item $f(x,\theta) \,dx$ se puede derivar bajo el signo integral
+\end{enumerate}
+
+Siendo $\theta_0$ el verdadero valor del parámetro, se obtienen los siguientes resultados:
+
+\begin{enumerate}
+    \item $P_\theta(L(\theta_0,X)\geq L(\theta,X),\quad \forall \theta \in \Theta) \xrightarrow[n \to \infty]{L}1$
+    
+    Con probabilidad que tiende a 1, cuando la función de verosimilitud alcanza el máximo en el verdadero valor del parámetro
+    \item $\hat{\theta_n} \to \theta_0$. El estimador es consistente.
+    \item $\hat{\theta_n} \sim N_s(\theta_0,V(\theta))$ donde $V(\theta)=I^{-1}(\theta)$ (es la varianza de la información de Fisher esperada).
+\end{enumerate}
 
 
 
