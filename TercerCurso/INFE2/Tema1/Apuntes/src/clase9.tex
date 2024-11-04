@@ -88,3 +88,103 @@ Como los intervalos de confianza basados en RV son invariantes por transformaci�
 \]
 
 (L y M son los puntos entre los que se cumple que $log L(\theta_0,X) \geq \log L(\bar{Y},X)-\frac{qchisq(0.95,1)}{2}$)
+
+\subsection*{Ejercicio 9}
+
+$X_1,\dots,X_n$ i.i.d. con distribución discreta ($P_1=P(ab),P_2=P(Ab),P_3=P(aB),P_4=P(AB)$).
+
+\(
+n=3839, \quad N_1=1997,N_2=904, N_3=906, N_4=n-N_1-N_2-N_3
+\)
+\(
+L(x)=\prod_{i=1}^{n}P(X_i=x_i)=P_1^{N_1}\cdot P_2^{N_2}\cdot P_3^{N_3}\cdot (1-P_1-P_2-P_3)^{n-N_1-N_2-N_3}
+\)
+\(
+log L(p,X_1,\dots,X_n)=1997 \log P_1+ 904 \log P_2+906 \log P_3+32\log(1-P_1-P_2-P_3)
+\)
+
+Ecuaciones de verosimilitud:
+
+\[
+\begin{matrix}
+    \frac{d}{d P_1} \log L(P_1, X_1, \dots, X_n) = \frac{1997}{P_1} - \frac{32}{1 - P_1 - P_2 - P_3} = 0 \\[1em]
+    \dots \\[1em]
+    \frac{d}{d P_3} \log L(P_3, X_1, \dots, X_n) = \frac{906}{P_3} - \frac{32}{1 - P_1 - P_2 - P_3} = 0
+\end{matrix}
+\]
+\[
+    \text{Resultado:}\quad \hat{P_1}=\frac{N_1}{n}=\frac{1997}{3834} \quad \hat{P_2}=\frac{N_2}{n}=\frac{904}{3834} \quad \hat{P_3}=\frac{N_3}{n}=\frac{906}{3834}
+\]
+
+\textbf{Apartado b.}
+
+Calcular el p-valor para el test de Wald.
+
+¿Como relacionamos nuestros parámetros a $\theta$ para contrastar $H_0$? Tenemos que escribir $H_0$ como una función de $g(\theta)$.
+
+El modelo global tiene 3 parámetros. Bajo $H_0$ depende de 1 parámetro y tiene qye haber 2 relaciones (2 funciones).
+
+\(
+H_0: \quad P_1=\frac{2+\theta}{4}, \quad P_2=\frac{1-\theta}{4}=P_3, \quad P_4=\frac{\theta}{4}
+\\g_1(P)=P_2-P_3=0
+\\g_2(P)=P_1+P_2-\frac{3}{4}=0
+\\H_0:
+\begin{pmatrix}
+    g_1(P)=0 \\
+    g_2(p)=0
+\end{pmatrix} \qquad (P=2,s=3) \quad H_0=(g(\theta)=(g_1(\theta),\dots,g_P(\theta)))
+\)
+
+Utilizando el delta-método multivariante:
+
+\(
+g(\hat{p})\sim N_2(g(P),G_{2x3}(\hat{P})\cdot \hat{Var(P)}_{3x3} \cdot G_{3x2}(\hat{P})')
+\)
+
+donde $G(\hat{P})$ es la matriz de derivadas parciales evaluadas en $\hat{P}$
+
+\(
+G(\hat{P})=
+\begin{pmatrix}
+    \frac{d}{d P_1} g_1(P) & \frac{d}{d P_2} g_1(P) & \frac{d}{d P_3} g_1(P) \\
+    \frac{d}{d P_1} g_2(P) & \frac{d}{d P_2} g_2(P) & \frac{d}{d P_3} g_2(P) 
+\end{pmatrix}
+\)
+
+\(
+W = \left( g_1(\hat{P}), g_2(\hat{P}) \right)' \cdot \left( G(\hat{P}) \, \hat{\text{Var}}(P) \, G(\hat{P})' \right)^{-1} \cdot \left( g_1(\hat{P}), g_2(\hat{P}) \right) \sim \chi^2_2 \quad \text{(bajo } H_0\text{)}
+\)
+
+Recordando:   
+\(
+\begin{matrix}
+    g_1(P)=P_2-P_3=0 \\
+    g_2(P)=P_1+P_2-\frac{3}{4}=0
+\end{matrix}
+\quad
+G(\hat{P})=
+\begin{pmatrix}
+    0 & 1 & -1\\
+    1 & 1 & 0
+\end{pmatrix}
+\)
+
+\(
+W = \left( \hat{P_2}-\hat{P_3}, \hat{P_1}+\hat{P_2}-\frac{3}{4} \right)' \cdot \left( G(\hat{P}) \, \hat{\text{Var}}(P) \, G(\hat{P})' \right)^{-1} \cdot 
+\left(  \hat{P_2}-\hat{P_3}, \hat{P_1}+\hat{P_2}-\frac{3}{4} \right) \sim \chi^2_2 
+\)
+
+\(
+\text{p-valor}=P_{H_0}(W \geq W_{obs})=1-pchisq(W_{obs},2)=0.36
+\)
+
+
+
+
+
+
+
+
+
+
+
