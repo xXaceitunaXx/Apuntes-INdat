@@ -1,0 +1,145 @@
+\textbf{\textit{Definición: }} Todos los estimadores CAN que se obtienen usando el $\Delta$-método a partir de otro estimador AE, son AE.
+
+\begin{proofs}
+    Sea $T_n(X)$ estimador CAN para $\theta$
+    \[
+        \sqrt{n}(T_n(X)-\theta) \overset{L}{\to}N(0,V^2_T(\theta))
+    \]
+
+    y $T_n(X)$ es AE entonces
+
+    \[
+        V^2_T(\theta) = \frac{1}{I_T(\theta)} \implies I_T(\theta)=\frac{1}{V^2_T(\theta)}
+    \]
+
+    Sea $g$ una función con derivada no nula, se tiene
+
+    \[
+        \sqrt{n}(g(T_n(X))-g(\theta)) \overset{L}{\to}N(0,V^2_T(\theta)(g'(\theta))^2)
+    \]
+
+    La varianza de $g(T_n(X))$ es
+
+    \[
+        Var(g(T_n(X)))=\frac{V^2_T(\theta)(g'(\theta))^2}{n}
+    \]
+
+    Y su cota CR es
+
+    \[
+        \frac{(g'(\theta))^2}{nI_{X_1}(\theta)}=\frac{(g'(\theta))^2}{\frac{n}{V^2_T(\theta)}}=\frac{V^2_T(\theta)(g'(\theta))^2}{n}\square
+    \]
+\end{proofs}
+
+
+\section{Inferencia Basada en Verosimilitud}
+
+
+\subsection{Caso Uniparamétrico}
+
+Toda información acerca de $\theta$ que los datos nos proporcionan está en la función de verosimilitud.
+
+\textbf{\textit{Definición: }} Sean $X_1, \dots, X_n$ v.a.i.i.d. Se define como función de verosimilitud a
+
+\[
+    L(\theta; X_1,\dots,X_n) =
+    \begin{cases}
+        P_\theta(X_1,\dots,X_n)=\prod_{i=1}^{n}P_\theta(X_i=x_i) & \text{Caso discreto} \\
+        f(X_1,\dots,X_n; \theta)=\prod_{i=1}^{n}f(x_i; \theta)   & \text{Caso continuo}
+    \end{cases}
+\]
+
+$L(\theta; X_1,\dots,X_n)$ es una función de $\theta$ proporcional a la probabilidad de observar que $(X_1,\dots,X_n)=(x_1,\dots,x_n)$ cuando $\theta$ es el verdadero valor del parámetro. Así, un valor del parámetro será más o menos verosimil cuanto mayor o menor sea esa verosimilitud.
+
+\newpage
+
+Consideremos las siguientes condiciones:
+
+\begin{enumerate}
+    \item El parámetro $\theta$ es identificable, es decir, que $\theta \neq \theta' \implies P_\theta \neq P_{\theta'}$
+    \item Las distribuciones $P_\theta$ donde $\theta \in \Theta$ tienen el mismo soporte $\{x:f(x,\theta) > 0\}$ y no depende de $\theta$
+\end{enumerate}
+
+\textbf{\textit{Resultado: }} Sean $X_1,\dots,X_n$ v.a.i.i.d. con $f(X;\theta)$. Entonces si $\theta_0$ es el verdadero valor del parámetro
+
+\[
+    P_\theta(L(\theta_0;X_1,\dots,X_n)>L(\theta;X_1,\dots,X_n))\xrightarrow{n\to\infty}1
+\]
+
+\begin{proofs}
+    Sea
+
+    \[
+        \left\{x:L(\theta_0;X_1,\dots,X_n)>L(\theta;X_1,\dots,X_n)\right\}=\left\{x:\prod_{i=1}^{n}\frac{f(x_i;\theta)}{f(x_i;\theta_0)}<1\right\}
+    \]
+
+    donde aplicando logaritmos
+
+    \[
+        \left\{x:\frac{1}{n}\sum_{i=1}^{n}\log{\frac{f(x_i;\theta)}{f(x_i;\theta_0)}}<0\right\}
+    \]
+
+    Tenemos que
+
+    \[
+        \frac{1}{n}\sum_{i=1}^{n}\log{\frac{f(x_i;\theta)}{f(x_i;\theta_0)}} \overset{P}{\to}E_{\theta_0}=\left(\log{\frac{f(x_i;\theta)}{f(x_i;\theta_0)}}\right)
+    \]
+
+    Aplicando la desigualdad de Jensen para funciones convexas: $f(E(X)) \leq E(f(X))$ donde $-\log$ es convexa
+
+    \[
+        E_{\theta_0}\left(-\log{\frac{f(x_i;\theta)}{f(x_i;\theta_0)}}\right) \geq -\log{E_{\theta_0}\left(\frac{f(x_i;\theta)}{f(x_i;\theta_0)}\right)} \implies
+    \]
+
+    \[
+        \implies E_{\theta_0}\left(\log{\frac{f(x_i;\theta)}{f(x_i;\theta_0)}}\right) \leq \log{E_{\theta_0}\left(\frac{f(x_i;\theta)}{f(x_i;\theta_0)}\right)}
+    \]
+
+    Y como
+
+    \[
+        \log{E_{\theta_0}\left(\frac{f(x_i;\theta)}{f(x_i;\theta_0)}\right)}=\log\int\frac{f(x_i;\theta)}{f(x_i;\theta_0)}f(x_i;\theta_0)dx=\log\int f(x_i;\theta_0)dx=\log(1)=0
+    \]
+
+    probamos que $\frac{1}{n}\sum_{i=1}^{n}\log{\frac{f(x_i;\theta)}{f(x_i;\theta_0)}}$ converge a una cantidad negativa
+\end{proofs}
+
+\newpage
+
+\subsubsection{Estimación por Máxima Verosimilitud}
+
+El estadistico EMV es el valor en el que se alcanza el máximo de la verosimilitud o así mismo, puesto que la transformación logaritmica es monótona y creciente, de la log verosimilitud definida como $l(\theta;X_1,\dots,X_n)=\log L(\theta;X_1,\dots,X_n)$. \\
+
+\textbf{\textit{Definición: }} $\hat{\theta}(x)$ será EMV de $\theta$ si
+
+\[
+    \hat{\theta}(x) = \underset{\theta \in \Theta}{argmax}(l(\theta;X_1,\dots,X_n))
+\]
+
+\begin{exercise}
+    Sean $X_1,\dots,X_n$ v.a.i.i.d. donde $X_i \thicksim B(\theta)$ para $\theta \in (0,1)$. Sea la función de distribución Bernoulli $P_\theta(X=x)=\theta^x(1-\theta)^{1-x}$. Estimar $\theta$ mediante máxima verosimilitud. \\
+    Calculamos la verosimilitud como
+
+    \[
+        L(\theta;X) \propto \prod_{i=1}^{n}\theta^x(1-\theta)^{1-x}=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}
+    \]
+
+    y la log verosimilitud
+
+    \[
+        l(\theta; X_1,\dots,X_n)=\sum_{i=1}^{n}x_i\log\theta + (n-\sum_{i=1}^{n}x_i)\log(1-\theta)
+    \]
+
+    Encontraremos un máximo en donde se cumpla que $\frac{\partial}{\partial\theta}l(\theta;X_1,\dots,X_n)=0$
+
+    \[
+        \frac{\partial}{\partial\theta}l(\theta;X_1,\dots,X_n) = \frac{\sum_{i=1}^{n}x_i}{\theta}-\frac{n-\sum_{i=1}^{n}x_i}{(1-\theta)} \implies
+    \]
+
+    \[
+        \implies \sum_{i=1}^{n}x_i(1-\theta)=(n-\sum_{i=1}^{n}x_i)\theta \implies \theta=\frac{\sum_{i=1}^{n}x_i}{n}=\overline{X}
+    \]
+
+    Por tanto concluimos que el EMV de $\theta$ es $\hat{\theta}=\overline{X}$.
+
+\end{exercise}

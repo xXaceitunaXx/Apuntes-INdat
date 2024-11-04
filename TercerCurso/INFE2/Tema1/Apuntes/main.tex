@@ -22,17 +22,17 @@
 
 \newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
 
-\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheoremstyle[name=Teorema,]{thmsty}
 \declaretheorem[style=thmsty,numberwithin=section]{theorem}
 \tcolorboxenvironment{theorem}{colback=LightGray}
 
-\declaretheoremstyle[name=Proposition,]{prosty}
-\declaretheorem[style=prosty,numberlike=theorem]{proposition}
-\tcolorboxenvironment{proposition}{colback=LightOrange}
+\declaretheoremstyle[name=Ejercicio,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{exercise}
+\tcolorboxenvironment{exercise}{colback=LightOrange}
 
-\declaretheoremstyle[name=Principle,]{prcpsty}
-\declaretheorem[style=prcpsty,numberlike=theorem]{principle}
-\tcolorboxenvironment{principle}{colback=LightGreen}
+\declaretheoremstyle[name=Demostración,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{proofs}
+\tcolorboxenvironment{proofs}{colback=LightGreen}
 
 \pgfmathdeclarefunction{gauss}{2}{\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}}
 
@@ -73,9 +73,10 @@
 \newpage
 
 % ------------------------------------------------------------------------------
-\include{src/clase3}
 
 \include{src/clase1}
+\include{src/clase3}
+\include{src/clase5}
 \include{src/clase12}
 
 

@@ -69,7 +69,7 @@ Existen algunas estrategias para comprobar si un estimador es consistente:
           Es decir que si ECM $T(X_1, \dots, X_n) \xrightarrow{{n \to \infty}} 0$, el estimador converge en media cuadrática. Un estimador insesgado sería consistente si su varianza converge a 0 con $n \to \infty$. La convergencia en media cuadrática es más fuerte que la convergencia en probabilidad.
 \end{enumerate}
 
-\begin{theorem}
+\begin{exercise}
     Sean $X_1, \dots, X_n$ v.a.i.i.d. con $E(X_i)=\mu$ y $Var(X_i)=\sigma^2$, $\forall i=1, \dots, n$. ¿Es consistente $T_n(x) = \frac{X_1 + X_2 + \dotsb + X_n}{\frac{n}{2}}$?
 
     Usando la ley de los grandes números:
@@ -78,7 +78,7 @@ Existen algunas estrategias para comprobar si un estimador es consistente:
     \]
 
     Resultado: El estimador $T_n(x)$ NO es consistente
-\end{theorem}
+\end{exercise}
 
 La consistencia por si sola no es tan interesante, ya que si $T_n$ es consistente para $\theta$, nos dice que para n grande los errores serán pequeños pero no nos permite conocer el orden del error $\left(\frac{1}{n}, \frac{1}{\sqrt{n}},\frac{1}{\log(n)}, \dots\right)$
 
