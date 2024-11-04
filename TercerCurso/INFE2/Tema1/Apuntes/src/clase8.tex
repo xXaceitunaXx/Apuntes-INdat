@@ -80,11 +80,190 @@ Siendo $\theta_0$ el verdadero valor del parámetro, se obtienen los siguientes 
     
     Con probabilidad que tiende a 1, cuando la función de verosimilitud alcanza el máximo en el verdadero valor del parámetro
     \item $\hat{\theta_n} \to \theta_0$. El estimador es consistente.
-    \item $\hat{\theta_n} \sim N_s(\theta_0,V(\theta))$ donde $V(\theta)=I^{-1}(\theta)$ (es la varianza de la información de Fisher esperada).
+    \item $\hat{\theta_n} \sim N_s(\theta_0,V(\theta))$ donde $V(\theta)=I^{-1}(\theta)$ (es la inversa de la información de Fisher esperada).
+    \item Para una componente de $\hat{\theta_k}$ de $\hat{\theta}$ (vector) se tiene que $\hat{\theta_k} \sim N(\theta_{0k},V_{kk}(\theta))$
+    donde $V_{kk}(\theta)$ es el k-ésimo elemento de la diagonal de $V(\theta)$
 \end{enumerate}
 
+\subsubsection*{Ejemplo}
+\(
+Para \quad X_1,\dots,X_n \quad N(\mu,\sigma) 
+\)
+Obtener $I(\theta)$ esperada
 
+\(
+f(x,\mu,\sigma)=\frac{1}{\sigma \sqrt{2 \pi}} \cdot e^{\frac{-(x-\mu)^2}{2 \cdot \sigma^2}}
+\\ L(\mu,\sigma,X_1,\dots,X_n)= (\frac{1}{\sigma \sqrt{2 \pi}})^n \cdot e^{\frac{-1 \cdot \sum_{i=1}^{n}(x_i-\mu)^2}{2 \cdot \sigma^2}}
+\\ \log L(\mu,\sigma,X_1,\dots,X_n)= -n \log \sigma \cdot \frac{-1}{2 \cdot \sigma^2} \sum_{i=1}^{n}(x_i-\mu)^2
+\)
 
+Sacamos las ecuaciones de verosimilitud:
+\(
+\\ \frac{d}{d \mu} \log L(\mu,\sigma,X_1,\dots,X_n)=\frac{\sum_{i=1}^{n} (x_i-\mu)}{\sigma^2}=0
+\\ \frac{d}{d \sigma} \log L(\mu,\sigma,X_1,\dots,X_n)=\frac{-n}{sigma}+ \frac{\sum_{i=1}^{n}(x_i-\mu)^2}{\sigma^3}=0
+\\I(\mu,\sigma)=
+\begin{pmatrix}
+    \frac{n}{\sigma^2} & 0\\
+    0 & \frac{2n}{\sigma^3}
+\end{pmatrix}
+\quad I^{-1}(\mu,\sigma)=
+\begin{pmatrix}
+    \frac{\sigma^2}{n} & 0\\
+    0 & \frac{\sigma^3}{2n}
+\end{pmatrix}
+\)
 
+luego:
+
+\(
+EMV=
+\begin{pmatrix}
+    \bar{\mu}\\
+    \bar{\sigma}
+\end{pmatrix}
+\sim N_2
+\begin{pmatrix}
+
+\begin{pmatrix}
+    \bar{\mu_0}\\
+    \bar{\sigma_0}
+\end{pmatrix}
+,
+\begin{pmatrix}
+    \frac{\sigma^2}{n} & 0\\
+    0 & \frac{\sigma^3}{2n}
+\end{pmatrix}
+    
+\end{pmatrix}
+\quad o
+\quad \sqrt{n}
+\begin{bmatrix}
+    \begin{pmatrix}
+        \bar{\mu}\\
+        \bar{\sigma}
+    \end{pmatrix}
+    -
+    \begin{pmatrix}
+        \bar{\mu_0}\\
+        \bar{\sigma_0}
+    \end{pmatrix}
+\end{bmatrix}
+\to
+N_2
+\begin{pmatrix}
+    0,
+    \begin{pmatrix}
+        \sigma^2 & 0\\
+        0 & \frac{\sigma^3}{2}
+    \end{pmatrix}
+        
+    \end{pmatrix}
+\)
+
+\subsubsection*{Ejemplo 2:}
+Sea $X_1,\dots,X_n$ i.i.d. de una distribución que toma valores en un conjunto finito de valores x=$\{a1,a2,a3\}$ con probabilidad
+$P_i$ tal que $\sum_{i=1}^{3} P_i=1$, obtener el EMV.
+
+Se trata de un modelo biparamétrico ya que $P_3=1-P_1-P_2$. $\theta=(P_1,P_2)'$
+
+Función de probabilidad=$f(x; \theta) = P_1 \mathbf{1}_{x = a_1} + P_2 \mathbf{1}_{x = a_2} + P_3 \mathbf{1}_{x = a_3}$
+
+Función de verosimilitud=
+\(L(\theta,X_1,\dots,X_n)=\prod_{i=1}^{n}f(x_i,P_1,P_2)=P_1^{N1}\cdot P_2^{N2} \cdot (1-P_1-p_2)^{N3}
+\quad donde \quad N_r=\sum_{i=1}^{n} \mathbf{1}_{x_i=a_r}
+\)
+
+Log-verosimilitud=$ \log L(\theta,X)=N_1 \log P_1 + N_2 \log P_2 +N_3 \log P_3$
+
+Ecuaciones de verosimilitud:
+\(
+\\ \frac{d}{dP_1} \log L(\theta,X)=\frac{N_1}{P_1}-\frac{N_3}{1-P_1-P_2}=0
+\\ \frac{d}{dP_2} \log L(\theta,X)=\frac{N_2}{P_2}-\frac{N_3}{1-P_1-P_2}=0
+\)
+
+Resolviendo el sistema de ecuaciones obtenemos:
+
+\[
+\hat{P_1}=\frac{N_1}{n} \quad \hat{P_2}=\frac{N_2}{n} \quad \hat{P_3}=\frac{N_3}{n}
+\]
+\[
+\begin{pmatrix}
+    \hat{p_1} \\
+    \hat{p_2}
+\end{pmatrix}
+\sim
+N_2
+\begin{pmatrix}
+    \begin{pmatrix}
+        P_1 \\
+        P_2
+    \end{pmatrix}
+, IF^{-1}
+\end{pmatrix}
+\]
+
+(Hallar la información de Fisher se deja como tarea para el lector)
+
+\subsubsection{Estimación de la varianza a través de la matriz de Información de Fisher observada}
+
+La matriz de información de Fisher es la negativa de la matriz Hessiana calculada en el EMV, es decir $-H(\hat{\theta},X)$
+, de forma que el estimador de $V(\theta)$ es:
+\[
+\hat{V}=\hat{V(\theta)}=-[H(\hat{\theta},X)]^{-1} \quad donde\quad H(\theta,X)=\frac{d^2}{d \theta_i d \theta_j} \log L(\theta,X)
+\]
+esto ocurre ya que:
+\(
+H(\hat{\theta},X) \to H(\theta_0,X)
+\\ \hat{\theta} \sim N_s(\theta_0,\hat{V})
+\hat{\theta_k} \sim N(\theta_{0_k},\hat{V_{kk}})
+\)
+
+En esto nos basaremos para hacer inferencia de Wald con intervalos de confianza y contrastes de hipótesis.
+
+\[
+Z \sim N_s(\theta,\Sigma) \to \text{Tipificando nos queda}
+\]
+\[
+(Z-\theta)' \Sigma^-1 (Z-\theta) \sim \chi_s^2
+\]
+\[
+\frac{(Z-\theta)^2}{\sigma} \sim \chi^2_1
+\]
+
+\subsection{Inferencia de Wald en el caso multiparamétrico}
+
+Si queremos hacer inferencia para 2 o más parámetros, tenemos:
+
+Sea una particion:
+\(
+\psi=(\theta_1,\dots,\theta_r) \quad r \leq s \quad, \quad
+\psi_0=(\theta_{1_0},\dots,\theta_{r_0}) \quad y \quad 
+\Omega=(\theta_{r+1},\dots,\theta_s)
+\)
+
+Buscamos contrastar: $H_0:\psi=\psi_0$
+
+El EMV para $\psi$ es $\hat{\psi}=(\hat{\theta_1},\dots,\hat{\theta_r})$.
+
+Bajo $H_0$ según lo visto, $\hat{\psi}\sim N_r(\psi_0,\hat{V_\psi})$
+donde $\hat{V_\psi}$ es la matriz de covarianzas de $\hat{\psi}$ que es la matriz rxr superior de $\hat{V(\theta)}$.
+
+El estadístico de Wald en este caso es:
+\[
+W=(\hat{\psi}-\hat{\psi_0}')[\hat{V_\psi}]^{-1}(\hat{\psi}-\psi_0)\sim\chi^2_r
+\]
+O lo que es lo mismo, en el caso uniparamétrico:
+\[
+\frac{(\hat{\theta}-\theta)^2}{\sigma}\sim \chi^2_1
+\]
+
+Un test de Wald de nivel $\alpha$ rechazará $H_0$ si $W>C_k\equiv W>\chi^2_{1-\alpha,r}$, es decir, si
+$\alpha$ es menor que el p-valor=$P_{\psi=\psi_0}(W>W_{obs})\backsimeq$1 - pchisq($W_{obs}$,r).
+
+La región de confianza para $\psi$ con $1-\alpha$ es una elipse r-dimensional para todos los valores ($W \leq \chi^2_{r,1-\alpha}$) en los que el test no rechaza $H_0$
+
+\[
+\text{Región de confianza}(1-\alpha)=\{ \psi_0 /\hat{\psi}-\hat{\psi_0}')[\hat{V_\psi}]^{-1}(\hat{\psi}-\psi_0)=\frac{(\hat{\theta}-\theta_s)^2}{\sigma}\leq\chi^2_r\}
+\]
 
 
