@@ -31,7 +31,15 @@ $$P_\theta\Bigg(\overline{X}-\zeta_{1-\frac{\alpha}{2}}\sqrt{\frac{\overline{X}(
 
 Este tipo de inferencia basada en la verosimilitud se llama \textbf{inferencia de Wald}.\\
 
-Para los contrastes de hipótesis vamos a definir tres estadísticos que nos sirven para hacer inferencia basada en la varosimilitud.
+Para los contrastes de hipótesis vamos a definir tres estadísticos que nos sirven para hacer inferencia basada en la verosimilitud.
+\begin{enumerate}
+    \large\item \textbf{Estadístico de Razón de Verosimilitud}\\\ \\
+    \normalsize Definamos $\lambda (X)$
+    $$\lambda (X)=\lambda (X_1,\dots ,X_n)=\Lambda (X)=\frac{L(\theta_0, X_1,\dots,X_n)}{\underset{\theta}{sup}\ L(\theta,X_1,\dots,X_n)}=\frac{L(\theta_0, X_1,\dots,X_n)}{L(\hat\theta_n, X_1,\dots,X_n)}\in [0,1]$$
+    $H_0$ se rechazará para valores bajos del estadístico. 
+    Ahora vamos a hallar la \textbf{región crítica del test} $\lambda (X)<k$. Para hacerlo más sencillo, se puede escribir con la log-verosimilitud:
+    $$Q_L=-2ln(\lambda (X))=-2\big(ln(L0)-ln(L0)\big)$$
+\end{enumerate}
 
 
 
