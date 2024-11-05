@@ -1,0 +1,194 @@
+\setlength{\parskip}{1em}
+
+
+Volviendo al caso multiparamétrico.
+
+Situación: $\theta=(\theta_1,\dots,\theta_s) \subseteq \mathbb{R}^s \quad \text{y sea }g:\mathbb{R^s}\to \mathbb{R}^r$
+
+\(
+g(\theta)=(g_1(\theta),\dots,g(\theta))'
+\quad G(\theta)=
+\begin{pmatrix}
+    \frac{d}{d \theta_1} g_1(\theta) & \dots &  \frac{d}{d \theta_s} g_1(\theta) \\
+    \dots & \dots & \dots \\
+    \frac{d}{d \theta_1} g_r(\theta) & \dots &  \frac{d}{d \theta_s} g_r(\theta)
+\end{pmatrix}
+\)
+
+Se requiere contrastar: $H_0:g(\theta)=0 \quad H_1:g(\theta) \neq 0$.
+\\ $H_0$ depende de s-r parámetros libres. Von el delta método podemos llegar a calcular un p-valor basado en el test de Wald
+
+\(
+g(\hat{\theta})-g(\theta) \sim (\text{bajo }H_0) N_r(0,G(\hat{\theta})\cdot \hat{V}(\hat{\theta})\cdot G(\hat{\theta})')
+\)
+\(
+W=(g(\hat{\theta})\cdot [G(\hat{\theta})\cdot \hat{V}(\hat{\theta})\cdot G(\hat{\theta})']^{-1} \cdot g(\hat{\theta})) \sim \chi^2_r
+\)
+
+\[
+\text{p-valor}=P_{H_0}(\chi^2_r>W_{obs})
+\]
+
+Aunque este test es potente, el test de razón de verosimilitud (RV) es más potente.
+
+\subsection{Test de razón de verosimilitud (RV)}
+
+Situación: $X_1,\dots,X_n$ i.i.d. $P_\theta:\theta \in \Theta \subseteq \mathbb{R}^s$
+
+\(
+H_0: \theta \in \Theta_0 \subseteq \Theta \quad H_1: \theta \notin \Theta_0
+\)
+
+donde $\Theta_0=\{
+    \theta \in \Theta: \theta=(\theta_{1_0},\dots,\theta_{r_0},\theta_{r+1},\theta_s)
+\}$
+
+$\Theta$ depende de s parámetros libres. $\Theta_0$ depende de r-s parámetros libres.
+
+El test de razón de verosimilitud (TRV) compara el máximo de la verosimilitud en $H_0$ con el mínimo en el EMV
+
+\[
+\Delta(x)=\frac{\sup_{\theta \in \Theta_0} L(\theta,X)}{\sup_{\theta \in \Theta} L(\theta,X)}
+\]
+
+El estadístivo test de razón de verosimilitud se escribe habitualmente como $-2 \cdot \log \Delta(x)$.
+\[
+Q_L(x)=2 \cdot [\log L(\hat{\theta},X)-\log L(\hat{\theta_0},X)]
+\]
+($\log L(\hat{\theta_0},X)$ ees el EMV de $\theta$ restringido a $\Theta_0$ y que depende de s-r parámetros libres)
+
+$Q_L(x)$ bajo $H_0$ tiene una distribución asintótica $\chi^2_r$.
+\begin{itemize}
+    \item Si $r=s \to H_0:\theta \in \Theta$ es una hipótesis simple, es decir, no hay parámetros libres bajo $H_0.(dim(\Theta_0)=0)$
+    \item Si $r<s \to H_0:\theta \in \Theta_0$ es una hipótesis compuesta ($dim(\Theta_0)=s-r$) con s-r parámetros que pueden tomar varios valores posibles.
+\end{itemize}
+
+Vamos a usar la notación de partición que vimos antes.
+
+\(
+\theta=(\phi,\lambda) \text{ donde } \phi=(\theta_1,\dots,\theta_r) \quad y \quad \lambda=(\theta_{r+1},\dots,\theta_s)
+\)
+
+El contraste es: $H_0:\phi=\phi_0 \quad H_1:\phi \neq \phi_0$
+
+Entonces para maximizar sobre el espacio paramétrico restringido a $\Theta_0$ es una maximización sobre $\lambda$ porque
+$\Theta_0=\phi_0=(\theta_{1_0},\dots,\theta_{r_0})$ y $\phi_0$ están restringidos.
+$\sup_{\theta \in \Theta}L(\theta,X)=\sup_\lambda L(\phi_0,\lambda,X)$
+
+Bajo las condiciones de regularidad de Craner-Rao multiparamétrico, $Q_L(X) \sim (\text{bajo }H_0) \chi^2_r$
+y rechazamos $H_0$ para valores grandes de $Q_L(x)$. El test de razón de verosimilitud rechaza $H_0$ a nivel $\alpha$ si $Q_L(x)>\chi^2_{2-\alpha,r}=qchisq(1-\alpha,r)$.
+
+p-valor $\to P_{H_0}(\chi^2_r>Q_{obs})=1-pchisq(Q_{obs},r)$
+
+\subsubsection{Región de confianza de la razón de verosimilitud}
+
+La región de confianza (1-$\alpha$) para $\phi=(\theta_1,\dots,\theta_r)\in \mathbb{R}^r$ es la colección de valores
+$\phi_0=(\theta_{1_0},\dots,\theta_{r_0})$ para los que $H_0:\phi=\phi_0$ no se rechaza a nuvel $\alpha$.
+\[
+RCRV(1-\alpha)=\{\phi_0 \in \mathbb{R}^r:H_0:\phi=\phi_0\}
+\]\[
+    =\{\phi_0 \in \mathbb{R}^r:2[\log L(\hat{\theta},X)-\sup \log L(\phi_0,\lambda,X)] \leq qchisq(1-\alpha,r)\}
+\]
+
+La región de confianza de la razón de verosimilitud será un elipsoide r-dimensional. Con s=2 se puede representar.
+
+\textbf{Caso particular para r=1:}
+
+Intervalo de confianza para $\theta_1$ basado en RV con $\theta=(\theta_1,\dots,\theta_s)$ y $\phi=\phi_0$.
+
+\(
+ICRV(\theta_1,1-\alpha)=\{\theta_{1_0}:H_0:\theta_1=\theta_{1_0}\}
+\\= \left\{ \theta_{1,0} : 2\left[\log L(\hat{\theta},X) - \sup \log L(\phi_0, \lambda, X)\right] \leq qchisq(1 - \alpha, r) \right\}
+\) 
+
+Buscamos el intervalo de confianza para el caso s=2, es decir, intervalo de confianza para $\theta_1$ con $\phi_0=\theta_1$ y $\lambda=\theta_2$.
+
+\(
+ICRV(\theta_1,1-\alpha)=\{ 
+\theta_{1_0}:h(\theta_{1_0})=\sup_{\theta_2} \log L(\theta_{1_0},\theta_2,X) \geq \log(\hat{\theta},X)-\frac{qchisq(1-\alpha,1)}{2}=d1
+\}
+\)
+
+Podemos representarlo fácilmente si conocemos la función $h(\theta_{1_0})$.
+%Se podria insetar gráfico.
+El resultado con s=2 es:
+\(
+\theta_{1_0} \in  ICRV(\theta_1,1-\alpha) \Longleftrightarrow \exists \alpha_2 / (\theta_1,\theta_2) \in B
+\)
+\(
+B=\{\theta=(\theta_1,\theta_2):\log L(\theta,X)>d_1\}
+\)
+\(
+d1=\log L(\hat{\theta},X)-\frac{qchisq(1-\alpha,1)}{2}
+\)
+%Se puede añadir gráfico
+
+En general, incluso con tamaños de muestra relativamente grandes, el p-valor del test de razón de verosimilitud no coincide con el de Wald.
+Siempre es mejor aproximación el test de razón de verosimilitud, especialmente en r>1.
+
+\subsubsection*{Ejercicio 6}
+(Script de R en el campus)
+
+\(
+X_1,\dots,X_n \quad \text{i.i.d. discreta} \quad 7
+Y_i=\sum_{j=1}^{50} \mathbf{1}_{x_j=i} \quad i=1,2,3
+\)
+\(
+Y_1=8 \quad Y_2=14 \quad Y_3=28
+\)
+
+\textbf{Apartado a.}
+
+Contrastar $H_0: p_2-2\cdot p_1=0 \quad H_1: p_2-\cdot p_1 \neq 0$
+con TRV.
+\begin{enumerate}
+    \item Escribimos la función de verosimilitud
+    \item Calculamos el EMV
+    \item Calculamos la log-verosimilitud en el EMV
+    \item Repetimos los 3 primeros pasos bajo $H_0$
+\end{enumerate}
+
+Tenemos $p=(p_1,p_2)$ como vector de parámetros.
+
+\(
+L(p,x)=\prod_{i=1}^{50} P_p(X=X_i)=P_1^{N_1}\cdot P_2^{N_2}\cdot (1-P_1-P_2)^{50-P_1-P_2}=P_1^8\cdot P_2^{14} \cdot (1-P_1-P_2)^{28}
+\)
+
+\(
+l(p,x)=8 \log P_1 +14 \log P_2 +28 \log (1-P_1-P_2)
+\)
+
+\(
+EMV=\left\{
+\begin{array}{l}
+    \frac{d}{d p_1} \log L(p,x)=0\\
+    \frac{d}{d p_2} \log L(p,x)=0
+\end{array}
+\right.
+\quad \hat{p_i}=\frac{N_i}{n}
+\quad
+\begin{matrix}
+    \hat{p_1}=\frac{8}{50}\\
+    \hat{p_2}=\frac{14}{50}
+\end{matrix}
+\)
+
+\(
+Q_L(x)=2[\log L(\hat{p},x)-\sup_{p_2=2\cdot p_1}\log L(p,x)]
+\)
+
+
+EMV bajo $H_0$:
+
+\(
+sup_{p_1}(8 \log p_1 +14 \log(2\cdot p_1)+28 \log(1-3\cdot P_1))\implies \hat{p_{1_0}=0.15}
+\)
+
+\(
+Q_l(x)=Q_obs \qquad \text{p-valor=}P_\theta(\chi^2_1 \geq Q_obs)=0.76
+\)
+
+No se rechaza $H_0$
+
+
+

@@ -4,7 +4,7 @@
 En la mayoría de casos el EMV se obtiene de forma explícita. Sin embargo, en muchos casos prácticos la ecuación (o ecuaciones) de verosimilitud son muy complejas.
 Por ejemplo, para obtener el EMV en R podemos utilizar la función \textit{optim}. En teoría veremos dos algoritmos distintos: el de \textbf{Newton-Raphson} y el \textbf{algoritmo EM}. 
 
-\subsection*{Algoritmo de Newton-Raphson (NR)}
+\subsection{Algoritmo de Newton-Raphson (NR)}
 
 Está basado en la aproximación analítica de la función objetivo vía la aproximación lineal de su derivada. \\
 
@@ -30,9 +30,9 @@ Si repetimos k veces el paso anterior llegaremos a $\theta^{(k)}$, por lo que la
 
 $$\theta^{(k+1)}=\theta^{(k)}-H(\theta^{(k)},x)^{-1}\frac{\partial}{\partial\theta}ln(L(\theta^{(k)},x))$$
 
-Es importante la elección del punto inicial para evitar convergencia a \textbf{óptimos locales}. \pagebreak
+Es importante la elección del punto inicial para evitar convergencia a \textbf{óptimos locales}.
 
-\subsection*{Algoritmo EM (\textit{Expectation-maximization})}
+\subsection{Algoritmo EM (\textit{Expectation-maximization})}
 
 Utilizado en situaciones donde los datos que tenemos se pueden considerar \textbf{incompletos} (censurados). 
 Es decir, cuando el experimento tiene dos variables aleatorias $Y$ y $B$ pero solamente se observa $Y=y$. $B$ no se observa y los datos completos serán $X=(Y,B)$. 
@@ -55,15 +55,13 @@ $$L(X_1,...,X_n,\theta)=L((Y_1,B_1),...,(Y_n,B_n),\theta)=\prod_{i=i}^{n}f(Y_i,B
 
 El algoritmo EM obtiene un valor aproximado del EMV que es el máximo de los datos observados a partir del EMV de los datos completos.
 
-\subsubsection*{Desarrollo del algoritmo EM}
+\subsubsection{Desarrollo del algoritmo EM}
 Se puede calcular la esperanza de $ln(L(X,\theta))$ condicionada a $Y=y$ dado un valor de $\theta$. A partir de un \textbf{valor inicial} $\theta_0$, el algoritmo establece dos pasos:
 \begin{enumerate}
     \item \textbf{Esperanza (expectation):} Calcular $E_{\theta_0}\Big(ln(L(X,\theta))\big/Y\Big)$ y sustituir la probabilidad de los valores no observados por el valor esperado condicionado a lo observado.
     \item \textbf{Maximización (maximization):} Obtener $\theta^{(n)}$ en el punto en el que se alcanza el máximo en la log-verosimilitud habiendo sustituido la expresión anterior.
 \end{enumerate} 
 Este proceso se repite \textbf{iterativamente} $k$ veces. 
-
-\pagebreak
 
 \hspace{-1cm}\noindent\begin{tabular}{r}
     \textbf{Ejemplo}  \\ \hline \ \\
@@ -100,7 +98,6 @@ $$=\frac{P_{p_0,\lambda_0}(B_i=1)P\Big(Y_i=y_i\Big/B_i=1\Big)}{P_{p_0,\lambda_0}
 \end{cases}$$
 Sea $b^{*}=\sum_{i=0}^{n}b^{*}_i$, al ser $p_0$ y $\lambda_0$ constantes, $b^{*}$ será \textbf{una constante} y tenemos que:
 $$E_{p_0,\lambda_0}\Big(ln(L(p_0,\lambda_0,b,y))\Big/Y_1,...,Y_n\Big)=b^{*}ln(p)+(n-b^{*})ln(1-p)-\lambda(n-b^{*})+\sum y_i(1-b^{*})ln(\lambda)$$
-\pagebreak
 
 \noindent\underline{Paso 2, Maximización:} Una vez tenemos la expresión para la esperanza, derivamos y buscamos el máximo en función de cada una de las variables:
 $$\begin{cases}

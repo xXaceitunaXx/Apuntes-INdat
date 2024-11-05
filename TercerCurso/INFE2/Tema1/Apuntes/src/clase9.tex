@@ -1,0 +1,190 @@
+\setlength{\parskip}{1em}
+
+¿Cómo hacemos inferencia para una función del parámetro?
+Utilizando el delta método s-variante.
+
+Partimos de la situacion $H_0:g(\theta)=0$.
+
+Si g es una función de $\theta$ tal que g:$\theta \to \mathbb{R}^p \quad p \leq S, \quad g(\theta)=(g_1(\theta),\dots,g_p(\theta))$
+y sea $G(\theta)$ la matriz p x s de las primeras derivadas respecto a $\theta$:
+
+\[
+G(\theta)=
+\begin{pmatrix}
+    \frac{d}{d \theta_1} g_1(\theta) & \dots & \frac{d}{d \theta_s} g_1(\theta)\\
+    \dots &\dots & \dots \\
+    \frac{d}{d \theta_1} g_p(\theta) & \dots &\frac{d}{d \theta_s} g_p(\theta)
+\end{pmatrix}
+\]
+
+Si $\hat{\theta}$ tiene distribución asintótica ($N_s(\theta_s,V)$)
+y $g(\hat{\theta})$ también tiene distribución asintótica ($N_p(g(\theta_0)),G_{pxs}(\theta_0)\cdot V \cdot G(\theta)'$)
+
+\[
+W=(g(\hat{\theta}-g(\theta_0)))'(G(\hat{\theta})\cdot \hat{V} G(\hat{\theta})')^-{-1}(g(\hat{\theta}-g(\theta_0))) \sim \chi^2_p
+\]
+
+\subsubsection*{Ejercicio 1}
+Se analizan 100 lotes con 10 muestras cada uno $\sum_{i=1}^{100}Y_i=12 \quad Y_1,\dots,Y_{100} \sim B(\theta)$.
+\\$\theta$="probabilidad de que la toxina esté presente en el lote"
+\\ p="probabilidad de que la toxina esté presente en una muestra individual"
+
+\textbf{Apartado a}.
+
+Nos piden hacer inferencia sobre p, sabiendo que p es función de $\theta$.
+
+\(
+P(Y_1=0)=1-\theta=(1-p)^{10} \quad P(Y_i=1)=\theta
+\)
+
+Ya que ya tenemos la relación, hacemos inferencia sobre p.
+
+\(
+L(\theta,Y_1,\dots,Y_{100})=\prod_{i=1}^{100} \theta^{Y_i}(1-\theta)^{1-Y_i}=\theta^{\sum_{i=1}^{100} Y_i}(1-\theta)^{100-\sum_{i=1}^{100} Y_i}
+\\ \log L(\theta,Y_1,\dots,Y_{100})=(\sum_{i=1}^{100}Y_i) \log \theta + (100-\sum_{i=1}^{100}Y_i) \log (1-\theta)
+\\ \frac{d}{d \theta} log L(\theta,Y_1,\dots,Y_{100})= \frac{\sum_{i=1}^{100}Y_i}{\theta} - \frac{100 - \sum_{i=1}^{100}Y_i}{1-\theta}=0
+\)
+
+El EMV es invariante por transformación: $EMV \to \hat{\theta}=\bar{Y}$
+
+p=g($\theta$)=1-$(1-\theta)^{0.1}$ $\Longrightarrow \hat{p}=g(\hat{\theta})=1-(1-\bar{Y})^{0.1}$
+
+\textbf{Apartado b}.
+
+Sabemos que $\hat{\theta}=\bar{Y}$ y que tiene distribución asintóticamente normal.
+
+\[
+I_n(\theta)=\frac{n}{\theta(1-\theta)} \quad \hat{\theta}\simeq N(\theta,\frac{1}{I_n(\theta)}) = N(\theta,\frac{\theta(1-\theta)}{n})
+\]
+
+Sabiendo esto, ¿cuál será la distribución de p?
+
+\[
+\hat{p}=g(\hat{\theta}) \simeq N(g(\theta),\frac{\hat{\theta}(1-\hat{\theta})}{n}\cdot (g'(\theta))^2)
+\]
+
+¿Y cual sería un intervalo de confianza de Wald con confianza del 95$\%$ para p?
+
+\[
+\hat{p} \pm qnorm(0.975)\sqrt{Var(\hat{p})}
+\]
+
+\textbf{Apartado c}.
+Calcular el ICRV con confianza 0.95 para p.
+
+$Q_L \approx Q_W \sim \chi^2_1$
+
+Usamos la fórmula que sabemos para calcular este intervalo para $\theta$.
+
+\[
+ICRV=\{ \theta_0:2[\log L(\hat{\theta},X) - log L(\theta_0,X)] \leq qchisq(0.95,1)\}
+=\{ \theta_0:\log L(\theta_0,X) \geq \log L(\bar{Y},X)-\frac{qchisq(0.95,1)}{2}\}
+\]
+
+Como los intervalos de confianza basados en RV son invariantes por transformación, el intervalo de confianza RV para p es:
+
+\[
+[1-(1-L)^{0.1},1-(1-M)^{0.1}]
+\]
+
+(L y M son los puntos entre los que se cumple que $log L(\theta_0,X) \geq \log L(\bar{Y},X)-\frac{qchisq(0.95,1)}{2}$)
+
+\subsection*{Ejercicio 9}
+
+$X_1,\dots,X_n$ i.i.d. con distribución discreta ($P_1=P(ab),P_2=P(Ab),P_3=P(aB),P_4=P(AB)$).
+
+\(
+n=3839, \quad N_1=1997,N_2=904, N_3=906, N_4=n-N_1-N_2-N_3
+\)
+\(
+L(x)=\prod_{i=1}^{n}P(X_i=x_i)=P_1^{N_1}\cdot P_2^{N_2}\cdot P_3^{N_3}\cdot (1-P_1-P_2-P_3)^{n-N_1-N_2-N_3}
+\)
+\(
+log L(p,X_1,\dots,X_n)=1997 \log P_1+ 904 \log P_2+906 \log P_3+32\log(1-P_1-P_2-P_3)
+\)
+
+Ecuaciones de verosimilitud:
+
+\[
+\begin{matrix}
+    \frac{d}{d P_1} \log L(P_1, X_1, \dots, X_n) = \frac{1997}{P_1} - \frac{32}{1 - P_1 - P_2 - P_3} = 0 \\[1em]
+    \dots \\[1em]
+    \frac{d}{d P_3} \log L(P_3, X_1, \dots, X_n) = \frac{906}{P_3} - \frac{32}{1 - P_1 - P_2 - P_3} = 0
+\end{matrix}
+\]
+\[
+    \text{Resultado:}\quad \hat{P_1}=\frac{N_1}{n}=\frac{1997}{3834} \quad \hat{P_2}=\frac{N_2}{n}=\frac{904}{3834} \quad \hat{P_3}=\frac{N_3}{n}=\frac{906}{3834}
+\]
+
+\textbf{Apartado b.}
+
+Calcular el p-valor para el test de Wald.
+
+¿Como relacionamos nuestros parámetros a $\theta$ para contrastar $H_0$? Tenemos que escribir $H_0$ como una función de $g(\theta)$.
+
+El modelo global tiene 3 parámetros. Bajo $H_0$ depende de 1 parámetro y tiene qye haber 2 relaciones (2 funciones).
+
+\(
+H_0: \quad P_1=\frac{2+\theta}{4}, \quad P_2=\frac{1-\theta}{4}=P_3, \quad P_4=\frac{\theta}{4}
+\\g_1(P)=P_2-P_3=0
+\\g_2(P)=P_1+P_2-\frac{3}{4}=0
+\\H_0:
+\begin{pmatrix}
+    g_1(P)=0 \\
+    g_2(p)=0
+\end{pmatrix} \qquad (P=2,s=3) \quad H_0=(g(\theta)=(g_1(\theta),\dots,g_P(\theta)))
+\)
+
+Utilizando el delta-método multivariante:
+
+\(
+g(\hat{p})\sim N_2(g(P),G_{2x3}(\hat{P})\cdot \hat{Var(P)}_{3x3} \cdot G_{3x2}(\hat{P})')
+\)
+
+donde $G(\hat{P})$ es la matriz de derivadas parciales evaluadas en $\hat{P}$
+
+\(
+G(\hat{P})=
+\begin{pmatrix}
+    \frac{d}{d P_1} g_1(P) & \frac{d}{d P_2} g_1(P) & \frac{d}{d P_3} g_1(P) \\
+    \frac{d}{d P_1} g_2(P) & \frac{d}{d P_2} g_2(P) & \frac{d}{d P_3} g_2(P) 
+\end{pmatrix}
+\)
+
+\(
+W = \left( g_1(\hat{P}), g_2(\hat{P}) \right)' \cdot \left( G(\hat{P}) \, \hat{\text{Var}}(P) \, G(\hat{P})' \right)^{-1} \cdot \left( g_1(\hat{P}), g_2(\hat{P}) \right) \sim \chi^2_2 \quad \text{(bajo } H_0\text{)}
+\)
+
+Recordando:   
+\(
+\begin{matrix}
+    g_1(P)=P_2-P_3=0 \\
+    g_2(P)=P_1+P_2-\frac{3}{4}=0
+\end{matrix}
+\quad
+G(\hat{P})=
+\begin{pmatrix}
+    0 & 1 & -1\\
+    1 & 1 & 0
+\end{pmatrix}
+\)
+
+\(
+W = \left( \hat{P_2}-\hat{P_3}, \hat{P_1}+\hat{P_2}-\frac{3}{4} \right)' \cdot \left( G(\hat{P}) \, \hat{\text{Var}}(P) \, G(\hat{P})' \right)^{-1} \cdot 
+\left(  \hat{P_2}-\hat{P_3}, \hat{P_1}+\hat{P_2}-\frac{3}{4} \right) \sim \chi^2_2 
+\)
+
+\(
+\text{p-valor}=P_{H_0}(W \geq W_{obs})=1-pchisq(W_{obs},2)=0.36
+\)
+
+
+
+
+
+
+
+
+
+
+
