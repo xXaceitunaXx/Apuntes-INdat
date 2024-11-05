@@ -1,3 +1,59 @@
 \section{Introducción al Bootstrap}
 
 El bootstrap es un mecanismo generador de datos. Hasta ahora hemos trabajado en una situación en la que tenemos una muestra $X=(X_1,\dots,X_n)$ v.a.i.i.d. de una distribución $P_\theta$, $\theta=(\theta_1,\dots,\theta_s)$ con el interés de obtener un estimador $T(\theta)$ razonable para $\theta$ o $g(\theta)$.\\
+
+Todo ello en el concepto de \textbf{inferencia frecuentista}; se tiene un estimador del parámetro en base al que queremos hacer inferencia respecto a $\theta$.
+Para esto es necesario conocer la distribución del estadístico  (distribución exacta o asintótica). Supongamos que:
+\begin{itemize}
+    \item No conocemos la distribución de los datos
+    \item No se cumplen las condiciones de regularidad de Cramer-Rao
+\end{itemize}
+
+Cuando se da uno de los casos anteriores, el bootstrap puede ser una buena opción. Puede resultar interesante poder repetir un mecanismo generador de datos con el que se obtuvo la muestra original de forma que podamos obtener tales muestras como se quiera, y cada una de ellas obtendrá sus estadísticos correspondientes. Es decir, a partir de $P_\theta$ obtendremos:
+
+$$\left.
+    \begin{matrix}
+        X_{11} & X_{12} & \cdots & X_{1n} & \longrightarrow & T^{1}_n(X)\\
+        X_{21} & X_{22} & \cdots & X_{2n} & \longrightarrow & T^{2}_n(X)\\
+        \vdots &\vdots & \ddots & \vdots & \vdots & \vdots\\
+        X_{5000,1} & X_{5000,2} & \cdots & X_{5000,n} & \longrightarrow & T^{5000}_n(X)
+    \end{matrix}
+    \right\}\text{Simulaciones si $P_\theta$ es conocida}$$
+
+Podemos usar bootstrap para \textbf{aproximar cualquier característica} de la distribución y hacer inferencia a partir de los datos simulados.\\
+
+Sin embargo, no siempre se conoce $P_\theta$, si no que solo se dispone de los datos observados. En estos casos no es posible simpular a partir de $P_\theta$.
+Podremos simularlos si somos capaces de estimar $F_\theta(\cdot)$, la verdadera función de distribución, La estimaremos a partir de la distribución empírica:
+
+$$\hat{F}(X)=\frac{1}{n}\sum_{i=1}^{n}\text{\Large{$\mathbbm{1}_{(x_i\leq x)}$}}$$
+
+Donde $\mathbbm{1}$ se refiere a la función indicadora. \textit{En los apuntes del tema 3 de probabilidad (2º curso) se ve otra forma de definir la función de distribución empírica}.\\
+
+\textbf{\textit{Definición:} Principio plug-in:} cualquier característica de una distribución pueede ser aproximada. El principio plug-in está apoyado por el \textbf{Teorema de Glivenko-Cantelli}:
+$$\underset{x\in\mathbb{R}}{sup}\ |\hat F(X)-F_0(X)|\overset{c.s.}{\longrightarrow}0$$
+
+La idea es simular por remuestreo el experimento y, a continuación, reajustar el modelo y recalcular estimadores con los datos simulados. Estos serían los pasos:
+\begin{enumerate}
+    \item Estimar $F_0(X)$ a partir de la muestra
+    \item Simular $\hat F(X)$
+\end{enumerate}
+Con el bootstrap podemos obtener también estimadores sobre el sesgo, intervalos de confianza y contrastes de hipótesis.
+
+\subsection{Aproximación bootstrap de la distribución EMV}
+
+Sean $X_1,\dots,X_n$ con $F(\dot)$, $\hat\theta$ es el EMV de $\theta$. El bootstrapsimula la distribución de $\hat\theta$.
+\begin{enumerate}
+    \item Se estima $\hat F(X)$$\begin{cases}
+        \text{En el caso no paramétrico, a partir de la función de distribución empírica}\\
+        \text{En el caso paramétrico, estimando los parámetros necesarios}
+    \end{cases}$
+    \item Generamos datos artificiales: las muestras bootstrap:
+        \begin{itemize}
+            \item $X_1^*,\dots,X_n^*$ con función de densidad $\hat F$ estimada de $F$ 
+            \item Se obtiene el EMV $\hat\theta^*$ basado en la muestra bootstrap
+        \end{itemize}
+\end{enumerate}
+
+La idea del procedimiento es la siguiente: la distribución $\hat\theta^*-\hat\theta$ aproxima la distribución de $\hat\theta-\theta$. Al repetir los pasos anteriores en un proceso B veces se obtiene una versión bootstrap del EMV.
+
+
