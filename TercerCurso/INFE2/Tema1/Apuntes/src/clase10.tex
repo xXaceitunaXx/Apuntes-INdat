@@ -1,0 +1,75 @@
+\setlength{\parskip}{1em}
+
+
+Volviendo al caso multiparamétrico.
+
+Situación: $\theta=(\theta_1,\dots,\theta_s) \subseteq \mathbb{R}^s \quad \text{y sea }g:\mathbb{R^s}\to \mathbb{R}^r$
+
+\(
+g(\theta)=(g_1(\theta),\dots,g(\theta))'
+\quad G(\theta)=
+\begin{pmatrix}
+    \frac{d}{d \theta_1} g_1(\theta) & \dots &  \frac{d}{d \theta_s} g_1(\theta) \\
+    \dots & \dots & \dots \\
+    \frac{d}{d \theta_1} g_r(\theta) & \dots &  \frac{d}{d \theta_s} g_r(\theta)
+\end{pmatrix}
+\)
+
+Se requiere contrastar: $H_0:g(\theta)=0 \quad H_1:g(\theta) \neq 0$.
+\\ $H_0$ depende de s-r parámetros libres. Von el delta método podemos llegar a calcular un p-valor basado en el test de Wald
+
+\(
+g(\hat{\theta})-g(\theta) \sim (\text{bajo }H_0) N_r(0,G(\hat{\theta})\cdot \hat{V}(\hat{\theta})\cdot G(\hat{\theta})')
+\)
+\(
+W=(g(\hat{\theta})\cdot [G(\hat{\theta})\cdot \hat{V}(\hat{\theta})\cdot G(\hat{\theta})']^{-1} \cdot g(\hat{\theta})) \sim \chi^2_r
+\)
+
+\[
+\text{p-valor}=P_{H_0}(\chi^2_r>W_{obs})
+\]
+
+Aunque este test es potente, el test de razón de verosimilitud (RV) es más potente.
+
+\subsection{Test de razón de verosimilitud (RV)}
+
+Situación: $X_1,\dots,X_n$ i.i.d. $P_\theta:\theta \in \Theta \subseteq \mathbb{R}^s$
+
+\(
+H_0: \theta \in \Theta_0 \subseteq \Theta \quad H_1: \theta \notin \Theta_0
+\)
+
+donde $\Theta_0=\{
+    \theta \in \Theta: \theta=(\theta_{1_0},\dots,\theta_{r_0},\theta_{r+1},\theta_s)
+\}$
+
+$\Theta$ depende de s parámetros libres. $\Theta_0$ depende de r-s parámetros libres.
+
+El test de razón de verosimilitud (TRV) compara el máximo de la verosimilitud en $H_0$ con el mínimo en el EMV
+
+\[
+\Delta(x)=\frac{\sup_{\theta \in \Theta_0} L(\theta,X)}{\sup_{\theta \in \Theta} L(\theta,X)}
+\]
+
+El estadístivo test de razón de verosimilitud se escribe habitualmente como $-2 \cdot \log \Delta(x)$.
+\[
+Q_L(x)=2 \cdot [\log L(\hat{\theta},X)-\log L(\hat{\theta_0},X)]
+\]
+($\log L(\hat{\theta_0},X)$ ees el EMV de $\theta$ restringido a $\Theta_0$ y que depende de s-r parámetros libres)
+
+$Q_L(x)$ bajo $H_0$ tiene una distribución asintótica $\chi^2_r$.
+\begin{itemize}
+    \item Si $r=s \to H_0:\theta \in \Theta$ es una hipótesis simple, es decir, no hay parámetros libres bajo $H_0.(dim(\Theta_0)=0)$
+    \item Si $r<s \to H_0:\theta \in \Theta_0$ es una hipótesis compuesta ($dim(\Theta_0)=s-r$) con s-r parámetros que pueden tomar varios valores posibles.
+\end{itemize}
+
+Vamos a usar la notación de partición que vimos antes.
+
+\(
+\theta=(\phi,\lambda) \text{ donde } \phi=(\theta_1,\dots,\theta_r) \quad y \quad \lambda=(\theta_{r+1},\dots,\theta_s)
+\)
+
+El contraste es: $H_0:\phi=\phi_0 \quad H_1:\phi \neq \phi_0$
+
+Entonces para maximizar sobre el espacio paramétrico restringido a $\Theta_0$ es una maximización sobre $\lambda$ porque
+$\Theta_0=\phi_0=(\theta_{1_0},\dots,\theta_{r_0})$ y $\phi_0$ están restringidos.
