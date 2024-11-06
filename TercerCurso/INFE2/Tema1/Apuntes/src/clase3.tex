@@ -206,7 +206,6 @@ y finalmente
 
 \subsection*{Ejemplo con la exponencial:}
 
-
 Sea $X \sim exp(\lambda) \to f(x,\lambda)=\lambda e^{-\lambda x}$
 simplemente como
 \[
@@ -217,3 +216,15 @@ entonces
     I_x (\lambda)=-E_\lambda(\frac{d}{d \lambda} S_x(\lambda))=-E_\lambda(\frac{-1}{\lambda^2})=\frac{1}{\lambda^2}
 \]
 
+\vspace{2cm}
+
+\noindent Vamos a profundizar un poco en las condiciones de regularidad de Craner-Rao:
+
+Sea X=$(X_1,\dots,X_n)$ m.a.s de $P_\theta,\theta \in \Theta \subseteq \mathbb{R}$
+,con densidad f(x,$\theta)$ y con $T_n(x)$ como estimador insesgado de g($\theta$).
+
+\[
+    E(T_n(x)=g(\theta)) \to g(\theta)=\int_x T_n(x) f(x,\theta) \,dx
+\]
+
+$g(\theta)$ es diferenciable respecto a $\theta$ bajo el signo integral y podemos intercambiar derivada e integral
