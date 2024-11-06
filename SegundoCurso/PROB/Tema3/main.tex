@@ -1,0 +1,100 @@
+\documentclass{article}
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{diagbox}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{subcaption}
+
+\pgfplotsset{compat=1.18}
+
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=Ejemplo,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=LightGray}
+
+\declaretheoremstyle[name=Proposition,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{proposition}
+\tcolorboxenvironment{proposition}{colback=LightOrange}
+
+\declaretheoremstyle[name=Principle,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{principle}
+\tcolorboxenvironment{principle}{colback=LightGreen}
+
+\setstretch{1.2}
+\geometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ------------------------------------------------------------------------------
+
+\title{ \normalsize \textsc{}
+\\ [2.0cm]
+\HRule{1.5pt} \\
+\LARGE \textbf{\uppercase{Apuntes Probabilidad}
+\HRule{2.0pt} \\ [0.6cm] \LARGE{Tema 3: Convergencias Estocásticas. Teoremas Límite} \\
+{\large Doble Grado en Informática y Estadística (INdat)} \\
+\vspace*{10\baselineskip}}
+}
+
+\author{\textbf{Autor} \\
+    Víctor Elvira Fernández \\
+    Universidad de Valladolid}
+
+\maketitle
+
+\newpage\null
+\newpage
+
+\tableofcontents
+
+\newpage
+
+% ------------------------------------------------------------------------------
+
+
+\include{src/Tema3-Prob}
+
+\newpage
+
+% ------------------------------------------------------------------------------
+% Reference and Cited Works
+% ------------------------------------------------------------------------------
+
+\begin{thebibliography}{9}
+    \bibitem{diapos1}
+    Pilar Rodríguez de Tío, \\ \textit{Vectores aleatorios y distribuciones multivariantes}. \\ Universidad de Valladolid, 2023.
+    \bibitem{diapos2}
+    Pilar Rodríguez de Tío, \\ \textit{Distribuciones asociadas a variables independientes igualmente distribuidas}. \\ Universidad de Valladolid, 2023.
+\end{thebibliography}
+
+% ------------------------------------------------------------------------------
+
+\end{document}
