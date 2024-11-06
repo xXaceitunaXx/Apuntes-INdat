@@ -140,7 +140,7 @@ $Y \sim Q_\theta, \quad \theta \in \Theta \subseteq \mathbb{R}, \quad g(y,\theta
 Entonces
 \begin{enumerate}
     \item Propiedad de la información de Fisher conjunta: $I_{xy}(\theta) = I_x(\theta)+I_y(\theta)$
-          \begin{proofs}
+          \begin{proofs} Por independencia
               \[
                   f_{xy}(x,y,\theta)=f_x(x,\theta)  f_y(y,\theta)
               \]
@@ -151,11 +151,7 @@ Entonces
               \[
                   =Var(\frac{d}{d \theta} (\log f_x(x,\theta))) + Var(\frac{d}{d \theta} (\log f_y(y,\theta)))=I_x(\theta)+I_y(\theta)
               \]
-
           \end{proofs}
-
-
-
     \item Sean $X_1, \dots, X_n$ m.a.s. v.a.i.i.d. $P_\theta,\theta \in \Theta$ con $f(x,\theta)$ de una familia regular:
           \[
               I_{X_1,\dots,X_n}=n  I_{X_1}(\theta)
