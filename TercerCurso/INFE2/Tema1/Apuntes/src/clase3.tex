@@ -160,46 +160,60 @@ Entonces
 
 \subsection*{Ejemplo con la distribucion de Bernoulli:}
 
-\(
-X \sim B(p) \to f(x,p)=p^x (1-p)^{1-x}  \quad x=0,1
-\\ \\ \text{Usando la primera definición de }I_x(p):
-\\ \\ I_x(p)=Var((S_x(p)))=Var(\frac{d}{dp} \log f(x,p))
-\\ log f(x,p)=x \log p + (1-x)\log(1-p)
-\\ S_x(p)=\frac{d}{dp}(x \log (p)+ (1-x)\log (1-p))
-\\ Var(S_x(p))=Var(\frac{x-p}{p(1-p)})=\frac{Var(x)}{p^2(1-p)^2}=
-\frac{p(1-p)}{p^2(1-p)^2}=\frac{1}{p(1-p)}
-\)
+Sea $X \sim B(p) \to f(x,p)=p^x (1-p)^{1-x}$ donde $x=\{0,1\}$. \\Usando la primera definición de $I_x(p)$:
+\[
+    I_x(p)=Var((S_x(p)))=Var(\frac{d}{dp} \log f(x,p))
+\]
+donde
+\[
+    log f(x,p)=x \log p + (1-x)\log(1-p) \implies S_x(p)=\frac{d}{dp}(x \log (p)+ (1-x)\log (1-p))
+\]
+por tanto
+\[
+    Var(S_x(p))=Var(\frac{x-p}{p(1-p)})=\frac{Var(x)}{p^2(1-p)^2}=\frac{p(1-p)}{p^2(1-p)^2}=\frac{1}{p(1-p)}
+\]
 
 \subsection*{Ejemplo con la distribucion de Poisson:}
 
-\(
-I_x(\lambda)=Var(S_x(\lambda))
-\\ f(x,\lambda) = \frac{\lambda^x  e^{-\lambda}}{x!}
-\\ S_x(\lambda) = \frac{d}{d \lambda} \log\left(\frac{\lambda^x  e^{-\lambda}}{x!}\right) = \frac{x-\lambda}{\lambda}
-\\ I_x(\lambda) = Var(\frac{x-\lambda}{\lambda})=\frac{1}{\lambda^2}Var(x-\lambda)
-=\frac{\lambda}{\lambda^2}=\frac{1}{\lambda}
-\)
+Sea $X \sim Poisson(\lambda) \to f(k,\lambda)=\frac{\lambda^ke^{-\lambda}}{k!}$ donde $k \in \mathbb{N}_0$. \\Usando la primera definición de $I_x(p)$:
+\[
+    I_x(\lambda)=Var(S_x(\lambda)); \quad S_x(\lambda) = \frac{d}{d \lambda} \log\left(\frac{\lambda^x e^{-\lambda}}{x!}\right)=\frac{x-\lambda}{\lambda}
+\]
+\[
+    I_x(\lambda) = Var(\frac{x-\lambda}{\lambda})=\frac{1}{\lambda^2}Var(x-\lambda)=\frac{\lambda}{\lambda^2}=\frac{1}{\lambda}
+\]
 
 \subsection*{Ejemplo con n muestras de la distribucion de Bernoulli:}
 
-\(
-X_1,\dots,X_n \quad v.a.i.i.d. \quad B(p)
-\\ \\ f(X_1,\dots,X_n)=\prod_{i=1}^{n} p^{x_i}(1-p)^{1-x_i}=p^{\sum_{i=1}^{n} x_i}
-(1-p)^{n-\sum_{i=1}^{n} x_i}
-\\ \log f(x_1,...,x_n)=(\sum_{i=1}^{n}x_i) \log p + (n-\sum_{i=1}^{n}x_i) \log (1-p)
-\\ S_{x_1,...,x_n}(p)=\frac{d}{dp} \log f(X_1,...,X_n)=\frac{\sum_{i=1}^{n}x_i - np}{p(1-p)}
-\\ Var(\frac{\sum_{i=1}^{n}x_i - np}{p(1-p)})=\frac{\sum_{i=1}^{n}(Var x_i)}{p^2(1-p)^2}=\frac{n}{p(1-p)}
-I_{x_1,...,x_n}(p)=n  I_{x_1}(p)=\frac{n}{p(1-p)}
-\)
+Sean $X_1,\dots,X_n$ v.a.i.i.d. donde $X_i \sim B(p)$ entonces la densidad conjunta será
+\[
+    f(X_1,\dots,X_n)=\prod_{i=1}^{n} p^{x_i}(1-p)^{1-x_i}=p^{\sum_{i=1}^{n} x_i}(1-p)^{n-\sum_{i=1}^{n} x_i}
+\]
+como
+\[
+    \log f(x_1,...,x_n)=(\sum_{i=1}^{n}x_i) \log p + (n-\sum_{i=1}^{n}x_i) \log (1-p)
+\]
+entonces
+\[
+    S_{x_1,...,x_n}(p)=\frac{d}{dp} \log f(X_1,...,X_n)=\frac{\sum_{i=1}^{n}x_i - np}{p(1-p)}
+\]
+y finalmente
+\[
+    Var(\frac{\sum_{i=1}^{n}x_i - np}{p(1-p)})=\frac{\sum_{i=1}^{n}(Var x_i)}{p^2(1-p)^2}=\frac{n}{p(1-p)}I_{x_1,...,x_n}(p)=n  I_{x_1}(p)=\frac{n}{p(1-p)}
+\]
+
+\newpage
 
 \subsection*{Ejemplo con la exponencial:}
 
-\(
-X \sim exp(\lambda)
-\\ \\ f(x,\theta)=\lambda  e^{-\lambda x}
-\\ \log f(x,\theta)=\log \lambda - \lambda X
-\\S_x(\lambda)=\frac{1}{\lambda}-X
-\\ I_x (\lambda)=-E_\lambda(\frac{d}{d \lambda} S_x(\lambda))=-E_\lambda(\frac{-1}{\lambda^2})
-=\frac{1}{\lambda^2}
-\)
+
+Sea $X \sim exp(\lambda) \to f(x,\lambda)=\lambda e^{-\lambda x}$
+simplemente como
+\[
+    \log f(x,\theta)=\log \lambda - \lambda X \implies S_x(\lambda)=\frac{1}{\lambda}-X
+\]
+entonces
+\[
+    I_x (\lambda)=-E_\lambda(\frac{d}{d \lambda} S_x(\lambda))=-E_\lambda(\frac{-1}{\lambda^2})=\frac{1}{\lambda^2}
+\]
 
