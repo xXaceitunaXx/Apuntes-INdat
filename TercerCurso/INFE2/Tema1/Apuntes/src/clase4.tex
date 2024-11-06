@@ -1,23 +1,10 @@
-\setlength{\parskip}{1em}
-
-Vamos a profundizar un poco en las condiciones de regularidad de Craner-Rao:
-
-Sea X=$(X_1,\dots,X_n)$ m.a.s de $P_\theta,\theta \in \Theta \subseteq \mathbb{R}$
-,con densidad f(x,$\theta)$ y con $T_n(x)$ como estimador insesgado de g($\theta$).
-
-\[
-E(T_n(x)=g(\theta)) \to g(\theta)=\int_x T_n(x) f(x,\theta) \,dx
-\]
-
-$g(\theta)$ es diferenciable resoecto a $\theta$ bajo el signo integral y podemos intercambiar derivada e integral
-
-\subsection{Cota de Craner-Rao}
+\subsection{Cota de Cramer-Rao}
 
 Sea $X_,\dots,X_n$ m.a.s $P_\theta,\theta \in \Theta \subseteq \mathbb{R}$ con densidad
 $f(x,\theta)$ y sea $T_n(x)$ un estimador insesgado de $g(\theta)$ con Var$(T_n(x)) < \infty$
 y que verifica las condiciones de regularidad de Craner-Rao, entonces:
 \[
-Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
+    Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
 \]
 
 \textbf{Demostración:}
@@ -35,7 +22,7 @@ Consideremos $Cov(T_n(x),S_x(\theta))=E(T_n(x)\cdot S_x(\theta))$
 \\ =\frac{d}{d \theta} g(\theta)=g'(\theta)
 \)
 
-Usamos la desigualdad de Cauchy-Schwarz que relaciona varianza y covarianza 
+Usamos la desigualdad de Cauchy-Schwarz que relaciona varianza y covarianza
 
 $cov(X,Y)=\sqrt{Var(X) \cdot Var(Y)}$
 
@@ -47,7 +34,7 @@ entonces,
 \)
 
 \[
-Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
+    Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
 \]
 
 La varianza de un estimador insesgado es como mínimo $\frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}$
@@ -56,7 +43,7 @@ Nota: Bajo las mismas condiciones de regularidad de Craner-Rao puede estiamrse
 en el caso que $T_n(x)$ sea un estimador de $\theta$ con $Var(T_n(x))<\infty$
 
 \[
-Var(T_n(x)) \geq \frac{1}{n \cdot I_{x_1}(\theta)}= \frac{1}{I_n(\theta)}
+    Var(T_n(x)) \geq \frac{1}{n \cdot I_{x_1}(\theta)}= \frac{1}{I_n(\theta)}
 \]
 
 
@@ -79,7 +66,7 @@ Var(T_n(x)) \geq \frac{1}{n \cdot I_{x_1}(p)}=\frac{p(1-p)}{n}
 Supongamos que nuestro estimador para p es $\bar{X}$
 
 $Var(\frac{\sum_{i=1}^{n}}{n})=\frac{1}{n^2}Var(\sum_{i=1}^{n} x_i)
-=\frac{n \cdot p(1-p)}{n^2}=\frac{p(1-p)}{n}$
+    =\frac{n \cdot p(1-p)}{n^2}=\frac{p(1-p)}{n}$
 
 \noindent\rule{\textwidth}{0.5pt} % Línea de ancho completo y grosor ajustado
 
@@ -111,29 +98,29 @@ Se demuestra que $X_{(n)}$ es un estimador consistente para $\theta$, pero la ve
 \subsection{Estimador Consistente Asintóticamente Normal (CAN) y \texorpdfstring{\\}{ } Asintóticamente Eficiente (AE)}
 
 Sea $X_1,\dots,X_n$ m.a.s. de $P_\theta, \theta \in \Theta \subseteq \mathbb{R}$
- con densidad $f(x,\theta)$ y $T_n(x)$ estimador insestado de g($\theta$) con una Var($T_n(x))<\infty$
- y que verifica las condiciones de regularidad DE Craner-Rao, entonces:
+con densidad $f(x,\theta)$ y $T_n(x)$ estimador insestado de g($\theta$) con una Var($T_n(x))<\infty$
+y que verifica las condiciones de regularidad DE Craner-Rao, entonces:
 
 \[
-Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
+    Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
 \]
 
 ,es decir,
 
 \[
-\frac{V_T^2(\theta)}{n} \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
+    \frac{V_T^2(\theta)}{n} \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
 \]
 \[
-V_T^2(\theta) \geq \frac{(g'(\theta))^2}{I_{x_1}(\theta)}
+    V_T^2(\theta) \geq \frac{(g'(\theta))^2}{I_{x_1}(\theta)}
 \]
 
-Concretamente un estimador CAN será mejor cuanto menor sea la varianza asintótica. 
+Concretamente un estimador CAN será mejor cuanto menor sea la varianza asintótica.
 Si la varianza del estimador original es igual a la cota de CRaner-Rao, decimos que $T_n(x)$ es CAN y asintóticamente eficiente (AE)
 
 \textbf{\textit{Definición: }}$X_1,\dots,X_n$ m.a.s.$P_\theta, \theta \in \Theta \subseteq \mathbb{R}, f(x,\theta), T_n(x)$
 es un estimador CAN y AE de g($\theta$) si es CAN y $V_T^2=\frac{(g'(\theta))^2}{I_{x_1}(\theta)}$, es decir si
 \[
-\sqrt{n}(T_n(x)-g(\theta))\xrightarrow{L}N(0,\frac{(g'(\theta))^2}{I_{x_1}(\theta)})
+    \sqrt{n}(T_n(x)-g(\theta))\xrightarrow{L}N(0,\frac{(g'(\theta))^2}{I_{x_1}(\theta)})
 \]
 
 
@@ -190,7 +177,7 @@ I_{x_1}=\frac{1}{\lambda^2} \quad \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
 ¿Y como obtendríamos un estimador AE para $\lambda$?
 Utilizando el delta método.
 
-Si $T_n(x)$ es CAN para $\theta \in \Theta \subseteq \mathbb{R}$ y g es una función con derivada no nula, 
+Si $T_n(x)$ es CAN para $\theta \in \Theta \subseteq \mathbb{R}$ y g es una función con derivada no nula,
 entonces $g(T_n(x))$ es CAN para $g(\theta)$ con varianza $\frac{V_T^2}{n}\cdot (g'(\theta))^2$
 
 $\sqrt{n}(T_n(x)-\theta) \xrightarrow{L}N(0,V_T^2(\theta))$
@@ -204,13 +191,13 @@ Pasos:
 \begin{enumerate}
     \item $\sqrt{n}(\bar{X}-\theta)\xrightarrow{L}N(0,\theta^2)$
     \item Delta método:
-    \(
-    \\ g(\theta)=\frac{1}{\theta} \quad;\quad g'(\theta)\frac{-1}{\theta^2}
-    \\ \sqrt{n}(g(\bar{X})-g(\theta)) \xrightarrow{L} N(0,\theta^2(\frac{-1}{\theta^2})^2)
-    \\ \sqrt{n}(\frac{1}{\bar{X}}-\frac{1}{\theta}) \xrightarrow{L} N(0,\frac{1}{\theta^2}) 
-    \)
-    \item $ \sqrt{n}(\frac{1}{\bar{X}}-\lambda) \xrightarrow{L} N(0,\lambda^2) \quad o \quad 
-    \frac{1}{\bar{X}}\eqsim N(\lambda,\frac{\lambda^2}{n})$
+          \(
+          \\ g(\theta)=\frac{1}{\theta} \quad;\quad g'(\theta)\frac{-1}{\theta^2}
+          \\ \sqrt{n}(g(\bar{X})-g(\theta)) \xrightarrow{L} N(0,\theta^2(\frac{-1}{\theta^2})^2)
+          \\ \sqrt{n}(\frac{1}{\bar{X}}-\frac{1}{\theta}) \xrightarrow{L} N(0,\frac{1}{\theta^2})
+          \)
+    \item $ \sqrt{n}(\frac{1}{\bar{X}}-\lambda) \xrightarrow{L} N(0,\lambda^2) \quad o \quad
+              \frac{1}{\bar{X}}\eqsim N(\lambda,\frac{\lambda^2}{n})$
 \end{enumerate}
 
 Entonces, $\frac{1}{\bar{X}}$ es CAN para $\lambda$ y $\frac{V_T^2(\lambda)}{n}=\frac{\lambda^2}{n}$
@@ -241,7 +228,7 @@ Para ver cual tiene una menor varianza asintótica, usamos la eficiencia relativ
 y $G_n(x)$ dos estimadores CAN de $g(\theta)$
 
 \[
-ARE_{TG}(\theta)=\frac{V_G^2(\theta)}{V_T^2(\theta)}
+    ARE_{TG}(\theta)=\frac{V_G^2(\theta)}{V_T^2(\theta)}
 \]
 
 Si $ARE_{TG}(\theta)$ es menor que 1, $T_n(x)$ es mejor. En cambio si ARE es mayor que 1, $G_n(x)$ es mejor.
