@@ -56,4 +56,41 @@ Sean $X_1,\dots,X_n$ con $F(\dot)$, $\hat\theta$ es el EMV de $\theta$. El boots
 
 La idea del procedimiento es la siguiente: la distribución $\hat\theta^*-\hat\theta$ aproxima la distribución de $\hat\theta-\theta$. Al repetir los pasos anteriores en un proceso B veces se obtiene una versión bootstrap del EMV.
 
+Existen dos tipos de bootstrap:
+\begin{itemize}
+    \item \textbf{Bootstrap paramétrico:} si el estimador de $F$ en el paso 1 es un estimador paramétrico
+    \item \textbf{Bootstrap no paramétrico:} si usamos la función de distribución empírica para estimar $F$ en el paso 1
+\end{itemize}
+
+\hspace{-1cm}\noindent\begin{tabular}{r}
+    \textbf{Ejemplo}  \\ \hline \ \\
+\end{tabular}
+
+Sean $X_1,\dots,X_n$ v.a.i.i.d de una $N(\mu,\sigma^2)$. Según lo visto en temas anteriores, sabemos que el EMV para $\theta=(\mu,\sigma)$ sigue la siguiente distribución:
+$$\sqrt(n)\begin{pmatrix}
+    \hat\mu-\mu\\
+    \hat\sigma-\sigma
+\end{pmatrix} \overset{\mathcal{L}}{\longrightarrow}N_2\Bigg(\begin{pmatrix}
+    0 \\ 0 \end{pmatrix},\begin{pmatrix}
+        \sigma^2 & 0 \\ 0 & 4\sigma^2
+    \end{pmatrix}\Bigg)$$
+    En este ejercicio supondremos que sabemos que los datos vienen de una distribución normal (aunque desconocemos los valores de $\mu$ y $\sigma$). Para conseguir una muestra bootstrap tenemos que seguir los pasos ya mencionados anteriormente:
+\begin{enumerate}
+    \item Estimar $\mu$ y $\sigma$ a partir del EMV
+    \item Simular desde nuestra nueva $\hat F$ (que sabemos que sigue una distribución normal)
+\end{enumerate}
+\textit{El algoritmo se ejecuta de forma iterativa, y es un proceso muy laborioso a mano. Por ello, se deja como ejercicio propuesto al lector hacer un script que siga dichos pasos (se ve en clases prácticas).}\\
+
+\noindent La distribución de $\begin{pmatrix}\mu^*_i \\ \sigma^{2*}_i\end{pmatrix}-\begin{pmatrix}\hat\mu \\ \hat\sigma^{2}\end{pmatrix}\forall i=1,2,\dots,B$ aproxima la distribución de $\begin{pmatrix}\hat\mu \\ \hat\sigma^{2}\end{pmatrix}-\begin{pmatrix}\mu \\ \sigma^{2}\end{pmatrix}$\\
+De igual forma, el histograma de $\mu^*_1,\dots,\mu^*_B$ aproxima el de $\hat\mu$. Pasa lo mismo para $\sigma^2$
+
+En el caso no paramétrico estimaríamos F a partir de la muestra original y su función de distribución empírica.
+
+\subsubsection{Estimador bootstrap de la varianza del EMV}
+
+Estamos estudiando la distribución de $\theta$, por lo que tenemos que poder estudiar cualquier característica que dependa de $\theta$. Estimaremos la varianza del EMV usando las B muestras bootstrap.
+
+\textit{Justificación} $\Longrightarrow$ La distribución de $\hat\theta^*-\hat\theta$ aproxima la de $\hat\theta-\theta$; por lo que la distribución de $Var(\hat\theta^*-\hat\theta)$ aproxima la de $Var(\hat\theta-\theta)$, y, por tanto:
+$$Var^*(\hat\theta^*)\approx Var^*(\hat\theta)$$
+
 
