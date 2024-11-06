@@ -44,105 +44,101 @@ Se cumple que la media tiende a 0 cuando n tiende a infinito.
 El estimador es consistente.
 
 \subsubsection*{Ejercicio 3}
-
-$X_1, \dots, X_n$ v.a.i.i.d. con distribución uniforme U($0,\theta$)
-
-¿$2 \bar{X}$ es consistente para $\theta$?
-
-\(
+Sean $X_1, \dots, X_n$ v.a.i.i.d. con distribución uniforme $U(0,\theta)$, ¿$2 \bar{X}$ es consistente para $\theta$?
+\[
 E(X_i)=\frac{a+b}{2}=\frac{\theta}{2};\quad Var(X_i)=\frac{(b-a)^2}{12}
-\)
+\]
+Entonces 
+\[
+    \bar{X} \xrightarrow[n \to \infty]{P} \implies 2 \bar{X} \xrightarrow{P} \theta
+\]
 
-$\bar{X} \xrightarrow[n \to \infty]{P} \implies 2 \bar{X} \xrightarrow{P} \theta
-$
+Por tanto $2 \bar{X}$ es consistente para $\theta$
 
-$2 \bar{X}$ es consistente para $\theta$
 \newpage
 
-\subsubsection{Información de Fisher}
+\subsection{Información de Fisher}
 
 La información de Fisher $I_x(\theta)$ es la matriz que mide la cantidad
 de información que una m.a.s. contiene sobre el estimador.
 
-\textbf{\textit{Definición: }} Sea X=($X_1 \dots X_n$) v.a.i.i.d. con distribución
-$P_\theta \in P=\{P_\theta : \theta \in \Theta \subseteq \mathbb{R}\}$
-con función de densidad f(X,$\theta$) y en la que existe $\frac{d f(x,\theta)}{d \theta}$
-, la información de Fisher sobre $\theta$ contenida en X es:
+\textbf{\textit{Definición: }} Sea $X=(X_1 \dots X_n)$ v.a.i.i.d. con distribución $P_\theta \in P=\{P_\theta : \theta \in \Theta \subseteq \mathbb{R}\}$ con función de densidad $f(X,\theta)$ y en la que existe $\frac{d f(x,\theta)}{d \theta}$, la información de Fisher sobre $\theta$ contenida en X es:
 \[
-I_x(\theta) = Var_\theta (S(\theta,X))
+    I_x(\theta) = Var_\theta (S(\theta,X))
 \]
 \[
-Score=S_x(\theta)=S(\theta,X)=\frac{d}{\mathrm{d\theta}}
-\log f(x,\theta)
+    Score=S_x(\theta)=S(\theta,X)=\frac{d}{\mathrm{d\theta}}\log f(x,\theta)
 \]
-\subsubsection{Condiciones de regularidad de Craner-Rao (CRCR)}
+\subsection{Condiciones de regularidad de Craner-Rao (CRCR)}
 
 Llamaremos familias regulares a aquellas familias en las que se verifican las 
 condiciones de regularidad de Craner-Rao.
 \\ Estas son las familias con las que trabajaremos.
-
-\textbf{Condiciones de regularidad de Craner-Rao:}
+\\ \\\textbf{Condiciones de regularidad de Craner-Rao:}
 \begin{enumerate}
     \item El espacio paramétrico es un intervalo de $\mathbb{R}$.
     \item El soporte de la distribución no depende del parámetro $\theta$.
-    
     Por ejemplo $x=\{x:f(x,\theta) > 0 \}$, no depende de $\theta$ y sería regular. En cambio U(0,$\theta$) 
     tiene un soporte que depende de $\theta$, por lo que no es regular
     \item Se pueden calcular las dos primeras derivadas bajo el signo integral.
      Además se puede intercambiar la derivada con el signo integral.
-     
-    \(
-    \frac{d}{d \theta} \int_{x} f(x,\theta)  \,dx =
-    \int_{x} \frac{d}{d \theta} f(x,\theta)  \,dx
-    \)
+    \[
+        \frac{d}{d \theta} \int_{x} f(x,\theta)  \,dx = \int_{x} \frac{d}{d \theta} f(x,\theta)  \,dx
+    \]
     \item $T_n(x)$ es un estimador insesgado para $\theta$ o $g(\theta)$.
 \end{enumerate}
 
 Bajo las condiciones de regularidad de Craner-Rao, podemos definir la cantidad
 de información esperada como:
 \[
-I_x(\theta)=E_\theta(S(\theta,X)^2)=E_\theta((\frac{d}{d \theta} \log f(x,\theta))^2)
+    I_x(\theta)=E_\theta(S(\theta,X)^2)=E_\theta\left(\left(\frac{d}{d \theta} \log f(x,\theta)\right)^2\right)
 \]
-\textbf{\textit{Demostración:}}
-Deberemos probar que $E_\theta((\frac{d}{d \theta} \log f(x,\theta)))=0$.
-Si lo conseguimos probar entonces, $Var(S(\theta,x))=E(S(\theta,x)^2)
--E(S(\theta,x))^2=E(S(\theta,x)^2)$
 
-\(
-    E_\theta((\frac{d}{d \theta} \log f(x,\theta)))=
-    \int_{x} E_\theta((\frac{d}{d \theta} \log f(x,\theta))) \cdot f(x,\theta) \,dx 
-    =\int_{x} \frac{\frac{d}{d \theta} f(x,\theta)}{f(x,\theta)} \cdot f(x,\theta) \,dx 
-    \\=\int_{x} \frac{d}{d \theta} f(x,\theta) \,dx = 0
-\)
+\newpage
+
+\begin{proofs}
+    Deberemos probar que $E_\theta(\left(\frac{d}{d \theta} \log f(x,\theta)\right))=0$.
+    Si lo conseguimos probar entonces, $Var(S(\theta,x))=E(S(\theta,x)^2)
+    -E(S(\theta,x))^2=E(S(\theta,x)^2)$
+
+    \[
+        E_\theta\left(\left(\frac{d}{d \theta} \log f(x,\theta)\right)\right)=
+        \int_{x} E_\theta\left(\left(\frac{d}{d \theta} \log f(x,\theta)\right)\right) \cdot f(x,\theta) \,dx =
+    \]
+    \[
+        =\int_{x} \frac{\frac{d}{d \theta} f(x,\theta)}{f(x,\theta)} \cdot f(x,\theta) \,dx 
+        =\int_{x} \frac{d}{d \theta} f(x,\theta) \,dx = 0
+    \]
+\end{proofs}
+
 
 Si se verifican las condiciones de regularidad de Crner-Rao, otra forma alternativa de calcular
 la información de Fisher es:
 \[
-I_x(\theta)=-E(\frac{d^2}{d \theta} \log f(x,\theta))
+    I_x(\theta)=-E\left(\frac{d^2}{d \theta} \log f(x,\theta)\right)
 \]
 
-\textbf{\textit{Demostración:}}
-
-Breve paso previo:
-
-
-\(
-\frac{d}{d \theta} (\frac{d}{d \theta} \log f(x,\theta))=
-\frac{d}{d \theta} (\frac{\frac{d}{d \theta} f(x,\theta)}{f(x,\theta)})
-\text{= (derivando el cociente)}
-\frac{\frac{d^2}{d \theta} f(x,\theta) f(x,\theta) - (\frac{d}{d \theta} f(x,\theta))^2}{f(x,\theta)^2}
-\\ = \frac{\frac{d^2}{d \theta} f(x,\theta)}{f(x,\theta)} - (\frac{\frac{d}{d \theta} f(x,\theta)}{f(x,\theta)})^2
-\)
-
-Demostración:
-
-\(
-E(\frac{d^2}{d \theta} \log f(x,\theta))=
-\int_{x} frac{d}{d \theta} (\frac{d}{d \theta} \log f(x,\theta)) \cdot f(x,\theta) \,dx = \\
-\int_{x} \frac{d^2}{d \theta} f(x, \theta) \,dx - \int_{x} (\frac{\frac{d}{d \theta} f(x,\theta)}{f(x,\theta)})^2 \cdot f(x,\theta) \,dx  
-= - \int_{x} (\frac{\frac{d}{d \theta} f(x,\theta)}{f(x,\theta)})^2 \cdot f(x,\theta) \,dx  
-= - I_x(\theta)
-\)
+\begin{proofs}
+    Breve paso previo:
+    \[
+        \frac{d}{d \theta}\left(\frac{d}{d \theta} \log f(x,\theta)\right)=\frac{d}{d \theta}\left(\frac{\frac{d}{d \theta} f(x,\theta)}{f(x,\theta)}\right)=
+    \]
+    donde derivando el cociente
+    \[
+        =\frac{\frac{d^2}{d \theta} f(x,\theta) f(x,\theta) -\left(\frac{d}{d \theta} f(x,\theta)\right)^2}{f(x,\theta)^2}=\frac{\frac{d^2}{d \theta} f(x,\theta)}{f(x,\theta)} -\left(\frac{\frac{d}{d \theta} f(x,\theta)}{f(x,\theta)}\right)^2
+    \]
+    Demostración:
+    \[
+        E(\frac{d^2}{d \theta} \log f(x,\theta))=
+        \int_{x} \frac{d}{d \theta}\left(\frac{d}{d \theta} \log f(x,\theta)\right) \cdot f(x,\theta) \,dx =
+    \]
+    \[
+        =\int_{x} \frac{d^2}{d \theta} f(x, \theta) \,dx - \int_{x}\left(\frac{\frac{d}{d \theta} f(x,\theta)}{f(x,\theta)}\right)^2 \cdot f(x,\theta) \,dx  
+    \]
+    \[
+        = -\int_{x}(\frac{\frac{d}{d \theta} f(x,\theta)}{f(x,\theta)})^2 \cdot f(x,\theta) \,dx=-I_x(\theta)
+    \]
+\end{proofs}
 
 \textbf{\textit{Propiedades:}}
 
@@ -192,7 +188,7 @@ X \sim B(p) \to f(x,p)=p^x (1-p)^{1-x}  \quad x=0,1
 \(
 I_x(\lambda)=Var(S_x(\lambda))
 \\ f(x,\lambda) = \frac{\lambda^x \cdot e^{-\lambda}}{x!}
-\\ S_x(\lambda) = \frac{d}{d \lambda} \log (\frac{\lambda^x \cdot e^{-\lambda}}{x!}) = \frac{x-\lambda}{\lambda}
+\\ S_x(\lambda) = \frac{d}{d \lambda} \log\left(\frac{\lambda^x \cdot e^{-\lambda}}{x!}\right) = \frac{x-\lambda}{\lambda}
 \\ I_x(\lambda) = Var(\frac{x-\lambda}{\lambda})=\frac{1}{\lambda^2}Var(x-\lambda)
 =\frac{\lambda}{\lambda^2}=\frac{1}{\lambda}
 \)
