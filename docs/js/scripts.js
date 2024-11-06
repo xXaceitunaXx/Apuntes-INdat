@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const pdfFiles = [
         { name: "Entrega2Tema1.pdf", grade: "3", subject: "INFE2", path: "https://raw.githubusercontent.com/xXaceitunaXx/Apuntes-INdat/WebPage/Bin/Entrega2Tema1.pdf" },
         { name: "ApuntesTema2Prob.pdf", grade: "2", subject: "PROB", path: "https://raw.githubusercontent.com/xXaceitunaXx/Apuntes-INdat/WebPage/Bin/ApuntesTema2Prob.pdf" },
-      {name: "ApuntesTema3Prob.pdf", grade: "2", subject: "PROB", path: "https://raw.githubusercontent.com/xXaceitunaXx/Apuntes-INdat/WebPage/Bin/ApuntesTema3Prob.pdf"}
+        { name: "ApuntesTema3Prob.pdf", grade: "2", subject: "PROB", path: "https://raw.githubusercontent.com/xXaceitunaXx/Apuntes-INdat/WebPage/Bin/ApuntesTema3Prob.pdf" },
         // Add more entries as needed
     ];
 
