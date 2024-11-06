@@ -19,7 +19,7 @@ Esta página web está diseñada para proporcionar acceso rápido y sencillo a l
 - Consultar el índice de contenidos de cada asignatura.
 - Acceder a recursos adicionales como ejercicios y soluciones.
 
-[Página web Apuntes INdat UVa](https://github.io/Apuntes-INdat)
+[Página web Apuntes INdat UVa](https://xxaceitunaxx.github.io/Apuntes-INdat)
 
 ## Colaboradores
 
@@ -28,18 +28,26 @@ Los principales colaboradores de este proyecto son:
 - Juan
 - Victor
 - Tomás
-- ...
 
 ## Contribuciones
 
 Si deseas contribuir a este repositorio, por favor sigue las siguientes pautas:
 
-1. Haz un fork del repositorio.
-2. Crea una nueva rama para tu contribución.
-3. Realiza tus cambios y haz un commit.
-4. Envía un pull request para revisión.
+1. Contacta con nosotros para comunicarnos tu idea (issue o mail).
+2. Haz un fork del repositorio.
+3. Crea una nueva rama para tu contribución.
+4. Realiza tus cambios y haz un commit.
+5. Envía un pull request para revisión.
+
+Tambien puedes colaborar comprandonos unas Patatas 5 Salsas en el siguiente enlace:
+[BuyMeACoffe!](https://buymeacoffee.com/apuntesindat)
 
 ¡Inmensamente agradecidos por tu interés en contribuir a los apuntes INdat!
+
+## Contacto
+- Juan: [juan.horrillo22@estudiantes.uva.es](mailto:juan.horrillo22@estudiantes.uva.es)
+- Victor: [victor.elvira22@estudiantes.uva.es](mailto:victor.elvira22@estudiantes.uva.es)
+- Tomás: [tomas.rojo22@estudiantes.uva.es](mailto:tomas.rojo22@estudiantes.uva.es)
 
 ## Licencia
 
