@@ -1,5 +1,4 @@
 \subsection{Cota de Cramer-Rao}
-
 Sea $X_,\dots,X_n$ m.a.s $P_\theta,\theta \in \Theta \subseteq \mathbb{R}$ con densidad
 $f(x,\theta)$ y sea $T_n(x)$ un estimador insesgado de $g(\theta)$ con Var$(T_n(x)) < \infty$
 y que verifica las condiciones de regularidad de Craner-Rao, entonces:
@@ -7,35 +6,38 @@ y que verifica las condiciones de regularidad de Craner-Rao, entonces:
     Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
 \]
 
-\textbf{Demostración:}
+\begin{proofs}
+    Consideremos $Cov(T_n(x),S_x(\theta))=E(T_n(x)\cdot S_x(\theta))$
 
-Consideremos $Cov(T_n(x),S_x(\theta))=E(T_n(x)\cdot S_x(\theta))$
-
-\(
-\\ Cov(T_n(x)S_x(\theta))=\int_x T_n(x) \cdot S_x(\theta) \cdot f(x,\theta) \,dx
-=\int_x T_n(x) \cdot \frac{d}{d \theta} \log f(x,\theta) \cdot f(x,\theta) \,dx
-\\=\int_x T_n(x) \cdot \frac{\frac{d}{d \theta f(x,\theta)}}{f(x,\theta)} \cdot f(x,\theta) \,dx
-=\int_x T_n(x) \cdot \frac{d}{d \theta} f(x,\theta)\,dx
+\[
+Cov(T_n(x)S_x(\theta))=\int_x T_n(x) \cdot S_x(\theta) \cdot f(x,\theta) \,dx
+\]\[
+\int_x T_n(x) \cdot \frac{d}{d \theta} \log f(x,\theta) \cdot f(x,\theta) \,dx
+=\int_x T_n(x) \cdot \frac{\frac{d}{d \theta f(x,\theta)}}{f(x,\theta)} \cdot f(x,\theta) \,dx
+\]\[
+\int_x T_n(x) \cdot \frac{d}{d \theta} f(x,\theta)\,dx
 = \frac{d}{d \theta} \int_x T_n(x) f(x,\theta) \,dx
 =\frac{d}{d \theta} E(T_n(x))
-\\ \text{(Como }T_n(x) \text{ es insesgado:)}
-\\ =\frac{d}{d \theta} g(\theta)=g'(\theta)
-\)
+\]
+Como $T_n(x)$ es insesgado:
+\[
+=\frac{d}{d \theta} g(\theta)=g'(\theta)
+\]
 
 Usamos la desigualdad de Cauchy-Schwarz que relaciona varianza y covarianza
-
-$cov(X,Y)=\sqrt{Var(X) \cdot Var(Y)}$
-
+\[
+cov(X,Y)=\sqrt{Var(X) \cdot Var(Y)}
+\]
 entonces,
-
-\(
+\[
 (g'(\theta)^2)=(cov(T_n(x)\cdot S_x(\theta)))^2 \leq Var(T_n(x)) \cdot Var(S_x(\theta))
 =Var(T_n(x)) \cdot n \cdot I_{x_1}(\theta)
-\)
-
+\]
 \[
     Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
 \]
+
+\end{proofs}
 
 La varianza de un estimador insesgado es como mínimo $\frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}$
 
@@ -67,8 +69,6 @@ Supongamos que nuestro estimador para p es $\bar{X}$
 
 $Var(\frac{\sum_{i=1}^{n}}{n})=\frac{1}{n^2}Var(\sum_{i=1}^{n} x_i)
     =\frac{n \cdot p(1-p)}{n^2}=\frac{p(1-p)}{n}$
-
-\noindent\rule{\textwidth}{0.5pt} % Línea de ancho completo y grosor ajustado
 
 Hemos visto que,como consecuencia del Teorema Central del Limite,  la velocidad de convergencia de los errores a cero es del orden $\frac{1}{\sqrt{n}}$
 
@@ -169,10 +169,10 @@ $g(\lambda)=\frac{1}{\lambda} ;  g'(\lambda)=\frac{-1}{\lambda^2}$
 Queremos ver si tambien es AE para la media poblacional. Tenemos que comprobar que $\frac{V_T^2(\lambda)}{n}=\frac{1}{\lambda^2}$
 coincida con la cota CR.
 
-\(
+\[
 I_{x_1}=\frac{1}{\lambda^2} \quad \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}=
 \frac{(\frac{-1}{\lambda^2})^2}{n \cdot \frac{1}{\lambda^2}}=\frac{1}{n \cdot \lambda^2}
-\)
+\]
 
 ¿Y como obtendríamos un estimador AE para $\lambda$?
 Utilizando el delta método.
@@ -180,22 +180,26 @@ Utilizando el delta método.
 Si $T_n(x)$ es CAN para $\theta \in \Theta \subseteq \mathbb{R}$ y g es una función con derivada no nula,
 entonces $g(T_n(x))$ es CAN para $g(\theta)$ con varianza $\frac{V_T^2}{n}\cdot (g'(\theta))^2$
 
-$\sqrt{n}(T_n(x)-\theta) \xrightarrow{L}N(0,V_T^2(\theta))$
+$$\sqrt{n}(T_n(x)-\theta) \xrightarrow{L}N(0,V_T^2(\theta))$$
 
-$\sqrt{n}(g(T_n(x))-g(\theta)) \xrightarrow{L} N(0,V_T^2(\theta)\cdot(g'(\theta))^2)$
+$$\sqrt{n}(g(T_n(x))-g(\theta)) \xrightarrow{L} N(0,V_T^2(\theta)\cdot(g'(\theta))^2)$$
 
-Volviendo al ejemplo, tras esta breve parte teórica, ya vimos que $\sqrt{n}(\bar{X}-\frac{1}{\lambda})\xrightarrow{L} N(0,\frac{1}{\lambda})$.
+Volviendo al ejemplo, tras esta breve parte teórica, ya vimos que $\sqrt{n}(\bar{X}-\frac{1}{\lambda})\xrightarrow{L} N(0,\frac{1}{\lambda})$
 Consideraremos que $\theta=\frac{1}{\lambda^2}$.
 
 Pasos:
 \begin{enumerate}
     \item $\sqrt{n}(\bar{X}-\theta)\xrightarrow{L}N(0,\theta^2)$
     \item Delta método:
-          \(
-          \\ g(\theta)=\frac{1}{\theta} \quad;\quad g'(\theta)\frac{-1}{\theta^2}
-          \\ \sqrt{n}(g(\bar{X})-g(\theta)) \xrightarrow{L} N(0,\theta^2(\frac{-1}{\theta^2})^2)
-          \\ \sqrt{n}(\frac{1}{\bar{X}}-\frac{1}{\theta}) \xrightarrow{L} N(0,\frac{1}{\theta^2})
-          \)
+          \[
+          g(\theta)=\frac{1}{\theta} \quad;\quad g'(\theta)\frac{-1}{\theta^2}
+          \]
+          \[ 
+          \sqrt{n}(g(\bar{X})-g(\theta)) \xrightarrow{L} N(0,\theta^2(\frac{-1}{\theta^2})^2)
+          \]
+          \[
+          \sqrt{n}(\frac{1}{\bar{X}}-\frac{1}{\theta}) \xrightarrow{L} N(0,\frac{1}{\theta^2})
+          \]
     \item $ \sqrt{n}(\frac{1}{\bar{X}}-\lambda) \xrightarrow{L} N(0,\lambda^2) \quad o \quad
               \frac{1}{\bar{X}}\eqsim N(\lambda,\frac{\lambda^2}{n})$
 \end{enumerate}
@@ -232,5 +236,3 @@ y $G_n(x)$ dos estimadores CAN de $g(\theta)$
 \]
 
 Si $ARE_{TG}(\theta)$ es menor que 1, $T_n(x)$ es mejor. En cambio si ARE es mayor que 1, $G_n(x)$ es mejor.
-
-
