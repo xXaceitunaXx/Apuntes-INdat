@@ -1,16 +1,145 @@
+/* General page settings */
 body {
     font-family: Arial, sans-serif;
+    background-color: #1a1b26;
+    /* Dark background */
+    color: #f5f5f5;
+    /* Light text for readability */
+    line-height: 1.6;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Container for centered content */
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #2a3146;
+    /* Dark blue background */
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    /* Soft shadow for depth */
+}
+
+/* Header styling */
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+header h1 {
+    color: #b12a34;
+    /* Garnet for headers */
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+/* Main content */
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Headings */
+h2,
+h3 {
+    color: #b12a34;
     text-align: center;
 }
-#filters {
-    margin: 20px;
+
+h2 {
+    font-size: 1.75rem;
 }
-#fileList {
-    list-style: none;
-    padding: 0;
+
+h3 {
+    font-size: 1.25rem;
 }
-#fileList li {
-    margin: 5px 0;
+
+/* Links */
+a {
+    color: #4186d3;
+    /* Soft blue for links */
+    text-decoration: none;
+    border-bottom: 1px solid #4186d3;
+}
+
+a:hover {
+    color: #b12a34;
+    /* Garnet on hover */
+    border-bottom: 1px solid #b12a34;
+}
+
+/* Tags for PDF associations */
+.tag {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    margin: 0.3rem;
+    font-size: 0.9rem;
+    color: #f5f5f5;
+    background-color: #4186d3;
+    /* Soft blue for tags */
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Slight shadow for depth */
+    transition: transform 0.2s ease;
+}
+
+.tag:hover {
+    background-color: #b12a34;
+    /* Garnet on hover */
+    transform: scale(1.05);
+    /* Slight enlargement on hover */
+}
+
+/* Code blocks */
+pre,
+code {
+    background-color: #2e3b55;
+    /* Dark blue */
+    color: #f5f5f5;
+    padding: 0.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+button {
+    background-color: #b12a34;
+    /* Garnet */
+    color: #f5f5f5;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Slight shadow for depth */
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #993232;
+    /* Darker garnet */
+    transform: translateY(-2px);
+    /* Lift effect */
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    background-color: #2a3146;
+    /* Dark blue */
+    color: #cccccc;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    border-radius: 0 0 15px 15px;
+    /* Rounded footer edges */
 }

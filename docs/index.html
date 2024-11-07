@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download Center</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <h1>Download Center</h1>
-    
+
     <div id="filters">
         <input type="text" id="searchBar" placeholder="Search...">
-        
+
+        <!-- Grade filter, populated dynamically -->
         <select id="gradeFilter">
             <option value="">All Grades</option>
-            <option value="1">Primer Curso</option>
-            <option value="2">Segundo Curso</option>
-            <option value="3">Tercer Curso</option>
-            <option value="4">Cuarto Curso</option>
-            <option value="5">Quinto Curso</option>
-            <!-- Add more grades as needed -->
         </select>
-        
+
+        <!-- Subject filter, populated dynamically -->
         <select id="subjectFilter">
             <option value="">All Subjects</option>
-            <option value="PROB">Probabilidad</option>
-            <option value="INFE2">Inferencia Estadística 2</option>
-            <!-- Add more subjects as needed -->
+        </select>
+
+        <!-- Type filter, populated dynamically -->
+        <select id="typeFilter">
+            <option value="">All Types</option>
         </select>
     </div>
-    
+
     <ul id="fileList"></ul>
-    
+
     <script src="js/scripts.js"></script>
 </body>
+
 </html>
