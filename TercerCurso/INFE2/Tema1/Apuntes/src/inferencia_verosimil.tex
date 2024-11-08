@@ -252,7 +252,7 @@ Queda como ejercicio para el lector comprobar si
 \[
     \sqrt{n}\left(\sqrt{\frac{\sum_{i=1}^{n}x^2_i}{n}}-\sigma\right)\overset{L}{\to}N\left(0,\frac{1}{I_1(\sigma)}\right)
 \]
-
+\newpage
 \subsubsection{Intervalos de confianza y contrastes de hipótesis uniparamétricos}
 
 Ya hemos visto como estimar el EMV en el caso uniparamétrico. Ahora vamos a ver como se hacen los intervalos de confianza y los contrastes de hipótesis.
@@ -313,7 +313,7 @@ Ahora:
     $$ln(L(\theta_0,X))\approx ln(L(\hat\theta_n,X))+\frac{(\theta-\hat\theta_n)^2}{2}I_n(\theta)$$
     Ahora vamos a calcular el desarrollo de Taylor para la función score en un entorno de $\hat\theta_n$
     $$S(\theta_0)\approx \underbrace{S(\hat\theta_n)}_{0}+(\theta_0-\hat\theta_n)\frac{\partial^2}{\partial\theta^2}ln(L(\hat\theta_n,X))$$
-    \textit{A partir de este punto el profesor hace una demostración que no es correcta, por lo que he preferido no incluirla, aunque las conclusiones que hay a continuación sí son validas}\\\ \\
+    \textit{(A partir de este punto el profesor hace una demostración que no es correcta, por lo que he preferido no incluirla, aunque las conclusiones que hay a continuación sí son validas)}\\\ \\
     Este resultado demuestra que $Q_R$ es asintóticamente equivalente a $Q_W$ y $Q_L$. 
 \end{enumerate}
 
@@ -334,9 +334,8 @@ $$P_{\theta}(Q_i>c)\approx 1-\alpha\Longrightarrow  c=\chi^2_{1,1-\alpha}$$
 Situacion:
 
 \(
-X_1,\dots,X_n \quad i.i.d. \quad P_\theta,\theta \in \Theta \subseteq \mathbb{R}^s 
-\\ \text{El parámetro s-dimensional es } \theta = (\theta_1,\dots,\theta_s) \quad s \geq 1
-\\ \text{ con familia de densidad }\{ f(x,\theta),\theta_0 \in \Theta\}
+X_1,\dots,X_n \quad i.i.d. \quad P_\theta,\theta \in \Theta \subseteq \mathbb{R}^s  \text{El parámetro s-dimensional es } \theta = (\theta_1,\dots,\theta_s) \\ \quad s \geq 1
+ \text{ con familia de densidad }\{ f(x,\theta),\theta_0 \in \Theta\}
 \)
 
 Igualmente podemos escribir
@@ -344,19 +343,18 @@ Igualmente podemos escribir
 \begin{itemize}
     \item Función de verosimilitud: $L(\theta,X_1,\dots,X_n)=\prod^{n}_{i=1} f(x_i,\theta)$
     \item Función de log-verosimilitud: $l(\theta,X_1,\dots,X_n)=\sum^{n}_{i=1} \log f(x_i,\theta)$
-    \item Vector/función score: $S(\theta,X_1,\dots,X_n)=S(X,\theta)=\frac{d}{d \theta} \log L(\theta,X)
-    = (\frac{d}{d \theta} \log L(\theta_1,X),\dots,\frac{d}{d \theta} \log L(\theta,X))$
+    \item Vector/función score: $$S(\theta,X_1,\dots,X_n)=S(X,\theta)=\frac{d}{d \theta} \log L(\theta,X)
+    = (\frac{d}{d \theta} \log L(\theta_1,X),\dots,\frac{d}{d \theta} \log L(\theta,X))$$
 \end{itemize}
 
 Ahora nos preguntamos, ¿cual es la cantidad de información de Fisher que tendremos en el caso multiparamétrico?.
 Para averiguarlo recurrrimos a la matriz Hessiana, que recordamos que es la matriz s x s de las derivadas parciales de segundo orden
 
-\(
+\[
 I_{ij}(\theta)=E_\theta(-\frac{d^2}{d \theta_i d \theta_j} log L(\theta,X))
 =E(\frac{d}{d \theta_i} log L(\theta,X),\frac{d}{d \theta_j} log L(\theta,X))
-\)
-
-\(
+\]
+\[
 H(\theta,X)=\{ \frac{d^2}{d \theta_i d \theta_j}log L(\theta,X) \}^s 
 =
 \begin{pmatrix}
@@ -364,7 +362,7 @@ H(\theta,X)=\{ \frac{d^2}{d \theta_i d \theta_j}log L(\theta,X) \}^s
     \vdots & \ddots & \vdots \\
     \frac{d^2}{d \theta_s d \theta_1}log L(\theta,X) & \dots & \frac{d^2}{d \theta_s^2}log L(\theta,X)
 \end{pmatrix}
-\)
+\]
 
 Sabiendo esto, $I(\theta)$,matriz de información esperada(que recordemos que es la matriz de covarianzas del vectir score) será:
 \[
@@ -396,10 +394,10 @@ y bajo las siguientes condiciones de regularidad:
     \item $\Theta$ es un intervalo de $\mathbb{R}^s$
     \item El soporte de f no depende de $\theta$. $\{x:f(x,\theta)>0\}$ no depende de $\theta$.
     \item $\frac{d}{d \theta_j} f(x,\theta)$ existe y es finita $\forall j=1,\dots,s \quad \theta \in \Theta$
-    \item La matriz de información de Fisher (IF($\theta$)) es definida positiva (si $\forall X \neq A, \quad X^T \cdot A \cdot X >0$)
+    \item La matriz de información de Fisher (IF($\theta$)) es definida positiva \[ (si \quad \forall X \neq A, \quad X^T \cdot A \cdot X >0) \]
     \item $f(x,\theta) \,dx$ se puede derivar bajo el signo integral
 \end{enumerate}
-
+\newpage
 Siendo $\theta_0$ el verdadero valor del parámetro, se obtienen los siguientes resultados:
 
 \begin{enumerate}
@@ -418,17 +416,21 @@ Para \quad X_1,\dots,X_n \quad N(\mu,\sigma)
 \)
 Obtener $I(\theta)$ esperada
 
-\(
+\[
 f(x,\mu,\sigma)=\frac{1}{\sigma \sqrt{2 \pi}} \cdot e^{\frac{-(x-\mu)^2}{2 \cdot \sigma^2}}
-\\ L(\mu,\sigma,X_1,\dots,X_n)= (\frac{1}{\sigma \sqrt{2 \pi}})^n \cdot e^{\frac{-1 \cdot \sum_{i=1}^{n}(x_i-\mu)^2}{2 \cdot \sigma^2}}
-\\ \log L(\mu,\sigma,X_1,\dots,X_n)= -n \log \sigma \cdot \frac{-1}{2 \cdot \sigma^2} \sum_{i=1}^{n}(x_i-\mu)^2
-\)
+\]\[ L(\mu,\sigma,X_1,\dots,X_n)= (\frac{1}{\sigma \sqrt{2 \pi}})^n \cdot e^{\frac{-1 \cdot \sum_{i=1}^{n}(x_i-\mu)^2}{2 \cdot \sigma^2}}
+\]\[ \log L(\mu,\sigma,X_1,\dots,X_n)= -n \log \sigma \cdot \frac{-1}{2 \cdot \sigma^2} \sum_{i=1}^{n}(x_i-\mu)^2
+\]
 
 Sacamos las ecuaciones de verosimilitud:
-\(
-\\ \frac{d}{d \mu} \log L(\mu,\sigma,X_1,\dots,X_n)=\frac{\sum_{i=1}^{n} (x_i-\mu)}{\sigma^2}=0
-\\ \frac{d}{d \sigma} \log L(\mu,\sigma,X_1,\dots,X_n)=\frac{-n}{sigma}+ \frac{\sum_{i=1}^{n}(x_i-\mu)^2}{\sigma^3}=0
-\\I(\mu,\sigma)=
+\[
+\begin{matrix}
+    \frac{d}{d \mu} \log L(\mu,\sigma,X_1,\dots,X_n)=\frac{\sum_{i=1}^{n} (x_i-\mu)}{\sigma^2}=0 \\
+    \frac{d}{d \sigma} \log L(\mu,\sigma,X_1,\dots,X_n)=\frac{-n}{sigma}+ \frac{\sum_{i=1}^{n}(x_i-\mu)^2}{\sigma^3}=0
+\end{matrix}
+\]
+\[
+I(\mu,\sigma)=
 \begin{pmatrix}
     \frac{n}{\sigma^2} & 0\\
     0 & \frac{2n}{\sigma^3}
@@ -438,11 +440,11 @@ Sacamos las ecuaciones de verosimilitud:
     \frac{\sigma^2}{n} & 0\\
     0 & \frac{\sigma^3}{2n}
 \end{pmatrix}
-\)
+\]
 
 luego:
 
-\(
+\[
 EMV=
 \begin{pmatrix}
     \bar{\mu}\\
@@ -462,8 +464,11 @@ EMV=
 \end{pmatrix}
     
 \end{pmatrix}
-\quad o
-\quad \sqrt{n}
+\]
+
+o tambien se puede escribir como
+
+\[ EMV=\sqrt{n}
 \begin{bmatrix}
     \begin{pmatrix}
         \bar{\mu}\\
@@ -485,7 +490,7 @@ N_2
     \end{pmatrix}
         
     \end{pmatrix}
-\)
+\]
 
 \subsubsection*{Ejemplo 2:}
 Sea $X_1,\dots,X_n$ i.i.d. de una distribución que toma valores en un conjunto finito de valores x=$\{a1,a2,a3\}$ con probabilidad
@@ -495,18 +500,21 @@ Se trata de un modelo biparamétrico ya que $P_3=1-P_1-P_2$. $\theta=(P_1,P_2)'$
 
 Función de probabilidad=$f(x; \theta) = P_1 \mathbf{1}_{x = a_1} + P_2 \mathbf{1}_{x = a_2} + P_3 \mathbf{1}_{x = a_3}$
 
-Función de verosimilitud=
-\(L(\theta,X_1,\dots,X_n)=\prod_{i=1}^{n}f(x_i,P_1,P_2)=P_1^{N1}\cdot P_2^{N2} \cdot (1-P_1-p_2)^{N3}
+Función de verosimilitud:
+\[L(\theta,X_1,\dots,X_n)=\prod_{i=1}^{n}f(x_i,P_1,P_2)=P_1^{N1}\cdot P_2^{N2} \cdot (1-P_1-p_2)^{N3}
 \quad donde \quad N_r=\sum_{i=1}^{n} \mathbf{1}_{x_i=a_r}
-\)
+\]
 
 Log-verosimilitud=$ \log L(\theta,X)=N_1 \log P_1 + N_2 \log P_2 +N_3 \log P_3$
 
 Ecuaciones de verosimilitud:
-\(
-\\ \frac{d}{dP_1} \log L(\theta,X)=\frac{N_1}{P_1}-\frac{N_3}{1-P_1-P_2}=0
-\\ \frac{d}{dP_2} \log L(\theta,X)=\frac{N_2}{P_2}-\frac{N_3}{1-P_1-P_2}=0
-\)
+\[
+\begin{matrix}
+    \frac{d}{dP_1} \log L(\theta,X)=\frac{N_1}{P_1}-\frac{N_3}{1-P_1-P_2}=0
+    \\ \frac{d}{dP_2} \log L(\theta,X)=\frac{N_2}{P_2}-\frac{N_3}{1-P_1-P_2}=0
+    
+\end{matrix}
+\]
 
 Resolviendo el sistema de ecuaciones obtenemos:
 
@@ -626,21 +634,22 @@ Se analizan 100 lotes con 10 muestras cada uno $\sum_{i=1}^{100}Y_i=12 \quad Y_1
 
 Nos piden hacer inferencia sobre p, sabiendo que p es función de $\theta$.
 
-\(
+\[
 P(Y_1=0)=1-\theta=(1-p)^{10} \quad P(Y_i=1)=\theta
-\)
+\]
 
 Ya que ya tenemos la relación, hacemos inferencia sobre p.
 
-\(
+\[
 L(\theta,Y_1,\dots,Y_{100})=\prod_{i=1}^{100} \theta^{Y_i}(1-\theta)^{1-Y_i}=\theta^{\sum_{i=1}^{100} Y_i}(1-\theta)^{100-\sum_{i=1}^{100} Y_i}
-\\ \log L(\theta,Y_1,\dots,Y_{100})=(\sum_{i=1}^{100}Y_i) \log \theta + (100-\sum_{i=1}^{100}Y_i) \log (1-\theta)
-\\ \frac{d}{d \theta} log L(\theta,Y_1,\dots,Y_{100})= \frac{\sum_{i=1}^{100}Y_i}{\theta} - \frac{100 - \sum_{i=1}^{100}Y_i}{1-\theta}=0
-\)
+\]\[ \log L(\theta,Y_1,\dots,Y_{100})=(\sum_{i=1}^{100}Y_i) \log \theta + (100-\sum_{i=1}^{100}Y_i) \log (1-\theta)
+\]\[ \frac{d}{d \theta} log L(\theta,Y_1,\dots,Y_{100})= \frac{\sum_{i=1}^{100}Y_i}{\theta} - \frac{100 - \sum_{i=1}^{100}Y_i}{1-\theta}=0
+\]
 
 El EMV es invariante por transformación: $EMV \to \hat{\theta}=\bar{Y}$
-
-p=g($\theta$)=1-$(1-\theta)^{0.1}$ $\Longrightarrow \hat{p}=g(\hat{\theta})=1-(1-\bar{Y})^{0.1}$
+\[
+    p=g(\theta)=1-(1-\theta)^{0.1}\Longrightarrow \hat{p}=g(\hat{\theta})=1-(1-\bar{Y})^{0.1}
+\]
 
 \textbf{Apartado b}.
 
@@ -665,13 +674,13 @@ Sabiendo esto, ¿cuál será la distribución de p?
 \textbf{Apartado c}.
 Calcular el ICRV con confianza 0.95 para p.
 
-$Q_L \approx Q_W \sim \chi^2_1$
+$$Q_L \approx Q_W \sim \chi^2_1$$
 
 Usamos la fórmula que sabemos para calcular este intervalo para $\theta$.
 
 \[
 ICRV=\{ \theta_0:2[\log L(\hat{\theta},X) - log L(\theta_0,X)] \leq qchisq(0.95,1)\}
-=\{ \theta_0:\log L(\theta_0,X) \geq \log L(\bar{Y},X)-\frac{qchisq(0.95,1)}{2}\}
+\]\[=\{ \theta_0:\log L(\theta_0,X) \geq \log L(\bar{Y},X)-\frac{qchisq(0.95,1)}{2}\}
 \]
 
 Como los intervalos de confianza basados en RV son invariantes por transformación, el intervalo de confianza RV para p es:
@@ -686,16 +695,16 @@ Como los intervalos de confianza basados en RV son invariantes por transformaci�
 
 $X_1,\dots,X_n$ i.i.d. con distribución discreta ($P_1=P(ab),P_2=P(Ab),P_3=P(aB),P_4=P(AB)$).
 
-\(
+\[
 n=3839, \quad N_1=1997,N_2=904, N_3=906, N_4=n-N_1-N_2-N_3
-\)
-\(
+\]
+\[
 L(x)=\prod_{i=1}^{n}P(X_i=x_i)=P_1^{N_1}\cdot P_2^{N_2}\cdot P_3^{N_3}\cdot (1-P_1-P_2-P_3)^{n-N_1-N_2-N_3}
-\)
-\(
+\]
+\[
 log L(p,X_1,\dots,X_n)=1997 \log P_1+ 904 \log P_2+906 \log P_3+32\log(1-P_1-P_2-P_3)
-\)
-
+\]
+\newpage
 Ecuaciones de verosimilitud:
 
 \[
@@ -717,39 +726,37 @@ Calcular el p-valor para el test de Wald.
 
 El modelo global tiene 3 parámetros. Bajo $H_0$ depende de 1 parámetro y tiene qye haber 2 relaciones (2 funciones).
 
-\(
+\[
 H_0: \quad P_1=\frac{2+\theta}{4}, \quad P_2=\frac{1-\theta}{4}=P_3, \quad P_4=\frac{\theta}{4}
-\\g_1(P)=P_2-P_3=0
-\\g_2(P)=P_1+P_2-\frac{3}{4}=0
-\\H_0:
+\]\[g_1(P)=P_2-P_3=0, \quad g_2(P)=P_1+P_2-\frac{3}{4}=0
+\]\[H_0:
 \begin{pmatrix}
     g_1(P)=0 \\
     g_2(p)=0
 \end{pmatrix} \qquad (P=2,s=3) \quad H_0=(g(\theta)=(g_1(\theta),\dots,g_P(\theta)))
-\)
+\]
 
 Utilizando el delta-método multivariante:
 
-\(
+\[
 g(\hat{p})\sim N_2(g(P),G_{2x3}(\hat{P})\cdot \hat{Var(P)}_{3x3} \cdot G_{3x2}(\hat{P})')
-\)
+\]
 
 donde $G(\hat{P})$ es la matriz de derivadas parciales evaluadas en $\hat{P}$
 
-\(
+\[
 G(\hat{P})=
 \begin{pmatrix}
     \frac{d}{d P_1} g_1(P) & \frac{d}{d P_2} g_1(P) & \frac{d}{d P_3} g_1(P) \\
     \frac{d}{d P_1} g_2(P) & \frac{d}{d P_2} g_2(P) & \frac{d}{d P_3} g_2(P) 
 \end{pmatrix}
-\)
-
-\(
+\]
+\[
 W = \left( g_1(\hat{P}), g_2(\hat{P}) \right)' \cdot \left( G(\hat{P}) \, \hat{\text{Var}}(P) \, G(\hat{P})' \right)^{-1} \cdot \left( g_1(\hat{P}), g_2(\hat{P}) \right) \sim \chi^2_2 \quad \text{(bajo } H_0\text{)}
-\)
+\]
 
 Recordando:   
-\(
+\[
 \begin{matrix}
     g_1(P)=P_2-P_3=0 \\
     g_2(P)=P_1+P_2-\frac{3}{4}=0
@@ -760,22 +767,20 @@ G(\hat{P})=
     0 & 1 & -1\\
     1 & 1 & 0
 \end{pmatrix}
-\)
-
-\(
+\]
+\[
 W = \left( \hat{P_2}-\hat{P_3}, \hat{P_1}+\hat{P_2}-\frac{3}{4} \right)' \cdot \left( G(\hat{P}) \, \hat{\text{Var}}(P) \, G(\hat{P})' \right)^{-1} \cdot 
 \left(  \hat{P_2}-\hat{P_3}, \hat{P_1}+\hat{P_2}-\frac{3}{4} \right) \sim \chi^2_2 
-\)
-
-\(
+\]
+\[
 \text{p-valor}=P_{H_0}(W \geq W_{obs})=1-pchisq(W_{obs},2)=0.36
-\)
+\]
 
 Volviendo al caso multiparamétrico.
 
 Situación: $\theta=(\theta_1,\dots,\theta_s) \subseteq \mathbb{R}^s \quad \text{y sea }g:\mathbb{R^s}\to \mathbb{R}^r$
 
-\(
+\[
 g(\theta)=(g_1(\theta),\dots,g(\theta))'
 \quad G(\theta)=
 \begin{pmatrix}
@@ -783,18 +788,18 @@ g(\theta)=(g_1(\theta),\dots,g(\theta))'
     \dots & \dots & \dots \\
     \frac{d}{d \theta_1} g_r(\theta) & \dots &  \frac{d}{d \theta_s} g_r(\theta)
 \end{pmatrix}
-\)
+\]
 
 Se requiere contrastar: $H_0:g(\theta)=0 \quad H_1:g(\theta) \neq 0$.
-\\ $H_0$ depende de s-r parámetros libres. Von el delta método podemos llegar a calcular un p-valor basado en el test de Wald
+\\ $H_0$ depende de s-r parámetros libres. Con el delta método podemos llegar a calcular un p-valor basado en el test de Wald
 
-\(
-g(\hat{\theta})-g(\theta) \sim (\text{bajo }H_0) N_r(0,G(\hat{\theta})\cdot \hat{V}(\hat{\theta})\cdot G(\hat{\theta})')
-\)
-\(
+Bajo $H_0$:
+\[
+g(\hat{\theta})-g(\theta) \sim N_r(0,G(\hat{\theta})\cdot \hat{V}(\hat{\theta})\cdot G(\hat{\theta})')
+\]
+\[
 W=(g(\hat{\theta})\cdot [G(\hat{\theta})\cdot \hat{V}(\hat{\theta})\cdot G(\hat{\theta})']^{-1} \cdot g(\hat{\theta})) \sim \chi^2_r
-\)
-
+\]
 \[
 \text{p-valor}=P_{H_0}(\chi^2_r>W_{obs})
 \]
@@ -835,21 +840,21 @@ $Q_L(x)$ bajo $H_0$ tiene una distribución asintótica $\chi^2_r$.
 
 Vamos a usar la notación de partición que vimos antes.
 
-\(
+\[
 \theta=(\phi,\lambda) \text{ donde } \phi=(\theta_1,\dots,\theta_r) \quad y \quad \lambda=(\theta_{r+1},\dots,\theta_s)
-\)
+\]
 
 El contraste es: $H_0:\phi=\phi_0 \quad H_1:\phi \neq \phi_0$
 
 Entonces para maximizar sobre el espacio paramétrico restringido a $\Theta_0$ es una maximización sobre $\lambda$ porque
 $\Theta_0=\phi_0=(\theta_{1_0},\dots,\theta_{r_0})$ y $\phi_0$ están restringidos.
-$\sup_{\theta \in \Theta}L(\theta,X)=\sup_\lambda L(\phi_0,\lambda,X)$
-
+$$\sup_{\theta \in \Theta}L(\theta,X)=\sup_\lambda L(\phi_0,\lambda,X)$$
+\newpage
 Bajo las condiciones de regularidad de Cramer-Rao multiparamétrico, $Q_L(X) \sim (\text{bajo }H_0) \chi^2_r$
 y rechazamos $H_0$ para valores grandes de $Q_L(x)$. El test de razón de verosimilitud rechaza $H_0$ a nivel $\alpha$ si $Q_L(x)>\chi^2_{2-\alpha,r}=qchisq(1-\alpha,r)$.
-
-p-valor $\to P_{H_0}(\chi^2_r>Q_{obs})=1-pchisq(Q_{obs},r)$
-
+\[
+\text{p-valor} \to P_{H_0}(\chi^2_r>Q_{obs})=1-pchisq(Q_{obs},r)
+\]
 \subsubsection{Región de confianza de la razón de verosimilitud}
 
 La región de confianza (1-$\alpha$) para $\phi=(\theta_1,\dots,\theta_r)\in \mathbb{R}^r$ es la colección de valores
@@ -865,37 +870,39 @@ La región de confianza de la razón de verosimilitud será un elipsoide r-dimen
 \textbf{Caso particular para r=1:}
 
 Intervalo de confianza para $\theta_1$ basado en RV con $\theta=(\theta_1,\dots,\theta_s)$ y $\phi=\phi_0$.
-
-\(
-ICRV(\theta_1,1-\alpha)=\{\theta_{1_0}:H_0:\theta_1=\theta_{1_0}\}
-\\= \left\{ \theta_{1,0} : 2\left[\log L(\hat{\theta},X) - \sup \log L(\phi_0, \lambda, X)\right] \leq qchisq(1 - \alpha, r) \right\}
-\) 
+\[
+ICRV(\theta_1,1-\alpha)=
+\]\[\{\theta_{1_0}:H_0:\theta_1=\theta_{1_0}\}
+= \left\{ \theta_{1,0} : 2\left[\log L(\hat{\theta},X) - \sup \log L(\phi_0, \lambda, X)\right] \leq qchisq(1 - \alpha, r) \right\}
+\]
 
 Buscamos el intervalo de confianza para el caso s=2, es decir, intervalo de confianza para $\theta_1$ con $\phi_0=\theta_1$ y $\lambda=\theta_2$.
-
-\(
-ICRV(\theta_1,1-\alpha)=\{ 
+\[
+ICRV(\theta_1,1-\alpha)=
+\]\[
+=\{ 
 \theta_{1_0}:h(\theta_{1_0})=\sup_{\theta_2} \log L(\theta_{1_0},\theta_2,X) \geq \log(\hat{\theta},X)-\frac{qchisq(1-\alpha,1)}{2}=d1
 \}
-\)
+\]
 
 Podemos representarlo fácilmente si conocemos la función $h(\theta_{1_0})$.
-%Se podria insetar gráfico.
+%Se puede añadir gráfico
+
 El resultado con s=2 es:
-\(
+\[
 \theta_{1_0} \in  ICRV(\theta_1,1-\alpha) \Longleftrightarrow \exists \alpha_2 / (\theta_1,\theta_2) \in B
-\)
-\(
+\]
+\[
 B=\{\theta=(\theta_1,\theta_2):\log L(\theta,X)>d_1\}
-\)
-\(
+\]
+\[
 d1=\log L(\hat{\theta},X)-\frac{qchisq(1-\alpha,1)}{2}
-\)
+\]
 %Se puede añadir gráfico
 
 En general, incluso con tamaños de muestra relativamente grandes, el p-valor del test de razón de verosimilitud no coincide con el de Wald.
 Siempre es mejor aproximación el test de razón de verosimilitud, especialmente en r>1.
-
+\newpage
 \subsubsection*{Ejercicio 6}
 (Script de R en el campus)
 
@@ -911,6 +918,8 @@ Y_1=8 \quad Y_2=14 \quad Y_3=28
 
 Contrastar $H_0: p_2-2\cdot p_1=0 \quad H_1: p_2-\cdot p_1 \neq 0$
 con TRV.
+
+Pasos:
 \begin{enumerate}
     \item Escribimos la función de verosimilitud
     \item Calculamos el EMV
@@ -920,15 +929,13 @@ con TRV.
 
 Tenemos $p=(p_1,p_2)$ como vector de parámetros.
 
-\(
+\[
 L(p,x)=\prod_{i=1}^{50} P_p(X=X_i)=P_1^{N_1}\cdot P_2^{N_2}\cdot (1-P_1-P_2)^{50-P_1-P_2}=P_1^8\cdot P_2^{14} \cdot (1-P_1-P_2)^{28}
-\)
-
-\(
+\]
+\[
 l(p,x)=8 \log P_1 +14 \log P_2 +28 \log (1-P_1-P_2)
-\)
-
-\(
+\]
+\[
 EMV=\left\{
 \begin{array}{l}
     \frac{d}{d p_1} \log L(p,x)=0\\
@@ -941,22 +948,19 @@ EMV=\left\{
     \hat{p_1}=\frac{8}{50}\\
     \hat{p_2}=\frac{14}{50}
 \end{matrix}
-\)
-
-\(
+\]
+\[
 Q_L(x)=2[\log L(\hat{p},x)-\sup_{p_2=2\cdot p_1}\log L(p,x)]
-\)
-
+\]
 
 EMV bajo $H_0$:
 
-\(
+\[
 sup_{p_1}(8 \log p_1 +14 \log(2\cdot p_1)+28 \log(1-3\cdot P_1))\implies \hat{p_{1_0}=0.15}
-\)
-
-\(
+\]
+\[
 Q_l(x)=Q_obs \qquad \text{p-valor=}P_\theta(\chi^2_1 \geq Q_obs)=0.76
-\)
+\]
 
 No se rechaza $H_0$
 
