@@ -110,6 +110,99 @@ $$\begin{cases}
 
 La solución de este sistema serán los valores $p^{(1)}$ y $\lambda^{(1)}$, a partir de los cuales podemos repetir el proceso de forma iterativa.
 
+\textbf{Ejercicio 1.Practica 4:}
 
+Tenemos 2 distribuciones N(0,1) y N(1,0.8). Observamos $Y_i$:
+\[
+Y_i \sim \left\{
+    \begin{matrix}
+        N(0,1) & \text{con probabilidad P}\\
+        N(1,0.8) & \text{con probabilidad 1-P}
+    \end{matrix}
+\right.\
+\quad
+\text{ con P desconocida}
+\]
+
+Como los datos son incompletos, no observamos $B_i \sim B(p)$. Los datos completos serían $X=(Y_i,B_i)$ con i=$1,\dots,n$.
+
+Función de densidad para los datos completos:
+\[
+f(y_i,b_i,p)=\left\{
+    \begin{matrix}
+        f(y_i,2,p)=P_p(B=1) \cdot f_{Y/B=1}(y_i \cdot p)= p \cdot N(0,1) & \text{si b=1}\\
+        f(y_i,2,p)=P_p(B=0) \cdot f_{Y/B=0}(y_i \cdot p)= (1-p) \cdot N(1,0.8) & \text{si b=0}
+    \end{matrix}
+\right.\
+\]
+\[
+=[p \cdot dnorm(y_i,0,1)]^{b_i} \cdot [(1-p) \cdot dnorm(y_i,1,0.8)]^{1-b_i}
+\]
+Densidad de los datos observados $Y_i$.
+\[
+g(Y_i,p)=\sum_{b=0}^{1} f(Y_i,b_i,p)=(p \cdot dnorm(y_i,0,1)) + ((1-p) \cdot dnorm(y_i,1,0.8))
+\]
+\[
+L(p,y)=\prod_{i=1}^{n} g(Y_i,p)=\prod_{i=1}^{n} [(p \cdot dnorm(y_i,0,1)) + ((1-p) \cdot dnorm(y_i,1,0.8))]
+\]
+\[
+log L(p,y)=\sum_{i=1}^{n} \log [(p \cdot dnorm(y_i,0,1)) + ((1-p) \cdot dnorm(y_i,1,0.8))]
+\]
+\[
+\frac{d}{dp} log L(p,y)= \sum_{i=1}^{n} \frac{dnorm(y_i,0,1)-dnorm(y_i,1,0.8)}{(p \cdot dnorm(y_i,0,1)) + ((1-p) \cdot dnorm(y_i,1,0.8))}
+\]
+\[
+\frac{d^2}{dp^2} log L(p,y)= \sum_{i=1}^{n} \frac{-(dnorm(y_i,0,1)-dnorm(y_i,1,0.8))^2}{((p \cdot dnorm(y_i,0,1)) + ((1-p) \cdot dnorm(y_i,1,0.8)))^2}
+\]
+En general:
+\[
+\theta_{n+1}-\theta_n
+-\frac{f'(\theta_n)}{f''(\theta_n)}\]
+\newpage
+Dado un valor inicial $P_0$, obtenemos P.
+\[
+p^{(1)}=p_0-\frac{\frac{d}{dp}\log L(p_0,y)}{\frac{d^2}{dp^2}\log L(p_0,y)}
+\]
+\[
+p^{(k+1)}=p_0-\frac{\frac{d}{dp}\log L(p^{(k)},y)}{\frac{d^2}{dp^2}\log L(p^{(k)},y)}
+\]
+
+Aplicamos el Algoritmo EM:
+
+Verosimilitud datos completos:
+
+Paso Esperanza: (Dado un $P_0$ inicial) Solo reemplazamos $b_i$ (desconocido) por su esoeranza condicionada a las observaciones.
+\[
+E_{p_0}(\log L(p,Y_i,B_i)/Y_1,\dots,Y_n)=(\sum_{i=1}^{n} E_{p_0}(B_i/Y_i=y) \log p)
+\]\[
++(n-\sum_{i=1}^{n} E_{p_0} E_{p_0}(B_i/Y_i=y) \log (1-p))
+\]\[
++\sum_{i=1}^{n} E_{p_0}(B_i/Y_i=y) \log(dnorm(y_i,0,1))+ \sum_{i=1}^{n} ((1-E_{p_0}(B_i/Y_i=y))\cdot \log(dnorm(y_i,1,0.8)))
+\]
+
+Necesitamos calcular $E_{p_0}(B_i/Y_i=y)$
+
+\[
+B_i=E_{p_0}(B_i/Y_i=y)=1\cdot E_{p_0}(B_i=1/Y_i=y)+0 \cdot E_{p_0}(B_i=0/Y_i=y)
+\]
+\[
+=\frac{p_0 \cdot dnorm(y_i,0,1)}{p_0 \cdot dnorm(y_i,0,1)+(1-p_0)dnorm(y_i,1,0.8)}
+\]
+Sea $B^*=\sum_{i=1}^{n} B_i^*$:
+\[
+E_{p_0}(\log L(p,y_i,B_i)/y_i=y_i)=B^* \log p + (n-B^*) \log (1-p) 
+\]\[+ \sum_{i=1}^{n} b_i^* \log dnorm(y_i,0,1)
++\sum_{i=1}^{n}(1-b_i^*) \log dnorm(y_i,1,0.8)
+\]
+\[
+\frac{d}{dp} E_{p_0} (\log L(p,Y_i,B_i)/Y_1,\dots,Y_n)=\frac{B^*}{p}-\frac{n-B^*}{1-p}=0
+\]
+Despejando
+
+\[
+p^{(1)}=\frac{B^*}{n}-\frac{1}{n} \sum_{i=1}^{n} \frac{p_0 \cdot dnorm(y_i,0,1)}{p_0 \cdot dnorm(y_i)+(1-p_0)dnorm(y_i,1,0.8)}
+\]
+\newpage
+\textbf{Ejercicio 2.Práctica 4:}
 
 
