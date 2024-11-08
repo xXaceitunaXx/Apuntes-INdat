@@ -1,0 +1,24 @@
+\subsection{Intervalos de confianza bootstrap (Método percentil)}
+Consideremos $X_1,\dots,X_n$, con función de distribución $F_0(\dot)$, dependiente del parámetro s-dimensional $\theta=(\theta_1,.s,\theta_s)$. Para obtener un intervalo de confianza de nivel 1-$\alpha$ para la k-ésima componente de $\theta$ ($\theta_k$) utilizaremos el \textbf{método percentil}.\\
+
+Sean $\hat\theta_{k1}^*,\dots,\hat\theta_{kB}^*$ las B versiones bootstrap del estimador $\hat\theta_k$, y sean $\hat\theta^*_{k,\frac{\alpha}{2}}$ y $\hat\theta^*_{k,1-\frac{\alpha}{2}}$ los cuantiles $\alpha/2$ y $1-\alpha/2$ respectivamente.
+El intervalo de confianza bootstrap percentil para $\theta_k$ será $\left(\hat\theta^*_{k,\frac{\alpha}{2}},\hat\theta^*_{k,1-\frac{\alpha}{2}} \right)$. Es decir, el método percentil consiste en sustituir los extremos del intervalo por los percentiles correspondientes para nuestro nivel $\alpha$.
+
+$$P_\theta\left(\hat\theta^*_{k,\frac{\alpha}{2}}\leq\theta\leq\hat\theta^*_{k,1-\frac{\alpha}{2}}\right)\approx 1-\alpha$$
+
+La justificación viene dada por la suposición de que, bajo las condiciones de regularidad apropiadas, el comportamiento de $\hat\theta$ como estimador de $\theta$ sea parecido al comportamiento de $\hat\theta^*$ como estimador de $\hat\theta$.
+En otras palabras, un intervalo que contenga a $\hat\theta^*_{k}$ con probabilidad aproximada $1-\alpha$ es también un intervalo que contiene a $\theta_k$ con probabilidad aproximada $1-\alpha$.
+
+En cuanto a una transformación $g(.)$, si la función g es monótona creciente, el método percentil es \textbf{invariante a transformaciones}.
+
+\subsection{Contrastes de hipótesis bootstrap}
+
+Sean $X_1,\dots,X_n$ i.i.d. con $f(.,\theta), \theta\in\Theta$. Vamos a contrastar $H_0: \theta\in\Theta_0$ ; $H_1:\theta\notin\Theta_0$.
+
+Sea T el estadístico de contraste y $\left\{T \geq C_\alpha\right\}$ la región crítica de nivel $\alpha$. Existen situaciones en las que es posible calcular la distribución asintótica o exacta del estadístico T bajo la hipótesis nula. 
+En ese caso, podemos determinar directamente $C_\alpha$ y calcular el p-valor del test. En el caso en el que calcular la distribución de T no sea posible podemos aproximarla mediante bootstrap.
+
+\begin{itemize}
+    \item \textbf{$H_0$ es simple}: el bootstrap no es necesario, basta con simulación.
+\end{itemize}
+
