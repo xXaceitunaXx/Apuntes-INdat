@@ -334,7 +334,7 @@ $$P_{\theta}(Q_i>c)\approx 1-\alpha\Longrightarrow  c=\chi^2_{1,1-\alpha}$$
 Situacion:
 
 \(
-X_1,\dots,X_n \quad i.i.d. \quad P_\theta,\theta \in \Theta \subseteq \mathbb{R}^s  \text{El parámetro s-dimensional es } \theta = (\theta_1,\dots,\theta_s) \\ \quad s \geq 1
+X_1,\dots,X_n \quad i.i.d. \quad P_\theta,\theta \in \Theta \subseteq \mathbb{R}^s  \text{El parámetro s-dimensional es } \theta = (\theta_1,\dots,\theta_s), \\ \quad s \geq 1
  \text{ con familia de densidad }\{ f(x,\theta),\theta_0 \in \Theta\}
 \)
 
@@ -344,18 +344,18 @@ Igualmente podemos escribir
     \item Función de verosimilitud: $L(\theta,X_1,\dots,X_n)=\prod^{n}_{i=1} f(x_i,\theta)$
     \item Función de log-verosimilitud: $l(\theta,X_1,\dots,X_n)=\sum^{n}_{i=1} \log f(x_i,\theta)$
     \item Vector/función score: $$S(\theta,X_1,\dots,X_n)=S(X,\theta)=\frac{d}{d \theta} \log L(\theta,X)
-    = (\frac{d}{d \theta} \log L(\theta_1,X),\dots,\frac{d}{d \theta} \log L(\theta,X))$$
+    = \left(\frac{d}{d \theta} \log L(\theta_1,X),\dots,\frac{d}{d \theta} \log L(\theta,X)\right)$$
 \end{itemize}
 
 Ahora nos preguntamos, ¿cual es la cantidad de información de Fisher que tendremos en el caso multiparamétrico?.
 Para averiguarlo recurrrimos a la matriz Hessiana, que recordamos que es la matriz s x s de las derivadas parciales de segundo orden
 
 \[
-I_{ij}(\theta)=E_\theta(-\frac{d^2}{d \theta_i d \theta_j} log L(\theta,X))
+I_{ij}(\theta)=E_\theta\left(-\frac{d^2}{d \theta_i d \theta_j} log L(\theta,X)\right)
 =E(\frac{d}{d \theta_i} log L(\theta,X),\frac{d}{d \theta_j} log L(\theta,X))
 \]
 \[
-H(\theta,X)=\{ \frac{d^2}{d \theta_i d \theta_j}log L(\theta,X) \}^s 
+H(\theta,X)=\left\{ \frac{d^2}{d \theta_i d \theta_j}log L(\theta,X) \right\}^s 
 =
 \begin{pmatrix}
     \frac{d^2}{d \theta_1^2}log L(\theta,X) & \dots & \frac{d^2}{d \theta_1 d \theta_s}log L(\theta,X) \\
@@ -418,7 +418,7 @@ Obtener $I(\theta)$ esperada
 
 \[
 f(x,\mu,\sigma)=\frac{1}{\sigma \sqrt{2 \pi}} \cdot e^{\frac{-(x-\mu)^2}{2 \cdot \sigma^2}}
-\]\[ L(\mu,\sigma,X_1,\dots,X_n)= (\frac{1}{\sigma \sqrt{2 \pi}})^n \cdot e^{\frac{-1 \cdot \sum_{i=1}^{n}(x_i-\mu)^2}{2 \cdot \sigma^2}}
+\]\[ L(\mu,\sigma,X_1,\dots,X_n)= \left(\frac{1}{\sigma \sqrt{2 \pi}}\right)^n \cdot e^{\frac{-1 \cdot \sum_{i=1}^{n}(x_i-\mu)^2}{2 \cdot \sigma^2}}
 \]\[ \log L(\mu,\sigma,X_1,\dots,X_n)= -n \log \sigma \cdot \frac{-1}{2 \cdot \sigma^2} \sum_{i=1}^{n}(x_i-\mu)^2
 \]
 
@@ -426,7 +426,7 @@ Sacamos las ecuaciones de verosimilitud:
 \[
 \begin{matrix}
     \frac{d}{d \mu} \log L(\mu,\sigma,X_1,\dots,X_n)=\frac{\sum_{i=1}^{n} (x_i-\mu)}{\sigma^2}=0 \\
-    \frac{d}{d \sigma} \log L(\mu,\sigma,X_1,\dots,X_n)=\frac{-n}{sigma}+ \frac{\sum_{i=1}^{n}(x_i-\mu)^2}{\sigma^3}=0
+    \frac{d}{d \sigma} \log L(\mu,\sigma,X_1,\dots,X_n)=\frac{-n}{\sigma}+ \frac{\sum_{i=1}^{n}(x_i-\mu)^2}{\sigma^3}=0
 \end{matrix}
 \]
 \[
@@ -622,7 +622,7 @@ Si $\hat{\theta}$ tiene distribución asintótica ($N_s(\theta_s,V)$)
 y $g(\hat{\theta})$ también tiene distribución asintótica ($N_p(g(\theta_0)),G_{pxs}(\theta_0)\cdot V \cdot G(\theta)'$)
 
 \[
-W=(g(\hat{\theta}-g(\theta_0)))'(G(\hat{\theta})\cdot \hat{V} G(\hat{\theta})')^-{-1}(g(\hat{\theta}-g(\theta_0))) \sim \chi^2_p
+W=(g(\hat{\theta})-g(\theta_0))'(G(\hat{\theta})\cdot \hat{V} G(\hat{\theta})')^{-1}(g(\hat{\theta})-g(\theta_0)) \sim \chi^2_p
 \]
 
 \subsubsection*{Ejercicio 1}
@@ -880,9 +880,9 @@ Buscamos el intervalo de confianza para el caso s=2, es decir, intervalo de conf
 \[
 ICRV(\theta_1,1-\alpha)=
 \]\[
-=\{ 
+=\left\{ 
 \theta_{1_0}:h(\theta_{1_0})=\sup_{\theta_2} \log L(\theta_{1_0},\theta_2,X) \geq \log(\hat{\theta},X)-\frac{qchisq(1-\alpha,1)}{2}=d1
-\}
+\right\}
 \]
 
 Podemos representarlo fácilmente si conocemos la función $h(\theta_{1_0})$.
