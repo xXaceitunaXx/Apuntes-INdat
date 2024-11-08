@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "Entrega 2 Tema 1", grade: GRADES.TERCERO, subject: SUBJECTS.INFE2, type: TYPES.EJERCICIOS, path: "https://raw.githubusercontent.com/xXaceitunaXx/Apuntes-INdat/WebPage/Bin/Entrega2Tema1.pdf" },
         { name: "Apuntes Tema 3 Probabilidad", grade: GRADES.SEGUNDO, subject: SUBJECTS.PROB, type: TYPES.APUNTES, path: "https://raw.githubusercontent.com/xXaceitunaXx/Apuntes-INdat/WebPage/Bin/ApuntesTema3Prob.pdf" },
         { name: "Apuntes Tema 2 Probabilidad", grade: GRADES.SEGUNDO, subject: SUBJECTS.PROB, type: TYPES.APUNTES, path: "https://raw.githubusercontent.com/xXaceitunaXx/Apuntes-INdat/WebPage/Bin/ApuntesTema2Prob.pdf" },
+        { name: "Apuntes Tema 1 Inferencia 2", grade: GRADES.SEGUNDO, subject: SUBJECTS.INFE2, type: TYPES.APUNTES, path: "https://raw.githubusercontent.com/xXaceitunaXx/Apuntes-INdat/WebPage/Bin/ApuntesTema1Infe2.pdf" },
     ];
 
     const fileList = document.getElementById("fileList");
