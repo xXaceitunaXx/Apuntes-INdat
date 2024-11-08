@@ -724,7 +724,7 @@ Calcular el p-valor para el test de Wald.
 
 ¿Como relacionamos nuestros parámetros a $\theta$ para contrastar $H_0$? Tenemos que escribir $H_0$ como una función de $g(\theta)$.
 
-El modelo global tiene 3 parámetros. Bajo $H_0$ depende de 1 parámetro y tiene qye haber 2 relaciones (2 funciones).
+El modelo global tiene 3 parámetros. Bajo $H_0$ depende de 1 parámetro y tiene que haber 2 relaciones (2 funciones).
 
 \[
 H_0: \quad P_1=\frac{2+\theta}{4}, \quad P_2=\frac{1-\theta}{4}=P_3, \quad P_4=\frac{\theta}{4}
@@ -850,7 +850,8 @@ Entonces para maximizar sobre el espacio paramétrico restringido a $\Theta_0$ e
 $\Theta_0=\phi_0=(\theta_{1_0},\dots,\theta_{r_0})$ y $\phi_0$ están restringidos.
 $$\sup_{\theta \in \Theta}L(\theta,X)=\sup_\lambda L(\phi_0,\lambda,X)$$
 \newpage
-Bajo las condiciones de regularidad de Cramer-Rao multiparamétrico, $Q_L(X) \sim (\text{bajo }H_0) \chi^2_r$
+Bajo las condiciones de regularidad de Cramer-Rao multiparamétrico, 
+$Q_L(X) \sim \chi^2_r$ (bajo $H_0$)
 y rechazamos $H_0$ para valores grandes de $Q_L(x)$. El test de razón de verosimilitud rechaza $H_0$ a nivel $\alpha$ si $Q_L(x)>\chi^2_{2-\alpha,r}=qchisq(1-\alpha,r)$.
 \[
 \text{p-valor} \to P_{H_0}(\chi^2_r>Q_{obs})=1-pchisq(Q_{obs},r)
@@ -901,7 +902,7 @@ d1=\log L(\hat{\theta},X)-\frac{qchisq(1-\alpha,1)}{2}
 %Se puede añadir gráfico
 
 En general, incluso con tamaños de muestra relativamente grandes, el p-valor del test de razón de verosimilitud no coincide con el de Wald.
-Siempre es mejor aproximación el test de razón de verosimilitud, especialmente en r>1.
+Siempre es mejor aproximación el test de razón de verosimilitud, especialmente en r$>$1.
 \newpage
 \subsubsection*{Ejercicio 6}
 (Script de R en el campus)
@@ -959,7 +960,7 @@ EMV bajo $H_0$:
 sup_{p_1}(8 \log p_1 +14 \log(2\cdot p_1)+28 \log(1-3\cdot P_1))\implies \hat{p_{1_0}=0.15}
 \]
 \[
-Q_l(x)=Q_obs \qquad \text{p-valor=}P_\theta(\chi^2_1 \geq Q_obs)=0.76
+Q_l(x)=Q_{obs} \qquad \text{p-valor=}P_\theta(\chi^2_1 \geq Q_{obs})=0.76
 \]
 
 No se rechaza $H_0$
