@@ -18,7 +18,7 @@ Partimos de un valor inicial "razonable" del parámetro: $\theta_0$ y aproximamo
 $$\frac{\partial}{\partial\theta}ln(L(\theta,x))\approx\frac{\partial}{\partial\theta}ln(L(\theta_0,x))+H(\theta_0,x)(\theta-\theta_0)$$
 Siendo $H(\theta_0,x)=\Big{\{}\frac{d^2}{d\theta_i d\theta_j}ln(L(\theta,x))\Big{\}}_{i,j}$ la matriz Hessiana de la función de log-verosimilitud. \\
 
-Este resultado es váido para todo $\theta$ y se deduce:
+Este resultado es válido para todo $\theta$ y se deduce:
 
 $$\frac{\partial}{\partial\theta}ln(L(\hat\theta,x))\approx\frac{\partial}{\partial\theta}ln(L(\theta_0,x))+H(\theta_0,x)(\hat\theta-\theta_0)$$
 
@@ -156,7 +156,7 @@ log L(p,y)=\sum_{i=1}^{n} \log [(p \cdot dnorm(y_i,0,1)) + ((1-p) \cdot dnorm(y_
 \]
 En general:
 \[
-\theta_{n+1}-\theta_n
+\theta_{n+1}=\theta_n
 -\frac{f'(\theta_n)}{f''(\theta_n)}\]
 \newpage
 Dado un valor inicial $P_0$, obtenemos P.
