@@ -15,11 +15,11 @@ En cuanto a una transformación $g(.)$, si la función g es monótona creciente,
 
 Sean $X_1,\dots,X_n$ i.i.d. con $f(.,\theta), \theta\in\Theta$. Vamos a contrastar $H_0: \theta\in\Theta_0$ ; $H_1:\theta\notin\Theta_0$.
 
-Sea T el estadístico de contraste y $\left\{T \geq C_\alpha\right\}$ la región crítica de nivel $\alpha$. Existen situaciones en las que es posible calcular la distribución asintótica o exacta del estadístico T bajo la hipótesis nula. 
+Sea T el estadístico de contraste y $\left\{T \geq C_\alpha\right\}$ la región crítica de nivel $\alpha$. Existen situaciones en las que es posible calcular la distribución asintótica o exacta del estadístico T bajo la hipótesis nula.
 En ese caso, podemos determinar directamente $C_\alpha$ y calcular el p-valor del test. En el caso en el que calcular la distribución de T no sea posible podemos aproximarla mediante bootstrap.
 
 \begin{itemize}
     \item \textbf{$H_0$ es simple}: el bootstrap no es necesario, basta con simulación. La idea es simular un número grande de muestras (B) de tamaño n de la distribución; sean $T_1,\dots,T_B$ los valores del estadístico T observados en las B muestras, podemos aproximar $C_\alpha$ por el cuantil $1-\alpha$ de estos B valores y el p-valor del test por la proporción de estos valores mayores que el observado para los datos originales.
-    \item \textbf{$H_0$ es compuesta}: bootstrap paramétrico. Si $\hat\theta_0$ es el EMV de $\theta$ bajo $H_0$, se generan B muestras \textbf{bootstrap} de la distribución. Al igual que antes se calcula el p-valor del test a partir de la proporción de los valores mayores que el valor observado para los datos; pero esta vez con muestreo bootstrap. 
+    \item \textbf{$H_0$ es compuesta}: bootstrap paramétrico. Si $\hat\theta_0$ es el EMV de $\theta$ bajo $H_0$, se generan B muestras \textbf{bootstrap} de la distribución. Al igual que antes se calcula el p-valor del test a partir de la proporción de los valores mayores que el valor observado para los datos; pero esta vez con muestreo bootstrap.
 \end{itemize}
 

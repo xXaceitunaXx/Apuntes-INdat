@@ -13,9 +13,9 @@ Cuando se da uno de los casos anteriores, el bootstrap puede ser una buena opci�
 
 $$\left.
     \begin{matrix}
-        X_{11} & X_{12} & \cdots & X_{1n} & \longrightarrow & T^{1}_n(X)\\
-        X_{21} & X_{22} & \cdots & X_{2n} & \longrightarrow & T^{2}_n(X)\\
-        \vdots &\vdots & \ddots & \vdots & \vdots & \vdots\\
+        X_{11}     & X_{12}     & \cdots & X_{1n}     & \longrightarrow & T^{1}_n(X)    \\
+        X_{21}     & X_{22}     & \cdots & X_{2n}     & \longrightarrow & T^{2}_n(X)    \\
+        \vdots     & \vdots     & \ddots & \vdots     & \vdots          & \vdots        \\
         X_{5000,1} & X_{5000,2} & \cdots & X_{5000,n} & \longrightarrow & T^{5000}_n(X)
     \end{matrix}
     \right\}\text{Simulaciones si $P_\theta$ es conocida}$$
@@ -44,14 +44,14 @@ Con el bootstrap podemos obtener también estimadores sobre el sesgo, intervalos
 Sean $X_1,\dots,X_n$ con $F(\dot)$, $\hat\theta$ es el EMV de $\theta$. El bootstrapsimula la distribución de $\hat\theta$.
 \begin{enumerate}
     \item Se estima $\hat F(X)$$\begin{cases}
-        \text{En el caso no paramétrico, a partir de la función de distribución empírica}\\
-        \text{En el caso paramétrico, estimando los parámetros necesarios}
-    \end{cases}$
+              \text{En el caso no paramétrico, a partir de la función de distribución empírica} \\
+              \text{En el caso paramétrico, estimando los parámetros necesarios}
+          \end{cases}$
     \item Generamos datos artificiales: las muestras bootstrap:
-        \begin{itemize}
-            \item $X_1^*,\dots,X_n^*$ con función de densidad $\hat F$ estimada de $F$ 
-            \item Se obtiene el EMV $\hat\theta^*$ basado en la muestra bootstrap
-        \end{itemize}
+          \begin{itemize}
+              \item $X_1^*,\dots,X_n^*$ con función de densidad $\hat F$ estimada de $F$
+              \item Se obtiene el EMV $\hat\theta^*$ basado en la muestra bootstrap
+          \end{itemize}
 \end{enumerate}
 
 La idea del procedimiento es la siguiente: la distribución $\hat\theta^*-\hat\theta$ aproxima la distribución de $\hat\theta-\theta$. Al repetir los pasos anteriores en un proceso B veces se obtiene una versión bootstrap del EMV.
@@ -63,18 +63,18 @@ Existen dos tipos de bootstrap:
 \end{itemize}
 
 \hspace{-1cm}\noindent\begin{tabular}{r}
-    \textbf{Ejemplo}  \\ \hline \ \\
+    \textbf{Ejemplo} \\ \hline \ \\
 \end{tabular}
 
 Sean $X_1,\dots,X_n$ v.a.i.i.d de una $N(\mu,\sigma^2)$. Según lo visto en temas anteriores, sabemos que el EMV para $\theta=(\mu,\sigma)$ sigue la siguiente distribución:
 $$\sqrt(n)\begin{pmatrix}
-    \hat\mu-\mu\\
-    \hat\sigma-\sigma
-\end{pmatrix} \overset{\mathcal{L}}{\longrightarrow}N_2\Bigg(\begin{pmatrix}
-    0 \\ 0 \end{pmatrix},\begin{pmatrix}
-        \sigma^2 & 0 \\ 0 & 4\sigma^2
-    \end{pmatrix}\Bigg)$$
-    En este ejercicio supondremos que sabemos que los datos vienen de una distribución normal (aunque desconocemos los valores de $\mu$ y $\sigma$). Para conseguir una muestra bootstrap tenemos que seguir los pasos ya mencionados anteriormente:
+        \hat\mu-\mu \\
+        \hat\sigma-\sigma
+    \end{pmatrix} \overset{\mathcal{L}}{\longrightarrow}N_2\Bigg(\begin{pmatrix}
+            0 \\ 0 \end{pmatrix},\begin{pmatrix}
+            \sigma^2 & 0 \\ 0 & 4\sigma^2
+        \end{pmatrix}\Bigg)$$
+En este ejercicio supondremos que sabemos que los datos vienen de una distribución normal (aunque desconocemos los valores de $\mu$ y $\sigma$). Para conseguir una muestra bootstrap tenemos que seguir los pasos ya mencionados anteriormente:
 \begin{enumerate}
     \item Estimar $\mu$ y $\sigma$ a partir del EMV
     \item Simular desde nuestra nueva $\hat F$ (que sabemos que sigue una distribución normal)
