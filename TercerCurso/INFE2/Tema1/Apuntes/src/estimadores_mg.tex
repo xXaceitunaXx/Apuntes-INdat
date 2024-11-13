@@ -244,9 +244,9 @@ de información esperada como:
     \]
 \end{proofs}
 
-Si se verifican las condiciones de regularidad de Crner-Rao, otra forma alternativa de calcular la información de Fisher es:
+Si se verifican las condiciones de regularidad de Cramer-Rao, otra forma alternativa de calcular la información de Fisher es:
 \[
-    I_x(\theta)=-E\left(\frac{d^2}{d \theta} \log f(x,\theta)\right)
+    I_x(\theta)=-E\left(\frac{d^2}{d \theta^2} \log f(x,\theta)\right)
 \]
 
 \begin{proofs}
@@ -582,32 +582,6 @@ Es un estimador asintóticamente eficiente.
 \textbf{Resultado: }Todos los estimadores CAN que se obtienen usando el delta método a partir de un estimador asintóticamente eficiente,
 son asintóticamente eficientes.
 
-(La demostracción era tarea)
-
-\subsubsection{Estimadores razonables}
-
-Los estimadores CAN y AE son estimadores con propiedades razonables, pero podemos tener más de un estimador razonable.
-
-Sean $T_n(x)$ estimador CAN para g($\theta$) y $G_n(x)$ estimador CAN para g($\theta$)
-\begin{itemize}
-    \item Si uno de los 2 es AE y el otro no, el estimador AE es mejor.
-    \item Si ambos son AE, será mejor el que tenga una menor varianza asintótica($V_T^2$).
-\end{itemize}
-
-Para ver cual tiene una menor varianza asintótica, usamos la eficiencia relativa asintótica.
-
-\textbf{\textit{Definición: }} $X_1,\dots,X_n$ i.i.d. $\{ P_\theta: \theta \in \Theta \}$, sean $T_n(x)$
-y $G_n(x)$ dos estimadores CAN de $g(\theta)$
-
-\[
-    ARE_{TG}(\theta)=\frac{V_G^2(\theta)}{V_T^2(\theta)}
-\]
-
-Si $ARE_{TG}(\theta)$ es menor que 1, $G_n(x)$ es mejor. En cambio si ARE es mayor que 1, $T_n(x)$ es mejor.
-
-\newpage
-
-\textbf{\textit{Definición: }} Todos los estimadores CAN que se obtienen usando el $\Delta$-método a partir de otro estimador AE, son AE.
 
 \begin{proofs}
     Sea $T_n(X)$ estimador CAN para $\theta$
@@ -639,3 +613,26 @@ Si $ARE_{TG}(\theta)$ es menor que 1, $G_n(x)$ es mejor. En cambio si ARE es may
         \frac{(g'(\theta))^2}{nI_{X_1}(\theta)}=\frac{(g'(\theta))^2}{\frac{n}{V^2_T(\theta)}}=\frac{V^2_T(\theta)(g'(\theta))^2}{n}\square
     \]
 \end{proofs}
+\newpage
+\subsubsection{Estimadores razonables}
+
+Los estimadores CAN y AE son estimadores con propiedades razonables, pero podemos tener más de un estimador razonable.
+
+Sean $T_n(x)$ estimador CAN para g($\theta$) y $G_n(x)$ estimador CAN para g($\theta$)
+\begin{itemize}
+    \item Si uno de los 2 es AE y el otro no, el estimador AE es mejor.
+    \item Si ambos son AE, será mejor el que tenga una menor varianza asintótica($V_T^2$).
+\end{itemize}
+
+Para ver cual tiene una menor varianza asintótica, usamos la eficiencia relativa asintótica.
+
+\textbf{\textit{Definición: }} $X_1,\dots,X_n$ i.i.d. $\{ P_\theta: \theta \in \Theta \}$, sean $T_n(x)$
+y $G_n(x)$ dos estimadores CAN de $g(\theta)$
+
+\[
+    ARE_{TG}(\theta)=\frac{V_G^2(\theta)}{V_T^2(\theta)}
+\]
+
+Si $ARE_{TG}(\theta)$ es menor que 1, $G_n(x)$ es mejor. En cambio si ARE es mayor que 1, $T_n(x)$ es mejor.
+
+\newpage
