@@ -1,0 +1,153 @@
+\subsection{Distribución del test bajo $H_1$}
+
+Podemos aumentar la potencia sacrificando \(\alpha\) o aumentando el tamaño de la muestra.  
+Si queremos asegurar una potencia de, por ejemplo, \(0.8\) o \(0.9\), necesitamos calcular cuánto debe valer \(n\).
+
+Para esto, necesitamos conocer la distribución del test bajo \(H_1\).
+
+Resultado:
+\[
+\lim_{n \to \infty} P_{\theta_1} (\chi^2_{k-1} \leq t) = P(\chi^2_{k-1}(\delta) \leq t)
+\]
+Donde \(\delta\) es el parámetro de descentralidad para la \(\chi^2_{k-1}\) descentrada.
+
+\textit{\textbf{Definición:}} La distribución asintótica bajo \(H_1\) del estadístico \(\chi^2\) de prueba de ajuste es una \(\chi^2\) descentrada con \(k-1\) grados de libertad y parámetro de descentralidad \(\delta\).
+
+La demostración no está incluida en este curso. Sin embargo, hacemos algunos comentarios sobre esta definición:
+
+\textbf{Comentarios:} %Los comentarios eran formulajos y no me compilan
+\begin{enumerate}
+    \item   \begin{itemize}
+        \item Si \(X\) es una variable aleatoria tal que \(X \sim N(0,1)\), entonces \(X^2 \sim \chi^2_1\).
+        \item Si \(X_1, \dots, X_n\) son v.a.i.i.d. \(N(0,1)\), entonces \(\sum_{i=1}^{n} X_i^2 \sim \chi^2_n\).
+        \item Si \(X_1, \dots, X_n\) son v.a.i.i.d. \(N(\mu, \sigma^2)\), entonces 
+        \(
+        \sum_{i=1}^{n} \left( \frac{X_i}{\sigma} \right)^2 \sim \chi^2_n
+        \)
+        descentrada con parámetro $\delta$.
+    \end{itemize}
+    \item Para contrastar 
+    \[
+    \begin{matrix}
+        H_0: p_0 = (p_1^0, \dots, p_k^0) \\
+        H_1: p \neq p^0
+    \end{matrix}
+    \]
+    si bajo \(H_1\) la alternativa 
+    es \(p = (p_1^1, \dots, p_k^1)\), el test \(\chi^2\) sigue 
+    una distribución \(\chi^2_{k-1}(\delta)\), donde \(\delta\) 
+    mide la distancia entre los dos vectores:
+    \[
+    \Delta = \sum_{j=1}^{k} \frac{(p_j^1 - p_j^0)^2}{p_j^0}; \quad \delta = n \cdot \Delta
+    \]
+    O equivalentemente:
+    \[
+    \delta = \sum_{j=1}^{k} \frac{\left( n \cdot p_j^1 - n \cdot p_j^0 \right)^2}{n \cdot p_j^0}.
+    \]
+    \item Existen tablas para $\chi_{k-1}^{2'}(\delta)$ (por ejemplo, las tablas estándar de $\chi^2$ descentrada).
+\end{enumerate}
+
+
+
+\newpage
+\subsubsection*{Ejercicio 11:}  
+Durante 60 meses consecutivos se observó la variable aleatoria X="nº de accidentes al mes en un cruce de carreteras". Los resultados fueron:
+\[
+\begin{matrix}
+    X & 0 & 1&2& 3+ \\
+    \text{Nº de meses} & 23 & 18 & 12 & 7
+\end{matrix}
+\]
+a) Contrastar la hipótesis de que la distribución de X es geométrica: 
+\[
+G(\theta);p_\theta(X=x)=\theta \cdot (1- \theta)^x, \quad X=0,1,2,\dots
+\]
+
+$H_0: X \sim G(\theta)=$EMV para $X \in \{0,1,2,3+\}$
+
+\[
+P_0^0=\theta, \quad P_1^0=\theta \cdot (1-\theta), \quad P_2^0=\theta \cdot (1-\theta)^2, \quad P_3^0=(1-\theta)^3
+\]
+\[
+L(\theta,f)=\prod_{j=1}^{4}[p_j^0]^{f_i}= \theta^{23}\cdot(\theta \cdot (1-\theta))^18 \cdot (\theta \cdot (1-\theta)^2)^12 \cdot ((1-\theta)^3)^7
+\]
+\[
+log L(\theta,f)=53 \log \theta+63 \log (1-\theta)
+\]
+\[
+\frac{d \log(\theta,f)}{d \theta}=\frac{53}{\theta}-\frac{63}{1-\theta} \Longrightarrow \hat{\theta}=\frac{53}{53+63}
+\]
+
+Test $\chi^2$:
+
+\[
+\hat{\chi^2}=\sum_{j=0}^{3} \frac{(f_j-60\cdot P_l^0(\hat{\theta}))^2}{60 \cdot p_j^0(\hat{\theta})} \sim \chi^2_2
+\]
+
+b) Potencia de $H_0:G(0.4) \quad B_n(2,0.6)$
+\[
+P_1(\chi^2> C_{0.05})=P(\chi_3^2(\delta)>C_{0.05})
+\]
+
+\[
+S=n \cdot \Delta, \quad \Delta=\sum_{j=0}^{3} \left(\frac{(p_j^0-p_j^1)^2}{p_j^0}\right)
+\]
+
+\subsubsection{Test de Kolmogorov-Smirnov}
+
+$X_1,\dots, X_n$ i.i.d. con función de distribución F continua y se quiere contrastar
+\[
+H_0: F=F_0 \quad H_1: F \neq F_0
+\]
+
+El test de Kolmogorov-Smirnov es más potente que el $\chi^2$ en el caso de F continua.
+Tenemos:
+\begin{itemize}
+    \item $F_0 \to $ Función de distribusión bajo $H_0$.
+    \item $\hat{F_n} \to$ Función de distribución muestral o empírica.
+\end{itemize}
+\[
+\hat{F_n}(\chi)=\frac{1}{n} \sum_{i=1}^{n} \mathbbm{1}_{(x_i \leq \chi)}, \quad \chi \in \mathrm{R}
+\]
+\newpage
+Tambien se puede definir a partir de los estadísticos de orden:
+
+\[
+\hat{F_n}(x)=
+\left\{
+\begin{array}{ll}
+    0, & \text{si } \chi \leq \chi_{(1)}\\
+    \frac{i}{n} & \text{si } \chi_{(i)} \leq \chi \leq \chi_{(i+1)}, \quad i=1,\dots,n-1 \\
+    1 & \text{si } \chi_{n} \leq \chi
+\end{array}
+\right.
+\]
+
+
+Propiedades:
+\begin{enumerate}
+    \item $n\cdot \hat{F_n(\chi)}$ es el total de valores de la muestra menores o iguales a $\chi$ y sigue una distribución B(n,F(x)), $\forall \chi \in \mathbb{R}$
+    \item Según el resultado anterior, junto con las propiedades de la distribución binomial, se tiene $\hat{F}$(x) es un estimador consistente de F(x)
+    \[
+    \lim_{n \to \infty} P(| \hat{F_n}(\chi - F(x)| < \epsilon) \to 0
+    \]
+    \[
+    \text{y es CAN: }\sqrt{n}\cdot(\hat{F_n}(x)-F(x))\backsimeq N(0,F(x)(1-F(x)))
+    \]
+    \item Por el teorema de Glivenko-Cantelli,$\hat{F_n}(\chi)$ converge uniformemente y casi seguro a F($\chi$).
+\end{enumerate}
+
+A medida que n crece, al función escalonada de $\hat{F_n}(\chi)$ con saltos en los valores de los estadísticos de orden $X_{(1)},\dots,X_{(n)}$ aproxima la distribución F(x)'.
+
+Por lo tanto cuando n es grande, la mayor diferencia entee $\hat{F_n}((x))$ y F(x) converge a 0.
+
+Este resultado nos sugiere el estadístico $
+D_n=sup_\chi[\hat{F_n}(x)-F(x)]
+$ es una medida razonable de la precisión de la estimación.
+
+Estadístico de Kolmogorov-Smirnov de una muestra:
+\[
+    D_n=sup_\chi|\hat{F_n}(\chi)-F_0(\chi)|
+\]
+El test rechaza la hipótesis para valores garndes del estadísitico ($D_n>C$).
+Como siempre debemos conocer la distribución para obtener el valor crítico.
