@@ -1,79 +1,4 @@
-\subsection{Examen parcial}
-
-Ejercicio 1  
-Un artículo, producto de un tipo de componente mecánico que puede deteriorarse a dos velocidades distintas, depende de factores de fabricación no controlados.  
-Se observa que el tiempo de vida ($X$) de cada componente sigue una mezcla de distribuciones exponenciales con las siguientes características:
-
-\begin{itemize}
-    \item Con probabilidad \(p\), el componente tiene un tiempo de vida \(X\) que sigue una distribución exponencial con parámetro \(\lambda_1\), lo cual corresponde a componentes con alta resistencia.
-    \item Con probabilidad \(1-p\), el componente tiene un tiempo de vida \(X\) que sigue una distribución exponencial con parámetro \(\lambda_2\), lo cual corresponde a componentes con menor resistencia.
-\end{itemize}
-
-El fichero \texttt{Tiempos.RData} corresponde a un conjunto de observaciones independientes \(x_1, x_2, \dots \), que representan los tiempos de vida medidos en horas de varios componentes.
-
-\begin{enumerate}
-    \item Obtener el EMV y concretar la distribución asintótica del EMV para los parámetros del modelo que subyace para estos datos.  
-    \textbf{Nota:} Planteadas las ecuaciones de verosimilitud, utilice la función \texttt{optim} para el cálculo del EMV.
-
-    \[
-    f(x, p, \lambda_1, \lambda_2) = p \cdot e^{-\lambda_1 x} + (1-p) \cdot e^{-\lambda_2 x}
-    \]
-
-    \[
-    L(x, p, \lambda_1, \lambda_2) = \prod_{i=1}^{n} f(x_i, p, \lambda_1, \lambda_2) = \prod_{i=1}^{n} \left( p \cdot e^{-\lambda_1 x_i} + (1-p) \cdot e^{-\lambda_2 x_i} \right)
-    \]
-
-    \[
-    \log L(x, p, \lambda_1, \lambda_2) = \sum_{i=1}^{n} \log f(x_i, p, \lambda_1, \lambda_2)
-    \]
-
-    \[
-    \begin{pmatrix}
-        \hat{p} \\
-        \hat{\lambda}_1 \\
-        \hat{\lambda}_2
-    \end{pmatrix}
-    \sim
-    N_3
-    \left(
-    \begin{pmatrix}
-        p \\
-        \lambda_1 \\
-        \lambda_2
-    \end{pmatrix},
-    \text{Var}_{\text{EMV}}^{3 \times 3}
-    \right)
-    \]
-
-    \item Obtener el IC de Wald con confianza aproximada de \(95\%\) para cada parámetro del modelo.
-
-    \[
-    \hat{p} \pm \texttt{qnorm}(0.975) \cdot \sqrt{\text{Var}(\hat{p})}
-    \]
-
-    \item Obtener el \textit{p-valor} basado en el estadístico de Wald para contrastar la hipótesis \(H_0: \lambda_1 = 0.5\) vs. \(H_a: \lambda_1 \neq 0.5\).
-
-    \[
-    W = \frac{(\hat{\lambda}_1 - 0.5)^2}{\text{Var}(\hat{\lambda}_1)} \sim \chi^2_1
-    \]
-
-    \item Obtener el \textit{p-valor} basado en el estadístico de RV para contrastar la hipótesis \(H_0: \lambda_1 = 0.5\) vs. \(H_a: \lambda_1 \neq 0.5\).
-
-    \[
-    Q_L = 2 \cdot \left[ \log L(\hat{p}, \hat{\lambda}_1, \hat{\lambda}_2, x) - \sup_{p, \lambda_2} \log L(p, \lambda_1 = 0.5, \lambda_2, x) \right] \sim \chi^2_1
-    \]
-
-\end{enumerate}
-
-\subsection{Test de bondad de ajuste}
-
-\(H_0\): Los datos provienen de una distribución geométrica \(\left(\frac{1}{2}\right)\).
-
-Según el test, no rechazamos \(H_0\).
-
-Si en realidad los datos vienen de una distribución geométrica \(\left(\frac{1}{3}\right)\),  
-¿cuál es la probabilidad de que el test lo detecte?  
-¿Y si vienen de una distribución geométrica \((0.52)\)?
+\subsection{Distribución del test bajo $H_1$}
 
 Podemos aumentar la potencia sacrificando \(\alpha\) o aumentando el tamaño de la muestra.  
 Si queremos asegurar una potencia de, por ejemplo, \(0.8\) o \(0.9\), necesitamos calcular cuánto debe valer \(n\).
@@ -91,29 +16,40 @@ Donde \(\delta\) es el parámetro de descentralidad para la \(\chi^2_{k-1}\) des
 La demostración no está incluida en este curso. Sin embargo, hacemos algunos comentarios sobre esta definición:
 
 \textbf{Comentarios:} %Los comentarios eran formulajos y no me compilan
-%\begin{enumerate}
-%    \item   \begin{itemize}
-%        \item Si \(X\) es una variable aleatoria tal que \(X \sim N(0,1)\), entonces \(X^2 \sim \chi^2_1\).
-%        \item Si \(X_1, \dots, X_n\) son v.a.i.i.d. \(N(0,1)\), entonces \(\sum_{i=1}^{n} X_i^2 \sim \chi^2_n\).
-%        \item Si \(X_1, \dots, X_n\) son v.a.i.i.d. \(N(\mu, \sigma^2)\), entonces 
-%        \[
-%        \sum_{i=1}^{n} \left( \frac{X_i}{\sigma} \right)^2 \sim \chi^2_n \quad \text{descentrada con parámetro } \delta.
-%        \]
-%    \end{itemize}
-%    \item Para contrastar \(H_0: p_0 = (p_1^0, \dots, p_k^0)\) contra \(H_1: p \neq p^0\),  si bajo \(H_1\) la alternativa es \(p = (p_1^1, \dots, p_k^1)\), el test \(\chi^2\) sigue una distribución \(\chi^2_{k-1}(\delta)\), donde \(\delta\) mide la distancia entre los dos vectores:
-%    \[
-%    \Delta = \sum_{j=1}^{k} \frac{(p_j^1 - p_j^0)^2}{p_j^0}; \quad \delta = n \cdot \Delta
-%    \]
-%    O equivalentemente:
-%    \[
-%    \delta = \sum_{j=1}^{k} \frac{\left( n \cdot p_j^1 - n \cdot p_j^0 \right)^2}{n \cdot p_j^0}.
-%    \]
-%    \item Existen tablas para \(\chi^2_{k-1}'(\delta)\) (por ejemplo, las tablas estándar de \(\chi^2\) descentrada).
-%\end{enumerate}
+\begin{enumerate}
+    \item   \begin{itemize}
+        \item Si \(X\) es una variable aleatoria tal que \(X \sim N(0,1)\), entonces \(X^2 \sim \chi^2_1\).
+        \item Si \(X_1, \dots, X_n\) son v.a.i.i.d. \(N(0,1)\), entonces \(\sum_{i=1}^{n} X_i^2 \sim \chi^2_n\).
+        \item Si \(X_1, \dots, X_n\) son v.a.i.i.d. \(N(\mu, \sigma^2)\), entonces 
+        \(
+        \sum_{i=1}^{n} \left( \frac{X_i}{\sigma} \right)^2 \sim \chi^2_n
+        \)
+        descentrada con parámetro $\delta$.
+    \end{itemize}
+    \item Para contrastar 
+    \[
+    \begin{matrix}
+        H_0: p_0 = (p_1^0, \dots, p_k^0) \\
+        H_1: p \neq p^0
+    \end{matrix}
+    \]
+    si bajo \(H_1\) la alternativa 
+    es \(p = (p_1^1, \dots, p_k^1)\), el test \(\chi^2\) sigue 
+    una distribución \(\chi^2_{k-1}(\delta)\), donde \(\delta\) 
+    mide la distancia entre los dos vectores:
+    \[
+    \Delta = \sum_{j=1}^{k} \frac{(p_j^1 - p_j^0)^2}{p_j^0}; \quad \delta = n \cdot \Delta
+    \]
+    O equivalentemente:
+    \[
+    \delta = \sum_{j=1}^{k} \frac{\left( n \cdot p_j^1 - n \cdot p_j^0 \right)^2}{n \cdot p_j^0}.
+    \]
+    \item Existen tablas para $\chi_{k-1}^{2'}(\delta)$ (por ejemplo, las tablas estándar de $\chi^2$ descentrada).
+\end{enumerate}
 
 
 
-
+\newpage
 \subsubsection*{Ejercicio 11:}  
 Durante 60 meses consecutivos se observó la variable aleatoria X="nº de accidentes al mes en un cruce de carreteras". Los resultados fueron:
 \[
@@ -122,13 +58,12 @@ Durante 60 meses consecutivos se observó la variable aleatoria X="nº de accide
     \text{Nº de meses} & 23 & 18 & 12 & 7
 \end{matrix}
 \]
-
-a) Contrastasr la hipótesis de que la distribución de X es geométrica: 
+a) Contrastar la hipótesis de que la distribución de X es geométrica: 
 \[
 G(\theta);p_\theta(X=x)=\theta \cdot (1- \theta)^x, \quad X=0,1,2,\dots
 \]
 
-$H_0: X \sim G(\theta)=$EMV para $X \in {0,1,2,3+}$
+$H_0: X \sim G(\theta)=$EMV para $X \in \{0,1,2,3+\}$
 
 \[
 P_0^0=\theta, \quad P_1^0=\theta \cdot (1-\theta), \quad P_2^0=\theta \cdot (1-\theta)^2, \quad P_3^0=(1-\theta)^3
@@ -160,24 +95,34 @@ S=n \cdot \Delta, \quad \Delta=\sum_{j=0}^{3} \left(\frac{(p_j^0-p_j^1)^2}{p_j^0
 
 \subsubsection{Test de Kolmogorov-Smirnov}
 
-$X_1,\dots, X_n$ i.i.d. con función de distribución F y se quiere contrastar
+$X_1,\dots, X_n$ i.i.d. con función de distribución F continua y se quiere contrastar
 \[
 H_0: F=F_0 \quad H_1: F \neq F_0
 \]
 
 El test de Kolmogorov-Smirnov es más potente que el $\chi^2$ en el caso de F continua.
-Tenemos:\(
-\begin{matrix}
-    F_0 \to \text{Función de distribusión bajo }H_0\\
-    \hat{F_n} \to \text{Función de distribución muestral o empírica}
-\end{matrix}
-\)
+Tenemos:
+\begin{itemize}
+    \item $F_0 \to $ Función de distribusión bajo $H_0$.
+    \item $\hat{F_n} \to$ Función de distribución muestral o empírica.
+\end{itemize}
 \[
-\hat{F_n}(\chi)=\frac{1}{n} \sum_{i=1}^{n} \mathbb{1}_{(x_i \leq \chi)}, \quad \chi \in \mathrm{R}
+\hat{F_n}(\chi)=\frac{1}{n} \sum_{i=1}^{n} \mathbbm{1}_{(x_i \leq \chi)}, \quad \chi \in \mathrm{R}
+\]
+\newpage
+Tambien se puede definir a partir de los estadísticos de orden:
+
+\[
+\hat{F_n}(x)=
+\left\{
+\begin{array}{ll}
+    0, & \text{si } \chi \leq \chi_{(1)}\\
+    \frac{i}{n} & \text{si } \chi_{(i)} \leq \chi \leq \chi_{(i+1)}, \quad i=1,\dots,n-1 \\
+    1 & \text{si } \chi_{n} \leq \chi
+\end{array}
+\right.
 \]
 
-Tambien se puede deifinir a partir de los estadísticos de orden:
-%Definirlo
 
 Propiedades:
 \begin{enumerate}
@@ -187,7 +132,7 @@ Propiedades:
     \lim_{n \to \infty} P(| \hat{F_n}(\chi - F(x)| < \epsilon) \to 0
     \]
     \[
-    \text{y es CAN: }\sqrt{n}\cdot(\hat)
+    \text{y es CAN: }\sqrt{n}\cdot(\hat{F_n}(x)-F(x))\backsimeq N(0,F(x)(1-F(x)))
     \]
     \item Por el teorema de Glivenko-Cantelli,$\hat{F_n}(\chi)$ converge uniformemente y casi seguro a F($\chi$).
 \end{enumerate}
@@ -200,7 +145,7 @@ Este resultado nos sugiere el estadístico $
 D_n=sup_\chi[\hat{F_n}(x)-F(x)]
 $ es una medida razonable de la precisión de la estimación.
 
-EStadístico de Kolmogorov-Smirnov de una muestra:
+Estadístico de Kolmogorov-Smirnov de una muestra:
 \[
     D_n=sup_\chi|\hat{F_n}(\chi)-F_0(\chi)|
 \]
