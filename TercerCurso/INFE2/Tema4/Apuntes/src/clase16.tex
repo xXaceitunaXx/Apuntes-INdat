@@ -29,9 +29,9 @@ El fichero \texttt{Tiempos.RData} corresponde a un conjunto de observaciones ind
 
     \[
     \begin{pmatrix}
-        \hat{p} \\
-        \hat{\lambda}_1 \\
-        \hat{\lambda}_2
+        \widehat{p} \\
+        \widehat{\lambda}_1 \\
+        \widehat{\lambda}_2
     \end{pmatrix}
     \sim
     N_3
@@ -48,19 +48,19 @@ El fichero \texttt{Tiempos.RData} corresponde a un conjunto de observaciones ind
     \item Obtener el IC de Wald con confianza aproximada de \(95\%\) para cada parámetro del modelo.
 
     \[
-    \hat{p} \pm \texttt{qnorm}(0.975) \cdot \sqrt{\text{Var}(\hat{p})}
+    \widehat{p} \pm \texttt{qnorm}(0.975) \cdot \sqrt{\text{Var}(\widehat{p})}
     \]
 
     \item Obtener el \textit{p-valor} basado en el estadístico de Wald para contrastar la hipótesis \(H_0: \lambda_1 = 0.5\) vs. \(H_a: \lambda_1 \neq 0.5\).
 
     \[
-    W = \frac{(\hat{\lambda}_1 - 0.5)^2}{\text{Var}(\hat{\lambda}_1)} \sim \chi^2_1
+    W = \frac{(\widehat{\lambda}_1 - 0.5)^2}{\text{Var}(\widehat{\lambda}_1)} \sim \chi^2_1
     \]
 
     \item Obtener el \textit{p-valor} basado en el estadístico de RV para contrastar la hipótesis \(H_0: \lambda_1 = 0.5\) vs. \(H_a: \lambda_1 \neq 0.5\).
 
     \[
-    Q_L = 2 \cdot \left[ \log L(\hat{p}, \hat{\lambda}_1, \hat{\lambda}_2, x) - \sup_{p, \lambda_2} \log L(p, \lambda_1 = 0.5, \lambda_2, x) \right] \sim \chi^2_1
+    Q_L = 2 \cdot \left[ \log L(\widehat{p}, \widehat{\lambda}_1, \widehat{\lambda}_2, x) - \sup_{p, \lambda_2} \log L(p, \lambda_1 = 0.5, \lambda_2, x) \right] \sim \chi^2_1
     \]
 
 \end{enumerate}
@@ -203,19 +203,19 @@ L(p, x) = \prod_{j=1}^{k} p_j^{f_j} \quad \implies \quad \log L(p, x) = \sum_{j=
 El estadístico es:
 
 \[
-T = 2 \left[\log L(\hat{p}, x) - \log L(p_0, x)\right] = 2 \left[ \sum_{j=1}^{k} f_j \log \hat{p_j} - \sum_{j=1}^{k} f_j \log p_j^0 \right] 
-\]\[= -2 \sum_{j=1}^{k} \left( \log p_j^0 - \log \hat{p_j} \right)
+T = 2 \left[\log L(\widehat{p}, x) - \log L(p_0, x)\right] = 2 \left[ \sum_{j=1}^{k} f_j \log \widehat{p_j} - \sum_{j=1}^{k} f_j \log p_j^0 \right] 
+\]\[= -2 \sum_{j=1}^{k} \left( \log p_j^0 - \log \widehat{p_j} \right)
 \]
 
-Aproximamos \( \log p_j^0 \) por un desarrollo de Taylor en torno a \( \log \hat{p_j} \):
+Aproximamos \( \log p_j^0 \) por un desarrollo de Taylor en torno a \( \log \widehat{p_j} \):
 
 \[
-\log p_j^0 \approx \log \hat{p_j} + (p_j^0 - \hat{p_j}) \frac{1}{\hat{p_j}} - \frac{(p_j^0 - \hat{p_j})^2}{2 \cdot \hat{p_j}^2}+ \dots
+\log p_j^0 \approx \log \widehat{p_j} + (p_j^0 - \widehat{p_j}) \frac{1}{\widehat{p_j}} - \frac{(p_j^0 - \widehat{p_j})^2}{2 \cdot \widehat{p_j}^2}+ \dots
 \]
 \[
-\to \log p_j^0- \log \hat{p_j}\thickapprox (p^0_j-\hat{p_j}) \frac{1}{\hat{p_j}}- \frac{(p^0_j-\hat{p_j})^2}{2}\frac{1}{\hat{p_j^2}}
+\to \log p_j^0- \log \widehat{p_j}\thickapprox (p^0_j-\widehat{p_j}) \frac{1}{\widehat{p_j}}- \frac{(p^0_j-\widehat{p_j})^2}{2}\frac{1}{\widehat{p_j^2}}
 \]
-Sabiendo que $\hat{p_j}=\frac{f_j}{n}$
+Sabiendo que $\widehat{p_j}=\frac{f_j}{n}$
 \[
 =\left(p_j^0-\frac{f_j}{n}\right) \cdot \frac{n}{f_j} - \frac{\left(p_j^0-\frac{f_j}{n}\right)^2}{2}\cdot \left(\frac{n}{f_j}\right)^2 \xrightarrow{c.s.} 0
 \]
