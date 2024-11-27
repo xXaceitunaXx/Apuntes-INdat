@@ -75,13 +75,13 @@ L(\theta,f)=\prod_{j=1}^{4}[p_j^0]^{f_i}= \theta^{23}\cdot(\theta \cdot (1-\thet
 log L(\theta,f)=53 \log \theta+63 \log (1-\theta)
 \]
 \[
-\frac{d \log(\theta,f)}{d \theta}=\frac{53}{\theta}-\frac{63}{1-\theta} \Longrightarrow \hat{\theta}=\frac{53}{53+63}
+\frac{d \log(\theta,f)}{d \theta}=\frac{53}{\theta}-\frac{63}{1-\theta} \Longrightarrow \widehat{\theta}=\frac{53}{53+63}
 \]
 
 Test $\chi^2$:
 
 \[
-\hat{\chi^2}=\sum_{j=0}^{3} \frac{(f_j-60\cdot P_l^0(\hat{\theta}))^2}{60 \cdot p_j^0(\hat{\theta})} \sim \chi^2_2
+\widehat{\chi^2}=\sum_{j=0}^{3} \frac{(f_j-60\cdot P_l^0(\widehat{\theta}))^2}{60 \cdot p_j^0(\widehat{\theta})} \sim \chi^2_2
 \]
 
 b) Potencia de $H_0:G(0.4) \quad B_n(2,0.6)$
@@ -92,8 +92,9 @@ P_1(\chi^2> C_{0.05})=P(\chi_3^2(\delta)>C_{0.05})
 \[
 S=n \cdot \Delta, \quad \Delta=\sum_{j=0}^{3} \left(\frac{(p_j^0-p_j^1)^2}{p_j^0}\right)
 \]
-
-\subsubsection{Test de Kolmogorov-Smirnov}
+\newpage
+\section{Test de Kolmogorov-Smirnov}
+\subsection{Test de Kolmogorov-Smirnov para hipótesis simples}
 
 $X_1,\dots, X_n$ i.i.d. con función de distribución F continua y se quiere contrastar
 \[
@@ -104,16 +105,15 @@ El test de Kolmogorov-Smirnov es más potente que el $\chi^2$ en el caso de F co
 Tenemos:
 \begin{itemize}
     \item $F_0 \to $ Función de distribusión bajo $H_0$.
-    \item $\hat{F_n} \to$ Función de distribución muestral o empírica.
+    \item $\widehat{F_n} \to$ Función de distribución muestral o empírica.
 \end{itemize}
 \[
-\hat{F_n}(\chi)=\frac{1}{n} \sum_{i=1}^{n} \mathbbm{1}_{(x_i \leq \chi)}, \quad \chi \in \mathrm{R}
+\widehat{F_n}(\chi)=\frac{1}{n} \sum_{i=1}^{n} \mathbbm{1}_{(x_i \leq \chi)}, \quad \chi \in \mathrm{R}
 \]
-\newpage
 Tambien se puede definir a partir de los estadísticos de orden:
 
 \[
-\hat{F_n}(x)=
+\widehat{F_n}(x)=
 \left\{
 \begin{array}{ll}
     0, & \text{si } \chi \leq \chi_{(1)}\\
@@ -126,28 +126,28 @@ Tambien se puede definir a partir de los estadísticos de orden:
 
 Propiedades:
 \begin{enumerate}
-    \item $n\cdot \hat{F_n(\chi)}$ es el total de valores de la muestra menores o iguales a $\chi$ y sigue una distribución B(n,F(x)), $\forall \chi \in \mathbb{R}$
-    \item Según el resultado anterior, junto con las propiedades de la distribución binomial, se tiene $\hat{F}$(x) es un estimador consistente de F(x)
+    \item $n\cdot \widehat{F_n(\chi)}$ es el total de valores de la muestra menores o iguales a $\chi$ y sigue una distribución B(n,F(x)), $\forall \chi \in \mathbb{R}$
+    \item Según el resultado anterior, junto con las propiedades de la distribución binomial, se tiene $\widehat{F}$(x) es un estimador consistente de F(x)
     \[
-    \lim_{n \to \infty} P(| \hat{F_n}(\chi - F(x)| < \epsilon) \to 0
+    \lim_{n \to \infty} P(| \widehat{F_n}(\chi - F(x)| < \epsilon) \to 0
     \]
     \[
-    \text{y es CAN: }\sqrt{n}\cdot(\hat{F_n}(x)-F(x))\backsimeq N(0,F(x)(1-F(x)))
+    \text{y es CAN: }\sqrt{n}\cdot(\widehat{F_n}(x)-F(x))\backsimeq N(0,F(x)(1-F(x)))
     \]
-    \item Por el teorema de Glivenko-Cantelli,$\hat{F_n}(\chi)$ converge uniformemente y casi seguro a F($\chi$).
+    \item Por el teorema de Glivenko-Cantelli,$\widehat{F_n}(\chi)$ converge uniformemente y casi seguro a F($\chi$).
 \end{enumerate}
 
-A medida que n crece, al función escalonada de $\hat{F_n}(\chi)$ con saltos en los valores de los estadísticos de orden $X_{(1)},\dots,X_{(n)}$ aproxima la distribución F(x)'.
+A medida que n crece, al función escalonada de $\widehat{F_n}(\chi)$ con saltos en los valores de los estadísticos de orden $X_{(1)},\dots,X_{(n)}$ aproxima la distribución F(x)'.
 
-Por lo tanto cuando n es grande, la mayor diferencia entee $\hat{F_n}((x))$ y F(x) converge a 0.
+Por lo tanto cuando n es grande, la mayor diferencia entee $\widehat{F_n}((x))$ y F(x) converge a 0.
 
 Este resultado nos sugiere el estadístico $
-D_n=sup_\chi[\hat{F_n}(x)-F(x)]
+D_n=sup_\chi[\widehat{F_n}(x)-F(x)]
 $ es una medida razonable de la precisión de la estimación.
 
 Estadístico de Kolmogorov-Smirnov de una muestra:
 \[
-    D_n=sup_\chi|\hat{F_n}(\chi)-F_0(\chi)|
+    D_n=sup_\chi|\widehat{F_n}(\chi)-F_0(\chi)|
 \]
-El test rechaza la hipótesis para valores garndes del estadísitico ($D_n>C$).
-Como siempre debemos conocer la distribución para obtener el valor crítico.
+El test rechaza la hipótesis para valores grandes del estadísitico ($D_n>C$).
+Como siempre debemos conocer la distribución de $D_n$ para obtener el valor crítico.
