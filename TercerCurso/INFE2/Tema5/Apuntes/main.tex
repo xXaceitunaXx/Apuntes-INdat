@@ -1,0 +1,95 @@
+\documentclass{article}
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english, spanish]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{bbm}
+\pgfplotsset{compat=1.18}
+
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=LightGray}
+
+\declaretheoremstyle[name=Proposition,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{proposition}
+\tcolorboxenvironment{proposition}{colback=LightOrange}
+
+\declaretheoremstyle[name=Principle,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{principle}
+\tcolorboxenvironment{principle}{colback=LightGreen}
+
+\pgfmathdeclarefunction{gauss}{2}{\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}}
+
+\setstretch{1.2}
+\geometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ------------------------------------------------------------------------------
+
+\title{ \normalsize \textsc{}
+\\ [2.0cm]
+\HRule{1.5pt} \\
+\LARGE \textbf{\uppercase{Inferencia Estadística II}
+\HRule{2.0pt} \\ [0.6cm] \LARGE{Técnicas de Bondad de Ajuste} \vspace*{10\baselineskip}}
+}
+
+\author{\textbf{Author} \\
+    Victor Elvira Fernández, Tomás Ruiz Rojo, Juan Horrillo Crespo \\
+    Universidad de Valladolid \\
+    \date{\today}}
+
+\maketitle
+\newpage
+
+\include{colaboraciones}
+
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+
+\newpage
+
+% ------------------------------------------------------------------------------
+% Reference and Cited Works
+% ------------------------------------------------------------------------------
+
+\begin{thebibliography}{9}
+    \bibitem{diapos1}
+    Juan Camilo Yepes Borrero, \\ \textit{Apuntes Manuscritos Tema 2}. \\ Universidad de Valladolid 2024.
+    \bibitem{diapos2}
+    Yolanda Larriba González, \\ \textit{Apuntes INFE2 Tema 2}. \\ Universidad de Valladolid 2023.
+\end{thebibliography}
+
+% ------------------------------------------------------------------------------
+
+\end{document}
