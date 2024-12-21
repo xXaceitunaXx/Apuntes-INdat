@@ -1,0 +1,28 @@
+\section{Test de Shapiro-Wilk}
+(Este test es más potente que el de Kolmogorov-Smirnov)
+
+Mide como de bien se ajustan los datos a una distribución normal esperada. Se basa en combinación lineal de estadísticos ordenados. %Esto lo ha añadido en clase
+
+\[
+    W=\frac{\left(\sum_{i=1}^{n} a_i \cdot \chi_{(i)}\right)^2}{\sum_{i=1}^{n}(\chi_i-\bar{X})^2}
+\]
+
+donde
+
+\begin{itemize}
+    \item $\chi_{(i)} \longrightarrow$ estadístico de orden i.
+    \item $a_i \longrightarrow$ coeficientes calculados a partir de los cuartiles esperados de una distribución normal estandar. 
+\end{itemize}
+
+\[
+    (a_1,a_2,\dots,a_n)=\frac{m^T\cdot v^{-1}}{\sqrt{m^T \cdot V^{-1} \cdot V^{-1} \cdot m}}
+\]
+
+tal que
+
+\begin{itemize}
+    \item m=($m_{(1)},\dots,m_{(n)}$)
+    \item V es la matriz de las covarianzas de $m_{(i)}$
+\end{itemize}
+
+El numerador nos indica como de bien se alinean los datos con la normalidad esperada. Si los datos son normales, el numerador será grande.

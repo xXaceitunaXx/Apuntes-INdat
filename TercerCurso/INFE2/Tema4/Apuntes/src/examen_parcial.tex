@@ -1,0 +1,67 @@
+\section{Primer examen parcial}
+
+\textbf{Ejercicio 1:}
+
+Un artículo, producto de un tipo de componente mecánico que puede deteriorarse a dos velocidades distintas, depende de factores de fabricación no controlados.  
+Se observa que el tiempo de vida ($X$) de cada componente sigue una mezcla de distribuciones exponenciales con las siguientes características:
+
+\begin{itemize}
+    \item Con probabilidad \(p\), el componente tiene un tiempo de vida \(X\) que sigue una distribución exponencial con parámetro \(\lambda_1\), lo cual corresponde a componentes con alta resistencia.
+    \item Con probabilidad \(1-p\), el componente tiene un tiempo de vida \(X\) que sigue una distribución exponencial con parámetro \(\lambda_2\), lo cual corresponde a componentes con menor resistencia.
+\end{itemize}
+
+El fichero \texttt{Tiempos.RData} corresponde a un conjunto de observaciones independientes \(x_1, x_2, \dots \), que representan los tiempos de vida medidos en horas de varios componentes.
+
+\begin{enumerate}
+    \item Obtener el EMV y concretar su distribución asintótica para los parámetros del modelo que subyace a partir de estos datos.
+    \textbf{Nota:} Planteadas las ecuaciones de verosimilitud, utilice la función \texttt{optim} para el cálculo del EMV.
+
+    \[
+    f(x, p, \lambda_1, \lambda_2) = p \cdot e^{-\lambda_1 x} + (1-p) \cdot e^{-\lambda_2 x}
+    \]
+
+    \[
+    L(x, p, \lambda_1, \lambda_2) = \prod_{i=1}^{n} f(x_i, p, \lambda_1, \lambda_2) = \prod_{i=1}^{n} \left( p \cdot e^{-\lambda_1 x_i} + (1-p) \cdot e^{-\lambda_2 x_i} \right)
+    \]
+
+    \[
+    \log L(x, p, \lambda_1, \lambda_2) = \sum_{i=1}^{n} \log f(x_i, p, \lambda_1, \lambda_2)
+    \]
+
+    \[
+    \begin{pmatrix}
+        \widehat{p} \\
+        \widehat{\lambda}_1 \\
+        \widehat{\lambda}_2
+    \end{pmatrix}
+    \sim
+    N_3
+    \left(
+    \begin{pmatrix}
+        p \\
+        \lambda_1 \\
+        \lambda_2
+    \end{pmatrix},
+    \text{Var}(\text{EMV})_{3 \times 3}
+    \right)
+    \]
+
+    \item Obtener el IC de Wald con confianza aproximada de \(95\%\) para cada parámetro del modelo.
+
+    \[
+    \widehat{p} \pm \texttt{qnorm}(0.975) \cdot \sqrt{\text{Var}(\widehat{p})}
+    \]
+
+    \item Obtener el \textit{p-valor} basado en el estadístico de Wald para contrastar la hipótesis \(H_0: \lambda_1 = 0.5\) vs. \(H_a: \lambda_1 \neq 0.5\).
+
+    \[
+    W = \frac{(\widehat{\lambda}_1 - 0.5)^2}{\text{Var}(\widehat{\lambda}_1)} \sim \chi^2_1
+    \]
+
+    \item Obtener el \textit{p-valor} basado en el estadístico de RV para contrastar la hipótesis \(H_0: \lambda_1 = 0.5\) vs. \(H_a: \lambda_1 \neq 0.5\).
+
+    \[
+    Q_L = 2 \cdot \left[ \log L(\widehat{p}, \widehat{\lambda}_1, \widehat{\lambda}_2, x) - \sup_{p, \lambda_2} \log L(p, \lambda_1 = 0.5, \lambda_2, x) \right] \sim \chi^2_1
+    \]
+
+\end{enumerate}
