@@ -1,0 +1,86 @@
+\subsubsection{Modelo poblacional}
+
+El precio que pagamos usando un modelo de aleatorización es que los resultados solo son válidos para los N individuos de estudio y no se pueden extrapolar a una población más amplia.
+Para que eso sea posible, será necesario que los N individuos representen a toda la población. Dicho de otra forma, necesitamos una \textbf{muestra aleatoria simple} de la población.
+
+La situación es la siguiente:
+Tenemos $N=n+m$ individuos al azar de la población,
+
+$$
+\begin{aligned}
+    n & \longrightarrow \text{elegidos al azar}\longrightarrow \text{grupo de tratamiento} \\
+    m & \longrightarrow \text{restantes al grupo de control} \\
+    \ & \ \\
+    Y: & \text{ Variable respuesta de individuos que reciben el tratamiento}\\
+    X: & \text{ Variable respuesta de individuos que son del grupo de control}  
+\end{aligned}
+$$
+
+X e Y son dos variables aleatorias con funciones de distribución $X\sim F$ y $Y\sim G$ \\
+\noindent Queremos contrastar la hipótesis de que el tratamiento NO es efectivo
+
+$$
+\begin{aligned}
+    H_0: & \text{ El tratamiento no tiene efecto (F=G)} \\
+    H_1: & \text{ El tratamiento aumenta/disminuye la respuesta (F>G/F<G)}  
+\end{aligned}
+$$
+
+El modelo poblacional tiene dos ventajas fundamentales:
+\begin{enumerate}
+    \item Los resultados son extrapolables
+    \item Podemos estudiar la potencia del test
+\end{enumerate}
+
+\noindent Si tenemos un modelo poblacional sin coincidencias podemos utilizar el estadístico $W_s$ y el test de Wilcoxon $(W_s>C_\alpha)$; bajo $H_0$, $W_s$ sigue la misma distribución que en el modelo de aleatorización.
+
+$$
+\begin{aligned}
+    X_1,\dots, X_m & \quad Y_1,\dots,Y_n\\
+    R_1,\dots, R_m & \quad S_1,\dots,S_n
+\end{aligned}
+$$
+$$
+W_s=S_1+\dots+S_n
+$$
+
+Si hay coincidencias, tenemos que encontrar la distribución de $W^*_s$ bajo $H_0$. \\
+En este caso el estadístico $W^*_s=S^*_1+\dots+S^*_n$ no es de distribución libre. La distribución bajo $H_0$ de los semi-rangos de los n individuos depende de F. 
+Esto se debe (al igual que en el modelo de aleatorización) a que la distribución depende de la configuración de las coincidencias $(e,d_1,\dots,d_e)$, que en el modelo de aleatorización son un número pero aquí son variables aleatorias cuya distribución depende de F.
+
+\begin{theorem}
+    Supongamos F discreta de tal forma que 
+    
+    $$
+        F:\begin{cases}
+            a & \text{Con probabilidad } p \\
+            b & \text{Con probabilidad } 1-p
+        \end{cases}
+    $$
+    Si a<b, y con m=2 y n=1, entonces los posibles resultados son:
+
+    $$
+    \begin{array}{c|c|c}
+        X_1X_2Y_1 & \text{Probabilidad} & \text{Semi-rangos} \\ \hline
+        a \; a \; a & p^3 & 2 \quad 2 \quad 2 \\ 
+        a \; a \; b & p^2(1-p) & 1.5 \quad 1.5 \quad 2 \\ 
+        a \; b \; a & p^2(1-p) & 1.5 \quad 2 \quad 1.5 \\ 
+        b \; a \; a & p^2(1-p) & 2 \quad 1.5 \quad 1.5 \\ 
+        a \; b \; b & p(1-p)^2 & 1 \quad 2 \quad 2 \\ 
+        b \; b \; a & p(1-p)^2 & 2 \quad 2 \quad 1 \\ 
+        b \; a \; b & p(1-p)^2 & 1.5 \quad 1 \quad 1.5 \\ 
+        b \; b \; b & (1-p)^3 & 1 \quad 1 \quad 1 \\ 
+    \end{array}
+    $$
+    La distribución de $W^*_s$ bajo $H_0$ será:
+
+    $$
+    \begin{array}{c|c c c c c}
+        S^*_n & 1 & 1.5 & 2 & 2.5 & 3 \\ \hline 
+        P_0(S^*_1=s^*_1) & p(1-p)^2 & 2p^2(1-p) & p^3+(1-p)^3 & 2p(1-p)^2 & p^2(1-p) \\
+    \end{array}
+    $$
+
+\end{theorem}
+
+
