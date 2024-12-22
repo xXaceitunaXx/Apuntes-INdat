@@ -201,4 +201,56 @@ $$
 \mu_\alpha=\frac{C_\alpha-\frac{1}{2}mn}{\sqrt{\frac{1}{12}mn(N+1)}} \Longrightarrow C_\alpha=\frac{1}{2}mn+\sqrt{\frac{1}{12}mn(N+1)}\mu_\alpha
 $$
 
-Calculando la potencia
+Calculando la potencia:
+
+$$
+\pi_F(\Delta)=P_\Delta\left(W_{XY}\geq\frac{1}{2}mn+\sqrt{\frac{1}{12}mn(N+1)}\mu_\alpha\right)=
+$$
+$$
+=P_\Delta\left(\frac{W_{XY}-E_\Delta(W_{XY})}{\sqrt(Var_\Delta(W_{XY}))}\geq\frac{\frac{1}{2}mn+\sqrt{\frac{1}{12}mn(N+1)}\mu_\alpha-mnp_1}{\sqrt{Var_\Delta(W_{XY})}} \right)=
+$$
+$$
+=1-\phi\left(\frac{\left(\frac{1}{2}-p_1\right)mn+\mu_\alpha\sqrt{\frac{1}{12}mn(N+1)}}{\sqrt{Var_\Delta(W_{XY})}}\right)
+$$
+
+Sustituyendo $p_1=P_{FG}(X<Y)$
+
+$$
+p_1=P_\Delta(X<Y)=P_0(X<Y-\Delta)=P_0(Y-X>\Delta)=P_0(\underbrace{Y-X}_\text{Misma dist. bajo $H_0$}-\Delta>0)=1-F^*(\Delta)
+$$
+
+$F^*(\Delta)$ será la función de distribución de la diferencia de las dos v.a. independientes con distribución F. Si desarrollamos $F^*(\Delta)$ en torno al 0 con el polinomio de Taylor, sabiendo que $(F^*(x))'=f^*(x)$ y por simetría respecto al 0:
+
+$$
+F^*(\Delta)\approx F^*(0)+(\Delta-0) f^*(0)=\frac{1}{2}+\Delta f^*(0)
+$$
+
+Supongamos $D=X-Y$, $X\sim F$, $Y\sim F$ y $D\sim F^*$, entonces:
+
+$$
+F^*(0)=P(D\leq 0)=P(X-Y\leq 0)=P(X\leq Y)=\frac{1}{2}
+$$
+
+Por lo tanto,
+
+$$
+p_1=1-F^*(0)\approx\frac{1}{2}+\Delta f^*(0) \Longrightarrow p_1-\frac{1}{2}\approx \Delta f^*(0)
+$$
+
+Entonces, ya podemos hacer una primera aproximación para el cálculo de la potencia:
+
+$$
+\pi_F(\Delta)\approx \phi\left(\frac{mn\Delta f^*(0)-\mu_\alpha\sqrt{\frac{1}{12}mn(N+1)}}{\sqrt{Var_\Delta(W_{XY})}}\right)
+$$
+
+Nos faltaría calcular $Var_\Delta(W_{XY})$. Podemos hallar una aproximación cuando $\Delta$ es pequeño, ya que 
+
+$$
+Var_\Delta(W_{XY})\approx Var_0(W_{XY})=\frac{mn(N+1)}{12}
+$$
+
+Por lo que la expresión para la potencia quedaría como
+
+$$
+\pi_F(\Delta)\approx\phi\left(\frac{mn\Delta f^*(0)}{\sqrt{\frac{mn(N+1)}{12}}}-\mu_\alpha\right)=\phi\left(\sqrt{\frac{12mn}{N+1}}\Delta f^*(0)-\mu_\alpha\right)
+$$
