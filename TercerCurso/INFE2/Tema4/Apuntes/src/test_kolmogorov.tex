@@ -13,7 +13,7 @@ Tenemos:
     \item $\widehat{F_n} \to$ Función de distribución muestral o empírica.
 \end{itemize}
 \[
-    \widehat{F_n}(\chi)=\frac{1}{n} \sum_{i=1}^{n} \mathbbm{1}_{(x_i \leq \chi)}, \quad \chi \in \mathrm{R}
+    \widehat{F_n}(x)=\frac{1}{n} \sum_{i=1}^{n} \mathbbm{1}_{(x_i \leq x)}, \quad x \in \mathrm{R}
 \]
 Tambien se puede definir a partir de los estadísticos de orden:
 
@@ -21,71 +21,73 @@ Tambien se puede definir a partir de los estadísticos de orden:
     \widehat{F_n}(x)=
     \left\{
     \begin{array}{ll}
-        0, & \text{si } \chi \leq \chi_{(1)}\\
-        \frac{i}{n} & \text{si } \chi_{(i)} \leq \chi \leq \chi_{(i+1)}, \quad i=1,\dots,n-1 \\
-        1 & \text{si } \chi_{n} \leq \chi
+        0, & \text{si} \quad x \leq X_{(1)}\\
+        \frac{i}{n} & \text{si} \quad X_{(i)} \leq x \leq X_{(i+1)}, \quad i=1, \dots,n-1 \\
+        1 & \text{si} \quad X_n \leq x
     \end{array}
     \right.
 \]
 
 Propiedades:
 \begin{enumerate}
-    \item $n\cdot \widehat{F_n(\chi)}$ es el total de valores de la muestra menores o iguales a $\chi$ y sigue una distribución B(n,F(x)), $\forall \chi \in \mathbb{R}$
-    \item Según el resultado anterior, junto con las propiedades de la distribución binomial, se tiene $\widehat{F}$(x) es un estimador consistente de F(x)
+    \item $n\cdot \widehat{F_n}(x)$ es el total de valores de la muestra menores o iguales a $x$y sigue una distribución $B(n, F(x))$, $\forall x \in \mathbb{R}$
+    \item Según el resultado anterior, junto con las propiedades de la distribución binomial, se tiene $\widehat{F}$(x) es un estimador consistente de $F(x)$
     \[
-        \lim_{n \to \infty} P(|\widehat{F_n}(\chi - F(x))| < \epsilon) \to 0
+        \lim_{n \to \infty} P(|\widehat{F_n}(x) - F(x)| < \varepsilon) \to 0
     \]
     \[
         \text{y es CAN: }\sqrt{n}\cdot(\widehat{F_n}(x)-F(x))\backsimeq N(0,F(x)(1-F(x)))
     \]
-    \item Por el teorema de Glivenko-Cantelli,$\widehat{F_n}(\chi)$ converge uniformemente y casi seguro a F($\chi$).
+    \item Por el teorema de Glivenko-Cantelli, $\widehat{F_n}(x)$ converge uniformemente y casi seguro a $F(x)$.
 \end{enumerate}
 
-A medida que n crece, al función escalonada de $\widehat{F_n}(\chi)$ con saltos en los valores de los estadísticos de orden $X_{(1)},\dots,X_{(n)}$ aproxima la distribución F(x)'.
+A medida que n crece, al función escalonada de $\widehat{F_n}(x)$ con saltos en los valores de los estadísticos de orden $X_{(1)},\dots,X_{(n)}$ aproxima la distribución $F(x)'$.  % Creo que eso no debería ser prima pero no soy un experto
 
-Por lo tanto cuando n es grande, la mayor diferencia entee $\widehat{F_n}((x))$ y F(x) converge a 0.
+Por lo tanto cuando n es grande, la mayor diferencia entre $\widehat{F_n}(x)$ y $F(x)$ converge a 0.
 
-Este resultado nos sugiere el estadístico $
-D_n=sup_\chi[\widehat{F_n}(x)-F(x)]
-$ es una medida razonable de la precisión de la estimación.
+Este resultado nos sugiere el estadístico $D_n=sup_x[\widehat{F_n}(x)-F(x)]$ el cual es una medida razonable de la precisión de la estimación.
 
-Estadístico de Kolmogorov-Smirnov de una muestra:
+Llamaremos estadístico de Kolmogorov-Smirnov de una muestra a
 \[
-    D_n=sup_\chi|\widehat{F_n}(\chi)-F_0(\chi)|
+    D_n=sup_x|\widehat{F_n}(x)-F_0(x)|
 \]
 El test rechaza la hipótesis para valores grandes del estadísitico ($D_n>C$).
 Como siempre debemos conocer la distribución de $D_n$ para obtener el valor crítico.
 
 \begin{enumerate}
-    \item Es importante ver que la máxima diferencia en $|\widehat{F_n}(\chi)-F_0(\chi)|$ es la máxima 
+    \item Es importante ver que la máxima diferencia en $|\widehat{F_n}(x)-F_0(x)|$ es la máxima 
     diferencia en los puntos en los que $\widehat{F_n}(x)>F_0(x)$ y la máxima en los punto donde $F_0(x)>\widehat{F_n}(x)$. 
     Así podemos definir los estadísticos Kolmogorov-Smirnov de un lado.
     \[
-    \left.
-    \begin{matrix}
-        D_n^+=sup_\chi(\widehat{F_n}(x)-F_0(x)) \\
-        D_n^-=sup_\chi(F_0(x)-\widetilde{F_n}(x))
-    \end{matrix}
-    \right\}
-    D_n=max\{D_n^+,D_n^-\}
+        \left.\begin{matrix}
+                D_n^+=sup_x(\widehat{F_n}(x)-F_0(x)) \\
+                D_n^-=sup_x(F_0(x)-\widetilde{F_n}(x))
+        \end{matrix}\right\}
+        D_n=max\{D_n^+,D_n^-\}
     \]
+            
     $D_n^+$ y $D_n^-$ son útiles para conocer la distribución.
-    \item La distribución de $D_n^+,D_n^-$ y $D_n$ no depende de $F_0$, es decir, $c_\alpha$
-    será el mismo sin importar si estamos contrastando diferentes hipótesis simples (Por ejemplo: N(3,1);exp(2),$\dots$)
-    Se dice que el estadístivo es de distribución libre ya que no depende de $F_0$.
+
+    \item La distribución de $D_n^+$, $D_n^-$ y $D_n$ no depende de $F_0$, es decir, $c_\alpha$ será el mismo sin importar si estamos contrastando diferentes hipótesis simples (Como por ejemplo $N(3,1)$, $exp(2)$, $\dots$). Se dice que el estadístivo es de distribución libre ya que no depende de $F_0$.
 \end{enumerate}
 
-Definimos los estadísticos de orden como $x_{(0)}=-\infty$ y $x_{(n)}=+\infty$, por lo tanto podemos definir $\widehat{F_n}(x)=\frac{i}{n} \quad \forall \chi_{(i)\leq \chi < \chi_{i+1}}$.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{assets/EjemploD.png}
+    \caption{Visualización del estadísitico D+ y D-}
+    \label{fig:Dplus_Dminus}
+\end{figure}
+
+Definimos los estadísticos de orden como $X_{(0)}=-\infty$ y $X_{(n)}=+\infty$, por lo tanto podemos definir $\widehat{F_n}(x)=\frac{i}{n} \quad \forall X_{(i)} \leq x < X_{(i+1)}$.
 
 $D_n^+$ lo podemos ir calculando a trozos como:
 
 \[
-    D_n^+=sup_\chi(\widehat{F_n}(x)-F_0(x))
+    D_n^+=sup_x(\widehat{F_n}(x)-F_0(x))
 \]
-
-Tomará un valor máximo unicamente en los extremos del intervalo $[x_{(i)},x_{(i+1)})$
-
-%insertar imagen de los apuntes.
+    
+Tomará un valor máximo unicamente en los extremos del intervalo $[X_{(i)},X_{(i+1)})$        
+            
 \[
     D_n^+=max_{1 \leq i \leq n}\left(\frac{i}{n}-F_0(x_{(i)})\right)
 \]
@@ -98,8 +100,6 @@ $D_n^+,D_n^-$(por lo tanto $D_n$) dependen de las variables aleatorias.
 F_0(X_{(1)}),\dots,F_0(X_{(n)}) \sim U(0,1)
 \]
 Esto ocurre por la trasnformada integral de probabilidad, siempre y cuando las variables aleatorias sean continuas.
-
-%Insertar imagen? Ns quien vea esto q se lo cuestione.
 
 \subsection{Test de Kolmogorov-Smirnov para una hipótesis compuesta}
 

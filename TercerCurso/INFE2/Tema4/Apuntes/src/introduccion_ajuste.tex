@@ -24,6 +24,13 @@ Empezamos con el caso de $H_0$ simple. Existen dos tipos de Test de Bondad de Aj
     \item $F_0$ continua: Comparamos la funcion de distribución empírica con la teórica.
 \end{enumerate}
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{assets/TeoricaEmpirica.png}
+    \caption{Visualización de una distribución teórica y empírica}
+    \label{fig:theorical_vs_empirical}
+\end{figure}
+
 Sea $X_1,\dots,X_n$ con distribución F discreta:
 \[
     \begin{matrix}
@@ -50,8 +57,6 @@ Frecuencia esperada bajo $H_0$ en $C_j$:
 \[
     e_j=n \cdot P_0(x=c_j)=n \cdot p_j^0
 \]
-
-\newpage
 
 \textbf{Ejemplo:}
 
@@ -110,52 +115,53 @@ Se podría conocer de forma exacta aunque es muy complejo, por ello, nos interes
 \]
 La distribución asintótica del estadístico $\chi^2$ bajo $H_0$ es $\chi^2_{k-1}$ $g'$.
 
-\newpage
-
 Ya hemos visto que en este contexto $ F_0 $ es una distribución multinomial. 
 Vamos a ver que el estadístico $ T $ bajo $ H_0 $ para el modelo multinomial con $ k-1 $ parámetros libres es asintóticamente equivalente al estadístico $ \chi^2_1 $.
 
 \begin{proofs}
-Estadístico RV para:
-\[
-    H_0: F = F_0
-\]
-\[
-    H_1: F \neq F_0
-\]
-Recordemos:
-\[
-    L(p, x) = \prod_{j=1}^{k} p_j^{f_j} \quad \implies \quad \log L(p, x) = \sum_{j=1}^{k} f_j \log p_j
-\]
-El estadístico es:
-\[
-    T = 2 \left[\log L(\widehat{p}, x) - \log L(p_0, x)\right] = 2 \left[ \sum_{j=1}^{k} f_j \log \widehat{p_j} - \sum_{j=1}^{k} f_j \log p_j^0 \right] 
-\]
-\[
-    = -2 \sum_{j=1}^{k} \left( \log p_j^0 - \log \widehat{p_j} \right)
-\]
-Aproximamos $\log p_j^0$ por un desarrollo de Taylor en torno a $\log \widehat{p_j}$:
-\[
-    \log p_j^0 \approx \log \widehat{p_j} + (p_j^0 - \widehat{p_j}) \frac{1}{\widehat{p_j}} - \frac{(p_j^0 - \widehat{p_j})^2}{2 \cdot \widehat{p_j}^2}+ \dots
-\]
-\[
-    \to \log p_j^0- \log \widehat{p_j}\thickapprox (p^0_j-\widehat{p_j}) \frac{1}{\widehat{p_j}}- \frac{(p^0_j-\widehat{p_j})^2}{2}\frac{1}{\widehat{p_j^2}}
-\]
-Sabiendo que $\widehat{p_j}=\frac{f_j}{n}$
-\[
-    =\left(p_j^0-\frac{f_j}{n}\right) \cdot \frac{n}{f_j} - \frac{\left(p_j^0-\frac{f_j}{n}\right)^2}{2}\cdot \left(\frac{n}{f_j}\right)^2 \xrightarrow{c.s.} 0
-\]
-Esto converge a 0, ya que, por la Ley de los Grandes Números (LGN), $\frac{F_j}{n}$ es un estimador consistente de $p_j$:
-\[
-    \lim_{n \to \infty} P \left( \left| \frac{F_j}{n} - p_j \right| > \varepsilon \right) = 0 \quad \forall \varepsilon>0
-\]
-Por lo tanto, el estadístico T queda:
-\[
-    T = -2 \sum_{j=1}^{k} \left( n \cdot p_j^0 - f_j \right) + \frac{\sum_{j=1}^{k} (f_j - n \cdot p_j^0)^2}{f_j}
-\]
+    Estadístico RV para:
+    \[
+        H_0: F = F_0
+    \]
+    \[
+        H_1: F \neq F_0
+    \]
+    Recordemos:
+    \[
+        L(p, x) = \prod_{j=1}^{k} p_j^{f_j} \quad \implies \quad \log L(p, x) = \sum_{j=1}^{k} f_j \log p_j
+    \]
+    El estadístico es:
+    \[
+        T = 2 \left[\log L(\widehat{p}, x) - \log L(p_0, x)\right] = 2 \left[ \sum_{j=1}^{k} f_j \log \widehat{p_j} - \sum_{j=1}^{k} f_j \log p_j^0 \right] 
+    \]
+    \[
+        = -2 \sum_{j=1}^{k} \left( \log p_j^0 - \log \widehat{p_j} \right)
+    \]
+    Aproximamos $\log p_j^0$ por un desarrollo de Taylor en torno a $\log \widehat{p_j}$:
+    \[
+        \log p_j^0 \approx \log \widehat{p_j} + (p_j^0 - \widehat{p_j}) \frac{1}{\widehat{p_j}} - \frac{(p_j^0 - \widehat{p_j})^2}{2 \cdot \widehat{p_j}^2}+ \dots
+    \]
+    \[
+        \to \log p_j^0- \log \widehat{p_j}\thickapprox (p^0_j-\widehat{p_j}) \frac{1}{\widehat{p_j}}- \frac{(p^0_j-\widehat{p_j})^2}{2}\frac{1}{\widehat{p_j^2}}
+    \]
+    Sabiendo que $\widehat{p_j}=\frac{f_j}{n}$
+    \[
+        =\left(p_j^0-\frac{f_j}{n}\right) \cdot \frac{n}{f_j} - \frac{\left(p_j^0-\frac{f_j}{n}\right)^2}{2}\cdot \left(\frac{n}{f_j}\right)^2 \xrightarrow{c.s.} 0
+    \]
 \end{proofs}
 
 \newpage
+
+\begin{proofs*}
+    Esto converge a 0, ya que, por la Ley de los Grandes Números (LGN), $\frac{F_j}{n}$ es un estimador consistente de $p_j$:
+    \[
+        \lim_{n \to \infty} P \left( \left| \frac{F_j}{n} - p_j \right| > \varepsilon \right) = 0 \quad \forall \varepsilon>0
+    \]
+    Por lo tanto, el estadístico T queda:
+    \[
+        T = -2 \sum_{j=1}^{k} \left( n \cdot p_j^0 - f_j \right) + \frac{\sum_{j=1}^{k} (f_j - n \cdot p_j^0)^2}{f_j}
+    \]
+\end{proofs*}
 
 El text $\chi^2$ y el TRV son asintóticamente equivalentes y como TRV converge a $\chi^2_{k-1}$, el estadístico $\chi^2$ también.
 Fijado un $\alpha$.
@@ -207,6 +213,8 @@ Calculamos las frecuencias esperadas
 \]
 
 Por tanto concluimos que es muy probable que no siga una P(1)
+
+\newpage
 
 \textbf{Ejercicio 10:} Se lanza una moneda hasta que aparece la primera cara. Este experimento se repite 100 veces. LAs frecuencias observadas del numero de ensayos necesarios hasta que aparece la primera cara son:
 
@@ -286,8 +294,6 @@ La demostración no está incluida en este curso. Sin embargo, hacemos algunos c
     \]
     \item Existen tablas para $\chi_{k-1}^{2'}(\delta)$ (por ejemplo, las tablas estándar de $\chi^2$ descentrada).
 \end{enumerate}
-
-\newpage
 
 \subsubsection*{Ejercicio 11:}  
 Durante 60 meses consecutivos se observó la variable aleatoria X="nº de accidentes al mes en un cruce de carreteras". Los resultados fueron:
