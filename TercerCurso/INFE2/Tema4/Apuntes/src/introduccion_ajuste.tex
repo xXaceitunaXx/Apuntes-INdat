@@ -16,9 +16,7 @@ $F_0$ está completamente especificada, por lo que es una hipótesis simple.
 
 La hipótesis nula sería compuesta si $F_0$ depende de parámetros desconocidos, por ejemplo, una P($\lambda$)
 
-\subsection{Test Chi-Cuadrado de Bondad de Ajuste} 
-
-Empezamos con el caso de $H_0$ simple. Existen dos tipos de Test de Bondad de Ajuste si $F_0$ es una función de  distribución conocida.
+Empezaremos con el caso de $H_0$ simple. Existen dos tipos de Test de Bondad de Ajuste si $F_0$ es una función de  distribución conocida.
 \begin{enumerate}
     \item $F_0$ discreta: Se comparan las frecuencias observadas con las esperadas bajo $H_0$ (Test $\chi^2$). También se puede hacer si $F_0$ es continua agrupando, pero hay tests más potentes para esos casos.
     \item $F_0$ continua: Comparamos la funcion de distribución empírica con la teórica.
@@ -30,6 +28,8 @@ Empezamos con el caso de $H_0$ simple. Existen dos tipos de Test de Bondad de Aj
     \caption{Visualización de una distribución teórica y empírica}
     \label{fig:theorical_vs_empirical}
 \end{figure}
+
+\subsection{Test Chi-Cuadrado de Bondad de Ajuste}
 
 Sea $X_1,\dots,X_n$ con distribución F discreta:
 \[
@@ -144,15 +144,15 @@ Vamos a ver que el estadístico $ T $ bajo $ H_0 $ para el modelo multinomial co
     \[
         \to \log p_j^0- \log \widehat{p_j}\thickapprox (p^0_j-\widehat{p_j}) \frac{1}{\widehat{p_j}}- \frac{(p^0_j-\widehat{p_j})^2}{2}\frac{1}{\widehat{p_j^2}}
     \]
-    Sabiendo que $\widehat{p_j}=\frac{f_j}{n}$
-    \[
-        =\left(p_j^0-\frac{f_j}{n}\right) \cdot \frac{n}{f_j} - \frac{\left(p_j^0-\frac{f_j}{n}\right)^2}{2}\cdot \left(\frac{n}{f_j}\right)^2 \xrightarrow{c.s.} 0
-    \]
 \end{proofs}
 
 \newpage
 
 \begin{proofs*}
+    Sabiendo que $\widehat{p_j}=\frac{f_j}{n}$
+    \[
+        =\left(p_j^0-\frac{f_j}{n}\right) \cdot \frac{n}{f_j} - \frac{\left(p_j^0-\frac{f_j}{n}\right)^2}{2}\cdot \left(\frac{n}{f_j}\right)^2 \xrightarrow{c.s.} 0
+    \]
     Esto converge a 0, ya que, por la Ley de los Grandes Números (LGN), $\frac{F_j}{n}$ es un estimador consistente de $p_j$:
     \[
         \lim_{n \to \infty} P \left( \left| \frac{F_j}{n} - p_j \right| > \varepsilon \right) = 0 \quad \forall \varepsilon>0
@@ -213,8 +213,6 @@ Calculamos las frecuencias esperadas
 \]
 
 Por tanto concluimos que es muy probable que no siga una P(1)
-
-\newpage
 
 \textbf{Ejercicio 10:} Se lanza una moneda hasta que aparece la primera cara. Este experimento se repite 100 veces. LAs frecuencias observadas del numero de ensayos necesarios hasta que aparece la primera cara son:
 
