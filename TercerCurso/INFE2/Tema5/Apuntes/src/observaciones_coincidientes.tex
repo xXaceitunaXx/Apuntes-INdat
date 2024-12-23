@@ -1,0 +1,249 @@
+\section{Test de rangos con observaciones coincidentes}
+
+Hemos visto contrastes para 2 muestras independientes, donde se eligen n individuos para un tratamiento y m para un grupo de control(u otro tratamiento), siendo N=n+m.
+\begin{center}
+    $H_0: $ Tratamiento no tiene efecto \\
+    $H_1$ Tratamiento tiene efecto
+\end{center}
+
+Mediamos la variable de interés en los N individuos.
+\begin{center}
+    $X_1,\dots,X_m$ para los individuos de control \\
+    $Y_1,\dots,Y_n$ para los individuos del tratamiento
+\end{center}
+
+Obteniamos los rangos de la muestra ($R_1,\dots,R_m$ y $S_1,\dots,S_n$).
+Si la alternativa es mayor, se rechaza $H_0$ para $W_S=S_1+\dots+S_n>C$.
+Si la alternativa es menor, se rechaza $H_0$ para $W_S=S_1+\dots+S_n<C$
+
+¿Que pasa si hay coincidencias?
+\subsubsection*{Ejemplo: }
+Muestra:
+
+\begin{center}
+    1.2, 1.7, 1.7, 1.7, 2, 3.1, 3.1, 5
+\end{center}
+
+Los rangos serían:
+
+\begin{center}
+    1, 2, 2, 2, 5, 6, 6, 8
+\end{center}
+
+Pero estos rangos no serían correctos. Para aquellos valores en los que coincida el rango, se les dan distintos y el rango de todos los que coincidan se calculara como la media de sus rangos. Por tanto, los rangos serían:
+1, 3, 3, 3, 5, 6.5, 6.5, 8
+
+A esto lo vamos a llamar \textbf{semi-rangos}. Siempre que tengamos coincidencias, calcularemos los semi-rangos
+\subsection{Semirangos}
+\textbf{\textit{Definición: }}Los semi-rangos correspondientes a observaciones coinicidentes, se calculan como la media de los rangos que les corresponderían si no tuviéramos empates.
+
+Notación:
+Cuando haya coincidencias, los semi-rangos se asignan y representan como:
+\begin{center}
+$R_1^*,\dots,R_m^*$ semi-rango individual de control \\
+$S_1^*,\dots,S_n^*$ semi-rango individual de tratamiento
+\end{center}
+
+Para controlar $H_0$, se rechaza si:
+\[
+    W_S^*=S_1^*+\dots+S_n^*>C
+\]
+Como siempre, necesitamos la distribución de $W_S^*$ bajo $H_0$ que no es la misma que cuando no hay coincidencias, aunque llegaremos a la distribución de la misma forma.
+\newpage
+
+\subsubsection*{Ejemplo:}
+$n=m=3$
+
+\(
+X_1=5, \quad X_2=5, \quad X_3=9, \quad Y_1=5,\quad Y_2=10,\quad Y_3=10
+\)
+
+Los semi-rangos son 2,2,4 $\quad$ 2,5.5,5.5
+(Nota: si los empates estan en el mismo grupo no nos afectan en nada)
+
+\[
+(S_1^*,S_2^*,S_3^*)=(2,5.5,5.5) \quad W_S^*=13
+\]
+
+Después de conocer los semi-rangos, calculamos la distribución de $W_S^*$ bajo $H_0$ de la misma forma que anteriormente.
+
+Bajo $H_0$, (hipótesis de que el tratamiento no tiene efecto), los 6 individuos recibirían los semi-rangos independientemente de que fueran asignados al grupo de tratamiento o de control. Por lo tanto, para la selección de los 3 individuos a tratamiento, hay $\binom{6}{3}$
+=20 posibles ekecciones de 3 individuos a tratamiento y 3 a control. Pero no todas diferentes, porque hay repetidos.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c}
+    $S_1^*,S_2^*,S_3^*$ & $(2,2,2)$ & $(2,2,4)$ & $(2,2,5.5)$ & $(2,4,5.5)$ & $(2,5.5,5.5)$ & $(4,5.5,5.5)$ \\ \hline
+    $W_S^*$             & $6$       & $8$       & $9.5$       & $11.5$      & $13$          & $15$          \\ \hline
+    $P_{H_0}$           & $\frac{1}{20}$ & $\frac{3}{20}$ & $\frac{6}{20}$ & $\frac{6}{20}$ & $\frac{3}{20}$ & $\frac{1}{20}$
+    \end{tabular}
+\end{table}
+
+
+La distribución depende de la configuración de las coincidencias. No se tienen tablas ya que habría que considerar cada caso.
+Para n grande, se tiene al distribución asintótica bajo $H_0$.
+\subsubsection{Configuración de las coincidencias}
+\textit{\textbf{Definición: }}Configuración de las coincidencias. 
+\begin{itemize}
+    \item Sea N=n+m el número de individuos tal que n sea el numero de individuos de control y m el numero de individuos del tratamiento
+    \item Sea e el número de observaciones distintas entre los tratamientos
+    \item Sea $d_1$, el número de observaciones iguales a la más pequeña
+    \item Sea $d_2$, el número de observaciones iguales a la siguiente más pequeña
+    \item Sea $d_e$ el número de observaciones iguales a la más grande
+\end{itemize}
+
+Al vector $(e,d_1,\dots,d_e)$ se le conoce como configuración de las coincidencias.
+
+\subsubsection*{Ejemplo}
+n=m=3
+
+\(
+X_1=5, \quad, X_2=5, \quad X_3=9, \quad Y_1=5,\quad Y_2=10,\quad Y_3=10
+\)
+
+Los semi-rangos son 2,2,4;2,5.5,5.5
+
+En este caso:
+\[
+    (e,d_1,\dots,d_e)=(3,3,1,2)
+\]
+\begin{itemize}
+    \item El semirango de las $d_1$:
+    \[
+        \frac{1+\dots+d_1}{d_1}=\frac{d_1+1}{2}
+    \]
+    \item El semirango de las $d_2$:
+    \[
+        \frac{(d_1+1)+\dots+(d_1+d_2)}{d_2}=d_1+\frac{d_2+1}{2}
+    \]
+    \item El semirango i-ésimo
+    \[
+        \frac{(d_{i-1}+1)+\dots+(d_{i-1}+d_i)}{d_i}=d_1+\dots+d_{i-1}+\frac{d_i+1}{2}
+    \]
+\end{itemize}
+
+\[
+    d_1=\frac{3+1}{2}=2 \quad d_2=3+\frac{1+1}{2}=4 \quad d_3=3+1+\frac{2+1}{2}=5.5
+\]
+
+Estos conteos se pueden hacer solo para n y m pequeños. En este caso, podemos relacionar $W_S^*$ con el estadístico de Mann-Whitney análogo para el caso sin coincidencias.
+
+\subsection{Estadístico de Mann-Whitney con observaciones no distintas}
+
+El estadístico de $W_S^*$ es una generalización de $W_S$ cuando no todas las observaciones son distintas.
+Del mismo modo, se puede generalizar el estadístico de Mann-Whitney. 
+
+Sea $X_1,\dots,X_m$ valores de la variable de interés para control y $Y_1,\dots,Y_m$ valores de la variable de interés del tratamiento
+,si todas las observaciones son distintas, definiamos el estadístico de Mann-Whitney como:
+\[
+    W_{XY}= \# [(X_i,Y_i)|X_i<Y_i]
+\]
+($\#$ = numero de casos en que: )
+
+En caso de tener coincidencias, se puede definir para cada par $(X_i,Y_j)$
+
+\[
+    \phi(X_i,Y_j)=\left\{ 
+        \begin{matrix}
+            1 & si & X_i<Y_j \\
+            \frac{1}{2} & si & X_i=Y_j \\
+            0 & si & X_i>Y_j
+        \end{matrix}
+    \right.
+\]
+
+Si definimios $W_{XY}^*=\sum \phi (X_i,Y_j)$, es decir:
+
+\[
+    W_{XY}^* = \# [(X_i,Y_i)|X_i<Y_i] + \frac{1}{2} \cdot \# [(X_i,Y_i)|X_i=Y_i]
+\]
+
+Resultado: Los tests basados en $W_S^*$ y en $W_{XY}^*$ son equivalentes y además
+\[
+    W_{XY}^*=W_S^*-\frac{n \cdot (n+1)}{2}
+\]
+Demostración en el campus
+
+Nota: se puede usar para categorías
+\newpage
+\subsubsection{Distribución asintótica de $W_S^*$}
+
+Si n y m son grandes y la proporción máxima de observaciones coincidentes no es próxima a 1, es decir, si:
+\[
+    max_{i=1,\dots,e}\left\{\frac{d_i}{N} \right\} << 1
+\]
+
+es decir, no hay un grupo en el que estén casi todas las observaciones.
+
+\[
+    \frac{W_S^*-E_\theta(W_S^*)}{\sqrt{Var_\theta(W_S^*)}} \xrightarrow{L} N(0,1)
+\]
+\[
+    E_\theta(W_S^*)=\frac{n \cdot (N+1)}{2}
+\]
+\[
+    Var_\theta(W_S^*)= \frac{n \cdot m \cdot (N-1)}{12}-n\cdot m \cdot \sum_{i=1}^{e} \frac{d_i \cdot (d_i^2-1)}{12-N \cdot (N+1)}
+\]
+
+\subsubsection*{Ejercicio 9}
+En un  estudio sobre la efectividad de los consejos psicológicos, 80 jovenes se dividen aleatoriamente en un grupo control de 40 jóvenes
+, a quienes se aconseja de un modo tradicional, y un grupo de 40 que recibe un tratamiento especial. El cambio en el comportamiento de los jóvenes se califica como
+pobre, medianamente pobre, medianamente bueno y bueno. Obtenemos los siguientes resultados:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    & Pobre & Medianamente pobre & Medianamente bueno & Bueno \\ \hline
+    Tratamiento & 5 & 7 & 16 & 12 \\ \hline
+    Control     & 7 & 9 & 15 & 9  \\ \hline
+    \end{tabular}
+\end{table}
+
+Contrastar si el efecto del tratamiento es positivo.
+
+Nos piden contrastar:
+
+\begin{center}
+    $H_0$: no hay diferencias entre control y tratamiento \\
+    $H_1$: El tratamiento aumenta la respuesta
+\end{center}
+
+Hay 4 grupos, por lo tanto e=4.
+
+\begin{itemize}
+    \item En el primer grupo hay 12 individuos
+\end{itemize}
+
+$(e,d_1,d_2,d_3,d_4)$=(4,12,16,31,21)
+
+Semi-rangos:
+\(
+\left\{
+\begin{matrix}
+    d_1=\frac{12+1}{2}=6.5 \\
+    d_2=12+\frac{16+1}{2}=20.5 \\
+    d_3=12+16+\frac{31+1}{2}=44 \\
+    d_4=12+16+31+\frac{21+1}{2}=70
+\end{matrix}
+\right.
+\)
+
+\[
+    W_S^*=\sum_{i=1}^{4} B_i \text{(semirangos)}=5\cdot (65)+ 7\cdot (205)+ \dots+12 \cdot (70)=1720
+\]
+
+Vemos si el valor es grande con su distribución asintótica
+
+El p-valor sería:
+\[
+    E_0(W_S^*) = \frac{n \cdot (N+1)}{2} = \frac{40 \cdot 81}{2} = 1620
+\]
+\[
+    Var(W_S^*) = 9854.937
+\]
+\[
+    P_{H_0}(W_S^* \geq 1720) = P \left( \frac{W_S^* - E(W_S^*)}{\sqrt{\text{Var}(W_S^*)}} \geq \frac{1720 - E(W_S^*)}{\sqrt{\text{Var}(W_S^*)}} \right)
+\]
+\[
+    = P \left(Z \geq \frac{1720 - 1620}{\sqrt{9854.937}} \right) = 1 - \Phi(1.01) = 0.16
+\]

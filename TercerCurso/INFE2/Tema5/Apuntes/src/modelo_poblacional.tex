@@ -1,0 +1,310 @@
+\section{Modelo poblacional}
+
+El precio que pagamos usando un modelo de aleatorización es que los resultados solo son válidos para los N individuos de estudio y no se pueden extrapolar a una población más amplia.
+Para que eso sea posible, será necesario que los N individuos representen a toda la población. Dicho de otra forma, necesitamos una \textbf{muestra aleatoria simple} de la población.
+
+La situación es la siguiente:
+Tenemos $N=n+m$ individuos al azar de la población,
+
+$$
+\begin{aligned}
+    n & \longrightarrow \text{elegidos al azar}\longrightarrow \text{grupo de tratamiento} \\
+    m & \longrightarrow \text{restantes al grupo de control} \\
+    \ & \ \\
+    Y: & \text{ Variable respuesta de individuos que reciben el tratamiento}\\
+    X: & \text{ Variable respuesta de individuos que son del grupo de control}  
+\end{aligned}
+$$
+
+X e Y son dos variables aleatorias con funciones de distribución $X\sim F$ y $Y\sim G$ \\
+\noindent Queremos contrastar la hipótesis de que el tratamiento NO es efectivo
+
+$$
+\begin{aligned}
+    H_0: & \text{ El tratamiento no tiene efecto (F=G)} \\
+    H_1: & \text{ El tratamiento aumenta/disminuye la respuesta (F>G/F<G)}  
+\end{aligned}
+$$
+
+El modelo poblacional tiene dos ventajas fundamentales:
+\begin{enumerate}
+    \item Los resultados son extrapolables
+    \item Podemos estudiar la potencia del test
+\end{enumerate}
+
+\noindent Si tenemos un modelo poblacional sin coincidencias podemos utilizar el estadístico $W_s$ y el test de Wilcoxon $(W_s>C_\alpha)$; bajo $H_0$, $W_s$ sigue la misma distribución que en el modelo de aleatorización.
+
+$$
+\begin{aligned}
+    X_1,\dots, X_m & \quad Y_1,\dots,Y_n\\
+    R_1,\dots, R_m & \quad S_1,\dots,S_n
+\end{aligned}
+$$
+$$
+W_s=S_1+\dots+S_n
+$$
+
+Si hay coincidencias, tenemos que encontrar la distribución de $W^*_s$ bajo $H_0$. \\
+En este caso el estadístico $W^*_s=S^*_1+\dots+S^*_n$ no es de distribución libre. La distribución bajo $H_0$ de los semi-rangos de los n individuos depende de F. 
+Esto se debe (al igual que en el modelo de aleatorización) a que la distribución depende de la configuración de las coincidencias $(e,d_1,\dots,d_e)$, que en el modelo de aleatorización son un número pero aquí son variables aleatorias cuya distribución depende de F.\\
+
+\hspace{-1cm}\noindent\begin{tabular}{r}
+    \textbf{Ejemplo}  \\ \hline \ \\
+\end{tabular}
+
+    Supongamos F discreta de tal forma que 
+    
+    $$
+        F:\begin{cases}
+            a & \text{Con probabilidad } p \\
+            b & \text{Con probabilidad } 1-p
+        \end{cases}
+    $$
+    Si a<b, y con m=2 y n=1, entonces los posibles resultados son:
+
+    $$
+    \begin{array}{c|c|c}
+        X_1X_2Y_1 & \text{Probabilidad} & \text{Semi-rangos} \\ \hline
+        a \; a \; a & p^3 & 2 \quad 2 \quad 2 \\ 
+        a \; a \; b & p^2(1-p) & 1.5 \quad 1.5 \quad 2 \\ 
+        a \; b \; a & p^2(1-p) & 1.5 \quad 2 \quad 1.5 \\ 
+        b \; a \; a & p^2(1-p) & 2 \quad 1.5 \quad 1.5 \\ 
+        a \; b \; b & p(1-p)^2 & 1 \quad 2 \quad 2 \\ 
+        b \; b \; a & p(1-p)^2 & 2 \quad 2 \quad 1 \\ 
+        b \; a \; b & p(1-p)^2 & 1.5 \quad 1 \quad 1.5 \\ 
+        b \; b \; b & (1-p)^3 & 1 \quad 1 \quad 1 \\ 
+    \end{array}
+    $$
+    La distribución de $W^*_s$ bajo $H_0$ será:
+
+    $$
+    \begin{array}{c|c c c c c}
+        S^*_n & 1 & 1.5 & 2 & 2.5 & 3 \\ \hline 
+        P_0(S^*_1=s^*_1) & p(1-p)^2 & 2p^2(1-p) & p^3+(1-p)^3 & 2p(1-p)^2 & p^2(1-p) \\
+    \end{array}
+    $$
+
+Evidentemente la distribución de $W^*_s$ depende de p; es decir, de F.\\
+
+Al igual que en el modelo de aleatorización, la distribución de $W^*_s$ depende de la configuración de las coincidencias, solo que esta vez esas coincidencias son v.a. que dependen de F.
+
+\subsection{Potencia del test}
+Una ventaja del modelo poblacional es que podemos calcular la potencia del test. Para ello debemos especificar la hipótesis alternativa. Sean F y G las distribuciones de las variables respuesta en individuos de control y tratamiento respectivamente,
+
+$
+\begin{array}{c}
+    H_0:\ F=G \\
+    H_1:\text{ El tratamiento aumenta la respuesta, }F>G
+\end{array}
+$
+
+¿Qué significa en términos de F y G que el tratamiento aumente la respuesta?
+
+$$
+\forall z \in\mathbb{R}\quad\quad\quad P(Y>z)\geq P(X>z) \iff 1-G(z)\geq 1-F(z) \iff F(z)\geq G(z)
+$$
+
+\begin{theorem}
+    Sean X e Y v.a. tales que $X\sim F$ y $Y\sim G$ con F y G distribuciones de distribución. Se dice que Y (respecto a X) es estocásticamente mayor que X (respecto a Y) cuando los valores que toma la v.a. Y son mayores que los que toma la v.a. X, es decir:
+    
+    $$
+    \begin{array}{c}
+        G(z)\leq F(z)\quad\quad\quad\forall z \in\mathbb{R}\\
+        H_0:\ F(x)=G(x)\\
+        H_1:\ F(x)\geq G(x)
+    \end{array}
+    $$
+
+\end{theorem}
+
+El cálculo de la potencia requiere la distribución de los rangos. En el caso de F y G continuas es muy complicado, por lo que aproximaremos con la distribución asintótica y usaremos el estadístico de Mann-Whitney.
+
+\subsubsection{Potencia asintótica}
+$$
+\begin{array}{c}
+    \Pi(F,G):\ X\sim F,\ Y\sim G\text{ si n y m son suficientemente grandes} \\
+    \Pi(F,G)=\underset{\text{Bajo }H_1}{P_{F,G}}(W_{XY}\geq C_\alpha)=P_{F,G}\left(\frac{W_{XY}-E_{FG}(W_{XY})}{\sqrt{Var_{FG}(W_{XY})}}\geq \frac{C_\alpha-E_{FG}(W_{XY})}{\sqrt{Var_{FG}(W_{XY})}}\right)=\\
+    =1-\Phi\left(\frac{C_\alpha-E_{FG}(W_{XY})}{\sqrt{Var_{FG}(W_{XY})}}\right)
+\end{array}
+$$
+
+$$
+\begin{array}{c}
+    E(W_{XY})=mnp_1\\
+    Var(W_{XY})=mnp_1(1-p_1)+mn(n-1)(p_2-p_1^2)+mn(m-1)(p_3-p_1^2)
+\end{array}
+$$
+
+Siendo:
+
+$$
+\begin{array}{c}
+    p_1=P_{FG}(X<Y)\\
+    p_2=P(X<Y,X<Y')\\
+    p_3=P(X<Y,X'<Y)
+\end{array}
+$$
+
+El problema viene porque $p_1$, $p_2$ y $p_3$ son difíciles de calcular, por lo que usaremos una aproximación de la potencia.
+
+\subsection{Modelo Shift de aproximación de la potencia}
+
+\begin{theorem}
+    F y G se agrupan en un modelo Shift si
+    $$
+    \exists\Delta>0,\ \forall x\quad\quad G(x)=F(x-\Delta)
+    $$
+\end{theorem}
+
+El modelo Shift queda
+
+$$
+H_0:F(x)=G(x)\iff\Delta=0\quad\quad\quad H_1:G(x)=F(x-\Delta)\iff\Delta>0
+$$
+
+La potencia se escribe como:
+
+$$
+\Pi_F(\Delta)=P_\Delta(W_{XY}>C_\alpha),\ \Delta>0
+$$
+En particular, $\Pi_F(0)=\alpha$
+
+\begin{theorem}
+    Sea $F^*$ la función de distribución de la diferencia de las dos v.a. independientes con distribución F y sea $f^*(0)$ su densidad en el 0. Entonces
+    $$
+    \Pi(\Delta)\approx\Phi\left[\sqrt{\frac{12mn}{N+1}}f^*(0)\Delta-\mu_\alpha\right]
+    $$
+    Donde $\mu_\alpha\ /\ \Phi(\mu_\alpha)=1-\alpha$
+\end{theorem}
+
+Supongamos que N es suficientemente grande como para poder usar la aproximación normal para encontrar $C_\alpha$
+
+$$
+\alpha = P_0(W_{XY}>C_\alpha)=P_0\left(\frac{W_{XY}-E_0(W_{XY})}{\sqrt{Var_0(W_{XY})}}\geq \frac{C_\alpha-E_0(W_{XY})}{\sqrt{Var_0(W_{XY})}}\right)
+$$
+
+$$
+\begin{array}{c}
+    W_{XY}=W_s-\frac{n(n+1)}{2}\\
+    E(W_s)=\frac{n(N+1)}{2}\\
+    E(W_{XY})=\frac{n(N+1)}{2}-\frac{n(n+1)}{2}=\dots=\frac{nm}{2}\\
+    Var(W_{XY})=\frac{1}{12}mn(N+1)
+\end{array}
+$$
+
+$$
+\alpha=P_0\left(\frac{W_{XY}-\frac{1}{2}mn}{\sqrt{\frac{1}{12}mn(N+1)}}\geq \frac{C_\alpha-\frac{1}{2}mn}{\sqrt{\frac{1}{12}mn(N+1)}}\right)
+$$
+
+Por lo que 
+
+$$
+\mu_\alpha=\frac{C_\alpha-\frac{1}{2}mn}{\sqrt{\frac{1}{12}mn(N+1)}} \Longrightarrow C_\alpha=\frac{1}{2}mn+\sqrt{\frac{1}{12}mn(N+1)}\mu_\alpha
+$$
+
+Calculando la potencia:
+
+$$
+\Pi_F(\Delta)=P_\Delta\left(W_{XY}\geq\frac{1}{2}mn+\sqrt{\frac{1}{12}mn(N+1)}\mu_\alpha\right)=
+$$
+$$
+=P_\Delta\left(\frac{W_{XY}-E_\Delta(W_{XY})}{\sqrt(Var_\Delta(W_{XY}))}\geq\frac{\frac{1}{2}mn+\sqrt{\frac{1}{12}mn(N+1)}\mu_\alpha-mnp_1}{\sqrt{Var_\Delta(W_{XY})}} \right)=
+$$
+$$
+=1-\Phi\left(\frac{\left(\frac{1}{2}-p_1\right)mn+\mu_\alpha\sqrt{\frac{1}{12}mn(N+1)}}{\sqrt{Var_\Delta(W_{XY})}}\right)
+$$
+
+Sustituyendo $p_1=P_{FG}(X<Y)$
+
+$$
+p_1=P_\Delta(X<Y)=P_0(X<Y-\Delta)=P_0(Y-X>\Delta)=P_0(\underbrace{Y-X}_\text{Misma dist. bajo $H_0$}-\Delta>0)=1-F^*(\Delta)
+$$
+
+$F^*(\Delta)$ será la función de distribución de la diferencia de las dos v.a. independientes con distribución F. Si desarrollamos $F^*(\Delta)$ en torno al 0 con el polinomio de Taylor, sabiendo que $(F^*(x))'=f^*(x)$ y por simetría respecto al 0:
+
+$$
+F^*(\Delta)\approx F^*(0)+(\Delta-0) f^*(0)=\frac{1}{2}+\Delta f^*(0)
+$$
+
+Supongamos $D=X-Y$, $X\sim F$, $Y\sim F$ y $D\sim F^*$, entonces:
+
+$$
+F^*(0)=P(D\leq 0)=P(X-Y\leq 0)=P(X\leq Y)=\frac{1}{2}
+$$
+
+Por lo tanto,
+
+$$
+p_1=1-F^*(0)\approx\frac{1}{2}+\Delta f^*(0) \Longrightarrow p_1-\frac{1}{2}\approx \Delta f^*(0)
+$$
+
+Entonces, ya podemos hacer una primera aproximación para el cálculo de la potencia:
+
+$$
+\Pi_F(\Delta)\approx \Phi\left(\frac{mn\Delta f^*(0)-\mu_\alpha\sqrt{\frac{1}{12}mn(N+1)}}{\sqrt{Var_\Delta(W_{XY})}}\right)
+$$
+
+Nos faltaría calcular $Var_\Delta(W_{XY})$. Podemos hallar una aproximación cuando $\Delta$ es pequeño, ya que 
+
+$$
+Var_\Delta(W_{XY})\approx Var_0(W_{XY})=\frac{mn(N+1)}{12}
+$$
+
+Por lo que la expresión para la potencia quedaría como
+
+$$
+\Pi_F(\Delta)\approx\Phi\left(\frac{mn\Delta f^*(0)}{\sqrt{\frac{mn(N+1)}{12}}}-\mu_\alpha\right)=\Phi\left(\sqrt{\frac{12mn}{N+1}}\Delta f^*(0)-\mu_\alpha\right)
+$$
+\[
+    =\Phi\left(\sqrt{\frac{12 \, m}{N+1}} \, \Phi^*(0) \Delta - \mu_\alpha\right) = \Pi
+\]
+
+\subsubsection{Inverso}
+
+\[
+    \sqrt{\frac{12 \, m}{N+1}} \, \Phi^*(0) \Delta - \mu_\alpha = \Phi^{-1}(\Pi)
+    \Longrightarrow 
+    \frac{12 \, m}{N+1} = \frac{\left(\Phi^{-1}(\Pi) + \mu_\alpha\right)^2}{\left(\Phi^*(0) \Delta\right)^2}
+\]
+
+Aproximamos asumiendo $m \simeq  n$ y asumimos también $N$ suficientemente grande para que $N \simeq N+1$:
+\[
+    n \simeq \frac{\left(\Phi^*(0) \Delta + \mu_\alpha\right)^2}{6 \Delta^2 \Phi^*(0)^2}
+\]
+
+\subsubsection{Intervalos de confianza para pares}
+
+Calculamos diferencias de nuestros dos:
+\[
+    D_{ij} = Y_i - X_j \quad \text{para todas las pares } i=1, \dots, m \quad j=1, \dots, n
+\]
+
+Tomamos como estimador 
+\(\hat{\Delta} = \text{mediana}(D_{ij})\) ya que la mediana es robusta y menos sesgada.
+
+\subsubsection{Test de signos para muestras pareadas}
+
+Antes del tratamiento:
+\[
+    X = \{2, 4, 5, 6, 8\}
+\]
+
+Después del tratamiento:
+\[
+    Y = \{3, 5, 7, 4, 10\}
+\]
+
+Se calculan las diferencias:
+\[
+    D = \{3-2, 5-4, \dots\} = \{1, 1, 2, -2, 2\}
+\]
+
+Si no hubiera diferencias, se deberían distribuir las diferencias positivas y negativas (y viceversa). El estadístico:
+\[
+    S \sim b(n, 0.5)
+\]
+
+En un test bilateral, el $p$-valor:
+\[
+    p = 2 \cdot P(5 \leq \min(S^+, S^-))
+\]
