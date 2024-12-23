@@ -1,0 +1,160 @@
+\section{Regresión}
+
+\subsection{Formulación de un modelo de regresión lineal}
+Cuando la relación entre las variables predictoras ($X_i$) y la variable respuesta ($Y$) es lineal, el modelo se formula como:
+
+$$
+Y=\beta_0+\beta_1X_1+\beta_2X_2+\dots+\beta_kX_k+\varepsilon
+$$
+
+El objetivo del ajuste del modelo de regresión será conocer el valor de los $\beta_i$
+
+\subsection{Formulación del modelo lineal simple}
+Modelo lineal más sencillo, una variable respuesta y una variable independiente:
+
+$$
+Y_i=\beta_0+\beta_1X_i+\varepsilon_i\quad\quad\quad\quad\varepsilon_i\sim N(0,\sigma^2)\ i.i.d
+$$
+
+Parámetros de un modelo de regresión lineal simple:
+\begin{itemize}
+    \item Los coeficientes $\beta_i$\begin{itemize}
+        \item $\beta_0$ es el intercept
+        \item $\beta_1$ es la pendiente. Si X e Y son independientes, $\beta_1=0$
+    \end{itemize}
+    \item La varianza del error ($\sigma^2$)
+\end{itemize}
+
+Al ajustar el modelo estamos tratando de estimar los parámetros $\beta_0$, $\beta_1$ y $\sigma^2$. La recta de regresión estimada será:
+
+$$
+\hat{Y}=\hat\beta_0+\hat\beta_1X
+$$
+
+Cabe recalcar que los valores $\hat y_i$ serán los valores predichos por el modelo de regresión, no los valores reales, que se desviarán de la recta de regresión por un error desconocido ($\varepsilon_i$). 
+Podemos estimar esos errores con los residuos:
+
+$$
+e_i=y_i-\hat y_i=y_i-(\hat\beta_0+\hat\beta_1x_i)
+$$
+
+\subsubsection{Asunciones del modelo de regresión lineal simple}
+
+Para que nuestro modelo sea válido debemos asumir que los errores sean v.a.i.i.d. normales con media 0 y varianza constante. Para ello debemos comprobar:
+\begin{itemize}
+    \item Linealidad: $E(\varepsilon)=0$
+    \item Homogeneidad de varianzas (no depende de i): $Var(\varepsilon)=\sigma^2$
+    \item Normalidad: $\varepsilon_i\rightarrow N$
+    \item Independencia entre $\varepsilon_i$ y $\varepsilon_j$ $\forall i\neq j$
+\end{itemize}
+
+\subsection{Estimación por mínimos cuadrados}
+
+Para encontrar las mejores estimaciones de $\beta_0$ y $\beta_1$ según el criterio de mínimos cuadrados debemos buscar las estimaciones que verifiquen
+
+$$
+\underset{\hat\beta_0,\hat\beta_1}{min} Q = \underset{\hat\beta_0,\hat\beta_1}{min} \sum_{i=1}^{n}(y_i-\hat y_i)
+$$
+
+Derivando y despejando se obtiene lo siguiente:
+
+$$
+\hat\beta_0=\overline{y}-\hat\beta_1\overline{x}
+$$
+
+$$
+\hat\beta_1=\frac{\displaystyle\sum_{i=1}^{n}(x_i-\overline{x})(y_i-\overline{y})}{\displaystyle\sum_{i=1}^{n}(x_i-\overline{x})^2}=\frac{SS_{XY}}{SS_X}
+$$
+
+Sabemos que: 
+
+$$
+Cov(X,Y)=\frac{SS_{XY}}{n-1}\quad\quad y \quad\quad Var(X)=\frac{SS_{X}}{n-1}
+$$
+
+Por lo que podemos estimar también el parámetro $\beta_1$ como:
+
+$$
+\hat\beta_1=\frac{Cov(X,Y)}{Var(X)}
+$$
+
+Estos estimadores son insesgados y tienen varianza mínima (Teorema de Gauss-Markov)
+
+\subsubsection{Propiedades de la recta de regresión}
+
+\begin{enumerate}
+    \item La suma de los residuos es 0
+    \item La suma de los residuos al cuadrado es mínima: $\displaystyle\sum_{i=1}^{n}e^2$ es mínima
+    \item La suma de los valores observados y ajustados es la misma $\displaystyle\sum_{i=1}^{n}y_i=\displaystyle\sum_{i=1}^{n}\hat y_i$
+    \item Se verifica $\displaystyle\sum_{i=1}^{n}x_ie_i=0$
+    \item Se verifica $\displaystyle\sum_{i=1}^{n}\hat{y}_ie_i=0$
+    \item La recta de regresión pasa por el punto $(\overline{x},\overline{y})$
+\end{enumerate}
+
+\subsubsection{Estimación de la varianza del error}
+
+La mejor estimación para $\sigma^2$ en una regresión lineal simple es:
+
+$$
+\hat\sigma^2=MSE=\frac{SSE}{n-2}=\frac{1}{n-2}\displaystyle\sum_{i=1}^{n}(y_i-\overline{y}_i)^2=\frac{1}{n-2}\displaystyle\sum_{i=1}^{n}e_i^2
+$$
+
+\subsection{Inferencias en regresión}
+\subsubsection{Inferencias sobre los parámetros de la regresión}
+Para poder probar si hay relación entre X e Y podemos hacer el siguiente contraste:
+
+$$
+H_0:\ \beta_1=0\quad\quad\quad H_1:\ \beta_1\neq0
+$$
+
+Si $\beta_1=0$ significará que no hay relación lineal entre X e Y. Necesitamos conocer la distribución de $\hat\beta_1$. Como es una combinación lineal de normales, $\hat\beta_1$ seguirá una distribución normal.
+
+$$
+\hat\beta_1\longrightarrow N\left(\beta_1, \sqrt{\frac{\sigma^2}{SS_X}}\right)
+$$
+
+Podemos estimar $Var(\hat\beta_1)=\frac{MSE}{SS_X}$, que será insesgado (MSE es insesgado para $\sigma^2$), por lo que 
+
+$$
+\frac{\hat\beta_1-\beta_1}{\sqrt{\frac{MSE}{SS_{X}}}}\longrightarrow t_{n-2}
+$$
+
+El intervalo de confianza para $\beta_1$ será
+
+$$
+\beta_1\in\left(\hat\beta_1\pm t_{n-2;1-\frac{\alpha}{2}}\sqrt{\frac{MSE}{SS_X}}\right)
+$$
+
+Para plantear el contraste de hipótesis anterior, podemos comparar el valor del estadístico observado,
+
+$$
+t^*=\frac{\hat\beta_1-0}{\sqrt{\frac{MSE}{SS_X}}}
+$$
+
+con el valor teórico de la $t_{n-2}$. Si $|t^*|>t_{n-2;1-\frac{\alpha}{2}}$, rechazaríamos $H_0$ a nivel $\alpha$
+
+Podríamos generalizar este resultado para contrastes unilaterales (comparando con el valor del percentil necesario) o incluso para contrastar si $\beta_1=b_1$ sustituyendo el 0 por el valor de $b_1$ en el estadístico obserbado $t^*$\\
+
+Para poder plantear contrastes acerca del parámetro $\beta_0$ debemos conocer la distribución de $\hat\beta_0$, que, al igual que antes, será normal
+
+$$
+\hat\beta_0\longrightarrow N\left(\beta_0,\sqrt{\sigma^2\left(\frac{1}{n}+\frac{\overline{X}^2}{SS_X}\right)}\right)
+$$
+
+Podemos estimar la varianza a partir del MSE, por lo que el intervalo de confianza será:
+
+$$
+\hat\beta_0\in\left(\hat\beta_0\pm t_{n-2,1-\frac{\alpha}{2}}\sqrt{MSE\left(\frac{1}{n}+\frac{\overline{X}^2}{SS_X}\right)}\right)
+$$
+
+Para contrastar $H_0:\ \beta_0=b_0$ nos basaremos en el valor del estadístico test $t^*$
+
+$$
+t^*=\frac{\hat\beta_0-b_0}{\sqrt{MSE\left(\frac{1}{n}+\frac{\overline{X}^2}{SS_X}\right)}}
+$$
+
+Y compararíamos del mismo modo que con $\beta_1$.\\
+
+Hay que tener en cuenta que las distribuciones de estos dos parámetros serán aproximadamente normales aunque las $Y_i$ no lo sean por el TCL.
+
+TODO: Ajuste de bonferroni, pasar a inferencias sobre la media
