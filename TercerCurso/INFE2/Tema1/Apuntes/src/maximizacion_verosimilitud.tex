@@ -6,7 +6,7 @@ Por ejemplo, para obtener el EMV en R podemos utilizar la función \textit{optim
 
 \subsection{Algoritmo de Newton-Raphson (NR)}
 
-Está basado en la aproximación analítica de la función objetivo vía la aproximación lineal de su derivada. \\
+Está basado en la aproximación analítica de la función objetivo vía la aproximación lineal de su derivada.
 
 Sean $X_1, X_2,...,X_n$ v.a.i.i.d, con $P_\theta\ \theta\in\Theta\subseteq \mathbb{R}^s$ y $\theta=(\theta_1,...,\theta_s)$ donde la función objetivo es $l(\theta,x)=ln(L(\theta,x))$.
 El algoritmo NR busca el máximo de la log-verosimilitud a través de la aproximación de su derivada: 
@@ -20,11 +20,11 @@ Siendo $H(\theta_0,x)=\Big{\{}\frac{d^2}{d\theta_i d\theta_j}ln(L(\theta,x))\Big
 
 Este resultado es válido para todo $\theta$ y se deduce:
 
-$$\frac{\partial}{\partial\theta}ln(L(\hat\theta,x))\approx\frac{\partial}{\partial\theta}ln(L(\theta_0,x))+H(\theta_0,x)(\hat\theta-\theta_0)$$
+$$\frac{\partial}{\partial\theta}ln(L(\widehat\theta,x))\approx\frac{\partial}{\partial\theta}ln(L(\theta_0,x))+H(\theta_0,x)(\widehat\theta-\theta_0)$$
 
 Despejando obtenemos lo siguiente:
 
-$$\hat\theta=\theta_0-H(\theta_0,x)^{-1}\frac{\partial}{\partial\theta}ln(L(\theta_0,x))=\theta^{(1)}$$
+$$\widehat\theta=\theta_0-H(\theta_0,x)^{-1}\frac{\partial}{\partial\theta}ln(L(\theta_0,x))=\theta^{(1)}$$
 
 Si repetimos k veces el paso anterior llegaremos a $\theta^{(k)}$, por lo que la fórmula de actualización del algoritmo en la siguiente iteración será:
 
@@ -48,7 +48,7 @@ Ambas densidades dependen de $\theta$ pero la densidad de $X$ depende también d
 \\
 
 La función de verosimilitud de los datos observados es:
-$$L(Y_1,...,Y_n,\theta)= \prod_{i=1}^{n}g(Y_i,\theta)$$ $$ln(L(Y,\theta))=\sum_{i=1}^{n}ln(g(Y_i,\theta))$$ Y el EMV será (como siempre): $\hat\theta=\underset{\theta}{arg\ max}[ln(L(Y,\theta))]$
+$$L(Y_1,...,Y_n,\theta)= \prod_{i=1}^{n}g(Y_i,\theta)$$ $$ln(L(Y,\theta))=\sum_{i=1}^{n}ln(g(Y_i,\theta))$$ Y el EMV será (como siempre): $\widehat\theta=\underset{\theta}{arg\ max}[ln(L(Y,\theta))]$
 \\
 
 Sin embargo, hay situaciones en las que es difícil resolver y plantear las ecuaciones de verosimilitud. El algoritmo EM nos permite calcular la función de verosimilitud a partir de los datos completos cuando es complicado hacerlo a partir de los observados.
@@ -91,11 +91,16 @@ $$ f(x,p,\lambda)=f(y,b,p,\lambda)=\begin{cases}
 $$L(p,\lambda,b,y)\propto\prod_{i=1}^{n}p^{b_i}\Big[(1-p)e^{-\lambda}\frac{\lambda^y}{y!}\Big]^{1-b_i}=p^{\sum b_i}(1-p)^{n-\sum b_i}e^{-\lambda(n-\sum b_i)}\lambda^{\sum y_i(1-b_i)}$$
 $$ln(L(p,\lambda,b,y))=ln(p)\sum b_i+(n-\sum b_i)ln(1-p)-\lambda(n-\sum b_i)+ln(\lambda)\sum y_i(1-b_i)$$\\\ \\
 \underline{Paso 1, Esperanza:} Dados $p_0$ y $\lambda_0$ sustituir $b_i$ por $E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)$:
-$$E_{p_0,\lambda_0}\Big(ln(L(p_0,\lambda_0,b,y))\Big/Y_1,...,Y_n\Big)=ln(p)\Bigg[\sum E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Bigg]+ln(1-p)\Bigg[n-\sum E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Bigg]$$
+
+$$E_{p_0,\lambda_0}\Big(ln(L(p_0,\lambda_0,b,y))\Big/Y_1,...,Y_n\Big)
+$$
+$$=ln(p)\Bigg[\sum E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Bigg]+ln(1-p)\Bigg[n-\sum E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Bigg]$$
 $$-\lambda\Bigg[n-\sum E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Bigg]+ln(\lambda)\Bigg[\sum y_i\Big(1-E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)\Big)\Bigg]$$
 Si tenemos que $b^*_i=E_{p_0,\lambda_0}\Big(B_i\Big/Y_i=y\Big)$ entonces, haciendo uso de la definición de esperanza y Teorema de Bayes:
-$$b^*_i=P\Big(B_i=1\Big/Y=y\Big)(1)+P\Big(B_i=0\Big/Y=y\Big)(0)=P\Big(B_i=1\Big/Y=y\Big)=$$
-$$=\frac{P_{p_0,\lambda_0}(B_i=1)P\Big(Y_i=y_i\Big/B_i=1\Big)}{P_{p_0,\lambda_0}(B_i=1)P\Big(Y_i=y_i\Big/B_i=1\Big)+P_{p_0,\lambda_0}(B_i=0)P\Big(Y_i=y_i\Big/B_i=0\Big)}=\begin{cases}
+$$b^*_i=P\Big(B_i=1\Big/Y=y\Big)(1)+P\Big(B_i=0\Big/Y=y\Big)(0)=P\Big(B_i=1\Big/Y=y\Big)$$
+$$=\frac{P_{p_0,\lambda_0}(B_i=1)P\Big(Y_i=y_i\Big/B_i=1\Big)}{P_{p_0,\lambda_0}(B_i=1)P\Big(Y_i=y_i\Big/B_i=1\Big)+P_{p_0,\lambda_0}(B_i=0)P\Big(Y_i=y_i\Big/B_i=0\Big)}
+$$
+$$=\begin{cases}
     \frac{p_0}{p_0+(1-p_0)e^{-\lambda_0}} & \text{si } y_i=0 \\
     0 & \text{si }y_i \neq 0
 \end{cases}$$
@@ -125,7 +130,6 @@ Y_i \sim \left\{
 \]
 
 Como los datos son incompletos, no observamos $B_i \sim B(p)$. Los datos completos serían $X=(Y_i,B_i)$ con i=$1,\dots,n$.
-
 Función de densidad para los datos completos:
 \[
 f(y_i,b_i,p)=\left\{
@@ -158,7 +162,7 @@ En general:
 \[
 \theta_{n+1}=\theta_n
 -\frac{f'(\theta_n)}{f''(\theta_n)}\]
-\newpage
+
 Dado un valor inicial $P_0$, obtenemos P.
 \[
 p^{(1)}=p_0-\frac{\frac{d}{dp}\log L(p_0,y)}{\frac{d^2}{dp^2}\log L(p_0,y)}
@@ -202,7 +206,5 @@ Despejando
 \[
 p^{(1)}=\frac{B^*}{n}-\frac{1}{n} \sum_{i=1}^{n} \frac{p_0 \cdot dnorm(y_i,0,1)}{p_0 \cdot dnorm(y_i)+(1-p_0)dnorm(y_i,1,0.8)}
 \]
-\newpage
-\textbf{Ejercicio 2.Práctica 4:}
 
 

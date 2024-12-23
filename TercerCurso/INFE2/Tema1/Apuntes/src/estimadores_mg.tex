@@ -133,13 +133,13 @@ Sean $X_1,\dots,X_n$ v.a.i.i.d. tal que $E(X_i)=\mu$ y $Var(X_i)=\sigma^2 < \inf
 \end{itemize}
 
 Resulta útil aplicar el $\Delta$-método cuando queremos aproximar la distribución de una función no lineal de un estimador que es asintoticamente normal.\\
-Sean $X_1,\dots,X_n$ v.a.i.i.d. donde su distribución es $P_\theta$ tal que $\theta \in \Theta \subseteq \mathbb{R}$ y sea uan función $g:\Theta \to \mathbb{R}$ con derivada no nula. Si $T_n(X)$ es CAN para $\theta$ tal que $\sqrt{n}(|T_n(X)-\theta|)\overset{L}{\to}N(0,V^2_t(\theta))$ entonces
+Sean $X_1,\dots,X_n$ v.a.i.i.d. donde su distribución es $P_\theta$ tal que $\theta \in \Theta \subseteq \mathbb{R}$ y sea una función $g:\Theta \to \mathbb{R}$ con derivada no nula. Si $T_n(X)$ es CAN para $\theta$ tal que $\sqrt{n}(|T_n(X)-\theta|)\overset{L}{\to}N(0,V^2_t(\theta))$ entonces
 
 \[
     \sqrt{n}(|g(T_n(X))-g(\theta)|)\overset{L}{\to}N(0,V^2_t(\theta)g'(\theta)^2)
 \]
 
-
+\newpage
 \subsection*{Ejercicio 1}
 
 Sean $X_1, \dots, X_n$ v.a.i.i.d. donde $E(X_i)=\mu,\quad Var(X_i)=\sigma^2 \quad \forall i=1 \dots n$. Determinar si los siguientes estimadores son consistentes
@@ -172,7 +172,7 @@ Sean $X_1, \dots, X_n$ v.a.i.i.d. donde $E(X_i)=\mu,\quad Var(X_i)=\sigma^2 \qua
           \[
               =\frac{2  \mu}{n  (n+1)}  \sum_{i=1}^{n} i=\frac{2  \mu}{n  (n+1)} \frac{n  (n+1)}{2}= \mu
           \]
-          Se cumple que la media tiende a mu cuando n tiende a infinito.
+          Se cumple que la media tiende a $\mu$ cuando n tiende a infinito.
 
           \[
               Var(T_n(x))=\frac{4}{n^2  (n+1)^2}  \sum_{i=1}^{n} Var(i X_i)= \frac{4}{n^2  (n+1)^2}  \sigma^2  \sum_{i=1}^{n} i^2
@@ -260,7 +260,7 @@ Si se verifican las condiciones de regularidad de Cramer-Rao, otra forma alterna
     \]
     Demostración:
     \[
-        E(\frac{d^2}{d \theta} \log f(x,\theta))=\int_{x} \frac{d}{d \theta}\left(\frac{d}{d \theta} \log f(x,\theta)\right)  f(x,\theta) \,dx =
+        E\left(\frac{d^2}{d \theta} \log f(x,\theta)\right)=\int_{x} \frac{d}{d \theta}\left(\frac{d}{d \theta} \log f(x,\theta)\right)  f(x,\theta) \,dx =
     \]
     \[
         =\int_{x} \frac{d^2}{d \theta} f(x, \theta) \,dx - \int_{x}\left(\frac{\frac{d}{d \theta} f(x,\theta)}{f(x,\theta)}\right)^2  f(x,\theta) \,dx
