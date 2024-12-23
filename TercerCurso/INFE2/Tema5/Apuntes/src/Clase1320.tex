@@ -1,4 +1,4 @@
-\subsection{Modelo poblacional}
+\section{Modelo poblacional}
 
 El precio que pagamos usando un modelo de aleatorización es que los resultados solo son válidos para los N individuos de estudio y no se pueden extrapolar a una población más amplia.
 Para que eso sea posible, será necesario que los N individuos representen a toda la población. Dicho de otra forma, necesitamos una \textbf{muestra aleatoria simple} de la población.
@@ -88,7 +88,7 @@ Evidentemente la distribución de $W^*_s$ depende de p; es decir, de F.\\
 
 Al igual que en el modelo de aleatorización, la distribución de $W^*_s$ depende de la configuración de las coincidencias, solo que esta vez esas coincidencias son v.a. que dependen de F.
 
-\subsubsection{Potencia del test}
+\subsection{Potencia del test}
 Una ventaja del modelo poblacional es que podemos calcular la potencia del test. Para ello debemos especificar la hipótesis alternativa. Sean F y G las distribuciones de las variables respuesta en individuos de control y tratamiento respectivamente,
 
 $
@@ -119,6 +119,7 @@ $$
 
 El cálculo de la potencia requiere la distribución de los rangos. En el caso de F y G continuas es muy complicado, por lo que aproximaremos con la distribución asintótica y usaremos el estadístico de Mann-Whitney.
 
+\subsubsection{Potencia asintótica}
 $$
 \begin{array}{c}
     \pi(F,G):\ X\sim F,\ Y\sim G\text{ si n y m son suficientemente grandes} \\
@@ -146,7 +147,7 @@ $$
 
 El problema viene porque $p_1$, $p_2$ y $p_3$ son difíciles de calcular, por lo que usaremos una aproximación de la potencia.
 
-\subsubsection{Modelo Shift de aproximación de la potencia}
+\subsection{Modelo Shift de aproximación de la potencia}
 
 \begin{theorem}
     F y G se agrupan en un modelo Shift si

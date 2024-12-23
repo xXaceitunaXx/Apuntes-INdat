@@ -1,3 +1,5 @@
+\section{Test de rangos con observaciones coincidentes}
+
 Hemos visto contrastes para 2 muestras independientes, donde se eligen n individuos para un tratamiento y m para un grupo de control(u otro tratamiento), siendo N=n+m.
 \begin{center}
     $H_0: $ Tratamiento no tiene efecto \\
@@ -11,7 +13,9 @@ Mediamos la variable de interés en los N individuos.
 \end{center}
 
 Obteniamos los rangos de la muestra ($R_1,\dots,R_m$ y $S_1,\dots,S_n$).
-Si la alternativa es mayor, se rechaza $H_0$ para $W_S=S_1+\dots+S_n>C$
+Si la alternativa es mayor, se rechaza $H_0$ para $W_S=S_1+\dots+S_n>C$.
+Si la alternativa es menor, se rechaza $H_0$ para $W_S=S_1+\dots+S_n<C$
+
 
 ¿Que pasa si hay coincidencias?
 \subsubsection*{Ejemplo: }
@@ -30,7 +34,7 @@ Pero estos rangos no serían correctos. Para aquellos valores en los que coincid
 1,3,3,3,5,6.5,6.5,8
 
 A esto lo vamos a llamar \textbf{semi-rangos}. Siempre que tengamos coincidencias, calcularemos los semi-rangos
-
+\subsection{Semirangos}
 \textbf{\textit{Definición: }}Los semi-rangos correspondientes a observaciones coinicidentes, se calculan como la media de los rangos que les corresponderían si no tuviéramos empates.
 
 Notación:
@@ -45,6 +49,8 @@ Notación:
  W_S^*=S_1^*+\dots+S_n^*>C
  \]
 Como siempre, necesitamos la distribución de $W_S^*$ bajo $H_0$ que no es la misma que cuando no hay coincidencias, aunque llegaremos a la distribución de la misma forma.
+\newpage
+
 \subsubsection*{Ejemplo:}
 n=m=3
 
@@ -76,7 +82,7 @@ Bajo $H_0$, (hipótesis de que el tratamiento no tiene efecto), los 6 individuos
 
 La distribución depende de la configuración de las coincidencias. No se tienen tablas ya que habría que considerar cada caso.
 Para n grande, se tiene al distribución asintótica bajo $H_0$.
-
+\subsubsection{Configuración de las coincidencias}
 \textit{\textbf{Definición: }}Configuración de las coincidencias. 
 \begin{itemize}
     \item Sea N=n+m el número de individuos tal que n sea el numero de individuos de control y m el numero de individuos del tratamiento
@@ -122,14 +128,15 @@ d_1=\frac{3+1}{2}=2 \quad d_2=3+\frac{1+1}{2}=4 \quad d_3=3+1+\frac{2+1}{2}=5.5
 
 Estos conteos se pueden hacer solo para n y m pequeños. En este caso, podemos relacionar $W_S^*$ con el estadístico de Mann-Whitney análogo para el caso sin coincidencias.
 
-\subsection{Estadístico de Mann-Whitney}
+\subsection{Estadístico de Mann-Whitney con observaciones no distintas}
 
 El estadístico de $W_S^*$ es una generalización de $W_S$ cuando no todas las observaciones son distintas.
-Del mismo modo, se puede generalizar el estadístico de Mann-Whitney. Sea $X_1,\dots,X_m$ valores de la variable de interés para control y $Y_1,\dots,Y_m$ valores de la variable de interés del tratamiento.
+Del mismo modo, se puede generalizar el estadístico de Mann-Whitney. 
 
-Definimos:
+Sea $X_1,\dots,X_m$ valores de la variable de interés para control y $Y_1,\dots,Y_m$ valores de la variable de interés del tratamiento
+,si todas las observaciones son distintas, definiamos el estadístico de Mann-Whitney como:
 \[
-W_{XY}= \# [(X_i,Y_i)|X_i<Y_i] \text{si todas las observaciones son distintas}
+W_{XY}= \# [(X_i,Y_i)|X_i<Y_i]
 \]
 ($\#$ = numero de casos en que: )
 
@@ -158,8 +165,8 @@ W_{XY}^*=W_S^*-\frac{n \cdot (n+1)}{2}
 Demostración en el campus
 
 Nota: se puede usar para categorías
-
-Distribución asintótica de $W_S^*$.
+\newpage
+\subsubsection{Distribución asintótica de $W_S^*$}
 
 Si n y m son grandes y la proporción máxima de observaciones coincidentes no es próxima a 1, es decir, si:
 \[
@@ -172,7 +179,10 @@ es decir, no hay un grupo en el que estén casi todas las observaciones.
 \frac{W_S^*-E_\theta(W_S^*)}{\sqrt{Var_\theta(W_S^*)}} \xrightarrow{L} N(0,1)
 \]
 \[
-E_\theta(W_S^*)= \quad Var_\theta(W_S^*)=
+E_\theta(W_S^*)=\frac{n \cdot (N+1)}{2}
+\]
+\[
+Var_\theta(W_S^*)= \frac{n \cdot m \cdot (N-1)}{12}-n\cdot m \cdot \sum_{i=1}^{e} \frac{d_i \cdot (d_i^2-1)}{12-N \cdot (N+1)}
 \]
 
 \subsubsection*{Ejercicio 9}
