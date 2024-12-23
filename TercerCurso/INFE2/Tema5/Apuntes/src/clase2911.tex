@@ -30,7 +30,7 @@ Opciones \href{https://media.tenor.com/lsbTX_Avt2AAAAAM/brushing-teeth-kowalski.
 \begin{enumerate}
     \item \textbf{Modelo de aleatorización}: Los datos vienen de un diseño controlado en el que los 
     individuos de análisis han sido asignados aleatoriamente a diferentes grupos.
-    \item \textbf{Modelo poblacional:} Los datos son extriados de una población y se asume que esa población tiene ciertas propiedades. 
+    \item \textbf{Modelo poblacional:} Los datos son extraidos de una población y se asume que esa población tiene ciertas propiedades. 
     Por ejemplo: una distribución
 \end{enumerate}
 
@@ -53,14 +53,15 @@ Para esto, usaremos \textbf{el estadístico basado en rangos}.
 El estadístico basado en rangos, no depende de unidades de medida.Tomaremos toda la muestra y asignaremos rangos.
 
 \textbf{\textit{Definición:}} Un rango es el lugar que ocupa la observación en la muestra ordenada.
-Sea n($X_1,\dots,X_m,Y_1,\dots,Y_n$) nuestra muestra completa, se ordenan los valores y se asignan rangos.
+Sean ($X_1,\dots,X_m,Y_1,\dots,Y_n$) nuestra muestra completa, se ordenan los valores y se asignan rangos.
 ($i_1,\dots,i_m,i_{m_1},i_n$)
 Esto es la permutación donde $i_k$ es el valor que ocupa la observación k-ésima en la muestra ordenada.
-
+\newpage
 \subsubsection*{Ejemplo:}
 \(
 X=\{5,8,9\} \quad Y=\{6,7,10\}
 \)
+
 Muestra completa: $\{5,8,9,6,7,10\}$
 
 Se ordena: $\{5,6,7,8,9,10\}$, y se le asigna un rango ($\{1,2,3,4,5,6\}$)
@@ -88,7 +89,8 @@ de suma de rangos. ($W_r=R_1+\dots+R_m$).
 
 Se rechazará $H_0$ para valores de $W_s$ grandes($W_s>c_\alpha$).
 
-Como siempre, debemos conocer la distribución del estadístico de $W_s$ bajo $H_1$.
+Como siempre, debemos conocer la distribución del estadístico de $W_s$ bajo $H_0$.
+
 La distribución es discreta, y podemos calcular lo siguiente:
 \[
 P_{H_0}(W_s=k)=\sum_{s_1+\dots+s_n=k} P_{H_0} ((S_1,\dots,S_n)=(s_1,\dots,s_n))
@@ -133,7 +135,7 @@ Rechazaremos $H_0$ cuando el valor de $W_s$ sea poco probable.
 La distribución de $W_s$ no es la misma si hubiéramos asignado n a tratamientos y n a control. Lo que es lo mismo, $W_R$ no sigue la misma distribución que $W_s$ bajo $H_0$
 La distribución dependerá de n y m.
 
-\subsubsection{Estadístico de Mann-Whitney}
+\subsection{Estadístico de Mann-Whitney}
 En el caso anterior, el valor mínimo de $W_s$ corresponde a la situaciñon a la que los individuos con tratamiento toman los valores más pequeños.
 En el ejemplo anterior, $W_s=6. \quad 6=\frac{n \cdot (n+1)}{2}$.
 Si consideramos el estadístico de Mann-Whitney,
@@ -191,11 +193,15 @@ Llegaríamos al mismo resultado usando $W_S+W_R=55$.
 \]
 Hay tablas hasta n=m=10. A partir de así usariamos la distribución asintótica.
 
-Una manera alternativa de ver el estadístico de Mann-Whitney que va a ser útil para calcular la potencia y también intervalos de confiasnza es:
+\subsubsection{Forma alternativa del estadístico de Mann-Whitney}
+Una manera alternativa de ver el estadístico de Mann-Whitney que va a ser útil para calcular la potencia y también intervalos de confianza es:
+
 \textit{\textbf{Definición: }} Si $X_1,\dots,X_m$ son valores para individuos sin tratamientos y $Y_1,\dots,Y_n$ son valores para individuos con tratamiento,
-y $W_{XY}=W_S-\frac{n \cdot (n+1)}{2}$, $W_{XY}$ es también el número de pares ($X_i,Y_j$) $i=1,\dtos,m$, $j=1,\dots,n$ para los que $X_i <Y_i$
+y $W_{XY}=W_S-\frac{n \cdot (n+1)}{2}$, $W_{XY}$ es también el número de pares ($X_i,Y_j$) $i=1,\dots,m, j=1,\dots,n$ para los que $X_i < Y_i$
+
+
 \[
-W_{XY}= # [(X_i,Y_j) | X_i <Y_j]
+W_{XY}= \# [(X_i,Y_j) | X_i <Y_j]
 \]
 
 \textbf{\textit{Demostración:}}
@@ -204,27 +210,33 @@ Sean $Y_{(1)}, \dots, Y_{(n)}$ valores ordenados de $Y_1,\dots,Y_n$ y sean $s_1,
 \begin{itemize}
     \item Hay $s_1-1$ observaciones menores que $Y_{(1)}$ y todas son X.
     \[
-        # [(X_i,Y_{(1)}) | X_i <Y_{(1)}]=S_1-1
+        \# [(X_i,Y_{(1)}) | X_i <Y_{(1)}]=S_1-1
     \]
     \item Hay $s_2-1$ observaciones menores que $Y_{(2)}$, de ellas una es $Y_{(1)}$ y el resto son X.
     \[
-        # [(X_i,Y_{(2)}) | X_i <Y_{(2)}]=S_2-1-1=S_2-2
+        \# [(X_i,Y_{(2)}) | X_i <Y_{(2)}]=S_2-1-1=S_2-2
     \]
     \item Hay $s_n-1$ observaciones menores que $Y_{(n)}$, de ellas n-1 son Y y el resto son X.
-    \item     \[
-        # [(X_i,Y_{(n)}) | X_i <Y_{(n)}]=S_n-n
+    \[
+        \# [(X_i,Y_{(n)}) | X_i <Y_{(n)}]=S_n-n
     \]
 \end{itemize} 
 Por lo tanto:
 \[
-    # [(X_i,Y_j) | X_i <Y_j]=(S_1-1)+(S_2-2)+ \dots +(S_n-n)=(S_1+\dots+S_n)-(1+2+\dots+n)=
-    W_S-\frac{n \cdot (n+1)}{2}=W_{XY}
+    \# [(X_i,Y_j) | X_i <Y_j]=(S_1-1)+(S_2-2)+ \dots +(S_n-n)=(S_1+\dots+S_n)-(1+2+\dots+n)=
+\]
+\[
+    =W_S-\frac{n \cdot (n+1)}{2}=W_{XY}
 \]
 %Falta acabar esto
 Distribución asintótica de $W_s$
-Si los valores n y m son grandes, se considera que la distribución asintótica para $W_S$
-bajo $H_0$.
+Si los valores n y m son grandes (mayores que 10), se considera que la distribución asintótica para $W_S$
+bajo $H_0$ es por el Teorema Central del Limite
 
 \[
-\frac{W_S-E_0(W_S)}{\sqrt{Var_{H_0}(W_S)}} \xrightarrow[H_0]{L} N(0,1)
+\frac{W_S-E_0(W_S)}{\sqrt{Var_{0}(W_S)}} \xrightarrow[H_0]{L} N(0,1)
+\]
+
+\[
+E_0(W_S)=\frac{n \cdot (N+1)}{2} \quad Var_0(W_S)=\frac{n \cdot (N-n) \cdot (N+1)}{12}
 \]
