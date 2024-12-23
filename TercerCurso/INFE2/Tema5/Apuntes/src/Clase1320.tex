@@ -169,13 +169,13 @@ $$
 $$
 En particular, $\pi_F(0)=\alpha$
 
-\begin{proposition}
+\begin{theorem}
     Sea $F^*$ la función de distribución de la diferencia de las dos v.a. independientes con distribución F y sea $f^*(0)$ su densidad en el 0. Entonces
     $$
     \pi(\Delta)\approx\phi\left[\sqrt{\frac{12mn}{N+1}}f^*(0)\Delta-\mu_\alpha\right]
     $$
     Donde $\mu_\alpha\ /\ \phi(\mu_\alpha)=1-\alpha$
-\end{proposition}
+\end{theorem}
 
 Supongamos que N es suficientemente grande como para poder usar la aproximación normal para encontrar $C_\alpha$
 
@@ -255,3 +255,7 @@ Por lo que la expresión para la potencia quedaría como
 $$
 \pi_F(\Delta)\approx\phi\left(\frac{mn\Delta f^*(0)}{\sqrt{\frac{mn(N+1)}{12}}}-\mu_\alpha\right)=\phi\left(\sqrt{\frac{12mn}{N+1}}\Delta f^*(0)-\mu_\alpha\right)
 $$
+
+\[
+    =\Phi\left(\sqrt{\frac{12 \, m}{N+1}} \, \Phi^*(0) \Delta - \mu_\alpha\right) = \Pi
+\]
