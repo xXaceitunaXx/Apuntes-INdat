@@ -1,0 +1,73 @@
+\[
+\Phi\left(\sqrt{\frac{12 \, m}{N+1}} \, \Phi^*(0) \Delta - \mu_\alpha\right) = \Pi
+\]
+
+\subsubsection{Inverso}
+\[
+\sqrt{\frac{12 \, m}{N+1}} \, \Phi^*(0) \Delta - \mu_\alpha = \Phi^{-1}(\Pi)
+\Longrightarrow 
+\frac{12 \, m}{N+1} = \frac{\left(\Phi^{-1}(\Pi) + \mu_\alpha\right)^2}{\left(\Phi^*(0) \Delta\right)^2}
+\]
+
+Aproximamos asumiendo $m \simeq  n$ y asumimos también $N$ suficientemente grande para que $N \simeq N+1$:
+\[
+n \simeq \frac{\left(\Phi^*(0) \Delta + \mu_\alpha\right)^2}{6 \Delta^2 \Phi^*(0)^2}
+\]
+
+\subsubsection{Intervalos de confianza para pares}
+
+Calculamos diferencias de nuestros dos:
+\[
+D_{ij} = Y_i - X_j \quad \text{para todas las pares } i=1, \dots, m \quad j=1, \dots, n
+\]
+
+Tomamos como estimador 
+\(
+\hat{\Delta} = \text{mediana}(D_{ij})\) ya que la mediana es robusta y menos sesgada.
+
+
+\subsubsection{Test de signos para muestras pareadas}
+
+Antes del tratamiento:
+\[
+X = \{2, 4, 5, 6, 8\}
+\]
+
+Después del tratamiento:
+\[
+Y = \{3, 5, 7, 4, 10\}
+\]
+
+Se calculan las diferencias:
+\[
+D = \{3-2, 5-4, \dots\} = \{1, 1, 2, -2, 2\}
+\]
+
+Si no hubiera diferencias, se deberían distribuir las diferencias positivas y negativas (y viceversa). El estadístico:
+\[
+S \sim b(n, 0.5)
+\]
+
+En un test bilateral, el $p$-valor:
+\[
+p = 2 \cdot P(5 \leq \min(S^+, S^-))
+\]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
