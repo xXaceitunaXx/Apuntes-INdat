@@ -12,9 +12,11 @@
 \usepackage{framed}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tcolorbox}
+\usepackage{diagbox}
+\usepackage{enumerate}
 \usepackage{pgfplots}
-\usepackage{tikz}
-\usepackage{enumitem}
+\usepackage{subcaption}
+
 \pgfplotsset{compat=1.18}
 
 \colorlet{LightGray}{White!90!Periwinkle}
@@ -23,19 +25,17 @@
 
 \newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
 
-\declaretheoremstyle[name=Teorema,]{thmsty}
+\declaretheoremstyle[name=Ejemplo,]{thmsty}
 \declaretheorem[style=thmsty,numberwithin=section]{theorem}
 \tcolorboxenvironment{theorem}{colback=LightGray}
 
-\declaretheoremstyle[name=Ejercicio,]{prosty}
-\declaretheorem[style=prosty,numberlike=theorem]{exercise}
-\tcolorboxenvironment{exercise}{colback=LightOrange}
+\declaretheoremstyle[name=Proposition,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{proposition}
+\tcolorboxenvironment{proposition}{colback=LightOrange}
 
-\declaretheoremstyle[name=Demostración,]{prcpsty}
-\declaretheorem[style=prcpsty,numberlike=theorem]{proofs}
-\tcolorboxenvironment{proofs}{colback=LightGreen}
-
-\pgfmathdeclarefunction{gauss}{2}{\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}}
+\declaretheoremstyle[name=Principle,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{principle}
+\tcolorboxenvironment{principle}{colback=LightGreen}
 
 \setstretch{1.2}
 \geometry{
@@ -58,38 +58,29 @@
 \title{ \normalsize \textsc{}
 \\ [2.0cm]
 \HRule{1.5pt} \\
-\LARGE \textbf{\uppercase{Inferencia Estadística II}
-\HRule{2.0pt} \\ [0.6cm] \LARGE{Tema 1: Propiedades asintóticas del EMV y del estadístico RV} \vspace*{10\baselineskip}}
+\LARGE \textbf{\uppercase{Apuntes Probabilidad}
+\HRule{2.0pt} \\ [0.6cm] \LARGE{Tema 3: Convergencias Estocásticas. Teoremas Límite} \\
+{\large Doble Grado en Informática y Estadística (INdat)} \\
+\vspace*{10\baselineskip}}
 }
 
-\author{\textbf{Autores} \\
-    Victor Elvira Fernández, Tomás Ruiz Rojo, Juan Horrillo Crespo \\
-    Universidad de Valladolid \\
-    \date{\today}}
+\author{\textbf{Autor} \\
+    Víctor Elvira Fernández \\
+    Universidad de Valladolid}
 
 \maketitle
+
+\newpage\null
 \newpage
 
-\include{colaboraciones}
-
 \tableofcontents
+
 \newpage
 
 % ------------------------------------------------------------------------------
 
-% \include{src/clase1}
-% \include{src/clase3}
-% \include{src/clase4}
-% \include{src/clase5}
-% \include{src/clase6}
-% \include{src/clase8}
-% \include{src/clase9}
-% \include{src/clase10}
-% \include{src/clase12}
 
-\include{src/estimadores_mg}
-\include{src/inferencia_verosimil}
-\include{src/maximizacion_verosimilitud}
+\include{src/Tema3-Prob}
 
 \newpage
 
@@ -98,10 +89,12 @@
 % ------------------------------------------------------------------------------
 
 \begin{thebibliography}{9}
-    \bibitem{manuscritos}
-    Juan Camilo Yepes Borrero, \\ \textit{Apuntes Manuscritos Tema 1}. \\ Universidad de Valladolid 2024.
-    \bibitem{apuntes}
-    Yolanda Larriba González, \\ \textit{Apuntes INFE2 Tema 1}. \\ Universidad de Valladolid 2023.
+    \bibitem{diapos1}
+    Pilar Rodríguez de Tío, \\ \textit{Vectores aleatorios y distribuciones multivariantes}. \\ Universidad de Valladolid, 2023.
+    \bibitem{diapos2}
+    Pilar Rodríguez de Tío, \\ \textit{Distribuciones asociadas a variables independientes igualmente distribuidas}. \\ Universidad de Valladolid, 2023.
+    \bibitem{diapos3}
+    Pilar Rodríguez de Tío, \\ \textit{Convergencias estocásticas. Teoremas límite}. \\ Universidad de Valladolid, 2023.
 \end{thebibliography}
 
 % ------------------------------------------------------------------------------
