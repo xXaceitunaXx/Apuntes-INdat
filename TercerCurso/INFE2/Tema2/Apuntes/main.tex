@@ -25,23 +25,16 @@
 \newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
 
 \declaretheoremstyle[name=Teorema,]{thmsty}
-\declaretheoremstyle[name=Teorema,]{thmsty}
 \declaretheorem[style=thmsty,numberwithin=section]{theorem}
 \tcolorboxenvironment{theorem}{colback=LightGray}
 
 \declaretheoremstyle[name=Ejercicio,]{prosty}
 \declaretheorem[style=prosty,numberlike=theorem]{exercise}
 \tcolorboxenvironment{exercise}{colback=LightOrange}
-\declaretheoremstyle[name=Ejercicio,]{prosty}
-\declaretheorem[style=prosty,numberlike=theorem]{exercise}
-\tcolorboxenvironment{exercise}{colback=LightOrange}
 
-\declaretheoremstyle[name=Demostración,]{prcpsty}
-\declaretheorem[style=prcpsty,numberlike=theorem]{proofs}
 \tcolorboxenvironment{proofs}{colback=LightGreen}
 \declaretheoremstyle[name=Demostración,]{prcpsty}
 \declaretheorem[style=prcpsty,numberlike=theorem]{proofs}
-\tcolorboxenvironment{proofs}{colback=LightGreen}
 
 \pgfmathdeclarefunction{gauss}{2}{\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}}
 
@@ -70,7 +63,6 @@
 \HRule{2.0pt} \\ [0.6cm] \LARGE{Simulación y Bootstrap} \vspace*{10\baselineskip}}
 }
 
-\author{\textbf{Autores} \\
 \author{\textbf{Autores} \\
     Victor Elvira Fernández, Tomás Ruiz Rojo, Juan Horrillo Crespo \\
     Universidad de Valladolid \\
