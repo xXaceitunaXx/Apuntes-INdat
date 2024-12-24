@@ -9,6 +9,7 @@
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage[english]{babel}
 \usepackage{framed}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tcolorbox}
@@ -24,13 +25,20 @@
 \newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
 
 \declaretheoremstyle[name=Teorema,]{thmsty}
+\declaretheoremstyle[name=Teorema,]{thmsty}
 \declaretheorem[style=thmsty,numberwithin=section]{theorem}
 \tcolorboxenvironment{theorem}{colback=LightGray}
 
 \declaretheoremstyle[name=Ejercicio,]{prosty}
 \declaretheorem[style=prosty,numberlike=theorem]{exercise}
 \tcolorboxenvironment{exercise}{colback=LightOrange}
+\declaretheoremstyle[name=Ejercicio,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{exercise}
+\tcolorboxenvironment{exercise}{colback=LightOrange}
 
+\declaretheoremstyle[name=Demostración,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{proofs}
+\tcolorboxenvironment{proofs}{colback=LightGreen}
 \declaretheoremstyle[name=Demostración,]{prcpsty}
 \declaretheorem[style=prcpsty,numberlike=theorem]{proofs}
 \tcolorboxenvironment{proofs}{colback=LightGreen}
@@ -63,14 +71,13 @@
 }
 
 \author{\textbf{Autores} \\
+\author{\textbf{Autores} \\
     Victor Elvira Fernández, Tomás Ruiz Rojo, Juan Horrillo Crespo \\
     Universidad de Valladolid \\
     \date{\today}}
 
 \maketitle
 \newpage
-
-\include{colaboraciones}
 
 \include{colaboraciones}
 
