@@ -157,4 +157,374 @@ Y compararíamos del mismo modo que con $\beta_1$.\\
 
 Hay que tener en cuenta que las distribuciones de estos dos parámetros serán aproximadamente normales aunque las $Y_i$ no lo sean por el TCL.
 
-TODO: Ajuste de bonferroni, pasar a inferencias sobre la media
+\subsubsection{Bandas de confianza simultáneas de Bonferroni }
+
+Si queremos hacer inferencia para los dos coeficientes simultáneamente, como no son independientes tendremos un problema de comparaciones múltiples. 
+Por ello utilizamos el ajuste de Bonferroni, que consiste en modificaar el nivel de confianza de cada inferencia individual para conseguir el nivel deseado en la inferencia simultánea.\\
+
+Si estimamos individualmente $\beta_0$ y $\beta_1$ a nivel $\alpha$, la desigualdad de Bonferroni nos garantiza una confianza simultánea de al menos el $1-2\alpha$\%.
+Tenemos que buscar una nivel de significación para cada contraste individual $\alpha^*$ que nos permita garantizar un niver $\alpha$ global. Sea m el número de IC individuales a construir, basta con tomar $\alpha^*$ tal que
+
+$$
+\alpha^*=\frac{\alpha}{m}
+$$
+
+\subsubsection{Inferencias sobre la respuesta media}
+
+Para estimar la respuesta media ya tenemos un estimador puntual,
+
+$$
+\hat Y_h=\hat\beta_0+\hat\beta_1x_h
+$$
+
+Para hacer inferencias necesitamos conocer la distribución de $\hat Y_h$, que, al ser combinación lineal de normales, será también normal
+
+$$
+\hat Y_h\longrightarrow N\left(E(Y_h),\sqrt{\sigma^2\left(\frac{1}{n}+\frac{(x_h-\overline{X})^2}{SS_X}\right)}\right)
+$$
+
+Usando MSE como estimador de $\sigma^2$ tenemos que:
+
+$$
+\frac{\hat Y_h-E(Y_h)}{\sqrt{MSE\left(\frac{1}{n}+\frac{(x_h-\overline{X})^2}{SS_X}\right)}}\longrightarrow t_{n-2}
+$$
+
+\subsubsection{Inferencias sobre una nueva observación}
+
+Queremos predecir una nueva observación de Y cuando X toma un determinado valor. Es importante distinguir entre la predicción de la respuesta media, $E(Y_h)$ y la predicción de una nueva observación $Y_{h(new)}$ (será raro que coincidan).
+Asumeindo que el modelo es aplicable a la nueva observación, el estimador puntual será:
+
+$$
+\hat Y_{h(new)}=\hat Y_h=\hat\beta_0+\hat\beta_1x_h
+$$
+
+Sin embargo, aunque la estimación puntual será la misma que para la predicción de la respuesta media, la distribución no, ya que el error que cometemos será diferente.
+La varianza de la nueva observación será: 
+
+$$
+Var(\hat Y_{h(new)})=Var(\hat Y_h)+ Var(Y)
+$$
+
+Por lo que la distribución de la nueva observación será:
+
+$$
+\hat Y_{h(new)}\longrightarrow N\left(Y_{h(new)},\sqrt{\sigma^2\left(1+\frac{1}{n}+\frac{(x_h-\overline{X})^2}{SS_X}\right)}\right)
+$$
+
+Al igual que antes podemos utilizar MSE como estimador de $\sigma^2$ y hacer un intervalo de confianza (se deja propuesto al lector).\\
+
+Podría ser que nos interesara calcular la media de $m$ nuevas observaciones de Y para un valor de X dado. En este caso, el cálculo de la distribución y el IC sería el mismo, solo que la nueva varianza sería:
+
+$$
+Var(\hat{\bar{Y}}_{h(new)})=\sigma^2\left(\frac{1}{m}+\frac{1}{n}+\frac{(x_h-\overline{X})^2}{SS_X}\right)
+$$
+
+\subsubsection{Predicción inversa}
+
+Podemos predecir el valor de la variable X en función de la variable Y usando el modelo de Y sobre X. Podemos obtener el estimador puntual despejando,
+
+$$
+\hat X_{h(new)}=\frac{Y_{h(new)}-\hat\beta_0}{\hat\beta_1},\quad\quad\hat\beta_1\neq 0
+$$
+
+Para hacer inferencia necesitaremos conocer la distribución de $\hat X_{h(new)}$, que es cl de normales e insesgado,
+
+$$
+\hat X_{h(new)}\longrightarrow N\left(X_{h(new)}, \sqrt{\frac{\sigma^2}{\beta_1^2}\left(1+\frac{1}{n}+\frac{(X_{h(new)}-\overline{X})^2}{SS_X}\right)}\right)
+$$
+
+Podemos sustituir los parámetros $\sigma^2$ y $\beta_1$ con sus respectivos estimadores para hallar el IC.
+
+\subsubsection{Bandas de confianza para la recta de regresión}
+
+Podemos construir una banda de confianza a partir de los ICs puntuales en todo el rango de valores de la X, esto será una banda de confianza puntual. El poblema de esta banda será que que tendrá un nivel de confianza simultáneo para toda la recta de regresión menor a $1-\alpha$.\\
+Con la banda de confianza de Working-Hotelling de nivel $1-\alpha$ podemos construir una banda de confianza simultánea que contiene a la recta de regresión con esa confianza.
+
+$$
+\hat Y_h \pm W\sqrt{MSE\left(\frac{1}{n}+\frac{(x_h-\overline{X})^2}{SS_X}\right)}
+$$
+
+Siendo el valor W,
+
+$$
+W=\sqrt{2F_{2,n-2;1-\alpha}}
+$$
+
+También podemos construir bandas de confianza para los valores predichos, que serán mucho más amplios que los de la respuesta media.
+
+\subsubsection{ANOVA en regresión simple}
+
+El ANOVA se basa en la descomposición de la variabilidad de la variable respuesta Y. La variabilidad total se describe como:
+
+$$
+SST=\sum_{i=1}^{n}(Y_i-\overline{Y})^2
+$$
+
+Sin tener en cuenta X, el mejor predictor de Y es $\overline{Y}$, $MST=\frac{SST}{n-1}$ es el estimador habitual de la varianza cuando no hay ningún predictor implicado.
+
+Se puede descomponer la variabilidad total de la siguiente manera,
+
+$$
+SST=SSR+SSE
+$$
+
+$$
+\sum_{i=1}^{n}(Y_i-\overline{Y})^2=\underbrace{\sum_{i=1}^{n}(\hat Y_i-\overline{Y})^2}_{\text{variabilidad explicada por la regresión}}+\underbrace{\sum_{i=1}^{n}(Y_i-\hat{Y}_i)^2}_\text{variabilidad NO explicada por la regresión}
+$$
+
+La variabilidad explicada por el modelo se basa en las desviaciones de la recta ajustada respecto del mejor predictor sin tener en cuenta esa variable. Si no hay relación entre X e Y, SSR=0. MSR=SSR\\
+
+La variabilidad NO explicada por el modelo estará representada por las desviaciones de cada observación a la recta ajustada. Si todos los valores de $Y_i$ coinciden con la recta de regresión, SSE=0. MSE=SSE/n-2 es la mejor estimación de la varianza una vez que condicionamos por la variable explicativa.\\
+
+Podemos utilizar el cociente $\frac{MSR}{MSE}$ para contrastar si $\beta_1=0$, cuanto mayor sea el cociente más evidencias habrá en contra. Podemos utilizar el siguiente estadístico test,
+
+$$
+F=\frac{MSR}{MSE}\underset{H_0}{\longrightarrow}F_{1,n-2}
+$$
+
+Se rechazará $H_0$ cuando el valor del estadístico observado sea mayor que el valor crítico a nivel $\alpha$. Este test es equivalente al contraste bilateral basado en la t. Esta infromación se resume en la tabla ANOVA.
+
+\subsubsection{F-test general}
+
+Al anterior test basado en la F se le llama F-test o contraste de regresión. Es un caso particular de un contraste general que sirve para evaluar modelos de regresión lineales
+
+\subsubsection{Relación lineal entre X e Y}
+
+A partir de lo visto en la sección del ANOVA, podemos utilizar la reducción en la variabilidad como proporción respecto al total de la variabilidad como medida de lo que se reduce la incertidumbre cuando utilizamos X para predecir Y,
+
+$$
+R^2=\frac{SSR}{SST}=1-\frac{SSE}{SST}
+$$
+
+Esta medida es el coeficiente de determinación, que tiene varias propiedades:
+\begin{enumerate}
+    \item $0\leq R^2\leq 1$
+    \item Adimensional
+    \item Es el cuadrado del coeficiente de correlación de Pearson para la muestra
+    \item Cuanto mayor sea $R^2$, mayor es la fuerza de la variable regresora para predecir la variable respuesta
+    \item Cuanto mayor sea $R^2$, más cercanos están los puntos a la recta de regresión ajustada
+    \item Toma el mismo valor cuando usamos a X para predecir a Y o cuando usamos a Y para predecir a X
+\end{enumerate}
+
+Correlación y regresión son conceptos relacionados, pero no hay que confundirlos. El modelo de regresión describe la relación lineal entre una variable independiente que utilizamos para estimar o explicar el comportamiento de la variable respuesta. En este caso solo la variable respuesta es aleatoria.
+La correlación describe la fuerza de la relación lineal entre dos variables, ambas aleatorias.
+
+\subsubsection{Regresión por el origen}
+
+A veces se impone la restricción de que cuando X=0, el valor esperado de Y sea cero. Estaremos interesados en estimar regresiones que pasan por el origen, es decir, rectas sin intercept. Para hallar el nuevo valor de la pendiente podemos minimizar por mínimos cuadrados, teniendo en cuenta que $\beta_0=0$:
+
+$$
+\hat\beta_1'=\frac{\displaystyle\sum_{i=1}^{n}X_iY_i}{\displaystyle\sum_{i=1}^{n}X^2_i}
+$$
+
+La distribución de nuestro nuevo parámetro será:
+
+$$
+\hat\beta_1'\longrightarrow N\left(\beta_1',\frac{\sigma^2}{\displaystyle\sum_{i=1}^{n}X_i^2}\right)
+$$
+
+Un estimador insegado de la varianza será $MSE=\frac{SSE}{n-1}$. Notar que se divide entre n-1 poruqe solo se pierde un grado de libertad al estimar un solo parámetro.
+
+\subsection{Validación de modelos de regresión lineal simple}
+
+Vamos a validar los 4 supuestos necesarios para que el modelo sea apropiado; debemos comprobar que los errores sigan una distribución normal con varianza constante:
+
+\begin{itemize}
+    \item Linealidad: $E(\varepsilon)=0$
+    \item Homogeneidad de varianzas (no depende de i): $Var(\varepsilon)=\sigma^2$
+    \item Normalidad: $\varepsilon_i\rightarrow N$
+    \item Independencia entre $\varepsilon_i$ y $\varepsilon_j$ $\forall i\neq j$
+\end{itemize}
+
+La validación se lleva a cabo con los residuos principalmente, por lo que se lleva a cabo tras el ajuste.
+
+\subsubsection{Diagnóstico para X}
+
+Para hacer un diagnóstico para X debemos hacer un análisis descriptivo de la variable, se puede hacer antes de ajustar el modelo.
+
+\subsubsection{Residuos}
+
+Como ya hemos visto anteriormente, los residuos se calculan como la diferencia entre el valor observado y el predicho por el modelo,
+
+$$
+e_i=Y_i-\hat Y_i
+$$
+
+No se suelen utilizar estos residuos para validar el modelo, ya que no cumplen ni la homogeneidad de varianzas (la varianza depende de la observación i-ésima) ni la independencia (no son totalmente independientes, existe una expresión para la covarianza). 
+
+$$
+Var(E_i)=\sigma^2\left(1-\frac{1}{n}-\frac{(X_i-\overline{X})^2}{SS_X}\right)
+$$
+
+Cuando estas propiedades son de poca importancia se pueden utilizar; es decir, cuando el tamaño muestral es grande en relación al número de parámetros en el modelo de regresión, y no hay puntos que estén ejerciendo gran influencia.\\
+
+Puede resultar interesante tener los residuos estandarizados; existen dos formas de estandarizar
+
+\begin{itemize}
+    \item \textbf{\underline{Residuos semi-estudentizados}}
+\end{itemize}
+
+Puesto que $Var(\varepsilon_i)=\sigma^2$, que se puede estimar utilizando MSE, podemos estandarizar como:
+
+$$
+e^*_i=\frac{e_i-\overline{e}_i}{\sqrt{MSE}}=\frac{e_i}{\sqrt{MSE}}
+$$
+
+Sin embargo, esto es solo una aproximación de la varianza de los residuos, no la real.
+
+\begin{itemize}
+    \item \textbf{\underline{Residuos estudentizados}}
+\end{itemize}
+
+$$
+r_i=\frac{e_i}{\sqrt{\sigma^2\left(1-\frac{1}{n}-\frac{(X_i-\overline{X})^2}{SS_X}\right)}}
+$$
+
+Donde $\hat\sigma^2=MSE=\frac{SSE}{n-2}$. Verifican las siguientes propiedades:
+
+\begin{itemize}
+    \item $E(r_i)=0$
+    \item $Var(r_i)=1  $  
+\end{itemize}
+
+Asumiendo normalidad en los errores, $r_i$ seguirá una distribución t-Student con n-2 grados de libertad. Estos residuos son útiles para conocer los residuos demasiado grandes (observaciones que no están bien ajustadas), ya que el 95\% de las observaciones tienen residuos entre -2 y 2, y el 99\% entre -3 y 3.\\
+
+\subsubsection{El análisis de los residuos}
+
+Ahora vamos a ver como utilizar los residuos para la validadión del modelo.
+
+\begin{enumerate}
+    \item \textbf{Linealidad: } Estudiada en el plot de residuales vs predichos (también puede ser frente a X, en la regresión lineal son equivalentes). Cuando el modelo lineal es adecuado los residuos se sitúan centrados en 0 de una forma aleatoria, sin observarse patrones sistemáticos.
+    \item \textbf{Homogeneidad de las varianzas: } Estudiada en el plot de residuales vs predichos. Cuando la varianza es homogénea la dispersión de los residuos será más o menos constante. También son útiles la representación del valor absoluto o el cuadrado de los residuos vs $\hat Y_i$ o $X_i$.
+    \item \textbf{Normalidad: } Representamos los residuos en un QQ-plot, en el que los comparamos frente a sus valores esperados bajo normalidad. 
+    \item \textbf{Independencia: } Representamos los residuos vs una secuencia para ver si hay correlación entre los errores. Observar rachas en los residuos sugiere no independencia
+\end{enumerate}
+
+Si a la vista de los gráficos no estamos seguros, podemos utilizar algunos contrastes de hipótesis complementarios
+
+\begin{itemize}
+    \item Para los contrastes de homogeneidad de varianzas, el más habitual es el de Brown-Forsythe, que es una modificación del test de Levene. La idea es dividir la muestra en dos grupos: valores bajos y valores altos según X. Si la varianza no es constante, los residuos de un grupo serán más variables que los dos otros
+    \item En los contrastes de normalidad hay varias opciones: Para distribuciones discretas utilizamos el test chi-cuadrado de Pearson, mientras que para continuas podemos utilizar el test de Kolmogorov-Smirnov o el de Shapiro-Wilk (más útil para muestras pequeñas). \textit{Estos tres test están vistos en infe II}.
+\end{itemize}
+
+\subsubsection{Outliers y puntos de influencia}
+
+Un outlier en regresión es un punto que no sigue el patrón lineal general del resto de datos, es decir que no se ajusta bien al modelo propuesto. Este tipo de datos se caracterizan por tener residuos altos.
+El método de mínimos cuadrados es muy sensible a la presencia de outliers, y podemos tener outliers tanto en la X como en la Y. Tambien puede ser que una observación no sea outlier ni en la X ni en la Y, pero que sí que lo sea en la relación entre ambas.\\
+Un punto de influencia es un outlier que tiene un efecto muy importante en la recta de regresión ajustada. En estos casos tendremos que comparar las decisiones que tomamos cuando lo tenemos en cuenta y cuando no.
+
+Podemos utilizar dos medidas de diagnóstico para identificar outliers que puedan ser potenciales puntos de influencia: los leverages y los residuos estudentizados.
+
+\begin{itemize}
+    \item \underline{\textbf{Leverage de la i-ésima observación}}
+\end{itemize}
+
+El leverage es una medida de lo lejos que está el valor de $x_i$ de la media muestral de las X. De alguna manera se podría decir que mide cuánto aporta la observación i-ésima a la varianza muestral de las X.
+
+$$
+h_{ii}=\frac{1}{n}+\frac{(x_i-\overline{X})^2}{SS_X}
+$$
+
+El leverage no depende del valor de $Y_i$ observado, y la suma de los leverages es 2. Los outliers en X pueden identificarse por valores de leverage grandes. Se considera un leverage grande si es mayor que dos veces la media de los leverages:
+
+$$
+h_{ii}>2\overline{h}=\frac{2}{n}\sum_{i=1}^{n}h_{ii}=\frac{4}{n}
+$$
+
+Puntos con leverages grandes serán potenciales puntos de influencia; es decir, que pueden condicionar de manera importante el ajuste del modelo
+
+\begin{itemize}
+    \item \underline{\textbf{Residuos estudentizados (eliminados)}}
+\end{itemize}
+
+Utilizando los residuos podemos identificar los outliers en la variable respuesta: valores altos/bajos indican observaciones que se ajustan mal al modelo.
+El problema con los residuos es que no tienen una escala conocida, por lo que es difícil definir lo que es un valor extremo. Por ello utilizamos otro tipo de residuos: los residuos estudentizados eliminados.\\
+
+Podemos obtener para cada observación su residuo en el modelo ajustado sin considerar dicha observación. Entonces, podríamos calcular $e_{(i)}=Y_i-\hat Y_{i(i)}$ siendo $\hat Y_{i(i)}$ el valor ajustado de la recta de regresion sin considerar $y_i$ para el cálculo de los parámetros.
+A partir de ese residuo podemos sacar la expresión de su varianza y su distribución (asumiendo normalidad en los errores). A esto se le conoce como residuo estudentizado eliminado.\\
+
+El problema en este caso es que para calcular cada residuo estudentizado eliminado tendríamos que ajustar n rectas de regresión. Existe una fórmula más sencilla para expresarlos:
+
+$$
+t_{(i)}=e_i\sqrt{\frac{n-3}{SSE(1-h_{ii})-e_i^2}}
+$$
+
+Para identificar outliers en Y, podemos utilizar tanto los residuos estudentizados como los residuos estudentizados eliminados, que se distribuyen según una t-Student. Como concemos la distribución, todo residuo mayor que 3 debe ser considerado un outlier, y valores entre 2 y 3 deben considerarse sospechosos también (en valor absoluto). 
+Muchas observaciones con residuos extremos podrían indicar que el modelo no es adecuado.\\
+
+Un outlier no siempre es un punto de influencia, ni tampoco son los únicos puntos sospechosos de influir demasiado en el ajuste. Utilizando los residuos estudentizados (eliminados) y los leverages, tendremos unos puntos potencialmente influyentes, pero necesitamos evaluar la influencia efectiva.
+Podemos utilizar varias medidas de influencia:
+
+\begin{enumerate}
+    \item \textbf{Distancia de Cook: }Determina la influencia de una observación en todos los valores predichos, de forma que valores grandes sugieren que tiene mucha influencia. Se pueden comparar con los valores de la distribución $F_{2,n-2}$.
+    
+    $$
+    D_i=\frac{\displaystyle\sum_{j=1}^{n}(\hat Y_j-\hat Y_{j(j)})^2}{2MSE}=\frac{e_i^2}{2MSE}\frac{h_{ii}}{(1-h_{ii})^2}
+    $$
+
+    \item \textbf{DFFits: }Determina la influencia de una observación en su propia predicción. Considerada una medida estandarizada del cambio que sufre $\hat Y_i$ si quitamos la observación i-ésima.
+    
+    $$
+    DFFits_i=\frac{\hat Y_i-\hat Y_{i(i)}}{\sqrt{MSE_{(i)}h_{ii}}}
+    $$
+
+    Una observación puede considerarse de influencia si,
+
+    $$
+    |DFFits_i|>2\sqrt{\frac{2}{n}}
+    $$
+    
+    \item \textbf{DFBeta: }Existe un DFBeta por cada parámetro y observación. Determina la influencia de cada observación en la estimación de cada parámetro.
+    Considerada una medida estandarizada del cambio que sufre $\hat\beta_j$ si quitamos la observación i.
+
+    $$
+    DFBeta_{ij}=\frac{\hat\beta_j-\hat\beta_{j(i)}}{\sqrt{\hat{Var}(\hat\beta_{j(i)})}}
+    $$
+
+    Son considerados altos valores mayores (en valor absoluto) que 1 o $\frac{2}{\sqrt{n}}$.
+
+\end{enumerate}
+
+\subsubsection{Soluciones para un modelo no válido}
+
+La opción principal será aplicar una transformación a algunas de las variables para que el modelo sea adecuado. 
+Al aplicar una transformación tendremos un nuevo modelo que requerirá del cumplimiento de las asunciones vistas anteriormente. Para cada una de las asunciones:
+
+\begin{itemize}
+    \item \textbf{Relación no lineal: }Transformar la Y, la X o ambas, de forma que se linealize la relación entre ambas. Se pueden introducir términos polinómicos de mayor orden o la función exponencial.
+    Transformaciones de Y podrían modificar la forma de su distribución y por tanto de la distribución de los errores. Transformaciones de la X podrían ayudar a linealizar la relación sin afectar a la distribución de Y.
+    \item \textbf{Varianza no constante o errores no normales: }Transformar la Y. Frecuentemente e la no-normalidad y la no-homogeneidad de varianza se presentan juntas. Lo normal es buscaar una transformación que estabilice la varianza primero.
+    Una transformación muy típica es el logaritmo, o una transformación de Box-Cox (dependiente del parámetro $\lambda$, maximizando la verosimilitud):
+
+    $$
+    g_\lambda(y)=\begin{cases}
+        \frac{y^\lambda-1}{\lambda} & \text{si }\lambda\neq0\\
+        log(y) & \text{si }\lambda=0
+    \end{cases}
+    $$
+
+    Cuando Y pueda tomar valores negativos también se puede hacer la siguiente transformación:
+
+    $$
+    g_\lambda(y)=\begin{cases}
+        \frac{(y+k)^\lambda-1}{\lambda} & \text{si }\lambda\neq0\\
+        log(y+k) & \text{si }\lambda=0
+    \end{cases}
+    $$
+
+\end{itemize}
+
+\subsubsection{Validación de la capacidad predictiva}
+
+La mejor validación de un modelo será aquella en la que utilizamos una muestra externa, es decir comprobamos como funciona nuestro modelo con unos nuevos datos que no se han utilizado para ajustar dicho modelo.
+Sin embargo, eso no suele ser posible. Podemos utilizar tres métodos distintos, dos de ellos se emplean cuando hay conjunto de datos grande y podemos dividirla en muestra de ajuste y muestra de validación, y otro cuando la muestra no se puede dividir:
+
+\begin{itemize}
+    \item \textbf{LOO y k-fold:} la muestra se puede separar en muestra de ajuste y muestra de validación (\textit{Vistos en ANDA}).
+    \item \textbf{Bootstrap: }\textit{visto en Infe II}.
+\end{itemize}
+
+
+
+
+
