@@ -1,0 +1,238 @@
+\subsection{Cota de Cramer-Rao}
+Sea $X_,\dots,X_n$ m.a.s $P_\theta,\theta \in \Theta \subseteq \mathbb{R}$ con densidad
+$f(x,\theta)$ y sea $T_n(x)$ un estimador insesgado de $g(\theta)$ con Var$(T_n(x)) < \infty$
+y que verifica las condiciones de regularidad de Craner-Rao, entonces:
+\[
+    Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
+\]
+
+\begin{proofs}
+    Consideremos $Cov(T_n(x),S_x(\theta))=E(T_n(x)\cdot S_x(\theta))$
+
+\[
+Cov(T_n(x)S_x(\theta))=\int_x T_n(x) \cdot S_x(\theta) \cdot f(x,\theta) \,dx
+\]\[
+\int_x T_n(x) \cdot \frac{d}{d \theta} \log f(x,\theta) \cdot f(x,\theta) \,dx
+=\int_x T_n(x) \cdot \frac{\frac{d}{d \theta f(x,\theta)}}{f(x,\theta)} \cdot f(x,\theta) \,dx
+\]\[
+\int_x T_n(x) \cdot \frac{d}{d \theta} f(x,\theta)\,dx
+= \frac{d}{d \theta} \int_x T_n(x) f(x,\theta) \,dx
+=\frac{d}{d \theta} E(T_n(x))
+\]
+Como $T_n(x)$ es insesgado:
+\[
+=\frac{d}{d \theta} g(\theta)=g'(\theta)
+\]
+
+Usamos la desigualdad de Cauchy-Schwarz que relaciona varianza y covarianza
+\[
+cov(X,Y)=\sqrt{Var(X) \cdot Var(Y)}
+\]
+entonces,
+\[
+(g'(\theta)^2)=(cov(T_n(x)\cdot S_x(\theta)))^2 \leq Var(T_n(x)) \cdot Var(S_x(\theta))
+=Var(T_n(x)) \cdot n \cdot I_{x_1}(\theta)
+\]
+\[
+    Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
+\]
+
+\end{proofs}
+
+La varianza de un estimador insesgado es como mínimo $\frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}$
+
+Nota: Bajo las mismas condiciones de regularidad de Craner-Rao puede estiamrse
+en el caso que $T_n(x)$ sea un estimador de $\theta$ con $Var(T_n(x))<\infty$
+
+\[
+    Var(T_n(x)) \geq \frac{1}{n \cdot I_{x_1}(\theta)}= \frac{1}{I_n(\theta)}
+\]
+
+
+La demostración es anaáloga a la anterior.
+
+\subsubsection*{Ejemplo}
+
+
+\(
+X_1,\dots,X_n \sim B(p) \quad p \in (0,1)
+\\I_n(\theta)=n \cdot I_{x_1}(\theta)=\frac{n}{p(1-p)}
+\)
+
+Si quiero estimar p, ¿cuál es la cota CR para cualquier estimador insesgado de P?
+
+\(
+Var(T_n(x)) \geq \frac{1}{n \cdot I_{x_1}(p)}=\frac{p(1-p)}{n}
+\)
+
+Supongamos que nuestro estimador para p es $\bar{X}$
+
+$Var(\frac{\sum_{i=1}^{n}}{n})=\frac{1}{n^2}Var(\sum_{i=1}^{n} x_i)
+    =\frac{n \cdot p(1-p)}{n^2}=\frac{p(1-p)}{n}$
+
+Hemos visto que,como consecuencia del Teorema Central del Limite,  la velocidad de convergencia de los errores a cero es del orden $\frac{1}{\sqrt{n}}$
+
+Si $X_1,\dots,X_n$ i.i.d. $P_\theta \in P,\theta \in \Theta \subseteq \mathbb{R}$ y f($x,\theta$)
+verifica las condiciones de regularidad de Craner-Rao, es decir, si la familia es regular.
+
+$\sqrt{n}(T_n(x)-g(\theta)) \xrightarrow{L} N(0,V_T^2(\theta))$
+
+donde $V_T^2(\theta)$ es la varianza asintótica del estimador y $\sqrt{n}$ es la normalización
+adecuada como consecuencia del TCL.
+
+Es equivalente, $T_n(x) \simeq N(g(\theta),\frac{V_T^2(\theta)}{n})$
+
+Bajo esas condiciones de regularidad, la varianza $\frac{V_T^2(\theta)}{n}$
+cumple también la cota de Craner-Rao
+
+\subsubsection*{Ejemplo:}
+
+\(
+X_1,\dots,X_n \quad i.i.d \quad U(0,\theta) \quad \theta>0
+\\f(x,\theta)= \frac{1}{\theta} \quad
+\)
+(Ejercicio 3 apartado b)
+
+Se demuestra que $X_{(n)}$ es un estimador consistente para $\theta$, pero la velocidad de convergencia no es $\frac{1}{\sqrt{n}}$
+
+\subsection{Estimador Consistente Asintóticamente Normal (CAN) y \texorpdfstring{\\}{ } Asintóticamente Eficiente (AE)}
+
+Sea $X_1,\dots,X_n$ m.a.s. de $P_\theta, \theta \in \Theta \subseteq \mathbb{R}$
+con densidad $f(x,\theta)$ y $T_n(x)$ estimador insestado de g($\theta$) con una Var($T_n(x))<\infty$
+y que verifica las condiciones de regularidad DE Craner-Rao, entonces:
+
+\[
+    Var(T_n(x)) \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
+\]
+
+,es decir,
+
+\[
+    \frac{V_T^2(\theta)}{n} \geq \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}
+\]
+\[
+    V_T^2(\theta) \geq \frac{(g'(\theta))^2}{I_{x_1}(\theta)}
+\]
+
+Concretamente un estimador CAN será mejor cuanto menor sea la varianza asintótica.
+Si la varianza del estimador original es igual a la cota de CRaner-Rao, decimos que $T_n(x)$ es CAN y asintóticamente eficiente (AE)
+
+\textbf{\textit{Definición: }}$X_1,\dots,X_n$ m.a.s.$P_\theta, \theta \in \Theta \subseteq \mathbb{R}, f(x,\theta), T_n(x)$
+es un estimador CAN y AE de g($\theta$) si es CAN y $V_T^2=\frac{(g'(\theta))^2}{I_{x_1}(\theta)}$, es decir si
+\[
+    \sqrt{n}(T_n(x)-g(\theta))\xrightarrow{L}N(0,\frac{(g'(\theta))^2}{I_{x_1}(\theta)})
+\]
+
+
+\subsubsection*{Ejemplo:}
+
+\(
+X \sim P(\lambda) \quad \lambda>0 \quad f(x,\theta)=\frac{e^{-\lambda}\cdot \lambda^x}{x!} \quad x=0,1,2,\dots
+\\ E(X)=\lambda \quad Var(X)=\lambda
+\\ \log F(x,\theta)=-\lambda + x \cdot \log \lambda - \log x!
+\)
+
+Buscamos un estimador CAN y AE para $\lambda$.
+
+Por el teorema central del límite, la media muestral es CAN para la media poblacional.
+
+\(
+\sqrt{n}(\bar{X}-\lambda) \xrightarrow{L} N(0,\lambda)
+\quad o \quad \bar{X} \simeq N(\lambda,\frac{\lambda}{n})
+\)
+
+Para comprobar si $\bar{X}$ es AE, debemos comprobar que $\frac{\lambda}{n}$ es igual a $\frac{1}{n \cdot I_{x_1}(\lambda)}$
+
+\(
+S_x(\lambda)=\frac{x-\lambda}{\lambda} \quad I_{x_1}=\frac{1}{\lambda}
+\)
+
+La varianza de $\bar{X}$ coincide con la cota de Craner-Rao, por lo que es un estimador
+$\\$ asintóticamente eficiente
+($\frac{1}{n\cdot I_{x_1}(\lambda)}=\frac{1}{n\cdot \frac{1}{\lambda}}=\frac{\lambda}{n}$)
+
+\subsubsection*{Ejemplo:}
+
+\(
+X \sim exp(\lambda) \quad f(x,\lambda)=\lambda \cdot e^{-\lambda \cdot x} \quad x>0, \quad \lambda>0
+\\ E(X) = \frac{1}{\lambda} \quad Var(X)=\frac{1}{\lambda^2}
+\\ \log f(x,\lambda)= \log \lambda - \lambda \cdot X
+\\ S(\lambda,x)=\frac{1}{\lambda}-X
+\\ \sqrt{n}(\bar{X}-\frac{1}{\lambda}) \xrightarrow{L} N(0,\frac{1}{\lambda^2})
+\\ \bar{X} \simeq N(\frac{1}{\lambda},\frac{1}{n \cdot \lambda^2})
+\)
+
+Sabemos que $\bar{X}$ es CAN para $\frac{1}{\lambda}$, es decir para
+$g(\lambda)=\frac{1}{\lambda} ;  g'(\lambda)=\frac{-1}{\lambda^2}$
+.
+
+Queremos ver si tambien es AE para la media poblacional. Tenemos que comprobar que $\frac{V_T^2(\lambda)}{n}=\frac{1}{\lambda^2}$
+coincida con la cota CR.
+
+\[
+I_{x_1}=\frac{1}{\lambda^2} \quad \frac{(g'(\theta))^2}{n \cdot I_{x_1}(\theta)}=
+\frac{(\frac{-1}{\lambda^2})^2}{n \cdot \frac{1}{\lambda^2}}=\frac{1}{n \cdot \lambda^2}
+\]
+
+¿Y como obtendríamos un estimador AE para $\lambda$?
+Utilizando el delta método.
+
+Si $T_n(x)$ es CAN para $\theta \in \Theta \subseteq \mathbb{R}$ y g es una función con derivada no nula,
+entonces $g(T_n(x))$ es CAN para $g(\theta)$ con varianza $\frac{V_T^2}{n}\cdot (g'(\theta))^2$
+
+$$\sqrt{n}(T_n(x)-\theta) \xrightarrow{L}N(0,V_T^2(\theta))$$
+
+$$\sqrt{n}(g(T_n(x))-g(\theta)) \xrightarrow{L} N(0,V_T^2(\theta)\cdot(g'(\theta))^2)$$
+
+Volviendo al ejemplo, tras esta breve parte teórica, ya vimos que $\sqrt{n}(\bar{X}-\frac{1}{\lambda})\xrightarrow{L} N(0,\frac{1}{\lambda})$
+Consideraremos que $\theta=\frac{1}{\lambda^2}$.
+
+Pasos:
+\begin{enumerate}
+    \item $\sqrt{n}(\bar{X}-\theta)\xrightarrow{L}N(0,\theta^2)$
+    \item Delta método:
+          \[
+          g(\theta)=\frac{1}{\theta} \quad;\quad g'(\theta)\frac{-1}{\theta^2}
+          \]
+          \[ 
+          \sqrt{n}(g(\bar{X})-g(\theta)) \xrightarrow{L} N(0,\theta^2(\frac{-1}{\theta^2})^2)
+          \]
+          \[
+          \sqrt{n}(\frac{1}{\bar{X}}-\frac{1}{\theta}) \xrightarrow{L} N(0,\frac{1}{\theta^2})
+          \]
+    \item $ \sqrt{n}(\frac{1}{\bar{X}}-\lambda) \xrightarrow{L} N(0,\lambda^2) \quad o \quad
+              \frac{1}{\bar{X}}\eqsim N(\lambda,\frac{\lambda^2}{n})$
+\end{enumerate}
+
+Entonces, $\frac{1}{\bar{X}}$ es CAN para $\lambda$ y $\frac{V_T^2(\lambda)}{n}=\frac{\lambda^2}{n}$
+
+Ahora nos cuestionamos, ¿es $\frac{1}{\lambda}$ AE?
+
+Teniamos que $I_{x_1}(\lambda)=\frac{1}{\lambda^2}$, por lo que la cota CR será $\frac{1}{n \cdot I_{x_1}(\lambda)}=\frac{\lambda^2}{n}$.
+Es un estimador asintóticamente eficiente.
+
+\textbf{Resultado: }Todos los estimadores CAN que se obtienen usando el delta método a partir de un estimador asintóticamente eficiente,
+son asintóticamente eficientes.
+
+(La demostracción era tarea)
+
+\subsubsection{Estimadores razonables}
+
+Los estimadores CAN y AE son estimadores con propiedades razonables, pero podemos tener más de un estimador razonable.
+
+Sean $T_n(x)$ estimador CAN para g($\theta$) y $G_n(x)$ estimador CAN para g($\theta$)
+\begin{itemize}
+    \item Si uno de los 2 es AE y el otro no, el estimador AE es mejor.
+    \item Si ambos son AE, será mejor el que tenga una menor varianza asintótica($V_T^2$).
+\end{itemize}
+
+Para ver cual tiene una menor varianza asintótica, usamos la eficiencia relativa asintótica.
+
+\textbf{\textit{Definición: }} $X_1,\dots,X_n$ i.i.d. $\{ P_\theta: \theta \in \Theta \}$, sean $T_n(x)$
+y $G_n(x)$ dos estimadores CAN de $g(\theta)$
+
+\[
+    ARE_{TG}(\theta)=\frac{V_G^2(\theta)}{V_T^2(\theta)}
+\]
+
+Si $ARE_{TG}(\theta)$ es menor que 1, $T_n(x)$ es mejor. En cambio si ARE es mayor que 1, $G_n(x)$ es mejor.

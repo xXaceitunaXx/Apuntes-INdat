@@ -1,0 +1,75 @@
+\subsubsection{Intervalos de confianza y contrastes de hipótesis uniparamétricos}
+
+Ya hemos visto como estimar el EMV en el caso uniparamétrico. Ahora vamos a ver como se hacen los intervalos de confianza y los contrastes de hipótesis.
+
+\hspace{-1cm}\noindent\begin{tabular}{r}
+    \textbf{Ejemplo}  \\ \hline \ \\
+\end{tabular}\\
+Sean $X_1\dots X_n\sim B(\theta)$ con $0<\theta < 1$, $f(x,\theta)=\theta^x(1-\theta)^{1-x}$, $E(X)=\theta$\ y\ \ $Var(X)=\theta(1-\theta)$
+
+Recordemos que el EMV para $X\sim B(\theta)$ es $\hat\theta_n=\overline{X}$
+$$I_1(\theta)=-E\Big(\frac{\partial^2}{\partial\theta^2}ln(f(x,\theta))\Big)=\frac{\theta^2-2\theta^2+\theta}{\theta^2(1-\theta)^2}=\frac{1}{\theta(1-\theta)}$$
+
+Por lo tanto: 
+$$\sqrt{n}(\overline{X}-\theta)\overset{\mathcal{L}}{\longrightarrow}N\big(0,\theta(1-\theta)\big)$$
+
+Usando esta distribución asintótica podemos construir \textbf{intervalos de confianza} para $\theta$.
+$$P_\theta\Bigg(\underbrace{\frac{\sqrt{n}|\overline{X}-\theta|}{\sqrt{\theta(1-\theta)}}}_{N(0,1)}<\zeta_{1-\frac{\alpha}{2}}\Bigg)=1-\alpha$$
+
+Buscamos el cuantil $\zeta_{1-\frac{\alpha}{2}}$ que hace que la probabilidad sea $1-\alpha$
+$$P_\theta\Bigg(-\zeta_{1-\frac{\alpha}{2}}<\frac{\sqrt{n}(\overline{X}-\theta)}{\sqrt{\theta(1-\theta)}}<\zeta_{1-\frac{\alpha}{2}}\Bigg)=1-\alpha$$
+
+Utilizamos la información de Fischer $I_n(\theta)=\frac{n}{\theta(1-\theta)}$ para depejar $\theta$
+$$P_\theta\Bigg(-\zeta_{1-\frac{\alpha}{2}}<\frac{(\overline{X}-\theta)}{\sqrt{\frac{1}{I_n(\theta)}}}<\zeta_{1-\frac{\alpha}{2}}\Bigg)=1-\alpha$$
+$$P_\theta\Bigg(\overline{X}-\zeta_{1-\frac{\alpha}{2}}\sqrt{\frac{1}{I_n(\theta)}}<\theta<\overline{X}+\zeta_{1-\frac{\alpha}{2}}\sqrt{\frac{1}{I_n(\theta)}}\Bigg)=1-\alpha$$
+
+    \textit{\textbf{Definición:}} La \textbf{Información de Fischer observada }se traduce en sustituir la información de Fischer esperada por su EMV. Como $\hat\theta_n$ es CAN para $\theta$, se tiene que
+    $$If_{obs}\overset{p}{\longrightarrow}If_{esp}$$
+
+\noindent En nuestro caso particular consiste en reemplazar $I_n(\theta)=\frac{n}{\theta(1-\theta)}$ por $I_n(\hat\theta)=\frac{n}{\overline{X}(1-\overline{X})}$, luego:
+$$P_\theta\Bigg(\overline{X}-\zeta_{1-\frac{\alpha}{2}}\sqrt{\frac{\overline{X}(1-\overline{X})}{n}}<\theta<\overline{X}+\zeta_{1-\frac{\alpha}{2}}\sqrt{\frac{\overline{X}(1-\overline{X})}{n}}\Bigg)=1-\alpha$$
+
+Este tipo de inferencia basada en la verosimilitud se llama \textbf{inferencia de Wald}.\\
+
+Para los contrastes de hipótesis vamos a definir tres estadísticos que nos sirven para hacer inferencia basada en la verosimilitud.
+\begin{enumerate}
+    \item \textbf{Estadístico de Razón de Verosimilitud}\\\ \\
+    Definamos $\lambda (X)$
+    $$\lambda (X)=\lambda (X_1,\dots ,X_n)=\Lambda (X)=\frac{L(\theta_0, X_1,\dots,X_n)}{\underset{\theta}{sup}\ L(\theta,X_1,\dots,X_n)}=\frac{L(\theta_0, X_1,\dots,X_n)}{L(\hat\theta_n, X_1,\dots,X_n)}\in [0,1]$$
+    $H_0$ se rechazará para valores bajos del estadístico. 
+    Ahora vamos a hallar la \textbf{región crítica del test} $\lambda (X)<k$. Para hacerlo más sencillo, se puede escribir con la log-verosimilitud:
+    $$Q_L=-2ln(\lambda (X))=-2\big(ln(L(\hat\theta_n,X_1\dots,X_n))-ln(L(\theta_0,X_1\dots,X_n))\big)$$
+    En este caso, se rechazará $H_0$ para valores grandes. La región crítica del test será $Q_L>C$. 
+    Necesitamos conocer la distribución asintótica de $Q_L$, algo que veremos más adelante.
+
+    \item \textbf{Estadístico de Wald}\\\ \\
+    Bajo las condiciones de regularidad de Cramer-Rao podemos escribir $ln(L(\theta_0,X))$ como \textbf{desarrollo de Taylor} en torno a $\hat\theta_n$ como:
+    $$ln(L(\theta_0,X))\approx ln(L(\hat\theta_n,X))+(\theta-\hat\theta_n)\overbrace{\frac{\partial}{\partial\theta}ln(L(\hat\theta_n,X))}^{0}+\frac{(\theta-\hat\theta_n)^2}{2}\frac{\partial^2}{\partial\theta^2}ln(L(\hat\theta_n,X))$$
+    Recordemos que $\hat\theta_n$ es el EMV, y por tanto el valor de su primera derivada es nula, pero el valor de su segunda derivada no tiene por qué serlo.
+Ahora:
+    $$Q_L=-2\big(ln(L(\hat\theta_n,X))-ln(L(\theta_0,X))\big)=-2(ln(L(\theta_0,X))+\frac{(\theta-\hat\theta_n)^2}{2}\frac{\partial^2}{\partial\theta^2}ln(L(\hat\theta_n,X))-ln(L(\theta_0,X)))=$$
+    $$=-2\Big(\frac{(\theta-\hat\theta_n)^2}{2}\frac{\partial^2}{\partial\theta^2}ln(L(\hat\theta_n,X))\Big)=(\theta-\hat\theta_n)^2\Big(\underbrace{-\frac{\partial^2}{\partial\theta^2}ln(L(\hat\theta_n,X))}_{\text{I. de Fischer observada}}\Big)=$$
+    $$=(\theta-\hat\theta_n)^2I_n(\theta)=\frac{n(\theta-\hat\theta_n)^2}{Var(\hat\theta_n)}=Q_W\longleftarrow\text{ \textbf{Estadístico de Wald}}$$
+    $Q_L$ y $Q_W$ son asintóticamente equivalentes.
+
+    \item \textbf{Estadístico de Rao}\\\ \\
+    $$Q_R=R=\frac{\overbrace{\frac{\partial}{\partial\theta}ln(L(\theta_0,X))}^{\text{Score}}}{I_n(\theta)}$$
+    Habíamos visto que 
+    $$ln(L(\theta_0,X))\approx ln(L(\hat\theta_n,X))+\frac{(\theta-\hat\theta_n)^2}{2}I_n(\theta)$$
+    Ahora vamos a calcular el desarrollo de Taylor para la función score en un entorno de $\hat\theta_n$
+    $$S(\theta_0)\approx \underbrace{S(\hat\theta_n)}_{0}+(\theta_0-\hat\theta_n)\frac{\partial^2}{\partial\theta^2}ln(L(\hat\theta_n,X))$$
+    \textit{A partir de este punto el profesor hace una demostración que no es correcta, por lo que he preferido no incluirla, aunque las conclusiones que hay a continuación sí son validas}\\\ \\
+    Este resultado demuestra que $Q_R$ es asintóticamente equivalente a $Q_W$ y $Q_L$. 
+\end{enumerate}
+
+Los tres estadísticos rechazarán $H_0$ para valores grandes. Para ver qué distribución siguen, usamos $Q_W$.\\
+Sabemos que un EMV es CAN y AE, por lo que:
+$$\sqrt{n}(\hat\theta_n-\theta)\overset{\mathcal{L}}{\longrightarrow}N\Big(0,\frac{1}{I_1(\theta)}\Big)\text{ y }\frac{\sqrt{n}(\hat\theta_n-\theta)}{\sqrt{\frac{1}{I_1(\theta)}}}\overset{\mathcal{L}}{\longrightarrow}N(0,1)$$
+
+$Q_W$ es $\displaystyle\frac{\sqrt{n}(\hat\theta_n-\theta)}{\sqrt{\frac{1}{I_1(\theta)}}}$ al cuadrado, por lo que, despejando, se obtiene que:
+$$n(\theta-\hat\theta_n)^2I_1(\theta)\overset{\mathcal{L}}{\longrightarrow}\chi^2_1$$
+En este punto es conveniente recordar que si una variable $Z\sim N(0,1)$ su cuadrado $Z^2\sim \chi^2_1$
+
+Las distribuciones exactas de $Q_L$, $Q_W$ y $Q_R$ son diferentes, pero como las tres son \textbf{asintóticamente equivalentes}, tenderán a seguir una distribución $\chi^2_1$. 
+Por tanto, para determinar el valor de la región crítica solo habría que calcular el siguiente percentil:
+$$P_{\theta}(Q_i>c)\approx 1-\alpha\Longrightarrow  c=\chi^2_{1,1-\alpha}$$

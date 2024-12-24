@@ -8,8 +8,7 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-\usepackage[english]{babel}
+\usepackage[english, spanish]{babel}
 \usepackage{framed}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tcolorbox}
@@ -36,7 +35,9 @@
 \declaretheorem[style=prcpsty,numberlike=theorem]{proofs}
 \tcolorboxenvironment{proofs}{colback=LightGreen}
 
-\pgfmathdeclarefunction{gauss}{2}{\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}}
+\declaretheoremstyle[name={..}, numbered=no,]{prcpsty_nonum}
+\declaretheorem[style=prcpsty_nonum,unnumbered]{proofs*} % Unnumbered version
+\tcolorboxenvironment{proofs*}{colback=LightGreen}
 
 \setstretch{1.2}
 \geometry{
@@ -60,10 +61,10 @@
 \\ [2.0cm]
 \HRule{1.5pt} \\
 \LARGE \textbf{\uppercase{Inferencia Estadística II}
-\HRule{2.0pt} \\ [0.6cm] \LARGE{Tema 2: Simulación y Bootstrap} \vspace*{10\baselineskip}}
+\HRule{2.0pt} \\ [0.6cm] \LARGE{Tema 5: Contrastes basados en estadísticos de rangos} \vspace*{10\baselineskip}}
 }
 
-\author{\textbf{Autores} \\
+\author{\textbf{Author} \\
     Victor Elvira Fernández, Tomás Ruiz Rojo, Juan Horrillo Crespo \\
     Universidad de Valladolid \\
     \date{\today}}
@@ -77,8 +78,15 @@
 \newpage
 
 % ------------------------------------------------------------------------------
+% \include{src/clase2911}
+% \include{src/clase1212}
 
-\include{src/clase1T2}
+% \include{src/Clase1320}
+% \include{src/clase2012}
+
+\include{src/test_rangos}
+\include{src/observaciones_coincidientes}
+\include{src/modelo_poblacional}
 
 \newpage
 
@@ -88,9 +96,9 @@
 
 \begin{thebibliography}{9}
     \bibitem{diapos1}
-    Juan Camilo Yepes Borrero, \\ \textit{Apuntes Manuscritos Tema 2}. \\ Universidad de Valladolid 2024.
+    Juan Camilo Yepes Borrero, \\ \textit{Apuntes Manuscritos Tema 5}. \\ Universidad de Valladolid 2024.
     \bibitem{diapos2}
-    Yolanda Larriba González, \\ \textit{Apuntes INFE2 Tema 2}. \\ Universidad de Valladolid 2023.
+    Yolanda Larriba González, \\ \textit{Apuntes INFE2 Tema 5}. \\ Universidad de Valladolid 2023.
 \end{thebibliography}
 
 % ------------------------------------------------------------------------------

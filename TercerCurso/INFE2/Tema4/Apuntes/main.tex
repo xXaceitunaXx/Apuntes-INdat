@@ -8,14 +8,15 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-\usepackage[english]{babel}
+\usepackage[english, spanish]{babel}
 \usepackage{framed}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tcolorbox}
 \usepackage{pgfplots}
 \usepackage{tikz}
 \usepackage{bbm}
+\usepackage{enumitem}
+
 \pgfplotsset{compat=1.18}
 
 \colorlet{LightGray}{White!90!Periwinkle}
@@ -35,6 +36,10 @@
 \declaretheoremstyle[name=Demostración,]{prcpsty}
 \declaretheorem[style=prcpsty,numberlike=theorem]{proofs}
 \tcolorboxenvironment{proofs}{colback=LightGreen}
+
+\declaretheoremstyle[name={..}, numbered=no,]{prcpsty_nonum}
+\declaretheorem[style=prcpsty_nonum,unnumbered]{proofs*} % Unnumbered version
+\tcolorboxenvironment{proofs*}{colback=LightGreen}
 
 \pgfmathdeclarefunction{gauss}{2}{\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}}
 
@@ -57,13 +62,13 @@
 % ------------------------------------------------------------------------------
 
 \title{ \normalsize \textsc{}
-\\ [2.0cm]
-\HRule{1.5pt} \\
-\LARGE \textbf{\uppercase{Inferencia Estadística II}
-\HRule{2.0pt} \\ [0.6cm] \LARGE{Tema 2: Simulación y Bootstrap} \vspace*{10\baselineskip}}
+    \\ [2.0cm]
+    \HRule{1.5pt} \\
+    \LARGE \textbf{\uppercase{Inferencia Estadística II}
+    \HRule{2.0pt} \\ [0.6cm] \LARGE{Tema 4: Técnicas de Bondad de Ajuste} \vspace*{10\baselineskip}}
 }
 
-\author{\textbf{Autores} \\
+\author{\textbf{Author} \\
     Victor Elvira Fernández, Tomás Ruiz Rojo, Juan Horrillo Crespo \\
     Universidad de Valladolid \\
     \date{\today}}
@@ -78,7 +83,12 @@
 
 % ------------------------------------------------------------------------------
 
-\include{src/clase1T2}
+% \include{src/clase16}
+% \include{src/practica6}
+\include{src/introduccion_ajuste}
+\include{src/test_kolmogorov}
+\include{src/test_shapiro}
+\include{src/examen_parcial}
 
 \newpage
 
@@ -88,9 +98,9 @@
 
 \begin{thebibliography}{9}
     \bibitem{diapos1}
-    Juan Camilo Yepes Borrero, \\ \textit{Apuntes Manuscritos Tema 2}. \\ Universidad de Valladolid 2024.
+    Juan Camilo Yepes Borrero, \\ \textit{Apuntes Manuscritos Tema 4}. \\ Universidad de Valladolid 2024.
     \bibitem{diapos2}
-    Yolanda Larriba González, \\ \textit{Apuntes INFE2 Tema 2}. \\ Universidad de Valladolid 2023.
+    Yolanda Larriba González, \\ \textit{Apuntes INFE2 Tema 4}. \\ Universidad de Valladolid 2023.
 \end{thebibliography}
 
 % ------------------------------------------------------------------------------
