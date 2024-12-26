@@ -690,6 +690,76 @@ $$
 Y_i=\beta_0+\beta_1X_{i1}+\beta_2X_{i2}+\dots+\beta_{p-1}X_{i,p-1}+\varepsilon_i\quad\quad\quad\varepsilon_i\sim N(0,\sigma^2)
 $$
 
-Al igual que en el modelo simple, hacemos los 4 supuestos sobre la coomponente aleatoria.
+Al igual que en el modelo simple, hacemos los 4 supuestos sobre la componente aleatoria:
 
+\begin{enumerate}
+    \item \textbf{Linealidad:} Los $\varepsilon_i$ tienen media 0
+    \item \textbf{Homogeneidad de la varianza: }Los $\varepsilon_i$ tienen la misma varianza, usualmente desconocida
+    \item \textbf{Normalidad: }Los $\varepsilon_i$ tienen distribución normal
+    \item \textbf{Independencia: }Los $\varepsilon_i$ son independientes entre si e independientes de los predictores
+\end{enumerate}
 
+Los parámetros $\beta_i$ a veces se les llama coeficientes de regresión parcial. Hay que tener en cuenta que el término "lineal" hace referencia a los parámetros, no a las variables explicativas. Otra cosa a tener en cuenta es la multicolinealidad; si las variables explicativas están altamente correladas entre sí, es posible que no obtengamos buenos estimadores de nuestros parámetros. Tratarán de explicar la misma parte de la variabilidad de la variable respuesta.
+
+\subsubsection{Coeficiente de determinación en el model de regresión lineal múltiple}
+
+El coeficiente $R^2$ no o es útil para comparar modelos de regresión con distinto número de variables explicativas, ya que puede aumentar independientemente de si las variables explicativas añadidas sean importantes o no. En su lugar, utilizamos el coeficiente de determinación múltiple ajustado.
+
+$$
+R^2_\alpha=1-\frac{MSE}{MST}=1-\left(\frac{n-1}{p-1}\right)\frac{SSE}{SST}
+$$
+
+Este nuevo coeficiente ajusta el valor de $R^2$ penalizándolo por cada variable explicativa añadida. Entonces, si al añadir una nueva variable $R^2_\alpha$ aumenta mucho será porque esa variable es importante para predecir Y y viceversa. Una diferencia importante es que este coeficiente puede disminuir al introducir una nueva variable en el modelo.
+
+\subsubsection{Validación del modelo de regresión lineal múltiple}
+
+La validación se hace de la misma forma que en el caso simple; con ayuda de herramientas gráficas, contrastes de hipótesis y tests de normalidad para los residuos. Si no se verifican las asunciones podemos transformar X si la relación es no lineal o transformar Y si se viola el principio de homogeneidad de varianzas o la normalidad.\\
+En el modelo de regresión múltiple introducimos el concepto de multicolinealidad. Decimos que hay multicolinealidad cuando existe correlación entre las variables independientes. La situación ideal es que las variables explicativas sean independientes, y puede resultar un problema cuando la correlación es muy alta. Cuando la correlación sea un problema de multicolinealidad tendremos que:
+
+\begin{itemize}
+    \item Correlaciones altas entre pares de predictores
+    \item Los estimadores de los coeficientes tienen un error estándar alto
+    \item Contraste significativo, $R^2$ alto, pero los t-test asociados a los parámetros no rechazan $\beta_i=0$
+    \item Las sumas de cuadrados de tipo I son muy diferentes a la de tipo III
+    \item Grandes cambios en los coeficientes de regresión estimados cuando se añaden o eliminan variables al modelo
+\end{itemize}
+
+Para detectar multicolinealidad, usamos una medida llamada vif (\textit{Variance Inflation Factors})
+
+$$
+VIF_k=\frac{1}{1-R^2_k}
+$$
+
+Donde $R^2_k$ es el coeficiente de determinación obtenido en el modelo de regresión de $X_k$ sobre el resto de predictores. Si el $VIF_k$ es mayor que 10 indica que hay un problema muy serio de multicolinealidad. También se define la tolerancia como
+
+$$
+T_k=1-R^2_k=\frac{1}{VIF_k}
+$$
+
+Tolerancias < 0.1 serán indicadores de multicolinealidad.
+
+\subsubsection{Criterios de selección de un modelo}
+
+¿Cómo podemos elegir cuando un modelo es mejor que otro? Podemos diferenciar dos casos:
+
+\begin{itemize}
+    \item Con el mismo número de predictores podemos definir $R^2_p$, donde p hace referencia al número de parámetros en el modelo
+    $$
+    R^2_p=\frac{SSR_p}{SST}
+    $$
+
+    Serán modelos con $R^2_p$ mayores.
+
+    \item Con distinto número de predictores, elegimos el modelo que tenga mayor $R^2_\alpha$, que penaliza en función del número de parámetros de modelo.
+
+\end{itemize}
+
+Existen también algoritmos automáticos de selección de variables basados en los p-valores asociados a los contrastes $H_0:\beta_k=0$ vs $H_1:\beta_k\neq0$  
+
+\begin{itemize}
+    \item \textbf{Selección hacia delante (forward)}\begin{enumerate}
+        \item Seleccionar un p-valor
+        \item Ajustar los modelos individuales
+        \item 
+    \end{enumerate}
+\end{itemize}
