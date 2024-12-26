@@ -524,7 +524,172 @@ Sin embargo, eso no suele ser posible. Podemos utilizar tres métodos distintos,
     \item \textbf{Bootstrap: }\textit{visto en Infe II}.
 \end{itemize}
 
+\subsection{El modelo de regresión lineal en notación matricial}
 
+El modelo de regresión lineal simple se puede formular en forma matricial como:
 
+$$
+\underbrace{\begin{pmatrix}
+    Y_1\\
+    Y_2\\
+    \vdots\\
+    Y_n
+\end{pmatrix}}_{\mathbf{Y}_{\text{n x 1}}} = \underbrace{\begin{pmatrix}
+    1 & X_1\\
+    1 & X_2\\
+    \vdots & \vdots\\
+    1 & X_n
+\end{pmatrix}}_{\mathbf{X}_{\text{n x 2}}}\underbrace{\begin{pmatrix}
+    \beta_0\\
+    \beta_1
+\end{pmatrix}}_{\mathbf{\beta}_{\text{2 x 1}}}+\underbrace{\begin{pmatrix}
+    \varepsilon_1\\
+    \varepsilon_2\\
+    \vdots\\
+    \varepsilon_n
+\end{pmatrix}}_{\mathbf{\varepsilon}_{\text{n x 1}}}
+$$
+
+Donde:
+\begin{itemize}
+    \item \textbf{Y} es el vector de respuestas
+    \item $\beta$ es el vector de parámetros
+    \item \textbf{X} es la matrix de diseño
+    \item $\varepsilon$ es el vector de errores, que sigue una distribución $N(0,\sigma^2\mathcal{I})$. Como los errores son independientes, la covarianza entre ellos es 0
+\end{itemize}
+
+\subsubsection{Estimación de los coeficientes de regresión en notación matricial}
+
+Utilizando el método de mínimos cuadrados para ajustar el modelo. 
+
+$$
+min\ \sum_{i=1}^{n}\varepsilon_i^2=\begin{pmatrix}
+    \varepsilon_1 & \varepsilon_2 & \cdots & \varepsilon_n
+\end{pmatrix}\begin{pmatrix}
+    \varepsilon_1 \\
+    \varepsilon_2 \\
+    \vdots \\
+    \varepsilon_n \\
+\end{pmatrix}
+$$
+
+Derivando e igualando a 0 tenemos que:
+
+$$
+\hat\beta=\mathbf{(X'X)^{-1}X'Y}
+$$
+
+Los valores ajustados de la recta de regresión se escribirán como
+
+$$
+\hat Y=\mathbf{X}\hat\beta
+$$
+
+Y la expresión para los residuos será:
+
+$$
+e=\mathbf{Y-X\hat\beta}
+$$
+
+La matriz
+
+$$
+\mathbf{H}_{\text{n x n}}=\mathbf{X(X'X)^{-1}X'}
+$$
+
+es la matriz hat que juega un papel muy importante en la identificación de puntos influyentes. Esta matriz es simétrica e idempotente (idempotencia: H=HH). La matriz de varianzas y covarianzas de los residuos se puede escribir en términos de esta matriz:
+
+$$
+Var(\mathbf{e})=\sigma^2(\mathcal{I}-\mathbf{H})
+$$
+
+En la diagonal de la matriz hat se encuentran los leverages $h_{ii}$
+
+\subsubsection{ANOVA en notación matricial}
+
+En notación matricial se tienen las siguientes definiciones:
+
+$$
+SST= \mathbf{Y'}\left(\mathcal{I}-\frac{1}{n}J\right)\mathbf{Y}
+$$
+
+Donde \textbf{J} es una matrix n x n con 1 en todas las posiciones
+
+$$
+SSR= \mathbf{Y'}\left(H-\frac{1}{n}J\right)\mathbf{Y}
+$$
+
+$$
+SSE= \mathbf{Y'}\left(\mathcal{I}-H\right)\mathbf{Y}
+$$
+
+Se sigue cumpliendo que 
+
+$$
+SST=SSR+SSE
+$$
+
+\subsubsection{Distribución de los parámetros en notación matricial}
+
+\begin{theorem}
+    Sea $U\sim N(\mu,\Sigma)$ un vector normal multivariante y sea $V =c+DU$ una transformación lineal de U, donde c es un vector y D una matriz. Entonces
+    $$
+    V\sim N\left(c+D\mu,D\Sigma D'\right)
+    $$
+\end{theorem}
+
+Dado que 
+
+$$
+Y\sim N(\mathbf{X}\beta, \sigma^2\mathcal{I})
+$$
+
+Y a partir del anterior teorema, sabemos que 
+
+$$
+\hat\beta\sim N(\beta, \sigma^2(\mathbf{X'X})^{-1})
+$$
+
+Y puesto que MSE es un estimador insesgado de $\sigma^2$,
+
+$$
+\hat{Var}(\hat\beta)=MSE(\mathbf{X'X})^{-1}
+$$
+
+\subsubsection{Notaci´n matricial en respuesta media y predicción}
+
+Dado un vector $\mathbf{X}_h'$, la respuesta media esperada será:
+
+$$
+\hat Y_h=\mathbf{X}_h'\hat\beta
+$$
+
+Siempre que el vector $\mathbf{X}_h'$ se encuentre dentro del scope del modelo. Este será un estimador puntual de $E(Y_h)$. La varianza estimada de este estimador será:
+
+$$
+\hat{Var}(\hat Y_h)=MSE\mathbf{X}_h'(\mathbf{X'X})^{-1}\mathbf{X}_h
+$$
+
+Para predecir una nueva observación para Y cuando conocemos los valores de la variable independiente necesitamos conocer un estimador de $Y_{h(new)}$ y su distribución. El estimador puntual es el mismo que el que usábamos para la respuesta media, pero la distribución cambia:
+
+$$
+\hat{Var}(\hat Y_{h(new)})=MSE(1+\mathbf{X}_h'(\mathbf{X'X})^{-1}\mathbf{X}_h)
+$$
+
+Para predecir la media de m nuevas observaciones, tendremos que nuestra nueva varianza será:
+
+$$
+\sigma^2\left(\frac{1}{m}+\mathbf{X}_h'(\mathbf{X'X})^{-1}\mathbf{X}_h\right)
+$$
+
+\subsection{Introducción al modelo de regresión lineal múltiple}
+
+En este caso, queremos modelizar la esperanza de una variable continua Y a partir de $p-1$ variables explicativas. Este modelo se formulará como:
+
+$$
+Y_i=\beta_0+\beta_1X_{i1}+\beta_2X_{i2}+\dots+\beta_{p-1}X_{i,p-1}+\varepsilon_i\quad\quad\quad\varepsilon_i\sim N(0,\sigma^2)
+$$
+
+Al igual que en el modelo simple, hacemos los 4 supuestos sobre la coomponente aleatoria.
 
 
