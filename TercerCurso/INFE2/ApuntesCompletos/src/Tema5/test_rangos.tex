@@ -1,0 +1,257 @@
+\subsection{Test de rangos}
+
+Caso paramétrico normal.
+
+$X_1,\dots,X_n$ i.i.d. $N(\mu_1,\sigma_1)$
+
+$Y_1,\dots,Y_n$ i.i.d. $N(\mu_2,\sigma_2)$
+
+\[
+    H_0:\mu_1=\mu_2
+\]
+\[
+    H_1: \mu_1 \neq \mu_2
+\]
+
+En el caso no paramétrico:
+
+$X_1,\dots,X_n$ i.i.d. con distribución $F$
+
+$Y_1,\dots,Y_n$ i.i.d. con distribución $G$
+
+\[
+    H_0:F=G
+\]
+\[
+    H_1: F \neq G
+\]
+
+En ambos casos el objetico es el mismo, comparar tratamientos o resultados.
+
+\textbf{Ejemplo:} 
+Digamos que se quiere contrastar la eficacia de un nuevo medicamento para una enfermedad.
+Lo primero que se tiene que hacer es diseñar un experimento para obtener los datos.
+
+\begin{center}
+    \href{https://media.tenor.com/lsbTX_Avt2AAAAAM/brushing-teeth-kowalski.gif}{Kowalski}, opciones (para diseñar el experimento xd):
+\end{center}
+
+\noindent Tenemos dos opciones...
+\begin{enumerate}
+    \item \textbf{Modelo de aleatorización}: Los datos vienen de un diseño controlado en el que los 
+    individuos de análisis han sido asignados aleatoriamente a diferentes grupos.
+    \item \textbf{Modelo poblacional:} Los datos son extraidos de una población y se asume que esa población tiene ciertas propiedades. 
+    Por ejemplo: una distribución
+\end{enumerate}
+
+\subsubsection{Modelo de aleatorización}
+
+Se dispone de N individuos. Se eligen n individuos a los que se asigna un tratamiento(una medición).
+Caso donde
+
+\[
+    X_1,\dots,X_m \quad H_0: \text{El tratamiento no tiene efecto} 
+\]
+\[
+    Y_1,\dots,Y_n \quad H_1: \text{El tratamiento tiene efecto} 
+\]
+
+El estadístico que utilicemos, rechazará $H_0$ cuando los valores de la variable considerada en los tratados sean mayores a los de control.
+Para esto, usaremos \textbf{el estadístico basado en rangos}.
+El estadístico basado en rangos, no depende de unidades de medida. Tomaremos toda la muestra y asignaremos rangos.
+
+\textbf{\textit{Definición:}} Un rango es el lugar que ocupa la observación en la muestra ordenada.
+Sean ($X_1,\dots,X_m$, $Y_1,\dots,Y_n$) nuestra muestra completa. Se ordenan los valores y se asignan rangos ($i_1,\dots,i_m,i_{m_1},i_n$)
+Esto es la permutación donde $i_k$ es el valor que ocupa la observación k-ésima en la muestra ordenada.
+
+\textbf{Ejemplo:}
+
+Tenemos $X=\{5,8,9\}$ e $Y=\{6,7,10\}$
+
+Por tanto la muestra completa será $\{5,8,9,6,7,10\}$
+
+Que ordenado $\{5,6,7,8,9,10\}$, y se le asigna un rango a cada elemento ($\{1,2,3,4,5,6\}$)
+
+\vspace{2mm}
+
+\noindent \textit{Usando notación de tuplas, ($a, b$) donde $a$ es un elemento de la muestra y $b$ el rango asociado, la anterior asignación quedaría de la siguiente manera $\{(5, 1),(6, 2),(7, 3),(8, 4),(9, 5),(10, 6)\}$}
+
+\vspace{2mm}
+
+\noindent Por tanto quedarían asignados...
+
+Rangos de X: $\{1,4,5\}$.
+
+Rangos de Y: $\{2,3,6\}$.
+
+\vspace{5mm}
+
+\noindent \textbf{Notación formal:}
+
+$R_1,\dots,R_m \longrightarrow$ rangos correspondientes a las observaciones $X_1,\dots,X_m$.
+
+$S_1,\dots,S_n \longrightarrow$ rangos correspondientes a las observaciones $Y_1,\dots,Y_n$.
+
+¿Cuando las $Y_s$ son mayores que las $X_s$?. Cuando $s_i$ sean más grandes, es decir, la suma de rangos sea más grande.
+
+\paragraph{Estadístico de suma de rangos}
+
+\textit{\textbf{Definición: }} La suma
+\[
+    W_s=s_1+\dots+s_n
+\]
+es conocida como \href{https://es.wikipedia.org/wiki/Prueba_de_los_rangos_con_signo_de_Wilcoxon}{el estadístico de Wilcoxon} de suma de rangos ($W_r=R_1+\dots+R_m$). Se rechazará $H_0$ para valores de $W_s$ grandes ($W_s>c_\alpha$).
+
+\newpage
+
+Como siempre, debemos conocer la distribución del estadístico de $W_s$ bajo $H_0$. Como la distribución es discreta, y podemos calcular lo siguiente...
+\[
+    P_{H_0}(W_s=k)=\sum_{s_1+\dots+s_n=k} P_{H_0} ((S_1,\dots,S_n)=(s_1,\dots,s_n))
+\]
+
+... encontrar la distribución de $W_s$ bajo $H_0$ se reduce a encontrar la distribución de ($S_1,\dots,S_n$).
+
+\[
+    P_{H_0} ((S_1,\dots,S_n)=(s_1,\dots,s_n))=\frac{1}{\binom{N}{n}}
+\]
+Cada resultado es igual de probable bajo $H_0$.
+
+
+\textbf{Ejemplo:}
+\noindent Dados $N=5, m=2, n=3$
+
+\[
+    \binom{N}{n}=\binom{5}{3}=\frac{5!}{3!\cdot2!}=10
+\]
+Habrá 10 posibles resultados de $s_1,s_2,s_3$.
+\[
+    \begin{array}{|c|c|c|c|c|c|}
+    \hline
+    \textbf{Tratados} & (1,2,3) & (1,2,4) & (1,2,5) & \dots & (3,4,5) \\ \hline
+    P_{H_0}((S_1, \dots, S_n) = (s_1, \dots, s_n)) & 0.1 & 0.1 & 0.1 & \dots & 0.1 \\ \hline
+    W_s & 6 &7 &8 & \dots &12 \\ \hline
+    \end{array}
+\]
+
+\noindent Distribución de \(W_s\) bajo \(H_0\):
+\[
+    \begin{array}{|c|c|c|c|c|c|c|c|}
+    \hline
+    k & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\ \hline
+    P_{H_0}(W_s = k) & 0.1 & 0.1 & 0.2 & 0.2 & 0.2 & 0.1 & 0.1 \\ \hline
+    \end{array}
+\]
+
+\noindent Rechazaremos $H_0$ cuando el valor de $W_s$ sea poco probable.
+
+\vspace{2mm}
+
+\noindent \textbf{Observaciones:}
+
+La distribución de $W_s$ no es la misma si hubiéramos asignado n a tratamientos y n a control. Lo que es lo mismo, $W_R$ no sigue la misma distribución que $W_s$ bajo $H_0$. La distribución dependerá de n y m.
+
+\subsubsection{Estadístico de Mann-Whitney}
+
+En el caso anterior, el valor mínimo de $W_s$ corresponde a la situaciñon a la que los individuos con tratamiento toman los valores más pequeños. Donde en el ejemplo anterior, $W_s=6 \quad 6=\frac{n \cdot (n+1)}{2}$.
+Si consideramos el estadístico de Mann-Whitney,
+\[
+    W_{XY}=W_S-\frac{n(n+1)}{2}
+\]
+se nos facilitará hacer la tabla porque tomas valores $0,1,\dots,(n \cdot m)$. Tomará el valor 0 cuando todos los valores de Y son los más pequeños y el valor n $\cdot$ m  cuando todos los Y tomen los valores más grandes.
+
+Una ventaja que tiene el estadístico es que toma los mismos valores sin importar la decisión de cuántos asignar a $n$ y cuántos a $m$.
+
+Del mismo modo:
+\[
+    W_{YX}=W_R-\frac{m(m+1)}{2}
+\]
+$W_{YX}$ también toma valores 0,1,$\dots,n \cdot m$.
+
+\noindent $W_{XY}$ y $W_{YX}$ siguen la misma distribución bajo $H_0$.
+
+\noindent Existen tablas para esta distribución.
+
+\vspace{2mm}
+
+\noindent \textbf{Observaciones:}
+
+La distribución bajo $H_0$ de $W_S$ (o $W_R)$ es simétrica respecto a $\frac{n \cdot (N+1)}{2}$.
+\[
+    \forall k \quad P_{H_0} \left( W_S=\frac{n \cdot (N+1)}{2}+k\right)=
+    P_{H_0} \left( W_S=\frac{n \cdot (N+1)}{2}-k\right)
+\]
+Bajo $H_0$ X e Y están igualmente distribuidas, por lo que todos los elementos deberían ser indistinguibles en término de rangos. Por esto $W_{XY}$ y $W_{YX}$ están igualmente distribuidas bajo $H_0$.
+
+\textbf{Ejemplo del uso de las tablas:}
+\noindent Tenemos $W=10,n=6,m=4$
+
+\noindent Queremos saber $P_{H_0}(W_s \geq 35)$
+
+\noindent Tenemos las tablas para $W_{XY}=W_S-\frac{n \cdot (N+1)}{2}=W_S-21$
+
+\noindent Debemos escribir $P_{H_0}(W_s \geq 35)$ como $P_{H_0}(W_{XY} \leq a)$
+
+\noindent Sabemos que $W_S$ es simétrico a $\frac{n \cdot (N+1)}{2}=33$. Entonces...
+\[
+    P_{H_0}(W_S \geq 35)= P_{H_0}(W_S \geq 33+2)=P_{H_0}(W_S \leq 33-2)=P_{H_0}(W_S \leq 31)
+\]
+\[
+    =P_{H_0}\left(W_S-\frac{n \cdot (n+1)}{2} \leq 31-21\right)= P_{H_0} (W_{XY} \leq 10)=0.3810 (\text{Usando las tablas})
+\]
+Llegaríamos al mismo resultado usando $W_S+W_R=55$.
+\[
+    P_{H_0}(W_S \geq 35)= P_{H_0}(W_R \leq 20)= P_{H_0} \left( W_R - \frac{m \cdot (m+1)}{2} \leq 20-10\right)
+\]
+\[
+    = P_{H_0} (W_{YX} \leq 10)=0.3810
+\]
+Hay tablas hasta $n=m=10$. A partir de así usariamos la distribución asintótica.
+
+\paragraph{Forma alternativa del estadístico de Mann-Whitney}
+
+Una manera alternativa de ver el estadístico de Mann-Whitney que va a ser útil para calcular la potencia y también intervalos de confianza es la siguiente
+
+\vspace*{2mm}
+
+\textit{\textbf{Definición: }} Si $X_1,\dots,X_m$ son valores para individuos sin tratamientos y $Y_1,\dots,Y_n$ son valores para individuos con tratamiento,
+y $W_{XY}=W_S-\frac{n \cdot (n+1)}{2}$, $W_{XY}$ es también el número de pares ($X_i,Y_j$) $i=1,\dots,m$, $j=1,\dots,n$ para los que $X_i < Y_i$
+\[
+    W_{XY}= \# [(X_i,Y_j) | X_i <Y_j]
+\]
+
+\begin{proofs}
+    Sean $Y_{(1)}, \dots, Y_{(n)}$ valores ordenados de $Y_1,\dots,Y_n$ y sean $s_1,\dots,s_n$ los rangos correpondientes también ordenados,
+    \begin{itemize}
+        \item Hay $s_1-1$ observaciones menores que $Y_{(1)}$ y todas son X.
+        \[
+            \# [(X_i,Y_{(1)}) | X_i <Y_{(1)}]=S_1-1
+        \]
+        \item Hay $s_2-1$ observaciones menores que $Y_{(2)}$, de ellas una es $Y_{(1)}$ y el resto son X.
+        \[
+            \# [(X_i,Y_{(2)}) | X_i <Y_{(2)}]=S_2-1-1=S_2-2
+        \]
+        \item Hay $s_n-1$ observaciones menores que $Y_{(n)}$, de ellas n-1 son Y y el resto son X.
+        \[
+            \# [(X_i,Y_{(n)}) | X_i <Y_{(n)}]=S_n-n
+        \]
+    \end{itemize} 
+    Por lo tanto:
+    \[
+        \# [(X_i,Y_j) | X_i <Y_j]=(S_1-1)+(S_2-2)+ \dots +(S_n-n)
+    \]
+    \[    
+        =(S_1+\dots+S_n)-(1+2+\dots+n)=W_S-\frac{n \cdot (n+1)}{2}=W_{XY}
+    \]
+\end{proofs}
+
+\vspace{5mm}
+
+Distribución asintótica de $W_s$
+Si los valores $n$ y $m$ son grandes (mayores que 10), se considera que la distribución asintótica para $W_S$ bajo $H_0$ es, por el Teorema Central del Limite...
+
+\[
+    \frac{W_S-E_0(W_S)}{\sqrt{Var_{0}(W_S)}} \xrightarrow[H_0]{L} N(0,1)
+\]
+\[
+    E_0(W_S)=\frac{n \cdot (N+1)}{2} \quad Var_0(W_S)=\frac{n \cdot (N-n) \cdot (N+1)}{12}
+\]

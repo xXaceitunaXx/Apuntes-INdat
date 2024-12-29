@@ -1,0 +1,194 @@
+\documentclass{article}
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{newclude}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{bookmark}
+
+\pgfplotsset{compat=1.18}
+
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=Teorema,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=LightGray}
+
+\declaretheoremstyle[name=Ejercicio,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{exercise}
+\tcolorboxenvironment{exercise}{colback=LightOrange}
+
+\declaretheoremstyle[name=Demostración,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{proofs}
+\tcolorboxenvironment{proofs}{colback=LightGreen}
+
+\declaretheoremstyle[name={..}, numbered=no,]{prcpsty_nonum}
+\declaretheorem[style=prcpsty_nonum,unnumbered]{proofs*} % Unnumbered version
+\tcolorboxenvironment{proofs*}{colback=LightGreen}
+
+\pgfmathdeclarefunction{gauss}{2}{\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}}
+
+\setstretch{1.2}
+\geometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+    
+\newenvironment{sectionpage}[2]{
+    \clearpage
+
+    \refstepcounter{section}
+    \addcontentsline{toc}{section}{\thesection\quad #1: #2}
+    \begin{center}
+        \Huge \textbf{#1}\\
+        \vspace{0.5em}
+        \Large\textit{#2}
+    \end{center}
+    \vspace{1em}
+    \hrule height 1pt
+    \vspace{1em}
+}{
+    \vspace{1em}
+    \hrule height 1pt
+    \vfill
+}
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ------------------------------------------------------------------------------
+
+\title{ \normalsize \textsc{}
+    \\ [2.0cm]
+    \HRule{1.5pt} \\
+    \LARGE \textbf{\uppercase{Inferencia Estadística II}
+    \HRule{2.0pt} \\ [0.6cm] \LARGE{Apuntes de la asignatura} \vspace*{10\baselineskip}}
+}
+
+\author{\textbf{Autores} \\
+    Victor Elvira Fernández, Tomás Ruiz Rojo, Juan Horrillo Crespo \\
+    Universidad de Valladolid \\
+    \date{\today}}
+
+\maketitle
+\newpage
+
+\include{colaboraciones}
+
+\tableofcontents
+\newpage\null\newpage
+
+% ------------------------------------------------------------------------------
+
+\begin{sectionpage}{Tema 1}{Propiedades asintóticas del EMV y del estadístico RV}
+    Aquí puedes escribir el contenido de la descripción de la sección, que puede ser un texto más extenso como se ve en la imagen proporcionada.
+\end{sectionpage}
+
+\input{src/Tema1/estimadores_mg.tex}
+\input{src/Tema1/inferencia_verosimil.tex}
+\input{src/Tema1/maximizacion_verosimilitud.tex}
+
+% ------------------------------------------------------------------------------
+
+\begin{sectionpage}{Tema 2}{Simulación y Bootstrap}
+    Aquí puedes escribir el contenido de la descripción de la sección, que puede ser un texto más extenso como se ve en la imagen proporcionada.
+\end{sectionpage}
+
+\input{src/Tema2/clase1T2.tex}
+
+% ------------------------------------------------------------------------------
+
+\begin{sectionpage}{Tema 4}{Técnicas de Bondad de Ajuste}
+    Aquí puedes escribir el contenido de la descripción de la sección, que puede ser un texto más extenso como se ve en la imagen proporcionada.
+\end{sectionpage}
+
+\input{src/Tema4/introduccion_ajuste.tex}
+\input{src/Tema4/test_kolmogorov.tex}
+\input{src/Tema4/test_shapiro.tex}
+
+% ------------------------------------------------------------------------------
+
+\newpage
+\null
+
+% ------------------------------------------------------------------------------
+
+\begin{sectionpage}{Tema 5}{Contrastes basados en estadísticos de rangos}
+    Aquí puedes escribir el contenido de la descripción de la sección, que puede ser un texto más extenso como se ve en la imagen proporcionada.
+\end{sectionpage}
+
+\input{src/Tema5/test_rangos.tex}
+\input{src/Tema5/observaciones_coincidientes.tex}
+\input{src/Tema5/modelo_poblacional.tex}
+
+% ------------------------------------------------------------------------------
+
+\newpage
+\null
+
+% ------------------------------------------------------------------------------
+
+\begin{sectionpage}{Parcial 2024-2025}{Resolución e indicaciones}
+    Aquí puedes escribir el contenido de la descripción de la sección, que puede ser un texto más extenso como se ve en la imagen proporcionada.
+\end{sectionpage}
+
+\input{src/examen_parcial.tex}
+
+% ------------------------------------------------------------------------------
+
+\newpage
+
+% ------------------------------------------------------------------------------
+% Reference and Cited Works
+% ------------------------------------------------------------------------------
+
+\begin{thebibliography}{9}
+    \bibitem{manuscritos1}
+    Juan Camilo Yepes Borrero, \\ \textit{Apuntes Manuscritos Tema 1}. \\ Universidad de Valladolid 2024.
+    \bibitem{apuntes1}
+    Yolanda Larriba González, \\ \textit{Apuntes INFE2 Tema 1}. \\ Universidad de Valladolid 2023.
+    \bibitem{manuscritos2}
+    Juan Camilo Yepes Borrero, \\ \textit{Apuntes Manuscritos Tema 2}. \\ Universidad de Valladolid 2024.
+    \bibitem{apuntes2}
+    Yolanda Larriba González, \\ \textit{Apuntes INFE2 Tema 2}. \\ Universidad de Valladolid 2023.
+    \bibitem{manuscritos4}
+    Juan Camilo Yepes Borrero, \\ \textit{Apuntes Manuscritos Tema 4}. \\ Universidad de Valladolid 2024.
+    \bibitem{apuntes4}
+    Yolanda Larriba González, \\ \textit{Apuntes INFE2 Tema 4}. \\ Universidad de Valladolid 2023.
+    \bibitem{manuscritos5}
+    Juan Camilo Yepes Borrero, \\ \textit{Apuntes Manuscritos Tema 5}. \\ Universidad de Valladolid 2024.
+    \bibitem{apuntes5}
+    Yolanda Larriba González, \\ \textit{Apuntes INFE2 Tema 5}. \\ Universidad de Valladolid 2023.
+    \bibitem{examen}
+    Juan Camilo Yepes Borrero, \\ \textit{Resolución examen en el aula}. \\ Universidad de Valladolid 2024.
+\end{thebibliography}
+
+% ------------------------------------------------------------------------------
+
+\end{document}
+
