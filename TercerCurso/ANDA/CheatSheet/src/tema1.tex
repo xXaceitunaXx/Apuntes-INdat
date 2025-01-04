@@ -1,0 +1,74 @@
+\section{Análisis por Componentes Principales}
+
+\begin{itemize}
+    \item Matriz de datos:
+          \[X_{n \times k} = \begin{bmatrix}x_{11} & x_{12} & \cdots & x_{1k} \\ x_{21} & x_{22} & \cdots & x_{2k} \\ \vdots & \vdots & \ddots & \vdots \\ x_{n1} & x_{n2} & \cdots & x_{nk}\end{bmatrix}\]
+    \item Individuo: Punto de $\mathbb{R}^k$
+    \item Variable: Punto de $\mathbb{R}^n$
+    \item Inercia Total: Suma de la distancia cuadrada de las observaciones al centro de gravedad G (lo situamos en 0)
+          \[I_t = \sum_{i=1}^{n}d^2(x_i, G) = \sum_{i=1}^{n}(x_i-G)'(x_i-G) = \sum_{i=1}^{n}\left\lVert x_i \right\rVert^2 = tr(XX') = tr(X'X)\]
+    \item Inercia explicada por $u$: Inercia explicada por el resumen unidimensional de los datos proyectados sobre $u$.
+    \item $I_t = \sum_{i=1}^{k}I_{u_i}$
+    \item El mayor autovector $u_1$ de $X'X$ maximiza la inercia recogida de entre cualquier otro vector.
+    \item El siguiente mayor autovector $u_2$ de $X'X$ es el que recoge más inercia por detras de $u_2$.
+    \item Sean $u_1, \dots, u_k$ los autovectores de $X'X$ entonces se verifica que $I_{u_1} \geq \dots \geq I_{u_k}$
+    \item Descomposición en valores singulares: Sea $M$ matriz $k\times k$ simétrica definida no negativa. Entonces existe una matriz $U$ ortonormal tal que
+          \[U'MU = \Delta\]
+          con $\Delta = diag(\lambda_1, \dots, \lambda_k)$ y $\lambda_1 \geq \dots \geq \lambda_k \geq 0$.
+    \item En nuestro caso $M = X'X$, por tanto $U$ esta formada por los autovectores que estamos buscando y $\lambda_i$ son los autovalores correspondientes.
+    \item Como $tr(M) = tr(\Delta)$ se deduce que $I_t = tr(X'X) = tr(\Delta) = \sum_{i=1}^{k}\lambda_i$. O lo que es lo mismo, $I_{u_i} = \lambda_i$.
+    \item Componente principal: Se define como componente principal de la siguiente forma \[F_\alpha = u_{1\alpha}X_1 + \dots + u_{k\alpha}X_k\]
+          \newpage
+    \item La proyección de un individuo $i$ sobre el eje $\alpha$ sería $F_{i\alpha} = x_i'u_\alpha$.
+    \item Analisis Normado: Permite realizar analisis de forma que lo que se descubra no sea la diferencia entre las varianzas de las variables. Entre otras cosas, es util para comparar mediciones de distintas unidades.
+    \item Sea $X^*$ una matriz de datos estandarizada, entonces la matriz $\frac{1}{n-1}(X^*)'X^*$ contiene no las covarianzas sino las correlaciones muestrales.
+    \item Inercia acumulada: $I.a._s = \sum_{i=1}^{s}I_i$
+    \item Porcentaje de inercia acumulada: $100\frac{\sum_{i=1}^{s}I_i}{\sum_{i=1}^{k}I_i} = 100\frac{I.c_s}{I_t}$
+    \item Algunos criterios de retención de componentes:
+          \begin{itemize}
+              \item Considerar el porcentaje de inercia acumulado y decidir retener un numero de componentes s que haga que la inercia explicada supere un determinado porcentaje.
+              \item Extraer aquellas componentes cuya inercia explicada supere el promedio de los autovalores (en el caso normado habitual esto es equivalente a extraer las componentes con autovalores mayores que 1).
+              \item Construir el denominado "scree plot" en el que se representa en el eje de ordenadas el número del autovalor y en el de abcisas el autovalor en si y buscar el codo del gráfico.
+          \end{itemize}
+    \item Contribuciones absolutas (a la inercia explicada por cada eje): Se definen como $c.a.(i,\alpha)=\frac{(x_i'u_\alpha)^2}{(n-1)\lambda_\alpha}$. Nos dice lo que ha contribuido el individuo $i$ a la definición del eje $\alpha$.
+    \item $\sum_{i=1}^{n}c.a.(i,\alpha)=1$ por lo que si un punto tiene contribuciones mucho más altas que el resto podemos dudar de la estabilidad del eje, ya que puede estar excesivamente condicionado por ese punto.
+    \item Contribuciones relativas (cosenos cuadrados): Se definen como $c.r.(i,\alpha)=\cos^2(i,\alpha)=\frac{(x_i'u_\alpha)^2}{d^2(i,G)}$. Nos dicen como de cerca (o lejos) esta un punto de cada eje. Sirve para saber si un punto está mejor o peor representado en un eje o conjunto de ejes.
+    \item $\sum_{\alpha=1}^{k}\cos^2(i,\alpha)=1$
+    \item Análisis de la nube de variables: Análisis como el anterior pero sobre la matriz transpuesta $X'_{(k\times n)}$. Por tanto buscamos un vector $v\in\mathbb{R}^n$
+    \item Como $(X'X)_{(k\times k)}$ tiene el mismo rango que $(XX')_{(n\times n)}$, $XX'$ tendrá solo $k$ autovalores mayores que 0.
+    \item Sea $\lambda_i$ autovalor de $X'X$ y $\mu_i$ autovalor de $XX'$ entonces $\lambda_i = \mu_i$.
+    \item Sea $v_i$ autovector de $XX'$, entonces $v_i = \frac{1}{\sqrt{\lambda_i}}Xu_i$.
+    \item Sea $u_i$ autovector de $X'X$, entonces $u_i = \frac{1}{\sqrt{\lambda_i}}X'v_i$.
+    \item De lo que se deduce que $\sqrt{\lambda_i}u_i = X'v_i$
+    \item Si se usa la matriz $\frac{1}{n-1}X'X$ las formulas correctas serán:
+          \[v_i=\frac{1}{\sqrt{(n-1)\lambda_i}}Xu_i \quad u_i=\frac{1}{\sqrt{(n-1)\lambda_i}}X'v_i\]
+    \item $X=V\Delta^\frac{1}{2}U'$.
+    \item $\sum_{i=1}^{k}\sqrt{\lambda_i}v_iu_i'=\sum_{i=1}^{k}Xu_iu_i'=X\sum_{i=1}^{k}u_iu_i'=XUU'=X$ por tanto podemos reconstruir la matriz original a partir de los autovalores y autovectores de $X'X$ o $XX'$.
+    \item Si nos quedamos con las primeras $q$ componentes podemos reproducir los datos de forma aproximada: $\tilde{X}=\sum_{i=1}^{q}\sqrt{\lambda_i}v_iu_i'=X\tilde{U}\tilde{U}'$.
+    \item La inercia recogida con $\tilde{X}$ con respecto a la original es $\frac{tr(\tilde{X}'\tilde{X})}{tr(X'X)}$.
+    \item Denotamos $G_\alpha = X'v_\alpha = \sqrt{\lambda_\alpha}u_\alpha$ a la proyección de las variables sobre el eje $\alpha$.
+    \item En un análisis normado $Corr(X_j,F_\alpha)=G_{j\alpha}$
+    \item Contribuciones absolutas (a la inercia explicada por cada eje): Se definen como $c.a.(j,\alpha) = \frac{G^2_{j\alpha}}{\lambda_\alpha}=u^2_{j\alpha}$. Nos dice lo que ha contribuido la variable $j$ a la definición del eje $\alpha$.
+    \item $\sum_{j=1}^{k}c.a.(j,\alpha)=1$
+    \item Contribuciones relativas (cosenos cuadrados): Se definen como $c.r.(j,\alpha)=\cos^2(j,\alpha)=\frac{G^2_{j\alpha}}{d^2(j,G)}=\frac{G^2_{j\alpha}}{Var(j)}$. Nos informan de la calida de la representación de la variable en la dimensión correspondiente.
+    \item Si el análisis es normado entonces $Var(j)=1$ con lo que $c.r.(j,\alpha)=\cos^2(j,\alpha)=G^2_{j\alpha}$ o lo que es lo mismo $c.r.(j,\alpha)=\cos^2(j,\alpha)=Corr^2(X_j,F_\alpha)$.
+    \item $\sum_{\alpha=1}^{k}c.r.(j,\alpha)=1$
+    \item Factor tamaño: Al no estar la nube de variables centrada podría ocurrir que todas las coordenadas de las variables de un eje tengan el mismo signo. Cuando esto ocurre en el primer eje se dice que es un factor de tamaño, pues si nos movemos por él, todas las variables crecerán y las observaciones serán más grandes, por tanto teniendo mayor "tamaño".
+    \item Variables Ilustrativas Continuas: Para posicionarlas se proyectan sobre los ejes igual que cualquier otra variable \[G^+_{j\alpha}=Corr(X^+_j,F_\alpha)\] si el analisis es normado y \[G^+_{j\alpha}=Var(X^+_j)Corr(X^+_j,F_\alpha)\]. La calidad de representación sobre el eje $\alpha$ será \[\cos^2(j^+,\alpha)=Corr^2(X^+_j,F_\alpha)\]. El superíndice $+$ indica que se trata de una variable ilustrativa.
+    \item La suma de los cosenos cuadrados puede ser menor que 1.
+    \item No tiene sentido calcular contribuciones a los ejes pues no han participado en la determinación de los mismos.
+    \item Variables Ilustrativas Nominales: Lo que se hace es calcular los individuos promedio de cada una de las clases y proyectarlos sobre el análisis como el resto de los individuos.
+    \item Individuos Ilustrativos: Se proyectan como el resto de individuos. Puede calcularse la calidad de su representación pero no tendrán contribuciones a los ejes.
+    \item Representaciones Simultáneas: La fila j de la matriz U contiene las proyecciones de la variable j sobre los ejes. El punto variable j puede representarse en la nube de puntos individuo. Este punto es el extremo del vector que define la dirección de crecimiento de la variable j en la nube de los individuos.
+    \item Algunas consideraciones al respecto:
+          \begin{enumerate}
+              \item Sólo la dirección de las variables cuenta en la interpretación conjunta con los individuos.
+              \item Estas proyecciones estarán dentro del círculo unidad y cuanto más cerca esté el punto de la circunferencia mejor representada estará la dirección de crecimiento en el espacion en el que se trabaja.
+              \item Los individuos próximos al centro de la representación tomarán valores cercanos a la media de la variable y los que estén lejos del centro en la dirección de crecimiento tomarán valores altos en esa variable.
+          \end{enumerate}
+    \item Técnicas de validación de la estabilidad:
+          \begin{enumerate}
+              \item Perturbación aleatoria de los datos: Se genera un nuevo conjunto de datos $x_{ij}=x_{ij}+N(0,K\sigma_j)$ donde $x_{ij}$ son los datos iniciales, $\sigma_j$ la desviación típìca de $j$. $K$ mide el nivel de perturbación. Se calculan las correlaciones de los ejes de los ejes de estos datos con los ejes de los datos originales. Habrá estabilidad si cada eje tiene una correlación alta con el eje del mismo orden de los datos originales.
+              \item  Bootstrap: Se generan muestras bootstrap a partir del conjunto de datos original. Se efectua el ACP para cada subconjunto. Se pueden entonces construir distribuciones bootstrap para los autovalores y para las correlaciones entre los ejes iniciales y los ejes bootstrap y valorar su estabilidad.
+          \end{enumerate}
+\end{itemize}
