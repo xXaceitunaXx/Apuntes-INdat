@@ -760,6 +760,36 @@ Existen también algoritmos automáticos de selección de variables basados en l
     \item \textbf{Selección hacia delante (forward)}\begin{enumerate}
         \item Seleccionar un p-valor
         \item Ajustar los modelos individuales
-        \item 
+        \item Identificar el predictor con menor p-valor en el contraste $H_0:\beta_k=0$
+        \begin{itemize}
+            \item Si el p-valor es menor que el seleccionado previamente, añadimos la variable correspondiente, reajustamos al modelo y volvemos a 3
+            \item Si el p-valor es mayor que el seleccionado previamente, no entran más variables y el proceso termina
+        \end{itemize}
+    \end{enumerate}
+
+    \item \textbf{Eliminación hacia atrás (backward)}\begin{enumerate}
+        \item Seleccionar un p-valor
+        \item Ajustar el modelo completo, con todas las variables
+        \item Identificar el predictor con mayor p-valor en el contraste $H_0:\beta_k=0$
+        \begin{itemize}
+            \item Si el p-valor es mayor que el seleccionado previamente, eliminamos dicha variable, reajustamos al modelo y volvemos a 3
+            \item Si el p-valor es menor que el seleccionado previamente, no salen más variables y el proceso termina
+        \end{itemize}
+    \end{enumerate}
+
+    \item \textbf{Regresión paso a paso (Stepwise)}\begin{enumerate}
+        \item Seleccionar dos un p-valores (enter $\leq$ remove)
+        \item Ajustar los modelos individuales
+        \item Identificar el predictor con menor p-valor en el contraste $H_0:\beta_k=0$
+        \begin{itemize}
+            \item Si el p-valor es menor que enter, añadimos dicha variable, reajustamos al modelo y volvemos a 3 (paso forward)
+            \item En el modelo ajustado tras el paso forward comprobamos si alguna de las variables que ya estaban en el modelo tienen que salir (paso backward)
+            \begin{itemize}
+                \item Elegimos la variable con mayor p-valor
+                \item Si el p-valor es mayor que remove, eliminamos dicha variable, reajustamos el modelo sin dicha variable y volvemos a ejecutar el paso backward
+                \item Si el p-valor es menor que remove, no salen más variables y concluimos el paso backward
+            \end{itemize}
+            \item El proceso concluye cuando no entran ni salen más variables
+        \end{itemize}
     \end{enumerate}
 \end{itemize}
