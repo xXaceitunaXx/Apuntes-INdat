@@ -7,7 +7,8 @@ const GRADES = {
 };
 const SUBJECTS = {
     PROB: "PROB",
-    INFE2: "INFE2"
+    INFE2: "INFE2",
+    ANDA: "ANDA"
 };
 const TYPES = {
     APUNTES: "Apuntes",
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "Apuntes Tema 4 Inferencia 2", grade: GRADES.TERCERO, subject: SUBJECTS.INFE2, type: TYPES.APUNTES, path: "https://raw.githubusercontent.com/xXaceitunaXx/Apuntes-INdat/WebPage/Bin/ApuntesTema4Infe2.pdf" },
         { name: "Apuntes Tema 5 Inferencia 2", grade: GRADES.TERCERO, subject: SUBJECTS.INFE2, type: TYPES.APUNTES, path: "https://raw.githubusercontent.com/xXaceitunaXx/Apuntes-INdat/WebPage/Bin/ApuntesTema5Infe2.pdf" },
         { name: "Apuntes Completos Inferencia 2", grade: GRADES.TERCERO, subject: SUBJECTS.INFE2, type: TYPES.APUNTES, path: "https://raw.githubusercontent.com/xXaceitunaXx/Apuntes-INdat/WebPage/Bin/ApuntesCompletosInfe2.pdf" },
+        { name: "Cheatsheet Analisis de Datos (conceptos rápidos)", grade: GRADES.TERCERO, subject: SUBJECTS.ANDA, type: TYPES.APUNTES, path: "https://raw.githubusercontent.com/xXaceitunaXx/Apuntes-INdat/WebPage/Bin/CheatsheetAnda.pdf" },
     ];
 
     const fileList = document.getElementById("fileList");
