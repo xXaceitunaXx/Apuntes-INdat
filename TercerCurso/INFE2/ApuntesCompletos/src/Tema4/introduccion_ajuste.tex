@@ -161,7 +161,7 @@ Vamos a ver que el estadístico $ T $ bajo $ H_0 $ para el modelo multinomial co
     \]
 \end{proofs}
 
-El text $\chi^2$ y el TRV son asintóticamente equivalentes y como TRV converge a $\chi^2_{k-1}$, el estadístico $\chi^2$ también.
+El test $\chi^2$ y el TRV son asintóticamente equivalentes y como TRV converge a $\chi^2_{k-1}$, el estadístico $\chi^2$ también.
 Fijado un $\alpha$.
 \begin{itemize}
     \item Región critica: $P_0(\chi^2 \geq C_\alpha) \quad C_\alpha=qchisq(1-\alpha,k-1)$
@@ -189,10 +189,9 @@ Esta aproximación es válida para frecuencias mayores o iguales a 5
     \end{tabular}
 \end{table}
 
-¿Son estos datos consistentes con la distribución de Poisson con $\lambda=1$?
+Queremos contrastar si los datos observados podrían atribuirse a un proceso de Poisson. Lo habitual es desconocer la información poblacional de dicha distribución, lo que significaría tener una hipótesis compuesta.
 
-Tenemos una hipótesis compuesta ya que no conocemos el parámetro de la Poisson.
-Si nos dijeran $P(1)$ sería simple.
+Para simplificar el ejercicio en este caso nos preguntaremos... ¿Son estos datos consistentes con la distribución de Poisson para $\lambda=1$?
 
 \[
     f(x,1)=\frac{e^{-1}\cdot \lambda^x}{x!}=\frac{e^{-1}}{x!}
@@ -210,7 +209,7 @@ Calculamos las frecuencias esperadas
     \chi^2=\frac{(181-220 \cdot e^{-1})^2}{220 \cdot e^{-1}}+\dots
 \]
 
-Por tanto concluimos que es muy probable que no siga una P(1)
+Por tanto concluimos que es muy probable que no siga una $P(1)$
 
 \textbf{Ejercicio 10:} Se lanza una moneda hasta que aparece la primera cara. Este experimento se repite 100 veces. Las frecuencias observadas del numero de ensayos necesarios hasta que aparece la primera cara son:
 
@@ -255,7 +254,7 @@ Resultado:
 \]
 Donde $\delta$ es el parámetro de descentralidad para la $\chi^2_{k-1}$ descentrada.
 
-\textit{\textbf{Definición:}} La distribución asintótica bajo $H_1$ del estadístico $\chi^2$ de prueba de ajuste es una $\chi^2$ descentrada con $k-1$ grados de libertad y parámetro de descentralidad $\delta$.
+\noindent \textit{\textbf{Definición:}} La distribución asintótica bajo $H_1$ del estadístico $\chi^2$ de prueba de ajuste es una $\chi^2$ descentrada con $k-1$ grados de libertad y parámetro de descentralidad $\delta$.
 
 La demostración no está incluida en este curso. Sin embargo, hacemos algunos comentarios sobre esta definición:
 
@@ -273,7 +272,7 @@ La demostración no está incluida en este curso. Sin embargo, hacemos algunos c
     \item Para contrastar 
     \[
     \begin{matrix}
-        H_0: p_0 = (p_1^0, \dots, p_k^0) \\
+        H_0: p=(p_1^0, \dots, p_k^0) \\
         H_1: p \neq p^0
     \end{matrix}
     \]
@@ -288,11 +287,11 @@ La demostración no está incluida en este curso. Sin embargo, hacemos algunos c
     \[
     \delta = \sum_{j=1}^{k} \frac{\left( n \cdot p_j^1 - n \cdot p_j^0 \right)^2}{n \cdot p_j^0}.
     \]
-    \item Existen tablas para $\chi_{k-1}^{2'}(\delta)$ (por ejemplo, las tablas estándar de $\chi^2$ descentrada).
+    \item Existen tablas para $\chi_{k-1}^{2}(\delta)$ (por ejemplo, las tablas estándar de $\chi^2$ descentrada).
 \end{enumerate}
 
 \textbf{Ejercicio 11:}  
-Durante 60 meses consecutivos se observó la variable aleatoria X="nº de accidentes al mes en un cruce de carreteras". Los resultados fueron:
+Durante 60 meses consecutivos se observó la variable aleatoria $X$=``nº de accidentes al mes en un cruce de carreteras''. Los resultados fueron:
 
 \begin{table}[!h]
     \centering
@@ -306,10 +305,10 @@ Durante 60 meses consecutivos se observó la variable aleatoria X="nº de accide
 \begin{enumerate}[label=\alph*)]
     \item Contrastar la hipótesis de que la distribución de X es geométrica:
     \[
-        G(\theta);p_\theta(X=x)=\theta \cdot (1- \theta)^x, \quad X=0,1,2,\dots
+        G(\theta);\quad p_\theta(X=x)=\theta \cdot (1- \theta)^x, \quad X=0,1,2,\dots
     \]
 
-    $H_0: X \sim G(\theta)=$EMV para $X \in \{0,1,2,3+\}$
+    $H_0: X \sim G(\theta)=$ EMV para $X \in \{0,1,2,3+\}$
 
     \[
         P_0^0=\theta, \quad P_1^0=\theta \cdot (1-\theta), \quad P_2^0=\theta \cdot (1-\theta)^2, \quad P_3^0=(1-\theta)^3
@@ -321,7 +320,7 @@ Durante 60 meses consecutivos se observó la variable aleatoria X="nº de accide
         log L(\theta,f)=53 \log \theta+63 \log (1-\theta)
     \]
     \[
-        \frac{d \log(\theta,f)}{d \theta}=\frac{53}{\theta}-\frac{63}{1-\theta} \Longrightarrow \widehat{\theta}=\frac{53}{53+63}
+        \frac{\partial \log(\theta,f)}{\partial \theta}=\frac{53}{\theta}-\frac{63}{1-\theta} \Longrightarrow \widehat{\theta}=\frac{53}{53+63}
     \]
     Test $\chi^2$:
     \[

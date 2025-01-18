@@ -1,12 +1,12 @@
 \subsection{Test de rangos con observaciones coincidentes}
 
-Hemos visto contrastes para 2 muestras independientes, donde se eligen n individuos para un tratamiento y m para un grupo de control(u otro tratamiento), siendo N=n+m.
+Hemos visto contrastes para 2 muestras independientes, donde se eligen $n$ individuos para un tratamiento y $m$ para un grupo de control (u otro tratamiento), siendo $N=n+m$.
 \begin{center}
-    $H_0: $ Tratamiento no tiene efecto \\
-    $H_1$ Tratamiento tiene efecto
+    $H_0:$ Tratamiento no tiene efecto \\
+    $H_1:$ Tratamiento tiene efecto
 \end{center}
 
-Mediamos la variable de interés en los N individuos.
+Mediamos la variable de interés en los $N$ individuos.
 \begin{center}
     $X_1,\dots,X_m$ para los individuos de control \\
     $Y_1,\dots,Y_n$ para los individuos del tratamiento
@@ -20,7 +20,7 @@ Si la alternativa es menor, se rechaza $H_0$ para $W_S=S_1+\dots+S_n<C$
 
 \newpage
 
-\textbf{Ejemplo: }
+\noindent \textbf{Ejemplo: }
 
 Muestra:
 
@@ -56,7 +56,8 @@ Para controlar $H_0$, se rechaza si:
 \]
 Como siempre, necesitamos la distribución de $W_S^*$ bajo $H_0$ que no es la misma que cuando no hay coincidencias, aunque llegaremos a la distribución de la misma forma.
 
-\textbf{Ejemplo:}
+\noindent \textbf{Ejemplo:}
+
 $n=m=3$
 
 \(
@@ -85,14 +86,13 @@ Bajo $H_0$, (hipótesis de que el tratamiento no tiene efecto), los 6 individuos
 \end{table}
 
 La distribución depende de la configuración de las coincidencias. No se tienen tablas ya que habría que considerar cada caso.
-Para n grande, se tiene al distribución asintótica bajo $H_0$.
+Para $n$ grande, se tiene al distribución asintótica bajo $H_0$.
 
 \paragraph{Configuración de las coincidencias}
-
 \textit{\textbf{Definición: }}Configuración de las coincidencias. 
 \begin{itemize}
-    \item Sea N=n+m el número de individuos tal que n sea el numero de individuos de control y m el numero de individuos del tratamiento
-    \item Sea e el número de observaciones distintas entre los tratamientos
+    \item Sea $N=n+m$ el número de individuos tal que $n$ sea el numero de individuos de control y $m$ el numero de individuos del tratamiento
+    \item Sea $e$ el número de observaciones distintas entre los tratamientos
     \item Sea $d_1$, el número de observaciones iguales a la más pequeña
     \item Sea $d_2$, el número de observaciones iguales a la siguiente más pequeña
     \item Sea $d_e$ el número de observaciones iguales a la más grande
@@ -140,8 +140,7 @@ Estos conteos se pueden hacer solo para n y m pequeños. En este caso, podemos r
 El estadístico de $W_S^*$ es una generalización de $W_S$ cuando no todas las observaciones son distintas.
 Del mismo modo, se puede generalizar el estadístico de Mann-Whitney. 
 
-Sea $X_1,\dots,X_m$ valores de la variable de interés para control y $Y_1,\dots,Y_m$ valores de la variable de interés del tratamiento
-,si todas las observaciones son distintas, definiamos el estadístico de Mann-Whitney como:
+Sea $X_1,\dots,X_m$ valores de la variable de interés para control y $Y_1,\dots,Y_m$ valores de la variable de interés del tratamiento, si todas las observaciones son distintas, definiamos el estadístico de Mann-Whitney como:
 \[
     W_{XY}= \# [(X_i,Y_i)|X_i<Y_i]
 \]
@@ -175,9 +174,9 @@ Demostración en el campus
 
 \paragraph{Distribución asintótica de $W_S^*$}
 
-Si n y m son grandes y la proporción máxima de observaciones coincidentes no es próxima a 1, es decir, si:
+Si $n$ y $m$ son grandes y la proporción máxima de observaciones coincidentes no es próxima a 1, es decir, si:
 \[
-    max_{i=1,\dots,e}\left\{\frac{d_i}{N} \right\} << 1
+    max_{i=1,\dots,e}\left\{\frac{d_i}{N} \right\} \ll 1
 \]
 
 es decir, no hay un grupo en el que estén casi todas las observaciones.
@@ -193,9 +192,7 @@ es decir, no hay un grupo en el que estén casi todas las observaciones.
 \]
 
 \textbf{Ejercicio 9}
-En un  estudio sobre la efectividad de los consejos psicológicos, 80 jovenes se dividen aleatoriamente en un grupo control de 40 jóvenes
-, a quienes se aconseja de un modo tradicional, y un grupo de 40 que recibe un tratamiento especial. El cambio en el comportamiento de los jóvenes se califica como
-pobre, medianamente pobre, medianamente bueno y bueno. Obtenemos los siguientes resultados:
+En un  estudio sobre la efectividad de los consejos psicológicos, 80 jovenes se dividen aleatoriamente en un grupo control de 40 jóvenes, a quienes se aconseja de un modo tradicional, y un grupo de 40 que recibe un tratamiento especial. El cambio en el comportamiento de los jóvenes se califica como pobre, medianamente pobre, medianamente bueno y bueno. Obtenemos los siguientes resultados:
 \begin{table}[h!]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
@@ -206,6 +203,8 @@ pobre, medianamente pobre, medianamente bueno y bueno. Obtenemos los siguientes 
     \end{tabular}
 \end{table}
 
+\newpage
+
 Contrastar si el efecto del tratamiento es positivo.
 
 Nos piden contrastar:
@@ -215,9 +214,7 @@ Nos piden contrastar:
     $H_1$: El tratamiento aumenta la respuesta
 \end{center}
 
-\newpage
-
-Hay 4 grupos, por lo tanto e=4.
+Hay 4 grupos, por lo tanto $e=4$.
 
 \begin{itemize}
     \item En el primer grupo hay 12 individuos
@@ -225,8 +222,8 @@ Hay 4 grupos, por lo tanto e=4.
 
 $(e,d_1,d_2,d_3,d_4)$=(4,12,16,31,21)
 
-Semi-rangos:
-\(
+\[
+\text{Semi-rangos: }
 \left\{
 \begin{matrix}
     d_1=\frac{12+1}{2}=6.5 \\
@@ -235,7 +232,7 @@ Semi-rangos:
     d_4=12+16+31+\frac{21+1}{2}=70
 \end{matrix}
 \right.
-\)
+\]
 
 \[
     W_S^*=\sum_{i=1}^{4} B_i \text{(semirangos)}=5\cdot (65)+ 7\cdot (205)+ \dots+12 \cdot (70)=1720

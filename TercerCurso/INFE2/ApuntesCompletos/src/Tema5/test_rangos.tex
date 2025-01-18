@@ -46,7 +46,7 @@ Lo primero que se tiene que hacer es diseñar un experimento para obtener los da
 
 \subsubsection{Modelo de aleatorización}
 
-Se dispone de N individuos. Se eligen n individuos a los que se asigna un tratamiento(una medición).
+Se dispone de $N$ individuos. Se eligen $n$ individuos a los que se asigna un tratamiento (una medición).
 Caso donde
 
 \[
@@ -80,9 +80,9 @@ Que ordenado $\{5,6,7,8,9,10\}$, y se le asigna un rango a cada elemento ($\{1,2
 
 \noindent Por tanto quedarían asignados...
 
-Rangos de X: $\{1,4,5\}$.
+Rangos de $X$: $\{1,4,5\}$.
 
-Rangos de Y: $\{2,3,6\}$.
+Rangos de $Y$: $\{2,3,6\}$.
 
 \vspace{5mm}
 
@@ -92,7 +92,7 @@ $R_1,\dots,R_m \longrightarrow$ rangos correspondientes a las observaciones $X_1
 
 $S_1,\dots,S_n \longrightarrow$ rangos correspondientes a las observaciones $Y_1,\dots,Y_n$.
 
-¿Cuando las $Y_s$ son mayores que las $X_s$?. Cuando $s_i$ sean más grandes, es decir, la suma de rangos sea más grande.
+¿Cuando las $Y$ son mayores que las $X$?. Cuando $s_i$ sean más grandes, es decir, la suma de rangos sea más grande.
 
 \paragraph{Estadístico de suma de rangos}
 
@@ -118,7 +118,7 @@ Cada resultado es igual de probable bajo $H_0$.
 
 
 \textbf{Ejemplo:}
-\noindent Dados $N=5, m=2, n=3$
+\noindent Dados $N=5$, $m=2$, $n=3$
 
 \[
     \binom{N}{n}=\binom{5}{3}=\frac{5!}{3!\cdot2!}=10
@@ -148,16 +148,16 @@ Habrá 10 posibles resultados de $s_1,s_2,s_3$.
 
 \noindent \textbf{Observaciones:}
 
-La distribución de $W_s$ no es la misma si hubiéramos asignado n a tratamientos y n a control. Lo que es lo mismo, $W_R$ no sigue la misma distribución que $W_s$ bajo $H_0$. La distribución dependerá de n y m.
+La distribución de $W_s$ no es la misma si hubiéramos asignado $n$ a tratamientos y $m$ a control. Lo que es lo mismo, $W_R$ no sigue la misma distribución que $W_s$ bajo $H_0$. La distribución dependerá de n y m.
 
 \subsubsection{Estadístico de Mann-Whitney}
 
-En el caso anterior, el valor mínimo de $W_s$ corresponde a la situaciñon a la que los individuos con tratamiento toman los valores más pequeños. Donde en el ejemplo anterior, $W_s=6 \quad 6=\frac{n \cdot (n+1)}{2}$.
+En el caso anterior, el valor mínimo de $W_s$ corresponde a la situación a la que los individuos con tratamiento toman los valores más pequeños. Donde en el ejemplo anterior, $W_s=6 \quad 6=\frac{n \cdot (n+1)}{2}$.
 Si consideramos el estadístico de Mann-Whitney,
 \[
     W_{XY}=W_S-\frac{n(n+1)}{2}
 \]
-se nos facilitará hacer la tabla porque tomas valores $0,1,\dots,(n \cdot m)$. Tomará el valor 0 cuando todos los valores de Y son los más pequeños y el valor n $\cdot$ m  cuando todos los Y tomen los valores más grandes.
+se nos facilitará hacer la tabla porque toma valores $0,1,\dots,(n \cdot m)$. Tomará el valor 0 cuando todos los valores de $Y$ son los más pequeños y el valor $n\cdot m$  cuando todos los $Y$ tomen los valores más grandes.
 
 Una ventaja que tiene el estadístico es que toma los mismos valores sin importar la decisión de cuántos asignar a $n$ y cuántos a $m$.
 
@@ -180,14 +180,17 @@ La distribución bajo $H_0$ de $W_S$ (o $W_R)$ es simétrica respecto a $\frac{n
     \forall k \quad P_{H_0} \left( W_S=\frac{n \cdot (N+1)}{2}+k\right)=
     P_{H_0} \left( W_S=\frac{n \cdot (N+1)}{2}-k\right)
 \]
-Bajo $H_0$ X e Y están igualmente distribuidas, por lo que todos los elementos deberían ser indistinguibles en término de rangos. Por esto $W_{XY}$ y $W_{YX}$ están igualmente distribuidas bajo $H_0$.
+Bajo $H_0$ $X$ e $Y$ están igualmente distribuidas, por lo que todos los elementos deberían ser indistinguibles en término de rangos. Por esto $W_{XY}$ y $W_{YX}$ están igualmente distribuidas bajo $H_0$.
+
+\vspace{2mm}
 
 \textbf{Ejemplo del uso de las tablas:}
-\noindent Tenemos $W=10,n=6,m=4$
+
+\noindent Tenemos $W=10$, $n=6$, $m=4$
 
 \noindent Queremos saber $P_{H_0}(W_s \geq 35)$
 
-\noindent Tenemos las tablas para $W_{XY}=W_S-\frac{n \cdot (N+1)}{2}=W_S-21$
+\noindent Tenemos las tablas para $W_{XY}=W_S-\frac{n \cdot (n+1)}{2}=W_S-21$
 
 \noindent Debemos escribir $P_{H_0}(W_s \geq 35)$ como $P_{H_0}(W_{XY} \leq a)$
 
@@ -222,15 +225,15 @@ y $W_{XY}=W_S-\frac{n \cdot (n+1)}{2}$, $W_{XY}$ es también el número de pares
 \begin{proofs}
     Sean $Y_{(1)}, \dots, Y_{(n)}$ valores ordenados de $Y_1,\dots,Y_n$ y sean $s_1,\dots,s_n$ los rangos correpondientes también ordenados,
     \begin{itemize}
-        \item Hay $s_1-1$ observaciones menores que $Y_{(1)}$ y todas son X.
+        \item Hay $s_1-1$ observaciones menores que $Y_{(1)}$ y todas son $X$.
         \[
             \# [(X_i,Y_{(1)}) | X_i <Y_{(1)}]=S_1-1
         \]
-        \item Hay $s_2-1$ observaciones menores que $Y_{(2)}$, de ellas una es $Y_{(1)}$ y el resto son X.
+        \item Hay $s_2-1$ observaciones menores que $Y_{(2)}$, de ellas una es $Y_{(1)}$ y el resto son $X$.
         \[
             \# [(X_i,Y_{(2)}) | X_i <Y_{(2)}]=S_2-1-1=S_2-2
         \]
-        \item Hay $s_n-1$ observaciones menores que $Y_{(n)}$, de ellas n-1 son Y y el resto son X.
+        \item Hay $s_n-1$ observaciones menores que $Y_{(n)}$, de ellas $n-1$ son Y y el resto son $X$.
         \[
             \# [(X_i,Y_{(n)}) | X_i <Y_{(n)}]=S_n-n
         \]

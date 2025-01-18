@@ -9,11 +9,11 @@ $X_1,\dots, X_n$ i.i.d. con función de distribución F continua y se quiere con
 El test de Kolmogorov-Smirnov es más potente que el $\chi^2$ en el caso de F continua.
 Tenemos:
 \begin{itemize}
-    \item $F_0 \to $ Función de distribusión bajo $H_0$.
+    \item $F_0 \to $ Función de distribución bajo $H_0$.
     \item $\widehat{F_n} \to$ Función de distribución muestral o empírica.
 \end{itemize}
 \[
-    \widehat{F_n}(x)=\frac{1}{n} \sum_{i=1}^{n} \mathbbm{1}_{(x_i \leq x)}, \quad x \in \mathrm{R}
+    \widehat{F_n}(x)=\frac{1}{n} \sum_{i=1}^{n} \mathbbm{1}_{(x_i \leq x)}, \quad x \in \mathbb{R}
 \]
 Tambien se puede definir a partir de los estadísticos de orden:
 
@@ -31,8 +31,8 @@ Tambien se puede definir a partir de los estadísticos de orden:
 
 Propiedades:
 \begin{enumerate}
-    \item $n\cdot \widehat{F_n}(x)$ es el total de valores de la muestra menores o iguales a $x$y sigue una distribución $B(n, F(x))$, $\forall x \in \mathbb{R}$
-    \item Según el resultado anterior, junto con las propiedades de la distribución binomial, se tiene $\widehat{F}$(x) es un estimador consistente de $F(x)$
+    \item $n\cdot \widehat{F_n}(x)$ es el total de valores de la muestra menores o iguales a $x$ y sigue una distribución $B(n, F(x))$, $\forall x \in \mathbb{R}$
+    \item Según el resultado anterior, junto con las propiedades de la distribución binomial, se tiene $\widehat{F}(x)$ es un estimador consistente de $F(x)$
     \[
         \lim_{n \to \infty} P(|\widehat{F_n}(x) - F(x)| < \varepsilon) \to 0
     \]
@@ -62,7 +62,7 @@ Como siempre debemos conocer la distribución de $D_n$ para obtener el valor cr�
     \[
         \left.\begin{matrix}
                 D_n^+=sup_x(\widehat{F_n}(x)-F_0(x)) \\
-                D_n^-=sup_x(F_0(x)-\widetilde{F_n}(x))
+                D_n^-=sup_x(F_0(x)-\widehat{F_n}(x))
         \end{matrix}\right\}
         D_n=max\{D_n^+,D_n^-\}
     \]
@@ -104,7 +104,7 @@ Esto ocurre por la trasnformada integral de probabilidad, siempre y cuando las v
 
 \subsubsection{Test de Kolmogorov-Smirnov para una hipótesis compuesta}
 
-Lo anterior nos sirve para hipótesis simp,es. Sin embargo en la mayoría de los escenarios reales, tenemos hipótesis compuestas.
+Lo anterior nos sirve para hipótesis simples. Sin embargo en la mayoría de los escenarios reales, tenemos hipótesis compuestas.
 Por ejemplo, utlizar Kolmogorov-Smirnov en ANOVA.
 
 Situación:
@@ -116,7 +116,7 @@ Lo haremos como siempre:
     \item Estimamos $\theta$ a partir de los datos(con el Estimador Máximo Verosimil).
     \item Se calcula el estadístico Kolmogorov-Smirnov como en el caso de la hipótesis simple:
     \[
-    \widehat{D_n}=sup_x|\widehat{F_n}(x)-F(x)|
+        \widehat{D_n}=sup_x|\widehat{F_n}(x)-F(x)|
     \]
     Se rechaza $H_0$ con valores grandes de $\widehat{D_n}$ ($\widehat{D_n}>C$). 
     
@@ -140,12 +140,12 @@ Pasos a seguir:
 \[
 \begin{matrix}
     H_0:F \equiv exp(\lambda) \\
-    H_1:F \neq exp(\lambda)
+    H_1:F \not\equiv exp(\lambda)
 \end{matrix}
 \]
 \[
     \widehat{\lambda}=\frac{1}{\bar{X}}, \quad z_i
-    =\frac{X_i}{\bar{X}} \to z_i \sim exp(1) \longrightarrow\gamma(1,\lambda)
+    =\frac{X_i}{\bar{X}} \to z_i \sim exp(1)=\gamma(1,\lambda)
 \]
 El contraste es equivalente a:
 \[

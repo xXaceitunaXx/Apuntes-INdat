@@ -1,7 +1,7 @@
 \subsection{Modelo poblacional}
 
-El precio que pagamos usando un modelo de aleatorización es que los resultados solo son válidos para los N individuos de estudio y no se pueden extrapolar a una población más amplia.
-Para que eso sea posible, será necesario que los N individuos representen a toda la población. Dicho de otra forma, necesitamos una \textbf{muestra aleatoria simple} de la población.
+El precio que pagamos usando un modelo de aleatorización es que los resultados solo son válidos para los $N$ individuos de estudio y no se pueden extrapolar a una población más amplia.
+Para que eso sea posible, será necesario que los $N$ individuos representen a toda la población. Dicho de otra forma, necesitamos una \textbf{muestra aleatoria simple} de la población.
 
 La situación es la siguiente:
 Tenemos $N=n+m$ individuos al azar de la población,
@@ -16,13 +16,16 @@ $$
 \end{aligned}
 $$
 
-X e Y son dos variables aleatorias con funciones de distribución $X\sim F$ y $Y\sim G$ \\
+$X$ e $Y$ son dos variables aleatorias con funciones de distribución $X\sim F$ y $Y\sim G$ \\
+
+\newpage
+
 \noindent Queremos contrastar la hipótesis de que el tratamiento NO es efectivo
 
 $$
 \begin{aligned}
-    H_0: & \text{ El tratamiento no tiene efecto (F=G)} \\
-    H_1: & \text{ El tratamiento aumenta/disminuye la respuesta (F>G/F<G)}  
+    H_0: & \text{ El tratamiento no tiene efecto }(F=G) \\
+    H_1: & \text{ El tratamiento aumenta/disminuye la respuesta} (F>G/F<G)  
 \end{aligned}
 $$
 
@@ -52,7 +55,7 @@ Esto se debe (al igual que en el modelo de aleatorización) a que la distribuci�
     \textbf{Ejemplo}  \\ \hline \ \\
 \end{tabular}
 
-    Supongamos F discreta de tal forma que 
+    Supongamos $F$ discreta de tal forma que 
     
     $$
         F:\begin{cases}
@@ -60,7 +63,7 @@ Esto se debe (al igual que en el modelo de aleatorización) a que la distribuci�
             b & \text{Con probabilidad } 1-p
         \end{cases}
     $$
-    Si a<b, y con m=2 y n=1, entonces los posibles resultados son:
+    Si $a<b$, y con $m=2$ y $n=1$, entonces los posibles resultados son:
 
     $$
     \begin{array}{c|c|c}
@@ -84,28 +87,27 @@ Esto se debe (al igual que en el modelo de aleatorización) a que la distribuci�
     \end{array}
     $$
 
-Evidentemente la distribución de $W^*_s$ depende de p; es decir, de F.\\
+Evidentemente la distribución de $W^*_s$ depende de p; es decir, de $F$.\\
 
 Al igual que en el modelo de aleatorización, la distribución de $W^*_s$ depende de la configuración de las coincidencias, solo que esta vez esas coincidencias son v.a. que dependen de F.
 
 \subsubsection{Potencia del test}
-Una ventaja del modelo poblacional es que podemos calcular la potencia del test. Para ello debemos especificar la hipótesis alternativa. Sean F y G las distribuciones de las variables respuesta en individuos de control y tratamiento respectivamente,
+Una ventaja del modelo poblacional es que podemos calcular la potencia del test. Para ello debemos especificar la hipótesis alternativa. Sean $F$ y $G$ las distribuciones de las variables respuesta en individuos de control y tratamiento respectivamente,
 
-$
+$$
 \begin{array}{c}
     H_0:\ F=G \\
     H_1:\text{ El tratamiento aumenta la respuesta, }F>G
 \end{array}
-$
+$$
 
-¿Qué significa en términos de F y G que el tratamiento aumente la respuesta?
-
+¿Qué significa en términos de $F$ y $G$ que el tratamiento aumente la respuesta?
 $$
 \forall z \in\mathbb{R}\quad\quad\quad P(Y>z)\geq P(X>z) \iff 1-G(z)\geq 1-F(z) \iff F(z)\geq G(z)
 $$
 
 \begin{theorem}
-    Sean X e Y v.a. tales que $X\sim F$ y $Y\sim G$ con F y G distribuciones de distribución. Se dice que Y (respecto a X) es estocásticamente mayor que X (respecto a Y) cuando los valores que toma la v.a. Y son mayores que los que toma la v.a. X, es decir:
+    Sean $X$ e $Y$ v.a. tales que $X\sim F$ y $Y\sim G$ con $F$ y $G$ funciones de distribución. Se dice que $Y$ (respecto a $X$) es estocásticamente mayor que $X$ (respecto a $Y$) cuando los valores que toma la v.a. $Y$ son mayores que los que toma la v.a. $X$, es decir:
     
     $$
     \begin{array}{c}
@@ -151,7 +153,7 @@ El problema viene porque $p_1$, $p_2$ y $p_3$ son difíciles de calcular, por lo
 \subsubsection{Modelo Shift de aproximación de la potencia}
 
 \begin{theorem}
-    F y G se agrupan en un modelo Shift si
+    $F$ y $G$ se agrupan en un modelo Shift si
     $$
     \exists\Delta>0,\ \forall x\quad\quad G(x)=F(x-\Delta)
     $$
@@ -178,7 +180,7 @@ En particular, $\Pi_F(0)=\alpha$
     Donde $\mu_\alpha\ /\ \Phi(\mu_\alpha)=1-\alpha$
 \end{theorem}
 
-Supongamos que N es suficientemente grande como para poder usar la aproximación normal para encontrar $C_\alpha$
+Supongamos que $N$ es suficientemente grande como para poder usar la aproximación normal para encontrar $C_\alpha$
 
 $$
 \alpha = P_0(W_{XY}>C_\alpha)=P_0\left(\frac{W_{XY}-E_0(W_{XY})}{\sqrt{Var_0(W_{XY})}}\geq \frac{C_\alpha-E_0(W_{XY})}{\sqrt{Var_0(W_{XY})}}\right)
@@ -197,6 +199,8 @@ $$
 \alpha=P_0\left(\frac{W_{XY}-\frac{1}{2}mn}{\sqrt{\frac{1}{12}mn(N+1)}}\geq \frac{C_\alpha-\frac{1}{2}mn}{\sqrt{\frac{1}{12}mn(N+1)}}\right)
 $$
 
+\newpage
+
 Por lo que 
 
 $$
@@ -206,61 +210,61 @@ $$
 Calculando la potencia:
 
 $$
-\Pi_F(\Delta)=P_\Delta\left(W_{XY}\geq\frac{1}{2}mn+\sqrt{\frac{1}{12}mn(N+1)}\mu_\alpha\right)=
+    \Pi_F(\Delta)=P_\Delta\left(W_{XY}\geq\frac{1}{2}mn+\sqrt{\frac{1}{12}mn(N+1)}\mu_\alpha\right)=
 $$
 $$
-=P_\Delta\left(\frac{W_{XY}-E_\Delta(W_{XY})}{\sqrt(Var_\Delta(W_{XY}))}\geq\frac{\frac{1}{2}mn+\sqrt{\frac{1}{12}mn(N+1)}\mu_\alpha-mnp_1}{\sqrt{Var_\Delta(W_{XY})}} \right)=
+    =P_\Delta\left(\frac{W_{XY}-E_\Delta(W_{XY})}{\sqrt(Var_\Delta(W_{XY}))}\geq\frac{\frac{1}{2}mn+\sqrt{\frac{1}{12}mn(N+1)}\mu_\alpha-mnp_1}{\sqrt{Var_\Delta(W_{XY})}} \right)=
 $$
 $$
-=1-\Phi\left(\frac{\left(\frac{1}{2}-p_1\right)mn+\mu_\alpha\sqrt{\frac{1}{12}mn(N+1)}}{\sqrt{Var_\Delta(W_{XY})}}\right)
+    =1-\Phi\left(\frac{\left(\frac{1}{2}-p_1\right)mn+\mu_\alpha\sqrt{\frac{1}{12}mn(N+1)}}{\sqrt{Var_\Delta(W_{XY})}}\right)
 $$
 
 Sustituyendo $p_1=P_{FG}(X<Y)$
 
 $$
-p_1=P_\Delta(X<Y)=P_0(X<Y-\Delta)=P_0(Y-X>\Delta)=P_0(\underbrace{Y-X}_\text{Misma dist. bajo $H_0$}-\Delta>0)=1-F^*(\Delta)
+    p_1=P_\Delta(X<Y)=P_0(X<Y-\Delta)=P_0(Y-X>\Delta)=P_0(\underbrace{Y-X}_\text{Misma dist. bajo $H_0$}-\Delta>0)=1-F^*(\Delta)
 $$
 
 $F^*(\Delta)$ será la función de distribución de la diferencia de las dos v.a. independientes con distribución F. Si desarrollamos $F^*(\Delta)$ en torno al 0 con el polinomio de Taylor, sabiendo que $(F^*(x))'=f^*(x)$ y por simetría respecto al 0:
 
 $$
-F^*(\Delta)\approx F^*(0)+(\Delta-0) f^*(0)=\frac{1}{2}+\Delta f^*(0)
+    F^*(\Delta)\approx F^*(0)+(\Delta-0) f^*(0)=\frac{1}{2}+\Delta f^*(0)
 $$
 
 Supongamos $D=X-Y$, $X\sim F$, $Y\sim F$ y $D\sim F^*$, entonces:
 
 $$
-F^*(0)=P(D\leq 0)=P(X-Y\leq 0)=P(X\leq Y)=\frac{1}{2}
+    F^*(0)=P(D\leq 0)=P(X-Y\leq 0)=P(X\leq Y)=\frac{1}{2}
 $$
 
 Por lo tanto,
 
 $$
-p_1=1-F^*(0)\approx\frac{1}{2}+\Delta f^*(0) \Longrightarrow p_1-\frac{1}{2}\approx \Delta f^*(0)
+    p_1=1-F^*(0)\approx\frac{1}{2}+\Delta f^*(0) \Longrightarrow p_1-\frac{1}{2}\approx \Delta f^*(0)
 $$
 
 Entonces, ya podemos hacer una primera aproximación para el cálculo de la potencia:
 
 $$
-\Pi_F(\Delta)\approx \Phi\left(\frac{mn\Delta f^*(0)-\mu_\alpha\sqrt{\frac{1}{12}mn(N+1)}}{\sqrt{Var_\Delta(W_{XY})}}\right)
+    \Pi_F(\Delta)\approx \Phi\left(\frac{mn\Delta f^*(0)-\mu_\alpha\sqrt{\frac{1}{12}mn(N+1)}}{\sqrt{Var_\Delta(W_{XY})}}\right)
 $$
 
 Nos faltaría calcular $Var_\Delta(W_{XY})$. Podemos hallar una aproximación cuando $\Delta$ es pequeño, ya que 
 
 $$
-Var_\Delta(W_{XY})\approx Var_0(W_{XY})=\frac{mn(N+1)}{12}
+    Var_\Delta(W_{XY})\approx Var_0(W_{XY})=\frac{mn(N+1)}{12}
 $$
+
+\newpage
 
 Por lo que la expresión para la potencia quedaría como
 
 $$
-\Pi_F(\Delta)\approx\Phi\left(\frac{mn\Delta f^*(0)}{\sqrt{\frac{mn(N+1)}{12}}}-\mu_\alpha\right)=\Phi\left(\sqrt{\frac{12mn}{N+1}}\Delta f^*(0)-\mu_\alpha\right)
+    \Pi_F(\Delta)\approx\Phi\left(\frac{mn\Delta f^*(0)}{\sqrt{\frac{mn(N+1)}{12}}}-\mu_\alpha\right)=\Phi\left(\sqrt{\frac{12mn}{N+1}}\Delta f^*(0)-\mu_\alpha\right)
 $$
 \[
     =\Phi\left(\sqrt{\frac{12 \, m}{N+1}} \, \Phi^*(0) \Delta - \mu_\alpha\right) = \Pi
 \]
-
-\newpage
 
 \paragraph{Inverso}
 
