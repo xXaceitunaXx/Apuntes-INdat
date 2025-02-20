@@ -1,0 +1,82 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{bookmark}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{xparse}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\NewDocumentCommand{\codeword}{v}{\texttt{\textcolor{blue}{#1}}}
+
+\lstset{language=C,keywordstyle={\bfseries \color{blue}}}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\setstretch{1.2}
+\geometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+\newenvironment{enfasis}
+    {\begin{tcolorbox}[colback=yellow!5!white, colframe=black, width=\textwidth, sharp corners, boxrule=0.1mm]\itshape}
+    {\dots\end{tcolorbox}}
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ------------------------------------------------------------------------------
+
+\title{ \normalsize \textsc{}
+    \\ [2.0cm]
+    \HRule{1.5pt} \\
+    \LARGE \textbf{\uppercase{Fundamentos de Ingeniería de Software}
+    \HRule{2.0pt} \\ [0.6cm] \LARGE{Apuntes de la asignatura} \vspace*{10\baselineskip}}
+}
+
+\author{\textbf{Autores} \\
+    Victor Elvira Fernández, Tomás Ruiz Rojo, Juan Horrillo Crespo \\
+    Universidad de Valladolid \\
+    \date{\today}}
+
+\maketitle
+\newpage
+
+\include{colaboraciones}
+
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+
+\include{src/introduccion}
+
+% ------------------------------------------------------------------------------
+
+\newpage
+
+% ------------------------------------------------------------------------------
+% Reference and Cited Works
+% ------------------------------------------------------------------------------
+
+\begin{thebibliography}{9}
+    \bibitem{diapositivas0}
+    Felix Prieto, \\ \textit{Diapositivas Introducción}. \\ Universidad de Valladolid 2025
+\end{thebibliography}
+
+% ------------------------------------------------------------------------------
+
+\end{document}
+
