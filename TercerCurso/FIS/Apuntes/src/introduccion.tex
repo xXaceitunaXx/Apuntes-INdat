@@ -119,3 +119,85 @@ Software se actualiza al una nueva versión, maximizando las probabilidades de f
     \caption{Gráfico que ilustra el suceso}
     \label{graph:softwarefails}
 \end{figure}
+
+Vistas toda la infinidad de cosas malas que pueden ocurrir con un \textbf{mal} Software, definiremos lo que si es
+\textbf{buen} Software. Los atributos de un buen producto Software son:
+
+\begin{enumerate}
+    \item \textbf{Mantenibilidad}. Es la posibilidad del Software de evolucionar para adaptarse a las necesidades
+    de cambio de los clientes. Una definición más exhaustiva puede ser la siguiente
+    \begin{enfasis}
+        Esta característica representa la capacidad del producto Software para ser modificado efectiva y
+        eficientemente, debido a necesidades evolutivas, correctivas, correctivas o perfectivas.
+    \end{enfasis}
+    No tener cuidado de hacer un Software \textbf{mantenible} provoca lo que se conoce como \textit{Deuda Técnica}.
+    Puedes investigar más sobre ello en su entrada de \href{https://es.wikipedia.org/wiki/Deuda_t%C3%A9cnica}{wikipedia}.
+    \item \textbf{Confiabilidad}. El Software no debe causar daños físicos o económicos en caso de fallo del sistema
+     o un comportamiento inesperado. Esto implica la \textbf{Fiabilidad}, \textbf{Seguridad} y \textbf{Protección}. \\
+     Por tanto no es solo que el Software no deba fallar, también es importante que \textit{no pueda saberse} que
+     tiene estos fallos, para poder proteger su integridad frente a ataques maliciosos.
+     \item \textbf{Eficiencia}. No deben malgastarse recursos del sistema. Hacer un Software poco eficiente no solo
+     te hace mal Ingeniero, también te va a hacer más pobre; los recursos son dinero.
+     \item \textbf{Usabilidad}. Con este termino surje una cuestión interesante, pues es muy loable la pregunta...
+     \textit{¿Qué es usable, y qué no?} Pues \textbf{depende}. \\
+     Definiremos usabilidad como el Software que \textbf{fácil de usar} y que ofrece una \textbf{interfaz de usuario
+     apropiada} y \textbf{documentación adecuada}. Por lo tanto lo usable depende en gran medida de a quien se le 
+     ofrece el Software, pues para un Ingeniero Informático hecho y derecho le puede parecer muy usable Vi 
+     (Vim, NVim) pero a duras penas sacará buen provecho de, por ejemplo, Tinder.
+\end{enumerate}
+
+\newpage
+
+Ya se ha mencionado anteriormente que un \textbf{Sistema Software} ya no es simplemente un código, sino un conjunto
+de muchas cosasa trabajando a la vez. Pero qué cosas, cómo trabajan, porqué no un programa y ya está (nos quieren
+hacer la vida imposible estos informáticos del diablo). Bien, pues paso a paso.
+
+\noindent Empezaremos definiendo correctamente lo que es un \textbf{Sistema}:
+
+Un \textbf{Sistema Software} es un conjunto de elementos interrelacionados que trabajan conjuntamente para
+cumplir algún objetivo. Algunas características notables de los sistemas es que tienen \textit{propiedades
+emergentes} (yo tampoco se lo que significa)\footnote{En teoría de sistemas, las propiedades emergentes son 
+atributos que surgen del funcionamiento de un sistema y que no se pueden identificar en las propiedades de los
+componentes que forman el mismo. \href{https://www.alegsa.com.ar/Dic/propiedad_emergente.php}{Fuente: Alegsa}}
+diferentes de las de sus elementos y que los sistemas que incluyen personas son \textit{no deterministas}, pues
+la acción de los humanos no lo es, y se ven afectados por ella.
+
+Podemos distinguir entre 3 tipos de sistemas
+
+\begin{enumerate}
+    \item Sistemas físicos. Transforman un flujo de entrada en uno de salida.
+    \item Sistemas de gestión. Controlan los sistemas físicos decidiendo el comportamiento de los mismos en función
+    de los objetivos marcados.
+    \item Sistemas de información. Comunican sistemas físicos con los de gestión.
+\end{enumerate}
+
+Por fin sabemos lo que es un Software, lo que es un sistema, los criterios de bondad del Software y todas esas
+cosas que hemos dicho que debe hacer un Ingeniero. ¿Pero Ingeniero de qué? Pues Ingeniero de Software\dots
+
+La Ingeniería de Software se define como
+
+\begin{enfasis}
+    La aplicación de un enfoque \textbf{sistemático}, \textbf{disciplinado} y \textbf{cuantificable} hacia el
+    desarrollo, operación y mantenimiento del Software; es decir, la aplicación de la ingeniería al Software
+
+     Estándar $610.12$ IEEE
+\end{enfasis}
+
+Desde distintos puntos de vista:
+\begin{enumerate}
+    \item Diseño, construcción y mantenimiento de grandes sistemas software
+    \item Construcción multi-persona de software multi-versión
+    \item Conjunto de técnicas que se enfrentan al software como un producto de ingeniería que requiere 
+    planificación, análisis, diseño, implementación pruebas y mantenimiento
+    \item Aplicación disciplinada de los principios y métodos de la ingeniería, la ciencia y las matemáticas para
+    la producción económicamente rentable de software de calidad
+    \item Conjunto de teorías, métodos y herramientas para el desarrollo profesional de software
+\end{enumerate}
+
+Esto está textualmente copiado de las transparencias de clase, por que lo vi importante y tampoco sabía que más
+añadir, pero creo que deja más que claro lo que es, ¿no? Pero somo hemos dicho lo que es, falta explicar en que
+consiste
+
+La Ingeniería de Software es una actividad de \textbf{modelado}. El modelado implica conocer a la perfección un
+problema para tener la capacidad de explicarlo con máximo detalle en un ``lenguaje'' que permita interpretarlo ya
+resolverlo (esta interpretación es mía, no algo que haya que aprenderse de pe a pa).
