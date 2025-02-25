@@ -31,7 +31,11 @@ programas, y otra gran cantidad de elementos, sean DBMS, ficheros, etc.
 \noindent Esta serie de pasos es lo que se conoce como \textbf{ciclo de vida} del Software, el cual (como bien 
 indica su nombre) se ``reinicia'' interminablemente durante la existencia del programa o sistema.
 
+\vspace*{2mm}
+
 \noindent\rule{\textwidth}{0.4pt}
+
+\vspace*{2mm}
 
 Antes de seguir indagando en los aspectos ``técnicos'' del Software, y para reflejar la importancia y complejidad 
 que puede llegar a alcanzar el Software, hablemos en términos económicos y de lineas de código\dots
@@ -96,7 +100,11 @@ ejemplos de noticias reales:
 \noindent Queda más que evicenciada la crucial importancia de la ingeniería de Software y las buenas prácticas que
 la rodean.
 
+\vspace*{2mm}
+
 \noindent\rule{\textwidth}{0.4pt}
+
+\vfil
 
 Por supuesto que estamos de acuerdo en que el Hardware se desgasta, una bombilla se puede fundir, un condensador puede
 explotar, quemar, o cualquier otra exagerada desdicha. Pero ocurre que el Software también se degrada, ¿cómo puede
@@ -110,7 +118,7 @@ afectadas por modificaciones ajenas. A esto se le llaman habitualmente efectos s
 
 \newpage
 
-Es donde surje aquí el concepto de versión. Para continuar adaptandose y expandiendose a las necesidades, el
+Es aquí donde surje el concepto de versión. Para continuar adaptandose y expandiendose a las necesidades, el
 Software se actualiza al una nueva versión, maximizando las probabilidades de fallos en cada cambio.
 
 \begin{figure}[h]
@@ -121,14 +129,14 @@ Software se actualiza al una nueva versión, maximizando las probabilidades de f
 \end{figure}
 
 Vistas toda la infinidad de cosas malas que pueden ocurrir con un \textbf{mal} Software, definiremos lo que si es
-\textbf{buen} Software. Los atributos de un buen producto Software son:
+\textbf{buen} Software. Los atributos de un buen producto (según la asignatura de FIS) Software son:
 
 \begin{enumerate}
     \item \textbf{Mantenibilidad}. Es la posibilidad del Software de evolucionar para adaptarse a las necesidades
     de cambio de los clientes. Una definición más exhaustiva puede ser la siguiente
     \begin{enfasis}
         Esta característica representa la capacidad del producto Software para ser modificado efectiva y
-        eficientemente, debido a necesidades evolutivas, correctivas, correctivas o perfectivas.
+        eficientemente, debido a necesidades evolutivas, correctivas, adaptativas o perfectivas.
     \end{enfasis}
     No tener cuidado de hacer un Software \textbf{mantenible} provoca lo que se conoce como \textit{Deuda Técnica}.
     Puedes investigar más sobre ello en su entrada de \href{https://es.wikipedia.org/wiki/Deuda_t%C3%A9cnica}{wikipedia}.
@@ -174,7 +182,9 @@ Podemos distinguir entre 3 tipos de sistemas
 Por fin sabemos lo que es un Software, lo que es un sistema, los criterios de bondad del Software y todas esas
 cosas que hemos dicho que debe hacer un Ingeniero. ¿Pero Ingeniero de qué? Pues Ingeniero de Software\dots
 
-La Ingeniería de Software se define como
+\vspace*{2mm}
+
+\noindent La Ingeniería de Software se define como
 
 \begin{enfasis}
     La aplicación de un enfoque \textbf{sistemático}, \textbf{disciplinado} y \textbf{cuantificable} hacia el
@@ -183,7 +193,7 @@ La Ingeniería de Software se define como
      Estándar $610.12$ IEEE
 \end{enfasis}
 
-Desde distintos puntos de vista:
+\noindent Desde distintos puntos de vista:
 \begin{enumerate}
     \item Diseño, construcción y mantenimiento de grandes sistemas software
     \item Construcción multi-persona de software multi-versión
@@ -194,10 +204,56 @@ Desde distintos puntos de vista:
     \item Conjunto de teorías, métodos y herramientas para el desarrollo profesional de software
 \end{enumerate}
 
-Esto está textualmente copiado de las transparencias de clase, por que lo vi importante y tampoco sabía que más
-añadir, pero creo que deja más que claro lo que es, ¿no? Pero somo hemos dicho lo que es, falta explicar en que
-consiste
+\textit{Esto está textualmente copiado de las transparencias de clase, por que lo vi importante y tampoco sabía 
+que más añadir, pero creo que deja más que claro lo que es, ¿no? De momento somo hemos dicho lo que es, falta 
+explicar en que consiste}
+
+\vspace*{2mm}
 
 La Ingeniería de Software es una actividad de \textbf{modelado}. El modelado implica conocer a la perfección un
-problema para tener la capacidad de explicarlo con máximo detalle en un ``lenguaje'' que permita interpretarlo ya
+problema para tener la capacidad de explicarlo con máximo detalle en un ``lenguaje'' que permita interpretarlo y
 resolverlo (esta interpretación es mía, no algo que haya que aprenderse de pe a pa).
+
+También se trata de una disciplina de resolución de problemas, pues como cualquier ingeniería, suerge sobre la 
+necesidad de resolver problemas mediante la adquisición de conocimiento y la toma razonada de decisiones 
+(y justificable). En general, todo lo que no podamos explicar, o que no este lo suficientemente documentado, no 
+está bien hecho.
+
+\newpage
+
+\subsection{Modelado}
+
+El \textbf{modelo} es la representación abstracta y semantica\footnote{El modelo semántico es un modelo conceptual
+ de datos en el que se incluye información semántica. Esto significa que el modelo describe el significado de 
+sus instancias. \href{https://es.wikipedia.org/wiki/Modelo_sem\%C3\%A1ntico_de_datos}{Fuente: Wikipedia}} de un 
+sistema para analizarlo y comprenderlo, lo que nos permite responder preguntas sobre el mismo (es la forma de 
+abordar la complejidad de un sistema).
+
+Un ingeniero de Software debe comprender el entorno en que ha de operar el sistema, esto se conoce como 
+\textbf{dominio del problema}, pero tambien necesita comprender el sistema a construir para poder evaluar las 
+distintas soluciones posibles. Esto último es el \textbf{dominio de la solución}. Los modelos de dominio del
+problema se construyen sobre aquellos elementos del mundo real que son relevantes para el problema en 
+consideración, es una comprensión profunda del entorno en donde ha de operar el sistema. Los modelos de dominio
+de la solución recogen todo lo relacionado a la comprensión y evaluación de los sistemas a construir.
+
+\subsection{Actividad de resolución de problemas}
+
+La actividad de resolución de problemas es un proceso esencial para la Ingeniería de Software, caracterizada por
+buscar soluciones adecuadas a problemas complejos. Existen multiples condicionantes que hacen de esta una ardua
+tarea, como la evaluación empírica de soluciones (toda conclusión se debe extraer de pruebas empíricas
+\footnote{Lo empírico consiste en aquello que se puede experimentar o comprobar a traves de los sentidos, 
+un encuentro directo con la realidad}), el manejo de recursos limitados y la necesidad de trabajar con 
+conocimiento incompleto (no nos lo van a dar todo hecho por desgracia). Para abordar un problema, se sigue un 
+método estructurado que consta de las siguientes fases:
+
+\begin{enumerate}
+    \item \textbf{Formulación del problema}. Debemos definir con \textit{claridad} lo que se desea resolver.
+    \item \textbf{Análisis del problema}. Comprende el entendimiento de las causas, las restricciones y las
+    posibles implicaciones.
+    \item \textbf{Búsqueda de soluciones}. Se exploran todas las alternativas posibles.
+    \item \textbf{Eleccion de la solución más adecuada}. Conocidas las alternativas, evaluamos las soluciones y
+    escogemos la más eficaz.
+    \item \textbf{Especificación de la solución}. Finalmente, se detalla como se implementa la solución escogida.
+\end{enumerate}
+
+Para poder llevar a cabo este proceso, es imprescindible contar con la información adecuada.
