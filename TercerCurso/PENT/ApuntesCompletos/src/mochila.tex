@@ -1,0 +1,205 @@
+\section{Problema de la mochila (Knapsack)}
+
+\subsection{Introducción}
+
+Dentro del área de problemas de Cargas y Empaquetamientos, los más sencillos son los problemas de una carga, conocidos
+como problemas de la mochila (knapsack) según la terminología de Dantrzig. En estos problemas se trata de minimizar un coste
+o maximizar un beneficio al seleccionar una serie de elementos para ``introducir en la mochila'', cumpliendo restricciones
+sobre las características de estos mismos (peso por ejemplo).
+
+\subsection{Problema de la Mochila 0-1}
+
+De forma general consideraremos
+
+\begin{center}
+    \begin{tabular}{rcl}
+        $n$   & = & número elementos para elegir \\
+        $p_j$ & = & el valor del objeto $j$ \\
+        $w_j$ & = & el peso del objeto $j$ \\
+        $c$   & = & peso total asumible
+    \end{tabular}
+\end{center}
+
+\noindent Por tanto el problema de la mochila binaria o 0-1 se puede formular de la siguiente manera
+
+\begin{alignat}{3}
+    \text{maximizar:}   &   \sum_{j=1}^n p_jx_j       \\
+    \text{sujeto a:}    &   \sum_{j=1}^n w_jx_j\leq c \\
+                        &   x_j \in {0, 1} \quad j=1,\dots,n
+\end{alignat}
+
+\noindent donde $x_j$ es la variable binaria que indica si el elemento $j$-ésimo está presente o no en la solución
+
+Existe una versión entera de este problema conocida como \textit{Problema de la Mochila Acotado}, donde $x_j$ indica la
+cantidad de dicho elemento que se va a incluir en vez de la presencia en si misma, por lo que $n$ ahora no es el número
+total de elementos sino el número de elementos diferentes. Se definen también cotas para la cantidad de cada elemento $u_j$
+tal que $0\leq x_j\leq u_j$.
+
+En ocasiones (y como ya se ha mencionado) se puede considerar el problema inverso, el de minimización, donde tratamos de 
+minimizar la función objetivo. Formular este problema es tan sencillo como invertir la restricción tal que
+
+\begin{alignat}{3}
+    \text{minimizar:}   &   \sum_{j=1}^n p_jx_j       \\
+    \text{sujeto a:}    &   \sum_{j=1}^n a_jx_j\geq b \\
+                        &   x_j \in {0, 1} \quad j=1,\dots,n
+\end{alignat}
+
+\noindent donde en esta ocasión $a_j$ es una caracteristica medida de los elementos y $b$ la cota mínima total.
+
+\newpage
+
+\subsubsection{Algoritmos Greedy}
+
+Diseñar un algoritmo voráz para un problema mochila 0-1 es muy sencillo, basta con elegir una función o criterio ``greedy''
+$g_j$ e ir introduciendo en la mochila los elementos que maximicen dicho criterio de forma sucesiva hasta que no entren
+más (es decir mientras se satisfaga la condición). 
+
+\vspace*{2mm}
+
+La primera opción es considerar el valor de los elementos como criterio del algoritmo, el problema que tiene esto es que no 
+estamos considerando el peso de los objetos. Del mismo modo, considerar el peso de los objetos como el criterio tampoco es lo 
+suficientemente completo, pues no sabemos nada respecto del valor de estos por lo que no aporta información sobre nada 
+relacionado con la función objetivo. 
+
+Una posible alternativa es elegir el criterio como el cociente del valor por el peso, de forma que $g_j=\frac{p_j}{w_j}$,
+lo cual parece lógico pues establecemos que lo valioso que es un objeto para nosotros depende de la relación entre el valor
+y el peso. Este último criterio es el más utilizado, pero no significa que se encuentre la solución óptima a partir de él.
+
+\vspace*{2mm}
+
+\begin{ejemplo}
+    En este ejemplo se muestra en una tabla una serie de elementos con sus correspondientes valores, pesos y cocientes
+    
+    \begin{center}
+        \begin{tabular}{c|cccccccc}
+            \hline
+            elemento & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\ \hline
+            valor & 15 & 100 & 90 & 60 & 40 & 15 & 10 & 1 \\
+            peso & 2 & 20 & 20 & 30 & 40 & 30 & 60 & 10 \\ \hline
+            $\frac{\text{valor}}{\text{peso}}$ & 7.5 & 5 & 4.5 & 2 & 1 & 0.5 & 0.16 & 0.1 \\
+            \hline
+        \end{tabular}
+    \end{center}
+
+    Sabiendo que el peso máximo es 102 $c=102$, se obtienen los siguientes resultados (representados en un array de
+    índices, no con las variables binarias, ordenados por elección)
+
+    \begin{itemize}
+        \item Tomando como criterio el valor, el array resultante es $[2, 3, 4, 1, 6]$ con un valor total de 280.
+        \item Tomando como criterio el peso, el array resultante es $[7, 5, 1]$ con un valor total de 65.
+        \item Por último, tomando como criterio el cociente, el array resultante es $[1, 2, 3, 4, 6]$ con un valor de 280.
+    \end{itemize}
+\end{ejemplo}
+
+\subsubsection{Relajación Lineal}
+
+La relajación lineal de un Problema de la Mochila 0-1 consiste en eliminar la restricción de variables binarias y sustituirla
+por una cota inferior o superior para $x_j$ tal que 
+
+\begin{alignat}{3}
+    \text{maximizar:}   &   \sum_{j=1}^n p_jx_j       \\
+    \text{sujeto a:}    &   \sum_{j=1}^n w_jx_j\leq c \\
+                        &   0\leq x_j\leq 1 \quad j=1,\dots,n
+\end{alignat}
+
+\noindent es decir, que permitimos a un elemento ser elegido de forma parcial.
+
+\newpage
+
+A la solución factible obtenida mediante este procedimiento la denotaremos $z_{LKP}$. Si redondeamos $z_{LKP}$ (truncar)
+obtendremos otra solución factible a la que llamaremos $z'$. Se verifica que
+\[
+    z' \leq z \leq z_{LKP}
+\]
+donde $z$ es la solución óptima del problema de la mochila. Por lo que estas dos soluciones factibles son una cota inferior
+y superior de la solución óptima.
+
+\subsubsection{Mejoras de las soluciones greedy}
+
+Para mejorar la solución que se obtiene mediante el algoritmo greedy puede usarse cualquier método que combine la 
+construcción greedy con la aleatorización en la forma de un método multistart, como los métodos random greedy y greedy 
+aleatorizado.
+
+Otra opción es optimizar un resultado mediante busqueda local. El procedimiento consiste en, dada una solución $x$ a un
+problema de la mochila, se selecciona un entorno de soluciones cercanas y se compara la solución obtenida contra la que
+máxima dentro del entorno. Si la solución del entorno mejora la actual se selecciona y se vuelve a aplicar el procedimiento,
+extrayendo un nuevo entorno y seleccionando la mejor hasta que ninguna supere la previamente seleccionada. La idea detras
+de este procedimiento es encontrar un máximo local de la función solución. Al tratarse de un espacio discreto debemos definir
+lo que es un entorno de la solución. Este se obtiene mediante intercambios de variables en el array solución, se eligen 
+$p=1,2,\dots$ elementos en el array solución que se deben intercambiar por otros $q=1,2,\dots$ que no esten presentes y que
+verifiquen que formen una solución factible. Cada una de estas permutaciones se trata de una solución del entorno de $x$.
+
+\subsection{Problema de la Mochila Múltiple}
+
+En el Problema de la Mochila Múltiple se tienen $m$ mochilas o contenedores. Para cada $i=1,\dots,m$ $c_i$ es la capacidad
+de la mochila $i$-ésima. El modelo completo es el siguiente
+
+\begin{alignat}{3}
+    \text{maximizar:}   &   \sum_{j=1}^n p_jx_j                             \\
+    \text{sujeto a:}    &   \sum_{j=1}^n w_jx_j\leq c_i \quad i=1,\dots,m   \\
+                        &   \sum_{i=1}^m x_{ij}\leq 1 \label{eq:62}           \\
+                        &   x_j \in {0, 1} \quad j=1,\dots,n
+\end{alignat}
+
+\noindent donde aparecen $mn$ variables binarias nuevas, $x_{ij}$, que representan la presencia o no del elemento $j$ en la 
+mochila $i$. La restricción \ref{eq:62} hace referencia al hecho de que un elemento solo puede estar presente en una mochila
+y no en varias a la vez.
+
+\subsubsection{Algoritmos greedy}
+
+Una posible implementación sencilla de un algoritmo greedy para el Problema de la Mochila Múltiple es tomar la mochila de
+mayor tamaño y ``llenarla'' usando el criterio del cociente antes descrito. Una vez ``llena'' se pasa a la siguiente mochila
+más grande y se repite el procedimiento hasta no poder incluir ningun elemento más en la última mochila. Aplicar busqueda 
+local basada en intercambios sobre la solución greedy suele proporcionar buenos resultados.
+
+\subsection{Problema de la Mochila Multidimensional}
+
+En esta ocasión se tienen $m$ caracteristicas sobre los elementos y $m$ restricciones sobre dichas características. Llamaremos
+$a_{ij}$ al valor de la caracteristica $i=1,\dots,m$ del objeto $j$ y $b_i$ al límite sobre dicha característica en el
+problema. La formulación del problema es la siguiente
+
+\begin{alignat}{3}
+    \text{maximizar:}   &   \sum_{j=1}^n p_jx_j                                 \\
+    \text{sujeto a:}    &   \sum_{j=1}^n a_{ij}x_j\leq b_i \quad i=1,\dots,m    \\
+                        &   x_j \in {0, 1} \quad j=1,\dots,n
+\end{alignat}
+
+Este modelo también se aplica sobre problemas de inversiones multiperíodo o a la selección de proyectos. Aquí $n$ es el 
+número de posibles inversiones o proyectos, $m$ el número de períodos o recursos, $b_i$ es el capital (o recurso) disponible
+en el periodo $i$, $a_{ij}$ la inversión (o cantidad de recurso) requerida por el proyecto $j$ en el periodo $i$ y $p_j$ la
+rentabilidad o tasa de ganancia esperada para el proyecto o inversión.
+
+\subsubsection{Algoritmos greedy}
+
+Igual que en el caso de la mochila simple, para construir una solución iterativamente mediante un algoritmo greedy hay que
+asignar un coeficiente o criterio greedy a cada elemento/proyecto. Para el caso multidimensional se han propuesto diferentes
+criterios para definir los coeficientes. Se destacan versiones de $g_j=\frac{p_j}{\sum_{i=1}^m \mu_ia_{ij}}$ donde $\mu_i$ 
+indica un valor dado al recurso $i$ en función de su escasez.
+
+\begin{itemize}
+    \item Mediante el cociente entre el beneficio y la suma agregada de recursos que consume
+    \[
+        g_j=\frac{p_j}{\sum_{i=1}^m a_{ij}}
+    \]
+    Equivale a tomar $\mu_i=1$, es decir, tratar todos los recursos por igual
+    \item Teniendo en cuenta la escasez de los recursos
+    \[
+        g_j=\frac{p_j}{\sum_{i=1}^m \frac{a_{ij}}{b_i}}
+    \]
+    En el caso de subastas, a este coeficiente se le conoce como el precio escalado normalizado de la puja u oferta $j$.
+    \item Seleccionando $\mu_i$ como el precio sombra de la restricciín $i$-ésima en la solución óptima de relajación lineal.
+\end{itemize}
+
+\noindent También se tienen en cuenta coeficientes basados en la solución del problema lineal. A cada elemento se le asigna
+como coeficiente greedy la solución de la relajación lineal, es decir, $g_j=x_{j}.sol$.
+
+\newpage
+
+\noindent En algunas versiones del algoritmo greedy, como el algoritmo de London u Michaelis, el criterio greedy se define y 
+calcula en cada iteración en función de los recursos usados hasta ese momento.
+
+\vspace*{5mm}
+
+Al igual que para el resto de Problemas de la Mochila, se pueden aplicar mecanismos de busqueda local mediante intercambios
+para encontrar máximos locales que mejoren la solución greedy y mecanismos de aleatorización en los elementos y en los 
+intercambios.

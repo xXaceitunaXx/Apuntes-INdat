@@ -1,0 +1,241 @@
+\section{Programación Entera}
+
+\subsection{Introducción}
+
+Un problema de \textbf{Programación Lineal Entera} (PLE) es un problema de optimización de una función lineal en presencia
+de restricciones lineales con la condición añadida de que alguna o todas las variables deben ser enteras. Cuando todas las
+variables están obligadas a ser enteras entonces se habla de un problema de \textbf{Programación Entera Pura} y si solo son
+algunas será un problema de \textbf{Programación Entera Mixta}. En ocasiones las variables enteras están limitadas a tomar
+valores 0 o 1, a estas variables las denominaremos binarias. Si esta condición es extensiva a todas las variables entonces
+hablamos de un problema de \textbf{Programación 0-1 Pura}, si solo afecta a alguna de las variables presentes, en este caso
+hablamos de un problema de \textbf{Programación 0-1 Mixta}.
+
+\vspace*{2mm}
+
+Los problemas de Programación Entera en general presentan grandes dificultades computacionales, pues el método Simplex deja
+de funcionar. Por ello se recurre a otros métodos de resolución, como los algoritmos \textit{branch-and-bound} (BNB) o 
+algoritmos de planos de corte.
+
+\vspace*{2mm}
+
+Este capítulo está dedicado a la formulación de problemas de Programación Lineal con presencia de variables enteras o 
+binarias y, en especial, a la modelización de condiciones o restricciones lógicas. Estas últimas restricciones son capaces
+de convertir un problema continuo en otro entero, por ello se suele considerar que el $90\%$ de los problemas reales de 
+programación terminan siendo de Programación Entera Pura o Mixta.
+
+
+\begin{flushright}
+    \textit{A partir de ahora se usarán ejemplos para explicar los distintos tipos de problemas a estudiar}
+\end{flushright}
+
+\subsection{Programación Entera Pura}
+
+\begin{ejemplo}
+    Una empresa está planificando la inversión a realizar en los próximos 3 trimestres en 5 proyectos de investigación. En 
+    la siguiente tabla aparece detallado el presupuesto disponible por trimestre, la inversión que se debe realizar por
+    proyecto y trimestre, y el beneficio que se espera obtener con cada proyecto. Todos los datos aparecen en millones de 
+    euros.
+
+    \begin{center}
+        \begin{tabular}{|c|ccc|c|}
+        \hline
+        \multirow{2}{*}{\textbf{Proyecto}} & \multicolumn{3}{c|}{\textbf{Trimestre}} & \multirow{2}{*}{\textbf{Beneficio}} \\
+         & 1 & 2 & 3 & \\
+        \hline
+        1 & 5 & 1 & 8 & 20 \\
+        2 & 4 & 7 & 10 & 40 \\
+        3 & 7 & 9 & 2 & 20 \\
+        4 & 3 & 4 & 1 & 15 \\
+        5 & 8 & 6 & 10 & 30 \\
+        \hline
+        \shortstack{\textbf{Presupuesto} \\ \textbf{disponible}} & 25 & 25 & 25 & \multicolumn{1}{c}{} \\
+        \cline{1-4}
+        \end{tabular}
+    \end{center}
+
+    Se desea conocer los proyectos en los que se debe invertir para maximizar el beneficio obtenido.
+\end{ejemplo}
+
+Obsérvese que no buscamos la cantidad a invertir en cada proyecto, sino que la única decisión que debemos tomar es si se
+invierte en un proyecto o no con el fin de maximizar el beneficio sin superar el presupuesto disponible. Se consideran 
+entonces las variables 0-1 siguientes
+
+\[
+    x_i=
+    \begin{cases}
+        1 & \text{si se invierte en el proyecto } i \\
+        0 & \text{si no se invierte en el proyecto } i
+    \end{cases}
+\]
+
+\newpage
+
+La formulación matemática del problema es la siguiente
+
+\begin{alignat}{4}
+    \text{maximizar:}   & \quad & 20x_1+40x_2+20x_3+15x_4+30x_5     & \quad &           \\
+    \text{sujeto a:}    & \quad & 5x_1+4x_2+3x_3+7x_4+8x_5\leq 25   &       &           \\
+                        & \quad & x_1+7x_2+9x_3+4x_4+6x_5\leq 25    &       &           \\
+                        & \quad & 8x_1+10x_2+2x_3+x_4+10x_5\leq 25  &       &           \\
+                        & \quad & x_i\in \{0, 1\}                   &       & \forall i=1,\dots,5          
+\end{alignat}
+
+Todas las variables presentes en este problema están restringidas a tomar los valores enteros 0 o 1, luego estamos ante un
+problema de Programación 0-1 Pura. La solución es invertir en todos los proyectos salvo el 5, generando un beneficio de
+95 millones de euros.
+
+\vspace*{2mm}
+
+\noindent Imaginemos que la empresa impone algunas de las siguientes condiciones sobre la inversión
+
+\begin{enumerate}
+    \item Se debe invertir, como mucho, en tres proyectos.
+    \item Se debe invertir en el proyecto 1 o en el 5 (o en ambos, or lógico).
+    \item Si se invierte en el proyecto 4 se debe invertir en el 3.
+    \item Si se invierte en los proyectos 2 o 3 se debe invertir en el proyecto 5.
+\end{enumerate}
+
+Formalizar la primera restricción es sencillo, como toman valores 0-1, contar el número de inversiones es equivalente a sumar
+las variables, por lo que la restricción queda tan sencilla como $x_1+\cdots+x_5\leq 3$. La segunda tiene truco, pues si bien
+podemos obligar la presencia de una variable con una restricción del tipo $x_i\geq 1$, si incorporamos a la formulación las 
+restricciones $x_1\geq 1$, $x_5\geq 1$ estaríamos obligando a la presencia de ambas conjunta pero sin permitir que aparezcan
+de forma individual. Una representación posible y correcta sería $x_1+x_5\geq 1$. La tercera condición hace que una variable
+dependa de la otra, y esto lo debemos reflejar en la restricción de forma que si $x_4$ toma el valor 1, $x_3$ también por lo
+que la restricción queda $x_3\geq x_4$ (se puede ver que no hay problema para que cuando $x_4=0$, $x_3$ sea 1). Por último,
+la cuarta condición no puede ser representada de manera análoga a la segunda, pues algo del tipo $x_5\geq x_2+x_3$ cuando 
+ambas variables sean 1 $x_5$ debería, como mínimo, valer 2, por lo que rompe la condición de variable binaria. Es por esto
+que resulta mucho más sencillo formalizarla como dos restricciones $x_5\geq x_2$ y $x_5\geq x_3$.
+
+\subsection{Programación Entera Mixta}
+
+\begin{ejemplo}
+    Una pequeña empresa puede producir 4 tipos de artículos y estima que para el próximo periodo, podrá vender todo lo que 
+    fabrica de los productos 1 y 3, pero como mucho tendrá demanda para 30 unidades del producto 2 y 10 del producto 4. La 
+    empresa tiene capacidad para producir un máximo de 110 artículos de cualquier tipo y combinación. A continuación se 
+    detalla el coste de producción por unidad producida, el coste fijo de producción y el precio de venta unitario de 
+    cada artículo
+
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Producto} & \textbf{Coste de} & \textbf{Coste fijo} & \textbf{P.V.P.} \\
+         & \textbf{producción} & & \\
+        \hline
+        1 & 300 & 60 & 450 \\
+        2 & 450 & 20 & 650 \\
+        3 & 500 & 70 & 600 \\
+        4 & 200 & 60 & 450 \\
+        \hline
+        \end{tabular}
+    \end{center}
+    
+    Formular el modelo matemático para determinar las unidades que se deben producir de cada artículo para maximizar los
+    beneficios de la empresa.
+\end{ejemplo}
+
+Si consideramos únicamente las variables 
+
+\[
+    x_i=\text{unidades del producto } i\text{ que debe fabricar el próximo periodo}
+\]
+
+la función de beneficios no podrá formularse correctamente. Ténganse en cuenta que los costes fijos no dependen de la cantidad
+sino de la decisión de producir o no, por lo que se necesitan más variables que hagan referencia a este aspecto
+
+\[
+    y_i=
+    \begin{cases}
+        1 & \text{si se fabrica el artículo } i \\
+        0 & \text{si no se fabrica el artículo } i
+    \end{cases}
+\]
+
+Por lo tanto se formula el problema de la siguiente forma
+
+\begin{alignat}{5}
+    \text{maximizar:}   & \quad & 150x_1+200x_2+100x_3+250x_4-60y_1-20y_2-70y_3-60y_4   & \quad &           \\
+    \text{sujeto a:}    & \quad & x_1+x_2+x_3+x_4\leq 110                               &       &           \\
+                        & \quad & x_2\leq 30                                            &       &           \\
+                        & \quad & x_4\leq 10                                            &       &           \\
+                        & \quad & x_i\geq 0                                             &       &           \\
+                        & \quad & y_i\in \{0, 1\}                                       &       & \forall i=1,\dots,4          
+\end{alignat}
+
+Ahora bien, está clara que la solución no respeta la relación entre las variables de producción y de decisión, pues ``podemos''
+(las restricciones lo permiten) fabricar productos sin pagar los costes fijos. Esto es debido a que no se han incluido
+relaciones entre las variables. 
+
+\newpage
+
+Sea $M$ una constante arbitrariamente grande. Entonces la restricción $x_i\leq My_i$ asegura que cuando $y_i=1$ entonces 
+$x_i>0$, o reciprocamente cuando $y_i=0$ entonces $x_i\leq 0$. La idea básica es que al asegurar que $x_i$ sea 0 cuando se
+toma la decisión de no comprar, entonces $x_i$ será mayor que 0 cuando se tome la decisión de comprar (suena un poco absurdo
+así explicado pero mi intención era, en efecto, reducirlo al absurdo). No tenemos que preocuparnos de que $x_i$ sea más grande
+ que $M$ en la solución óptima pues $M$ es lo suficientemente grande.
+
+\vspace*{2mm}
+
+\noindent Supongamos ahora que el fabricante impone además las siguientes condiciones
+
+\begin{enumerate}
+    \item Si se produce del artículo 1 se debe producir del artículo 2
+    \item Si se produce del artículo 4 no debe producirse nada del artículo 3.
+    \item Se debe producir obligatoriamente de los artículos 2, 3 y 4.
+    \item Si se producen más de 30 unidades del artículo 1, se deben producir por lo menos 10 unidades del artículo 2.
+    \item Si se producen más de 30 unidades del artículo 1, se deben producir como mucho 10 unidades del artículo 2.
+\end{enumerate}
+
+La primera condición se puede expresar como $x_1 > 0 \implies x_2 > 0$ que se traduce como $x_1\leq My_1$ y $x_2\geq my_1$,
+cumpliendose así que $x_1>0\implies y_1=1 \implies x_2\geq m$. La segunda se resuelve simplemente haciendo que ambas variables
+de decisión no puedan estar presentes al mismo tiempo mediante la restricción $y_3+y_4\leq 1$. En cuanto a la tercera es tan
+simple como añadir 3 restricciones que obliguen a elegir esos artículos ($y_2=y_3=y_4=1$) o lo que es equivalente 
+$y_2+y_3+y_4=3$. Las siguientes 2 restricciones implican crear una nueva variable $z$ definida como $z=0$ si $x_1\leq 30$ y
+$z=1$ si $x_1>30$ y añadiendo la restricción $x_1-30\leq Mz$ con $M$ suficientemente grande, lo que permite definir la 
+cuarta condición mediante la restricción $x_2\geq 10z$ y la quinta mediante la restricción $x_1-10\leq M(1-z)$ para $M$
+suficientemente grande.
+
+\vspace*{5mm}
+
+\noindent Generalizaremos alguna de las ideas expresadas en los ejemplos anteriores.
+
+\subsubsection{Restricciones ``si entonces'' en programación mixta}
+
+En general, la condición $f(x_1,\dots,x_n)>0 \implies g(x_1,\dots,x_n)\geq k$ se formula del modo siguiente. 
+Definimos la variable lógica $z$ tal que
+
+\[
+    z=
+    \begin{cases}
+        1 & \text{si } f(x_1,\dots,x_n)>0 \\
+        0 & \text{si } f(x_1,\dots,x_n)\leq0
+    \end{cases}
+\]
+
+\noindent e incorporaremos al modelo las condiciones
+
+\[
+    \begin{array}{l}
+        f(x_1,\dots,x_n)\leq Mz \\
+        g(x_1,\dots,x_n)\geq kz \\
+        z \in {0, 1}
+    \end{array}
+\]
+
+\newpage
+
+Reciprocamente, la condición $f(x_1,\dots,x_n)>0 \implies g(x_1,\dots,x_n)\leq k$ se formula incorporando al modelo 
+las condiciones
+
+\[
+    \begin{array}{l}
+        f(x_1,\dots,x_n)\leq Mz \\
+        g(x_1,\dots,x_n)-k\geq M(1-z) \\
+        z \in {0, 1}
+    \end{array}
+\]
+
+\subsection{Problemas de programación entera típicos}
+
+Se habla de los distintos tipos de problemas de programación entera en las siguientes secciones de los
+apuntes, incuyendo la sección de \textbf{Extras}, la cual contiene problemas más específicos.
+

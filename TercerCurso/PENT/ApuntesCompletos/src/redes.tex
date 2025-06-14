@@ -20,6 +20,8 @@ se habla de una \textbf{red dirigida} (como podráin ser las tuberías), así mi
 solo tiene arcos no dirigidos, se tratará de una \textbf{red no dirigida}. Toda red podrá considerarse dirigida sustituyendo
 los arcos no dirigidos por un par de arcos dirigidos con direcciones opuestas.
 
+\vspace*{2mm}
+
 Una trayectoria entre dos nodos es la sucesión de arcos distintos que conectan ambos nodos. Cuando algunos o todos los
 arcos de una red son arcos dirigidos, distinguiremos entre trayectorias dirigidas y trayectorias no dirigidas. Una 
 \textbf{trayectoria dirigida o camino} del nodo $i$ al nodo $j$ es una sucesión de arcos cuya dirección es hacia el nodo 
@@ -50,12 +52,12 @@ Este grafo (red) está definidos por el conjunto de nodos $N=\{A,B,C,D,E\}$ y el
 $A={(A,B),(A,C),(A,D),(B,E),(C,B),(D,E),(E,D)}$. La sucesión de arcos $\{(C,B),(B,E),(E,D)\}$ es una trayectoria dirigida del
 nodo $C$ al nodo $D$.
 
+\newpage
+
 \subsection{Problema del flujo de coste mínimo}
 
 Sea $G=(N,A)$ un grafo dirigido con un conjunto de nodos $N=\{1,\dots,m\}$ y un conjunto de arcos $A$ representados por pares
 $(i,j)$ con $i,j\in N$. La red corresponiende al grafo $G$ tiene los siguientes elementos adicionales.
-
-\newpage
 
 \begin{itemize}
     \item Asociado a cada nodo $i\in N$ se tiene una cantidad $b_i$ que representa la oferta o demanda de cierto producto
@@ -83,16 +85,75 @@ A las restricciones definidas en \ref{eq:35} se conocen como las \textit{ecuacio
 (aristas que vienen de los nodos $\partial_i^+$) y los flujos de salida (aristas que van a los nodos $\partial_i^-$) y el 
 ``consumo'' (o la ``emisión'') local definida por $b_i$.
 
+\vspace*{2mm}
+
 Si el número de arcos en el grafo es $n$ y representamos por $x=(x_{ij})$ al vector de variables o flujos, por $c=(c_{ij})$
 al vector de costes y $b=(b_{i})$ el vector de ``balances'', el problema puede formularse de forma matricial como sigue
 
 \begin{alignat}{3}
     \text{minimizar:}   & \quad & cx                & \quad &   \\
     \text{sujeto a:}    & \quad & Ax=b              &       &   \\
-                        & \quad & x\geq \mathbf{0}  &       &   \\     
+                        & \quad & x\geq \mathbf{0}  &       &        
 \end{alignat}
 
 donde $A$ es la matriz de coeficientes de las ecuaciones de balance. La variable $x_{ij}$ asociada al arco $(i,j)\in A$
 aparecerá con coeficiente 1 en la restricción correspondiente al nodo $i$ y con coeficiente -1 en la restricción correspondiente
 al nodo $j$. La matriz $A$ es conocida como \textit{matriz de incidencias nodos-arcos} para un grafo dirigido cualquiera.
 
+\newpage
+
+\begin{ejemplo}
+    Para el grafo dado por el conjunto de nodos $N=\{1,2,3,4\}$ y el conjunto de arcos 
+    $A=\{(1,2),(1,2),(2,3),(2,4),(3,2),(3,4),(4,1)\}$ la matriz de restricciones es la matriz de incidencias nodos-arcos
+
+    \[A=\begin{pmatrix}
+         1 &  1 &  0 &  0 &  0 &  0 & -1 \\
+        -1 &  0 &  1 &  1 & -1 &  0 &  0 \\
+         0 & -1 & -1 &  0 &  1 &  1 &  0 \\
+         0 &  0 &  0 & -1 &  0 & -1 &  1
+    \end{pmatrix}\]
+
+    \noindent El arco $(1,2)$ une desde el nodo 1 al nodo 2, por lo que $a_{11}=1$ y $a_{12}=-1$, del mismo modo ocurre con 
+    el resto de arcos. Como hay 4 nodos y 7 arcos las dimensiones de $A$ son $7\times 4$.
+\end{ejemplo}
+
+El modelo de flujos de redes tiene una propiedad importante, la \textbf{propiedad de integralidad} (no confundir con 
+\textit{integrabilidad}). Esta propiedad puede enunciarse como ``si las ofertas y demandas son números enteros, toda solución
+básica factible tiene valores enteros''. Es por esto que los problemas de flujo en redes muchas veces se incluyen en los
+estudios del campo de la programación entera (como en nuestra asignatura).
+
+\subsection{Redes balanceadas}
+
+Se define la oferta total como la cantidad positiva $O_T=\sum_{b_i>0}b_i$, osea la suma de las ofertas. Del mismo modo,
+se define la demanda total como la cantidad positiva $D_T=-\sum_{b_i<0}b_i$. Diremos que una red está balanceada si la oferta
+es igual a la demanda, esto es $O_T=D_T$, o dicho de otra forma, si $\sum_ib_i=0$. Para todo problema factible su red está
+balanceada, pero no toda red balanceada genera un problema factible.
+
+\vspace*{2mm}
+
+En muchos casos prácticos sucede que la oferta total no coincide con la demanda totaly es necesario ajustar el
+problema para convertirlo en una red balanceada. Para ello se pueden asignar restricciones en función de si un nodo es de
+oferta o de demanda, pero en la práctica esto resulta muy incomodo. Lo habitual es añadir un nodo ficticio conectado con arcos
+dirigidos a todos los demás con coste 0 y demanda $D_T-O_T<0$
+
+\subsection{Extensiones y aplicaciones}
+
+En los problemas de redes, los costes y capacidades están siempre asociados a los arcos. En ocasiones, se quiere o necesita
+establecer alguna de estas caracteristicas a un nodo (costes de fabricación, etc) por lo que se ha de crear un arco ficticio
+que desdoble al nodo donde se adjudiquen estas características. Otra posible variante es incluir cotas mínimas, cambiando
+las restricciones a $l_{ij}\leq x_{ij}\leq u_{ij}$.
+
+\vspace*{2mm}
+
+Existen otros problemas que generalizan el modelo básico y que tienen gran cantidad de aplicaciones en distintos sectores. A
+pesar de que no se estudiarán, se enuncian algunos
+
+\begin{itemize}
+    \item Redes Generalizadas (tambien conocidas como Redes con Pérdidas y Ganancias)
+    \item Redes Multiproducto
+    \item Redes con costos fijos (se estudian en el tema de programación entera)
+    \item Redes no lineales (cuando la función objetivo no es lineal)
+\end{itemize}
+
+Las aplicaciones más importantes de lo problemas de flujo en redes se dan en \textit{problemas de distribución}, pero tienen
+impacto en ambitos como la planificación de \textit{redes espacio/tiempo} para modelizar problemas de producción/inventario.

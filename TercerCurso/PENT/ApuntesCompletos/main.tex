@@ -13,24 +13,30 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tcolorbox}
 \usepackage{tikz}
+\usepackage{multirow}
 
 \colorlet{LightGray}{White!90!Periwinkle}
 \colorlet{LightOrange}{Orange!15}
 \colorlet{LightGreen}{Green!15}
+\colorlet{LightBlue}{Blue!15}
 
 \newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
 
 \declaretheoremstyle[name=Theorem,]{thmsty}
 \declaretheorem[style=thmsty,numberwithin=section]{theorem}
-\tcolorboxenvironment{theorem}{colback=LightGray}
+\tcolorboxenvironment{theorem}{colback=LightBlue,arc=0mm}
 
 \declaretheoremstyle[name=Proposition,]{prosty}
 \declaretheorem[style=prosty,numberlike=theorem]{proposition}
-\tcolorboxenvironment{proposition}{colback=LightOrange}
+\tcolorboxenvironment{proposition}{colback=LightOrange,arc=0mm}
 
 \declaretheoremstyle[name=Principle,]{prcpsty}
 \declaretheorem[style=prcpsty,numberlike=theorem]{principle}
-\tcolorboxenvironment{principle}{colback=LightGreen}
+\tcolorboxenvironment{principle}{colback=LightGreen,arc=0mm}
+
+\declaretheoremstyle[name=Ejemplo,]{ejemplosty}
+\declaretheorem[style=ejemplosty,numberwithin=section]{ejemplo}
+\tcolorboxenvironment{ejemplo}{colback=LightGray, arc=0mm}
 
 \setstretch{1.2}
 \geometry{
@@ -58,7 +64,7 @@
 }
 
 \author{\textbf{Autores} \\
-    Victor Elvira Fernández, Tomás Ruiz Rojo, Juan Horrillo Crespo \\
+    Juan Horrillo Crespo \\
     Universidad de Valladolid \\
     \date{\today}}
 
@@ -74,6 +80,10 @@
 
 \include{src/transporte}
 \include{src/redes}
+\include{src/entera}
+\include{src/mochila}
+\include{src/asignacion}
+\include{src/empaquetado}
 
 \newpage
 
