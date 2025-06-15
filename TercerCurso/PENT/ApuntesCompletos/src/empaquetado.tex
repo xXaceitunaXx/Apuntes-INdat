@@ -1,2 +1,90 @@
 \section{Problema Bin Packing}
 
+\subsection{Introducción}
+
+El problema de empaquetado de objetos o Problema Bin Packing se produce de forma frecuente en entornos de almacenes,
+transporte y mensajería. Los objetos pueden ser paquetes, cajas o pallets\footnote{Se le llama pallet o palé a la plataforma
+formada con tablas de madera que se utiliza para el almacenamiento y el traslado de mercancias} que deben ser cargados en 
+contenedores, furgonetas, camiones, vagones o cualquier otro medio de transporte. El objetivo es minimizar el coste asociado
+al uso de los contenedores, aunque suele reducirse al mínimo de contenedores necesarios para efectuar una carga. Dependiendo
+de las características de los objetos se clasifican entre
+
+\begin{itemize}
+    \item Problemas de Bin Packing de dimensión uno, para objetos de alta densidad y solo se considera el peso.
+    \item Problemas de Bin Packing de dimensión dos, para carga de objetos de la misma altura.
+    \item Problemas de Bin Packing de dimensión tres, para carga de objetos de baja densidad, en cuyo caso se considera el
+    volumen.
+\end{itemize}
+
+\subsection{Problema unidimensional}
+
+Sea $n$ el número de objetos que hay que empaquetar, y para cada $j=1,\dots,n$ $a_j$ es peso del objeto $j$. Se dispone de $m$
+contenedores o ``bins'', y para cada $i=1,\dots,m$ $q_i$ es la capacidad o peso total que admite el contenedor $i$ y $c_i$ es
+el costo por uso del contenedor $i$. Se supone que todo objeto cabe en el contenedor. Se formula el problema de la siguiente
+manera
+
+\begin{alignat}{3}
+    \text{minimizar:}   &   \sum_{i=1}^m c_{i}y_{i}               \\
+    \text{sujeto a:}    &   \sum_{i=1}^m x_{ij}=1 \quad j=1,\dots,n             \\
+                        &   \sum_{j=1}^n a_{j}x_{ij}\leq q_iy_i \quad i=1,\dots,m \\
+                        &   x_{ij} \in {0, 1} \quad i=1,\dots,m \quad j=1,\dots,n \\
+                        &   y_{i} \in {0, 1} \quad i=1,\dots,m
+\end{alignat}
+
+\noindent donde las variables binarias $y_i$ indican el uso del contenedor $i$ y las $x_{ij}$ indican la asignación de objetos
+a los contenedores.
+
+Cuando los contenedores son identicos, se toma la capacidad $q_i=q$ para todos los contenedores, y la función objetivo se 
+reduce a minimizar el número de contenedores usados
+\begin{alignat}{3}
+    \text{minimizar:}   &   \sum_{i=1}^m y_{i}
+\end{alignat}
+
+\newpage
+
+En algunas ocasiones, el número de contenedores que pueden usarse es ilimitado. Entonces se toma $m$ lo suficietemente grande
+para que el modelo tenga solución. Por ejemplo, en el caso de contenedores idénticos basta con que $m=n$, aunque siempre es
+preferible un valor menor para que no haya demasidas variables. Para encontrar un valor menor vale con encontrar una solución
+factible rápida y usar el número de contenedores utilizados en la solución como valor de $m$.
+
+\subsection{Métodos de solución}
+
+Existen numerosos algoritmos heurísticos para el Problema de Bin Packing, que permiten encontar soluciones factibles cercanas
+al óptimo. Por ejemplo, puede aplicarse el algoritmo conocido como FFD (First Fit Decreasing)
+
+\begin{itemize}
+    \item \textbf{Etapa 0}. Se ordenan los objetos de forma decreciente respecto del peso. Sea $S$ la lista de objetos, $V$
+    la lista de ``bins'' y $T$ la lista de los ``bins'' usados. Inicialmente $T=\emptyset$.
+    \item \textbf{Etapa 1}. Elegimos el primer objeto $j$ de la lista $S$ y lo insertamos en el primer ``bin'' $i\in T$ que
+    tenga capacidad residual mayor o igual que $a_j$. Si no hay ningún ``bin'' elegimos el primero $k$ de la lista $V$, lo
+    añadimos al final de la lista $T$ e insertamos $j$ en $k$.
+    \item \textbf{Etapa 2}. Si $S=\emptyset$ se termina, pues todos los objetos han sido ya cargados. Entonces $T$ es el
+    conjunto de ``bins'' usados mientras que $V$ son los no usados. Si $S\neq\emptyset$ volvemos a la Etapa 1.
+\end{itemize}
+
+\noindent Es posible y sencillo dar una cota de la solución óptima $z$ tal que
+\[
+    z_1\leq z\leq z_2
+\]
+\noindent donde $z_2$ es la solución proporcionada por el algoritmo anterior y $z_1$ definida como
+\[
+    z_1= \ceil*{\frac{\sum_{j=1}^n a_j}{q}}
+\]
+\noindent En ocasiones resulta ser que $z_1=z_2$, en esta situación hemos encontrado el valor mínimo sin necesidad de
+resolver el modelo.
+
+\begin{ejemplo}
+    Se tienen que transportar 11 objetos desde un almacén a otro. Los pesos de los objetos vienen dados en la siguiente tabla
+    
+    \begin{center}
+        \begin{tabular}{c|ccccccccccc}
+            \hline
+            objeto & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\ \hline
+            peso & 67.3 & 504 & 121 & 130 & 375 & 234 & 73.7 & 175 & 8.5 & 225 & 50.5 \\ \hline
+        \end{tabular}
+    \end{center}
+
+    Los objetos deben ser transportados en furgonetas que admiten hasta 670 Kg (es decir, $q=670$). El algoritmo FFD encuentra
+    una asignación de los 11 objetos a 3 furgonetas, por tanto $z_2=3$. Como $z_1=\ceil*{\frac{\sum_{j=1}^n a_j}{q}}=
+    \ceil*{\frac{1964}{670}}=\ceil*{2.93}=3$, en este caso podemos asegurar que el mínimo número necesario de furgonetas es 3.
+\end{ejemplo}

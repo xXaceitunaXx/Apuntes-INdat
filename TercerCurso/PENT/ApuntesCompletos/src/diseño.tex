@@ -1,0 +1,195 @@
+\section{Problemas de Diseño de Redes}
+
+\subsection{Introducción}
+
+Los problemas de diseño de redes constituyen un área de problemas donde se tiene que encontrar la configuración o el diseño
+óptimo de una red, de forma que se cumplan ciertos criterios de servicio y conectividad, dependiendo del problema concreto.
+Este área tiene muchas aplicaciones prácticas, fundamentalmente en problemas de redes de comunicaciones y en redes logísticas
+de distribución. Cuando el objetivo no es el diseño de la red sino la optimización del uso de la misma se tienen los problemas
+de optimización de flujo en red. En la siguiente tabla se muestran ejemplos de problemas de cada tipo
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{l|l}
+        \textbf{Problemas de optimización del uso} & \textbf{Problemas de diseño} \\ \hline
+        Problemas de transporte & Problemas de localización con costos fijos \\
+        Flujo en redes de un producto & Transporte con costos fijos \\
+        Flujo en redes multiproducto & Flujo en redes con costes fijos \\
+        Transporte en dos etapas & Sistema de distribución en dos etapas
+    \end{tabular}
+\end{table}
+
+\subsection{Sistemas de distribución}
+
+Los problemas de planificación de la distribución de productos se clasifican en tres tipos, problemas estratégicos (plazo
+largo, incertidumbre grande), problemas tácticos (plazo medio, incertidumbre menor) y problemas operacionales (plazo muy
+corto, incertidumbre pequeña). Para el diseño de un sistema de distribución de productos hay 3 esquemas o sistemas básicos
+
+\begin{itemize}
+    \item \textbf{Transporte directo}. Los productos se transportan directamente desde las plantas hasta los puntos de
+    distribución finales. El problema de diseño para este tipo de sistema para un único producto se modela como un problema
+    de localización con costes fijos en una de sus tres variantes, UFLP (Uncapacited Facility Location Problem), CFLP
+    (Capacited Facility Location Problem) o SSCFLP (Single Source Capacitated Facility Location Problem). La optimización de
+    un sistema ya diseñado se reduce al problema de transporte clásico.
+    \item \textbf{Almacenamiento}. Es el método tradicional de almacenar los productos en tanques/almacenes intermedios. El problema de
+    optimización para un producto es un problema de transporte en dos etapas que tambien puede modelizarse como problema de
+    flujo en redes.
+    \item \textbf{Terminales de carga (Crossdocking)}. Este método se conoce tamién como distribución just-in-time. Los
+    productos se envían a una instalación ``crossdock'' con terminales de carga donde son ordenados, las cargas se consolidan
+    con otros productos y se envian con trailers a los puntos de demanda sin necesidad de almacenarlos. El problema de
+    optimización de un sistema con terminales de carga es un problema de flujos en redes multiproducto, y el problema de diseño
+    es un problema de flujos en redes multiproductos con costos fijos.
+\end{itemize}
+
+\subsection{Problema de Flujo en Redes con Costos Fijos (FCNP)}
+
+Se tiene un grafo dirigido $G=(N,A)$ con $N=\{1,\dots,n\}$ conjunto de nodos y $A$ un conjunto de arcos, donde cada arco
+corresponde a un par $(i,j)$ tal que $i,j\in N$. Asociado a cada arco hay una variable de flujo con valores 
+$0\leq x_{ij}\leq u_{ij}$ donde $u_{ij}$ es una cota superior del flujo en el arco $(i,j)$ y una variable binaria 
+$y_{ij}\in\{0,1\}$ que representa el ``uso'' del arco en la solución final (cuando $x_{ij}>0$).Para ello es necesaria la
+restricción
+\[
+    x_{ij}\leq u_{ij}y_{ij}
+\]
+Las variables $y_{ij}$ son las variables de diseño y tienen asociadas en la función objetivo un costo fijo $f_{ij}$. En 
+ocasiones las variables $x_{ij}$ tienen asociado un costo variable $c_{ij}$. Finalmente, $b_i$ es la oferta o demanda del
+nodo $i$. Se formula el modelo, suponiendo la red balanceada, como
+
+\begin{alignat}{3}
+    \text{minimizar:}   & \sum_{(i,j)\in A}(f_{ij}y_{ij} + c_{ij}x_{ij})    &                       \\
+    \text{sujeto a:}    & \sum_{j=1}^nx_{ij}-\sum_{j}x_{ji}=b_i                 & \forall i\in N        \\
+                        & x_{ij}\leq u_{ij}y_{ij}                           & \forall (i,j)\in A    \\
+                        & x_{ij}\geq 0                                      & \forall (i,j)\in A    \\
+                        & y_{ij}\in\{0,1\}                                  & \forall (i,j)\in A
+\end{alignat}
+
+\subsection{Problema Conector}
+
+El Problema Conector consiste en encontar la forma de conectar $n$ puntos (nodos) entre si con costo o distancia total mínima 
+a partir de un árbol $G=(N,A)$ donde cada arista $(i,j)$ tiene asociado un costo $\omega_{ij}$. Un subgrafo expandido conexo 
+es un grafo $G'=(N,T)$, con conjunto de aristas $T\subseteq A$ que conecta entre si todos los nodos de $N$, y que tiene 
+asociado un costo total $\omega(T)=\sum_{(i,j)\in T}\omega_{ij}$. El problema conector se reduce a encontrar el subgrafo 
+expandido conexo de menor costo total.
+
+\subsubsection{Minimum Spaning Tree (MST)}
+
+Un árbol es un grafo conexo y sin ciclos. En la mayoria de problemas prácticos de conexión se puede suponer que 
+$\omega_{ij}>0$ para toda arista $(i,j)\in A$. En este caso el Problema Conector tiene como solución un árbol expandido,
+pues si existiese un grafo expandido con algún ciclo simplemente se puede eliminar una arista manteniendo la conexión entre
+todos los nodos y reduciendo \textbf{siempre} el costo total. 
+
+Por tanto el Problema Conector se ve reducido al problema MST (Minimun Spanning Tree), que puede ser formulado como Problema 
+de Flujo en Redes con Costos Fijos. Primero se duplica cada arísta en dos arcos, pues el Problema de Flujo en Redes con Costos
+Fijos es dirigido, $i\to j$ y $j\to i$. Si se van a conectar $n$ puntos, se elige uno arbitariamente (nodo $k$) y se toman 
+ofertas/demandas de $b_k=n-1$ y $b_i=-1$ para $k\neq i$. Estas ofertas y demandas obligan a conectar todos los puntos 
+proporcionando una solución de grafo conexo. En la función objetivo solo aparecerán los costos de los arcos por las variables 
+de diseño binarias $y_{ij}$ (no hay costos variables). Por último, para asociar las variables 
+$x_{ij}\geq 0$ y $y_{ij}\in\{0,1\}$ en las restricciones $x_{ij}\leq u_{ij}y_{ij}$ se puede usar como $u_{ij}=n-1$ para todo 
+arco $(i,j)\in A$.
+
+\vspace*{2mm}
+
+A pesar de que el problema MST puede ser formulado como problema mixto de redes con costes fijos, hay algoritmos que lo
+resuelven fácilmente sin necesidad de plantear el modelo.
+
+\newpage
+
+\subsubsection{Algoritmo de Kruskal}
+
+Es un caso particular de los algoritmos ``greedy'' pues en cada paso se toma la arista o variable de costo mínimo, y no se
+vuelve a reoptimizar o corregir. Para el MST el algoritmo es el siguiente
+
+\begin{itemize}
+    \item \textbf{Etapa inicial}. Se elige una arista de costo mínimo
+    \item \textbf{Etapa general}. Si se han elegido ya aristas $A'=\{a_1,\dots,a_i\}$ se elige la siguiente arista 
+    $a_{1+1}\in A-A'$ de forma que se verifique que en $A'=\{a_1,\dots,a_i,a_{i+1}\}$ no hay ciclos y el costo 
+    $\omega(a_{i+1})$ es mínimo.
+    \item \textbf{Etapa final}. Se termina cuando ya no se pueda realizar la etapa anterior (siempre en $n-1$ etapas).
+\end{itemize}
+
+\subsubsection{Algoritmo de Prim}
+
+Se trata de otra implementación del algoritmo greedy. En vez de ir añadiendo aristas hasta formal el árbol final (con las 
+comprobaciones de ciclos que conlleva), en este método se va aumentando un árbol expandido $T_j$ desde uno con un único nodo y
+ninguna arista hasta uno con $n$ nodos y $n-1$ aristas.
+
+\begin{itemize}
+    \item \textbf{Etapa inicial}. $T_0$ consiste de un único nodo.
+    \item \textbf{Etapa general}. Dado $T_{j-1}$ árbol conteniendo $j$ nodos y $j-1$ aristas, se añadie la arista de costo o
+    peso mínimo entre todas las aristas con un extremo en $T_{j-1}$ y otro en $T_{j-1}'$.
+    \item \textbf{Etapa final}. Se termina con el árbol $T_{n-1}$ (siempre en $n-1$ etapas).
+\end{itemize}
+
+\subsubsection{Capacitated Minimum Spaning Tree (CMST)}
+
+El Problema del Mínimo Árbol con Capacidades (CMST) es una versión del problema MST con la concición adicional de que ninguno
+de los sub-árboles saliendo desde la raíz tenga más de $k$ nodos. Salvo para los casos triviales de $k=1$ (árbol estrella) y 
+$k\geq n-1$ (MST) se trata de un problema mucho más dificil de resolver que el MST y no existe ningún algoritmo simple
+(polinómico) pàra su resolución.
+
+
+En otra versión del problema existen demandas $d_i$ desde los nodos $i\neq 1$ al nodo raíz o desde el nodo raíz al resto de
+nodos. En este caso la restricción de capacidad es un límite $C$ sobre la capacidad de tráfico que puede manejar. Entonces se
+debe cumplir la restricción $\sum_{i\in T_k}d_i \leq C$ donde $T_k$ es el conjunto de nodos del árbol conectado a cualquier
+puerto $k$.
+
+\vspace*{2mm}
+
+El problema CMST se puede formular como un Problema de Flujo en Redes con Costos Fijos con las siguientes características.
+\begin{enumerate}
+    \item Costos fijos. $f_{ij}=\omega_{ij}$ mientras que los costos variables son nulos para todo arco $(i,j)\in A$.
+    \item Ofertas/demandas. Hay dos formas de formularlas, dependiendo de si el flujo es de los nodos a la raíz $r$ o de la 
+    raíz a los nodos. Si el tráfico es de los nodos a la raíz, en el modelo de redes se toman como ofertas/demandas $b_i=1$
+    para $i\neq r$ y $b_r=-(n-1)$, y para el caso de demandas de tráfico $b_i=d_i$ para $i\neq r$ y $b_r=-\sum d_r$. Cuando el
+    tráfico es de la raíz a los nodos se toman como ofertas/demandas $b_i=-1$ para $i\neq r$ y $b_r=(n-1)$, y para el caso de
+    demandas $b_i=-d_i$ para $i\neq r$ y $b_r=\sum d_r$. En todos los casos la red está balanceada.
+    \item Capacidades. En el caso del tráfico de los nodos a la raíz, $u_ir=k$ y para el resto en principio no hay restricción
+    de capacidad. Si el tráfico va del nodo raíz hasta el resto de nodos, $u_ri=k$ y para el resto no hay restricción de
+    capacidad.
+\end{enumerate}
+
+\newpage
+
+\subsubsection{Métodos heurísticos CMST}
+
+Existe uma variedad de métodos heurísticos para el problema CMSP. Heurísticas de construcción conocidas son la heurística de
+Eseau-Williams, que tiene su origen en el conocido algoritmo de Clarke-Wright para el problema de rutas con capacidades y se
+basa en el concepto de ahorro (saving). Otra más sencilla es el algoritmo de Prim modificado, el método consiste en ir
+construyendo subárboles con raíz en el nodo base $r$, con el criterio del método greedy de Prim y respetando la restricción
+de capacidad (se puede realizar de forma secuencial o en paralelo).
+
+\subsubsection{Problema de Steiner}
+
+Otro Problema Conector que surge en la práctica es el Problema de Steiner. En este problema se tiene, al igual que en el MST,
+un grafo $G=(N,A)$ con pesos o distancias en las aristas $\omega_{ij}$ para $(i,j)\in A$ y uin subconjunto de nodos
+$T\subseteq N$ conocidos como terminales. El problema consiste en encontrar un subgrafo que conecte los nodos terminales entre
+sí y que tenga peso total mínimo. Si los pesos son positivos la solución final tendrá forma de árbol, conocido como árbol de
+Steiner. Si $T=N$ el problema se reduce al MST, mientras que si $|T|=2$ se reduce al del camino más corto entre los dos nodos
+en $T$. Para el resto de casos, el problema de Steiner es un problema dificil para el que no existe ningún algoritmo
+polinómico.
+
+El problema del mínimo árbol de Steiner se puede formular como un problema de flujo en redes con costos fijos con las siguientes
+características
+
+\begin{enumerate}
+    \item Se transforma el grafo en uno dirigido duplicando cada arista $(i,j)$ en dos arcos dirigidos $(i,j)$ y $(j,i)$.
+    \item Costos fijos. $f_{ij}=\omega_{ij}$ mientras que los costos variables son nulos para todo arco $(i,j)\in A$.
+    \item Ofertas/demandas. Se escoge arbitrariamente un nodo terminal como raíz $r\in T$ y se toman como ofertas/demandas
+    $b_r=|T|-1$ y $b_i=-1$ para $i\in T$, $i\neq r$ y $b_i=0$ para todo $i\notin T$.
+    \item Capacidades. Las capacidades de los arcos se toman igual al flujo total, que es $|T|-1$.
+\end{enumerate}
+
+\subsection{Modelos de Diseño Redes Multiproducto con Costos Fijos}
+
+Los problemas de diseño de redes multiproducto son una extensión a varios productos de los problemas de diseño vistos
+anteriormente. Los elementos básicos son un grafo dirigido $G=(N,A)$ donde $N$ es el conjunto de nodos y $A$ el conjunto de
+arcos, y un conjunto de productos $K$. En los siguientes modelos tenemos de nuevo dos clases de variables de decisión, la
+cantidad de flujo del producto $k$ que pasa por el arco $(i,j)$ que denotaremos como $x_{ij}^k$ y $y_{ij}$ que indican si el
+arco $(i,j)$ se usa o no en el diseño solución. Para cada $x_{ij}^k$ tendremos un coste unitario $c_{ij}^k$ asociado y en el
+caso de las $y_{ij}$ un coste fijo $f_{ij}$. También hay una serie de ofertas/demandas $b_i^k$ para cada nodo $i\in N$.
+
+\begin{flushright}
+    Hasta aquí llegué, consultar más en los apuntes que me va a dar un chungazo de escribír\footnote{Es mucho y repetitivo de 
+    anteriores temas pero generalizado a $K$ productos, consultar en el document ``Diseño redes multiproducto.pdf. Más adelante
+    esta sección será completada correctamente. La formula objetivo y las restricciones son bastante sencillas de intuir.''}
+\end{flushright}

@@ -14,6 +14,7 @@
 \usepackage{tcolorbox}
 \usepackage{tikz}
 \usepackage{multirow}
+\usepackage{mathtools}
 
 \colorlet{LightGray}{White!90!Periwinkle}
 \colorlet{LightOrange}{Orange!15}
@@ -21,6 +22,7 @@
 \colorlet{LightBlue}{Blue!15}
 
 \newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 
 \declaretheoremstyle[name=Theorem,]{thmsty}
 \declaretheorem[style=thmsty,numberwithin=section]{theorem}
@@ -84,6 +86,8 @@
 \include{src/mochila}
 \include{src/asignacion}
 \include{src/empaquetado}
+\include{src/diseño}
+\include{src/localizacion}
 
 \newpage
 
@@ -91,7 +95,10 @@
 % Reference and Cited Works
 % ------------------------------------------------------------------------------
 
-
+\begin{thebibliography}{9}
+    \bibitem{PDFs}
+    José Ignacio Segovia Martín, Ricardo Josa Fombellida, \\ \textit{PDF de la asignatura PENT}. \\ Universidad de Valladolid 2024.
+\end{thebibliography}
 
 % ------------------------------------------------------------------------------
 
