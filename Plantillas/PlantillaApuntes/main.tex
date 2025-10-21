@@ -19,17 +19,17 @@
 
 \newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
 
-\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheoremstyle[name=Teorema,]{thmsty}
 \declaretheorem[style=thmsty,numberwithin=section]{theorem}
 \tcolorboxenvironment{theorem}{colback=LightGray}
 
-\declaretheoremstyle[name=Proposition,]{prosty}
-\declaretheorem[style=prosty,numberlike=theorem]{proposition}
-\tcolorboxenvironment{proposition}{colback=LightOrange}
+\declaretheoremstyle[name=Ejercicio,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{exercise}
+\tcolorboxenvironment{exercise}{colback=LightOrange}
 
-\declaretheoremstyle[name=Principle,]{prcpsty}
-\declaretheorem[style=prcpsty,numberlike=theorem]{principle}
-\tcolorboxenvironment{principle}{colback=LightGreen}
+\declaretheoremstyle[name=Demostración,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{proofs}
+\tcolorboxenvironment{proofs}{colback=LightGreen}
 
 \setstretch{1.2}
 \geometry{
@@ -55,57 +55,70 @@
 		\LARGE \textbf{\uppercase{Template Title}
 		\HRule{2.0pt} \\ [0.6cm] \LARGE{Subtitle} \vspace*{10\baselineskip}}
 		}
-\date{}
+
 \author{\textbf{Author} \\ 
-		Who? \\
-		Where? \\
-		When?}
+		Victor Elvira Fernandez, Tomás Ruiz Rojo, Juan Horrillo Crespo \\
+		Universidad de Valladolid \\
+		\date{\today}}
 
 \maketitle
 \newpage
+
+\include{colaboraciones}
 
 \tableofcontents
 \newpage
 
 % ------------------------------------------------------------------------------
+\section{Primera sección}
 
-\section{Examples}
+Vel consectetur corrupti eum unde deserunt et asperiores harum. Dolorem fugiat cum sequi culpa. Nemo dignissimos et hic qui et non nemo. Iusto id quia debitis vitae. Expedita dolorem inventore eos facere reprehenderit quasi.
+
+Doloremque fugit non veniam recusandae perferendis. Ipsum ad velit inventore et vitae exercitationem ipsam explicabo. Qui sapiente non eaque expedita deserunt possimus iusto iste. Odit occaecati ducimus harum culpa. Est eius omnis consequatur ut earum maxime dolore natus. Nostrum non molestiae voluptas nisi quisquam fugiat dolor.
+
+Aliquam sed ipsa natus nam laudantium consequuntur. Repellat cumque vel voluptatem enim similique blanditiis. Et quod qui quasi doloribus quia adipisci similique. Eveniet velit ducimus odit molestiae magni. Sit ex rem et et quibusdam. Minus et reprehenderit et architecto et reprehenderit ut ullam.
+
+Optio quia molestiae cumque et. Porro magnam quia veritatis illum temporibus officiis. Laborum quod quis impedit ducimus deleniti. Officia omnis aspernatur quis est odit ex labore. Eaque non eveniet vel. Deserunt tempora aliquam pariatur quo.
+
+Quas dignissimos excepturi similique nemo. Omnis sint dignissimos nobis mollitia commodi. In odio fugiat nesciunt. Tenetur odit tempora praesentium alias delectus soluta. Dicta et commodi nostrum facilis inventore sunt nisi ex.
+
+\section{Teorema, Demsotración y Ejemplo}
 
 \begin{theorem}
-    This is a theorem.
+    Teorema de ejemplo
 \end{theorem}
 
-\begin{proposition}
-    This is a proposition.
-\end{proposition}
+\begin{proofs}
+    Demsotración de ejemplo
+\end{proofs}
 
-\begin{principle}
-    This is a principle.
-\end{principle}
+\begin{exercise}
+    Ejemplo de \textit{ejemplo}$\dots$
+\end{exercise}
 
-% Maybe I need to add one more part: Examples.
-% Set style and colour later.
+\section{Matemáticas}
 
-\subsection{Pictures}
-
-\begin{figure}[htbp]
-    \center
-    \includegraphics[scale=0.06]{img/photo.jpg}
-    \caption{Sydney, NSW}
-\end{figure}
-
-\subsection{Citation}
-
-This is a citation\cite{Eg}.
-
-\newpage
+\begin{itemize}
+    \item Matemáticas en línea: \\
+    Puedes escribir entradas matemáticas en linea como $\phi \sim N(0,1)$ y seguir escribiendo$\dots$
+    \item Matemátricas en ``bloque'': \\
+    Tambien puedes escribir entradas matemáticas en bloque como 
+    \[
+        \phi \sim N(0,1)
+    \]
+    y seguir escribiendo$\dots$
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 % Reference and Cited Works
 % ------------------------------------------------------------------------------
 
-\bibliographystyle{IEEEtran}
-\bibliography{References.bib}
+\begin{thebibliography}{9}
+    \bibitem{manuscritos}
+    Juan Camilo Yepes Borrero, \\ \textit{Apuntes INFE2 ...}. \\ Universidad de Valladolid 2024.
+    \bibitem{apuntes}
+    Yolanda Larriba González, \\ \textit{Apuntes INFE2 ...}. \\ Universidad de Valladolid 2023.
+\end{thebibliography}
 
 % ------------------------------------------------------------------------------
 
