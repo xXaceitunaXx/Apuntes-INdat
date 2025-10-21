@@ -1,0 +1,54 @@
+\temaportada{Tema 1: Cadenas de Markov en Tiempo Discreto}
+\subsection{Parte 1}
+\subsubsection{Ejercicio 1}
+\begin{exercise}
+Una moneda justa se lanza de forma reiterada, con resultados $Y_0, Y_1, Y_2, \ldots$ 
+(identificamos \emph{cara} con $1$ y \emph{cruz} con $0$).  
+
+Para cada $n \geq 1$, se define
+\[
+X_n = Y_n + Y_{n-1}
+\]
+como el número de caras obtenidas en los lanzamientos $n-1$ y $n$.  
+
+¿Es $X_n$ una cadena de Markov? En caso afirmativo, describe la matriz de transición.
+\end{exercise}
+
+Suponemos un espacio E=$\{0,1,2\}$. Para que sea cadena de Markov, $X_n$ deberá depender de n y no de los estados anteriores.
+\[
+P\left(X_{n+1}/ X_n, X_{n-1},\dots, X_0\right) = P\left(X_{n+1}/ X_n\right)
+\]
+
+Esto a simple vista podemos ver que \textbf{no es una cadena de Markov}
+
+¿Por qué?. Lo demostramos con un ejemplo.
+
+\[
+P \left(X_3 = 0 / X_2 =1, X_1=0\right) = 0 \rightarrow P \left( X_2 =1,X_1=0\right) = P(Y_0=0,Y_1=0,Y_2=1)
+\]
+$X_3$ no podrá ser en este caso 0 y por eso la probabilidad es 0.
+
+En cambio:
+\[
+P\left(X_3=0 / X_2=1, X_1=2\right) = P \left( X_3 =0 / Y_0 = 1,Y_1 =1, Y_2=0\right) = \frac{1}{2}
+\]
+
+Si fuera una cadena de Markov $P(X_3=0)$ debería ser igual en ambos casos. Por lo tanto concluimos que depende $X_n$ depende de los estados anteriores y no es una cadena de Markov.
+
+\subsubsection{Ejercicio 2}
+\begin{exercise}
+Un conductor de taxi se mueve entre el aeropuerto $A$ y dos hoteles, $B$ y $C$, de acuerdo con las siguientes reglas:
+
+\begin{itemize}
+    \item Si está en el aeropuerto, después estará en uno de los dos hoteles con igual probabilidad.
+    \item Si está en un hotel, volverá al aeropuerto con probabilidad $\frac{3}{4}$ o irá al otro hotel con probabilidad $\frac{1}{4}$.
+\end{itemize}
+
+\begin{enumerate}
+    \item Escribe la matriz de transición de la cadena de Markov.
+    \item Supongamos que el conductor está en el aeropuerto en el tiempo $n=0$. Calcula la probabilidad de estar en cada una de las tres localizaciones posibles en $n=2$ y la probabilidad de que esté en un hotel en $n=3$.
+\end{enumerate}
+\end{exercise}
+
+
+Partiendo del espacio de estados: $E=\{A,B,C\}$ donde A es el aeropuerto y B y C son los dos hoteles.
