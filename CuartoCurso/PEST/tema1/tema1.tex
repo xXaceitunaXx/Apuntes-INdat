@@ -52,3 +52,64 @@ Un conductor de taxi se mueve entre el aeropuerto $A$ y dos hoteles, $B$ y $C$, 
 
 
 Partiendo del espacio de estados: $E=\{A,B,C\}$ donde A es el aeropuerto y B y C son los dos hoteles.
+
+Vemos que este problema viene dado por una Cadena de Markov, ya que el estado es independiente de n y solo depende del estado anterior.
+
+Se nos pide la matriz de transición de la cadena. Observando el enunciado vemos que la matriz de transición es:
+
+\[
+\mathbb{P} =
+\begin{pmatrix}
+    0 & \frac{1}{2} & \frac{1}{2}\\
+    \frac{3}{4} & 0 & \frac{1}{4} \\
+    \frac{3}{4} & \frac{1}{4} & 0\\
+\end{pmatrix}
+\]
+
+Se nos pide calcular la probabilidad de que esté en cualquiera de las 3 localizaciones en n=2, sabiendo que está en el aeropuerto (A) en n=0.
+Es decir:
+\[
+P(X_2=A \mid X_0=A) \quad P(X_2=B \mid X_0=A) \quad P(X_2=C \mid X_0=A)
+\]
+
+Lo podemos calcular de manera manual o a través de la matriz de transiciones. Lo calcularemos de ambas formas para ilustrar que el resultado es el mismo:
+\[
+P(X_2=A\mid X_0=A)=\sum_{s\in\{A,B,C\}} P(X_1=s\mid X_0=A)P(X_2=A\mid X_1=s)
+=0\cdot0+\tfrac12\cdot\tfrac34+\tfrac12\cdot\tfrac34=\tfrac34,
+\]
+
+Aunque se pueda calcular así, es mucho más sencillo usando la matriz de transición.
+
+\[
+\mathbb{P}^2 = \mathbb{P} \cdot \mathbb{P} = 
+\begin{pmatrix}
+    0 & \frac{1}{2} & \frac{1}{2}\\
+    \frac{3}{4} & 0 & \frac{1}{4} \\
+    \frac{3}{4} & \frac{1}{4} & 0\\
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+    0 & \frac{1}{2} & \frac{1}{2}\\
+    \frac{3}{4} & 0 & \frac{1}{4} \\
+    \frac{3}{4} & \frac{1}{4} & 0\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+    \frac{3}{4} & \frac{1}{8} & \frac{1}{8} \\
+    \frac{3}{16} & \frac{3}{8} & \frac{5}{16} \\
+    \frac{3}{16} & \frac{5}{16} & \frac{3}{8} \\
+\end{pmatrix}
+\]
+
+Como nos interesa para $X_0=A$, nos quedamos con la primera fila y vemos que las probabilidades son $\left(\frac{3}{4}, \frac{1}{8}, \frac{1}{8}\right)$
+
+\subsection{Ejercicio 5}
+
+
+\begin{exercise}
+Sea $\{X_n\}_{n\ge 0}$ una cadena de Markov homogénea con espacio de estados $E$ y matriz de transición $P$.  
+Sea $\tau$ el primer instante para el que $X_n \neq X_0$, donde $\tau = \infty$ si $X_n = X_0$ para todo $n \ge 0$.  
+
+Calcula $\mathbb{E}[\tau \mid X_0 = i]$ en términos de $p_{ii}$.
+\end{exercise}
+
