@@ -103,7 +103,7 @@ Aunque se pueda calcular así, es mucho más sencillo usando la matriz de transi
 
 Como nos interesa para $X_0=A$, nos quedamos con la primera fila y vemos que las probabilidades son $\left(\frac{3}{4}, \frac{1}{8}, \frac{1}{8}\right)$
 
-\subsection{Ejercicio 5}
+\subsubsection{Ejercicio 5}
 
 
 \begin{exercise}
@@ -112,4 +112,31 @@ Sea $\tau$ el primer instante para el que $X_n \neq X_0$, donde $\tau = \infty$ 
 
 Calcula $\mathbb{E}[\tau \mid X_0 = i]$ en términos de $p_{ii}$.
 \end{exercise}
+\[
+\tau \in \{1,2,3\} \cup \{\infty\}.
+\]
+Si $\tau=4 \Rightarrow$ (por ejemplo) $x_0=0, x_1=0, x_2=0, x_3=0, x_4=1$, ya que $x_n \neq x_0$.
 
+La probabilidad de que $\tau=\infty$ es 0:
+\[
+P(\tau=\infty \mid X_0=i) = \lim_{n \to \infty} P(\tau > n \mid X_0=i) = \lim_{n \to \infty} p_{ii}^{n} = 0.
+\]
+
+Ahora calculamos la esperanza:
+\[
+P(\tau=1\mid X_0=i)=1-p_{ii}, \quad 
+P(\tau=2\mid X_0=i)=p_{ii} \cdot (1-p_{ii}), \quad \dots
+\]
+\[
+P(\tau=n \mid X_0=i)=p_{ii}^{\,n-1} \cdot (1-p_{ii})
+\]
+
+Por lo tanto:
+\[
+E(\tau \mid X_0=i) = \sum_{k=1}^{\infty} k \cdot P(\tau=k \mid X_0=i) = (1-p_{ii}) \sum_{k=1}^{\infty} k \cdot p_{ii}^{\,k-1} = \frac{1}{1-p_{ii}}.
+\]
+
+Vemos que $\tau$ sigue una distribución geométrica de parámetro $1-p_{ii}$:
+\[
+\tau \sim \text{Geom}(1-p_{ii}).
+\]
