@@ -142,34 +142,157 @@ Vemos que $\tau$ sigue una distribución geométrica de parámetro $1-p_{ii}$:
 \]
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsubsection{Ejercicio 7}
+\begin{exercise}
+Sea $\{Z_n\}_{n \geq 1}$ una sucesión de variables aleatorias independientes e idénticamente distribuidas (v.a.i.i.d.) geométricas, es decir, tales que, para $k \geq 0$,
+\[
+P(Z_n = k) = (1 - p)^k p, \quad \text{con } p \in (0,1).
+\]
+Sea $X_n = \max(Z_1, \dots, Z_n)$. 
+
+Demuestra que $\{X_n\}_{n \geq 1}$ es una cadena de Markov homogénea y da su matriz de transición.
+\end{exercise}
+
+Primero comprobamos que $\{X_n\}_{n\geq 1}$ es una cadena de Markov. Sabemos que $X_n = max(Z_1, \dots, Z_n)$. Para que sea una cadena de Markov $X_{n+1}$ solo podrá depender de $Z_{n+1}$ y del estado anterior $X_n$ (esto se puede aplicar porque $Z_n$ es v.a.i.i.d. y $Z_{n+1}$ no depende de $Z_n$).
+
+Si calculamos $X_{n+1}$ vemos que:
+\[
+X_{n+1}=max(Z_1,\dots,Z_{n+1})=max(max(Z_1,\dots,Z_n),Z_{n+1})
+\]
+\[
+X_{n+1}=max(X_n,Z_{n+1})
+\]
+Como solo depende del estado anterior y del valor de $Z_{n+1}$, $\{X_n\}_{n\geq 1}$ es una cadena de Markov.
+
+Ahora calcularemos la matriz de transición.
+
+Observando las condiciones vemos que el i,j-ésimo elemento de la matriz será:
+
+\[
+p_{ij}=
+\left\{
+\begin{matrix}
+    0  \\
+    \sum_{k=0}^{i} p \cdot (1+p)^k \\
+    (1-p)^j \cdot p
+\end{matrix}
+\right.
+\begin{matrix}
+    j < i \\
+    j = i \\
+    j > i
+\end{matrix}
+\]
+Esto ocurre porque si j<i el máximo no puede disminuir, entonces la probabilidad de pasar a un estado menor es 0.
+Si j=i, el proceso se mantiene en el mismo estado siempre que $Z_{n+1} \leq i$ lo cual tiene una probabilidad de ocurrencia de: $P(Z_{n+1}=i)=1-(1-p)^{i+1}$
+Si j >i, el máximo aumenta a j si $Z_{n+1}=j$, lo que ocurre con probabilidad $p \cdot (1-p)^j$.
+
+La matriz de transición queda así:
+\[
+\mathbb{P}=
+\begin{pmatrix}
+(1-p)^1 & p(1-p)^1 & p(1-p)^2 & \cdots & p(1-p)^{i-1} \\[1mm]
+0 & (1-p)^2 & p(1-p)^2 & \cdots & p(1-p)^{i-1}\\[1mm]
+0 & 0 & (1-p)^3 & \cdots & p(1-p)^{i-1}  \\[1mm]
+\vdots & \vdots & \vdots & \ddots & \vdots \\[1mm]
+0 & 0 & 0 & \cdots & (1-p)^i\\[1mm]
+
+\end{pmatrix}
+\]
+
+
+
 \subsubsection{Ejercicio 8}
 \subsubsection{Ejercicio 9}
 \subsubsection{Ejercicio 11}
+
+\begin{exercise}
+Un ratón se mueve en un recinto con cinco parcelas, como se representa en el siguiente gráfico. 
+El ratón parte del espacio 1. Cuando el ratón está en una parcela, elige cualquiera de las parcelas 
+comunicadas con igual probabilidad, hasta que llega al espacio 3, donde está un gato, 
+o al 5, donde hay un trozo de queso. 
+
+\medskip
+\noindent
+¿Cuál es la probabilidad de que el ratón alcance el queso antes de ser comido por el gato?
+\end{exercise}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{tema1/img/ej11p1.png}
+    \caption{Recinto con las cinco parcelas y posibles movimientos del ratón.}
+    \label{ej11p1}
+\end{figure}
+
+Siendo $\tau_i$ el primer instante n tal que $X_n=i$:
+
+\[
+\tau_i = inf\{n \geq 0 : X_n=i\}
+\]
+
+Se nos pide hallar la probabidad de que el ratón alcance el queso. Planteamos las posibilidades llamando $\tau_5$ al queso y $\tau_3$ al gato
+\[
+\begin{matrix}
+    P(\tau_5 < \tau_3 \mid X_0=1) = x \\
+    P(\tau_5 < \tau_3 \mid X_0=2) = y \\
+    P(\tau_5 < \tau_3 \mid X_0=3) = 0 \\
+    P(\tau_5 < \tau_3 \mid X_0=4) = z \\
+    P(\tau_5 < \tau_3 \mid X_0=5) = 1 
+\end{matrix}
+\]
+
+Llamamos a las probabilidades de alcanzar el queso antes de ser comido x,y,z. Si la posición inicial es la 3 es claro que el gato ya nos habrá alcanzado y no podrremos alcanzar el queso antes observando la figura \ref{ej11p1}.
+Ocurrirá lo mismo si la posición inicial es la 5, la probabilidad de alcanzar el queso será 1.
+
+Resolveremos utilizando el método del primer paso que consiste en ir buscando ecuaciones recursivas basadas en lo que ocurre después del primer movimiento de la cadena.
+
+Buscamos despejar x,y,z:
+\[
+\begin{matrix}
+    x= P(\tau_5 < \tau_3 \mid X_0=1) = P(\tau_5 < \tau_3 , X_1=2 \mid X_0=1) + P(\tau_5 < \tau_3 , X_1=4 \mid X_0=1) \\
+    x= \tfrac12 \cdot y + \tfrac12 \cdot z
+\end{matrix}
+\]
+
+\[
+\begin{matrix}
+    y=P(\tau_5 < \tau_3 \mid X_0=2) = P(\tau_5 < \tau_3, X_1=1 \mid X_0=2)+P(\tau_5 < \tau_3, X_1=3 \mid X_0=2) \\
+    y = \tfrac12 \cdot x + \tfrac12 \cdot 0 = \tfrac12 \cdot x
+\end{matrix}
+\]
+
+\[
+\begin{matrix}
+    z=P(\tau_5 < \tau_3 \mid X_0=4) = P(\tau_5 < \tau_3, X_1=1 \mid X_0=4) + P(\tau_5 < \tau_3, X_1=3 \mid X_0=4)\\ + P(\tau_5 < \tau_3, X_1=5 \mid X_0=4) \\
+    z= \tfrac13 \cdot x + \tfrac13 \cdot 1 \tfrac13 \cdot 0 = \tfrac13 \cdot x + \tfrac13 
+\end{matrix}
+\]
+
+Planteamos el sistema de ecuaciones y resolvemos:
+\[
+\begin{matrix}
+    x = \tfrac12 \cdot y + \tfrac12 \cdot z \\
+    y = \tfrac12 \cdot x \\
+    z= \tfrac13 \cdot x + \tfrac13 
+\end{matrix}
+\]
+Resolvemos:
+\[
+\begin{matrix}
+    x = \tfrac14 x + \tfrac16 x +\tfrac16 \Longrightarrow \frac{7}{12} \cdot x = \tfrac16 \Longrightarrow x = \frac{12}{7} \cdot \tfrac16 \\
+    x = \tfrac27
+\end{matrix}
+\]
+\medskip
+\[
+    y= \tfrac12 \cdot\tfrac27 = \tfrac17
+\]
+\medskip
+\[
+z=\tfrac13 \cdot \left(1 + \tfrac27\right) = \tfrac13 \cdot \tfrac97 = \tfrac37
+\]    
+
+
 \subsubsection{Ejercicio 15}
 \subsubsection{Ejercicio 17}
 \subsubsection{Ejercicio 19}
