@@ -295,6 +295,58 @@ z=\tfrac13 \cdot \left(1 + \tfrac27\right) = \tfrac13 \cdot \tfrac97 = \tfrac37
 
 \subsubsection{Ejercicio 15}
 \subsubsection{Ejercicio 17}
+\begin{exercise}
+Prueba que el siguiente grafo de transición es irreducible. Calcula el periodo y las clases cíclicas.
+\end{exercise}
+
+Se nos da la secuencia de transiciones:
+\[
+1 \rightarrow 4 \rightarrow 3 \rightarrow 2 \rightarrow 7 \rightarrow 6 \rightarrow 1 \rightarrow 4 \rightarrow 5 \rightarrow 2 \rightarrow 7 \rightarrow 6 \rightarrow 2 \rightarrow 7 \rightarrow 6 \rightarrow 1 \dots
+\]
+(EL grafo tambien se nos da, consulta los enunciados amego)
+
+El conjunto de estados es \(S=\{1,2,3,4,5,6,7\}\).
+
+Para probar que la cadena es irreducible basta demostrar que todo par de estados se comunican. Observemos que desde cualquier estado se puede alcanzar el estado \(2\):
+\[
+1\to4\to3\to2,\quad 4\to3\to2,\quad 3\to2,\quad 5\to2,\quad 6\to2,\quad 7\to6\to2.
+\]
+Por otro lado, desde \(2\) se puede llegar a cualquier otro estado recorriendo el grafo:
+\[
+2\to7\to6\to1\to4\to3,\quad \text{y también } 4\to5.
+\]
+Por tanto, desde \(2\) se puede alcanzar a todos los demás estados. Dado que cualquier estado llega a \(2\) y \(2\) llega a cualquiera, se tiene que todos los estados se comunican entre sí. La cadena es, por tanto, \textbf{irreducible}.
+
+Para el cálculo del periodo recordemos que
+\[
+A_i = \{n\ge1 : p_{ii}^{(n)} > 0\}, \quad d(i) = \gcd A_i.
+\]
+Como la cadena es irreducible, el periodo es el mismo para todos los estados, por lo que basta calcularlo para \(i=2\). Encontramos ciclos que comienzan y terminan en \(2\):
+\[
+2 \to 7 \to 6 \to 2 \quad (\text{longitud } 3), \qquad
+2 \to 7 \to 6 \to 1 \to 4 \to 3 \to 2 \quad (\text{longitud } 6),
+\]
+y también concatenaciones de ellos de longitud \(9, 12, \dots\). El conjunto de longitudes posibles es, pues, \(\{3,6,9,\dots\}\), y su máximo común divisor es
+\[
+d(2) = \gcd\{3,6,9\} = 3.
+\]
+Luego el periodo de toda la cadena es \(3\).
+
+Para determinar las clases cíclicas agrupamos los estados según la congruencia módulo \(3\) del número de pasos mínimos desde un estado de referencia (por ejemplo, desde \(1\)):
+\[
+\begin{array}{lcl}
+\text{distancia 0 (mod 3):} & \{1,2\},\\
+\text{distancia 1 (mod 3):} & \{4,7\},\\
+\text{distancia 2 (mod 3):} & \{3,5,6\}.
+\end{array}
+\]
+Estas son las tres clases cíclicas, y se observa que cada transición lleva de una clase a la siguiente, de modo que el patrón se repite cada tres pasos, consistente con el periodo \(3\).
+
+En conclusión, el grafo es \textbf{irreducible}, tiene \textbf{periodo 3} y sus \textbf{clases cíclicas} son:
+\[
+\boxed{\mathbb{C}_0 = \{1,2\}, \quad \mathbb{C}_1 = \{4,7\}, \quad \mathbb{C}_2 = \{3,5,6\}.}
+\]
+
 \subsubsection{Ejercicio 19}
 \subsubsection{Ejercicio 20}
 \subsubsection{Ejercicio 21}
