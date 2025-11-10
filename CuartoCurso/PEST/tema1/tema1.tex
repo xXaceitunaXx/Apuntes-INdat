@@ -299,8 +299,55 @@ z=\tfrac13 \cdot \left(1 + \tfrac27\right) = \tfrac13 \cdot \tfrac97 = \tfrac37
 \subsubsection{Ejercicio 20}
 \subsubsection{Ejercicio 21}
 \subsubsection{Ejercicio 22}
-\subsubsection{Ejercicio 23}
+\begin{exercise}
+Prueba que la cadena del problema 7 no tiene distribución estacionaria.
+\end{exercise}
 
+Recordemos que en el \textbf{Ejercicio 7} se definía la sucesión $\{X_n\}_{n\ge1}$ como
+\[
+X_n = \max(Z_1, Z_2, \dots, Z_n),
+\]
+donde $\{Z_n\}_{n\ge1}$ son variables aleatorias independientes e idénticamente distribuidas, con distribución geométrica:
+\[
+\mathbb{P}(Z_n = k) = (1-p)^k p, \quad k = 0,1,2,\dots, \quad p \in (0,1).
+\]
+
+\paragraph{Recordatorio de la matriz de transición.}
+Sabemos que $\{X_n\}$ es una cadena de Markov homogénea con matriz de transición
+\[
+P_{i,j} = 
+\begin{cases}
+0, & j < i,\\[4pt]
+1-(1-p)^{i+1}, & j = i,\\[4pt]
+(1-p)^j p, & j > i.
+\end{cases}
+\]
+Esto se debe a que
+\[
+X_{n+1} = \max(X_n, Z_{n+1}),
+\]
+por lo que dado $X_n = i$, el siguiente estado depende únicamente del nuevo valor $Z_{n+1}$.
+
+\paragraph{Comprobación de la posible distribución estacionaria.}
+Sea $\pi = (\pi_0, \pi_1, \pi_2, \dots)$ una distribución estacionaria, es decir:
+\[
+\pi = \pi P, \quad \text{con} \quad \sum_{k=0}^\infty \pi_k = 1.
+\]
+De la primera ecuación:
+\[
+\pi_0 = p \cdot \pi_0 \quad \Longrightarrow \quad \pi_0(1-p) = 0 \quad \Longrightarrow \quad \pi_0 = 0.
+\]
+Para el siguiente estado:
+\[
+\pi_1 = (1-p)p \pi_0 + \left[p + (1-p)p\right] \pi_1 + \sum_{j>1}(1-p)^j p \pi_j.
+\]
+Como $\pi_0 = 0$, y todos los coeficientes multiplicativos son menores que 1, se obtiene inductivamente que todas las probabilidades $\pi_k$ deben ser nulas:
+\[
+\pi_k = 0 \quad \text{para todo } k \ge 0.
+\]
+Por tanto, el único vector que satisface $\pi = \pi P$ es el vector nulo, el cual no es una distribución de probabilidad.
+
+Por tanto, la cadena $X_n$ no tiene distribución estacionaria.
 
 \subsection{Parte 2}
 \subsubsection{Ejercicio 1}
