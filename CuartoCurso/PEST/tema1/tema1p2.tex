@@ -1,5 +1,86 @@
 \subsection{Parte 2}
 \subsubsection{Ejercicio 1}
+\begin{exercise}
+Dada una cadena de Markov homogénea con espacio de estados $E=\{0,1\}$ y matriz de transición
+\[
+\mathbb{P}=
+\begin{pmatrix}
+1-\alpha & \alpha \\
+\beta & 1-\beta
+\end{pmatrix},
+\]
+calcula $P_0(T_0=n)$ y $E_0[T_0]$, donde $T_0=\inf\{n\ge1 : X_n=0\}$ es el tiempo de primer retorno al estado $0$.
+\end{exercise}
+
+La matriz de transición es irreducible y el espacio de estados $E$ es finito, por lo tanto la cadena es persistente positiva y tendrá una distribución estacionaria.
+
+\[
+\pi_0=\frac{1}{E_0[T_0]}, \qquad \pi_1=\frac{1}{E_1[T_1]}.
+\]
+
+Para hallar $\pi$, usamos las ecuaciones de equilibrio global:
+\[
+\left\{
+\begin{array}{l}
+\pi \mathbb{P} = \pi, \\
+\pi \mathbb{1}= \pi \longrightarrow \pi_0 + \pi_1 = 1.
+\end{array}
+\right.
+\]
+
+Desarrollando la primera ecuación:
+\[
+\pi_0 = (1-\alpha)\pi_0 + \beta\pi_1
+\quad \Longrightarrow \quad
+\alpha\pi_0 = \beta\pi_1
+\quad \Longrightarrow \quad
+\frac{\pi_0}{\pi_1} = \frac{\beta}{\alpha}.
+\]
+
+Usando $\pi_0 + \pi_1 = 1$:
+\[
+\pi_0 = \frac{\beta}{\alpha+\beta}, \qquad \pi_1 = \frac{\alpha}{\alpha+\beta}.
+\]
+
+Como $\pi_0 = \dfrac{1}{E_0[T_0]}$, se tiene:
+\[
+E_0[T_0] = \frac{1}{\pi_0} = \frac{\alpha+\beta}{\beta}.
+\]
+
+\medskip
+\textbf{Cálculo de $P_0(T_0=n)$}
+
+Partiendo del estado $0$, la cadena puede retornar a $0$ en $n$ pasos sólo si:
+\[
+X_1=1, \, X_2=1, \dots, X_{n-1}=1, \, X_n=0.
+\]
+% Probabilidades de retorno al estado 0 (solo la parte solicitada)
+\[
+P_0(T_0=1)=\mathbb{P}(X_1=0\mid X_0=0)=p_{00}=1-\alpha.
+\]
+\[
+P_0(T_0=2)=\mathbb{P}(X_1=1,X_2=0\mid X_0=0)=p_{01}p_{10}=\alpha\beta.
+\]
+
+Por tanto:
+\[
+P_0(T_0=n)=
+\begin{cases}
+1-\alpha, & n=1,\\[4pt]
+\alpha(1-\beta)^{\,n-2}\beta, & n\ge2.
+\end{cases}
+\]
+
+Comprobamos:
+\[
+E_0[T_0] = \sum_{n=2}^{\infty} n P_0(T_0=n)
+= \sum_{n=2}^{\infty} n\, \alpha(1-\beta)^{n-2}\beta
+= \frac{\alpha+\beta}{\beta},
+\]
+lo cual coincide con el valor obtenido a partir de la distribución estacionaria.
+
+
+
 \subsubsection{Ejercicio 2}
 \subsubsection{Ejercicio 7}
 
