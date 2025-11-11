@@ -203,7 +203,133 @@ La matriz de transición queda así:
 
 
 \subsubsection{Ejercicio 8}
+
+\begin{exercise}
+Supongamos que la probabilidad de que llueva hoy es $0.3$ si ninguno de los dos últimos días fue lluvioso, pero es $0.6$ si hubo lluvia en al menos uno de los dos. Si clasificamos el tiempo en el día $n$ como $W_n \in \{L,S\}$ (lluvioso o seco):
+
+\begin{enumerate}
+    \item ¿Es $\{W_n\}$ una cadena de Markov?
+    \item Definimos $X_n = (W_{n-1}, W_n)$. ¿Es $\{X_n\}$ una cadena de Markov?
+    \item Determina la matriz de transición de $\{X_n\}$.
+    \item Si no llovió el domingo ni el lunes, ¿cuál es la probabilidad de que llueva el miércoles?
+\end{enumerate}
+\end{exercise}
+
+\textbf{$W_n$}
+
+$W_n$ será una cadena de Markov si su estado siguiente no depende de los estados anteriores.
+
+\[
+P(W_{n+1}=L \mid W_{n}=S, W_{n-1}=S)=0.3,\qquad
+P(W_{n+1}=L \mid W_{n}=L\ \text{o}\ W_{n-1}=L)=0.6
+\]
+
+Como depende de los dos estados anteriores, $W_n$ \textbf{no es una cadena de Markov}.
+
+\medskip
+\textbf{$X_n=(W_{n-1},W_n)$}
+
+Espacio de estados $E=\{SS,SL,LS,LL\}$
+
+\[
+\mathbb{P}=
+\begin{pmatrix}
+0.7 & 0.3 & 0   & 0   \\
+0   & 0   & 0.4 & 0.6 \\
+0.4 & 0.6 & 0   & 0   \\
+0   & 0   & 0.4 & 0.6
+\end{pmatrix}
+\]
+
+Ahora $X_n$ sí es una cadena de Markov, pues el siguiente estado depende sólo del par actual.
+
+\textbf{Lluvia el miercoles}
+
+Estado inicial (domingo, lunes) $=SS$.  
+Queremos la probabilidad de que el miércoles (dos días después) llueva, es decir, que $W_{n+2}=L$.  
+Esto ocurre si el estado al cabo de dos pasos es $SL$ o $LL$.
+
+Calculamos $\mathbb{P}^2$:
+
+\[
+\mathbb{P}^2=
+\begin{pmatrix}
+0.49 & 0.21 & 0.18 & 0.12\\
+0.42 & 0.18 & 0.24 & 0.16\\
+0.49 & 0.21 & 0.18 & 0.12\\
+0.42 & 0.18 & 0.24 & 0.16
+\end{pmatrix}
+\]
+
+Desde $SS$, las probabilidades a dos pasos son la primera fila: $(0.61,\,0.21,\,0.12,\,0.06)$.
+
+La probabilidad de que el tercer día (miércoles) sea lluvioso es:
+\[
+P(W_{n+2}=L \mid SS)=P(X_{n+2}\in\{SL,LL\})=0.49+0.18=0.67.
+\]
+
+
 \subsubsection{Ejercicio 9}
+\begin{exercise}
+Sea $\{X_n\}_{n\ge0}$ una cadena de Markov homogénea con espacio de estados $E$ y matriz de transición $P=(p_{ij})_{i,j\in E}$. Para $L\ge1$ definimos
+\[
+Y_n=(X_n,X_{n+1},\dots,X_{n+L}).
+\]
+El proceso $\{Y_n\}_{n\ge0}$ toma valores en
+\[
+F=\{(i_0,i_1,\dots,i_L)\in E^{L+1}:\; p_{i_0 i_1}p_{i_1 i_2}\cdots p_{i_{L-1} i_L}>0\}.
+\]
+Demuestra que $\{Y_n\}$ es una cadena de Markov homogénea y da su matriz de transición (cadena serpiente de orden $L$).
+\end{exercise}
+
+Queremos probar que
+\[
+P(Y_{n+1}=\vec{j} \mid Y_n=\vec{i}, Y_{n-1}=\vec{v},\dots,Y_0=\vec{v_0})
+= P(Y_{n+1}=\vec{j} \mid Y_n=\vec{i}).
+\]
+
+Sabiendo que
+\[
+\vec{j}=(j_0,j_1,\dots,j_L), \qquad \vec{i}=(i_0,i_1,\dots,i_L),
+\]
+tenemos que
+\[
+Y_{n+1}=(X_{n+1},X_{n+2},\dots,X_{n+L+1}).
+\]
+Entonces, para que la transición $\vec{i}\to\vec{j}$ sea posible, debe cumplirse
+\[
+j_0=i_1,\ j_1=i_2,\ \dots,\ j_{L-1}=i_L,
+\]
+y sólo la última coordenada cambia.
+
+Por tanto:
+\[
+P(Y_{n+1}=\vec{j} \mid Y_n=\vec{i})
+= P(X_{n+L+1}=j_L \mid X_{n+L}=i_L)
+= p_{i_L j_L}.
+\]
+Si no se cumple la condición de solapamiento ($j_k=i_{k+1}$ para $k=0,\dots,L-1$), entonces la probabilidad es 0.
+
+En resumen:
+\[
+P(Y_{n+1}=\vec{j}\mid Y_n=\vec{i})=
+\begin{cases}
+p_{i_L j_L}, & \text{si } (j_0,\dots,j_{L-1})=(i_1,\dots,i_L),\\[4pt]
+0, & \text{en otro caso.}
+\end{cases}
+\]
+
+Por tanto $\{Y_n\}$ es una cadena de Markov homogénea con matriz de transición $\mathbb{P}=(p_{\vec{i},\vec{j}})$ dada por
+\[
+p_{\vec{i},\vec{j}}=
+\begin{cases}
+p_{i_L j_L}, & \text{si } (j_0,\dots,j_{L-1})=(i_1,\dots,i_L),\\[4pt]
+0, & \text{en otro caso.}
+\end{cases}
+\]
+
+Esta construcción se denomina \textbf{cadena serpiente (snake chain)} de orden $L$ asociada a $\{X_n\}$.
+
 \subsubsection{Ejercicio 11}
 
 \begin{exercise}
