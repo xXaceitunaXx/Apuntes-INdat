@@ -1,0 +1,50 @@
+\subsection{Parte 2}
+\subsubsection{Ejercicio 1}
+\subsubsection{Ejercicio 2}
+\subsubsection{Ejercicio 7}
+
+\begin{exercise}
+    En ajedrez el rey puede moverse en horizontal, vertical o diagonal, con desplazamientos de una celda sobre un tablero de $8\times 8$. Supongamos que $X_n$ es la posición del rey si en cada paso se elige uno de los movimientos legales al azar.  Calcula la distribución estacionaria de $X_n$ y el tiempo medio de retorno a una esquina cuando se parte de ella.
+\end{exercise}
+
+Para calcular la distribución estacionaria partimos de las ecuaciones d eequilibrio global: $\left\{\begin{array}{l}
+    \pi=\pi\mathbb{P}\\
+    \pi\mathds{1}=1
+\end{array}\right.$\\
+
+También tenemos que tener en cuenta que $g_i$ es el grado del nodo $i$. De la primera ecuación de equilibrio sacamos que:
+
+$$
+\pi_i\frac{1}{g_i}=\pi_j\frac{1}{g_j}=cte.\Rightarrow\ \frac{\pi_i}{g_i}=cte.\ \forall i\in E
+$$
+
+De la segunda ecuación de equilibrio sacamos que:
+
+$$
+\sum_{i\in E}\pi_i=1\Rightarrow\sum_{i\in E}cte.\ g_i=1\Rightarrow cte.=\frac{1}{\sum_{i\in E}g_i}
+$$
+
+Volviendo a la ecuación anterior, podemos obtener una fórmula para la distribución estacionaria:
+
+$$
+\pi_j=\frac{g_j}{\sum_{i\in E}g_i}
+$$
+
+A partir de este punto, solo tenemos que calcular el número total de nodos y el grado de cada uno de ellos. Como tenemos un tablero $8\times 8$, 
+\begin{itemize}
+    \item Tenemos 4 esquinas, cuyo grado es 3.
+    \item Tenemos 6+6+6+6=24 casillas laterales, cuyo grado es 5
+    \item Tenemos 64-24-4=36 casillas centrales, cuyo grado es 8
+\end{itemize}
+
+En total tendremos un grado total de $4\times3+24\times5+36\times8=420$, por lo que la distribución estacionaria será
+
+$$
+\pi_i=\frac{g_i}{420}
+$$
+
+\subsubsection{Ejercicio 8}
+\subsubsection{Ejercicio 10}
+\subsubsection{Ejercicio 14}
+\subsubsection{Ejercicio 17}
+

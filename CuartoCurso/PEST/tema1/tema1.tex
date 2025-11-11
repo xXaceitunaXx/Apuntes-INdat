@@ -526,54 +526,96 @@ Como $\pi_0 = 0$, y todos los coeficientes multiplicativos son menores que 1, se
 Por tanto, el único vector que satisface $\pi = \pi P$ es el vector nulo, el cual no es una distribución de probabilidad.
 
 Por tanto, la cadena $X_n$ no tiene distribución estacionaria.
-
-\subsection{Parte 2}
-\subsubsection{Ejercicio 1}
-\subsubsection{Ejercicio 2}
-\subsubsection{Ejercicio 7}
-
+\subsubsection{Ejercicio 23}
 \begin{exercise}
-    En ajedrez el rey puede moverse en horizontal, vertical o diagonal, con desplazamientos de una celda sobre un tablero de $8\times 8$. Supongamos que $X_n$ es la posición del rey si en cada paso se elige uno de los movimientos legales al azar.  Calcula la distribución estacionaria de $X_n$ y el tiempo medio de retorno a una esquina cuando se parte de ella.
+Supongamos que $\{X_n\}_{n\ge0}$ es un proceso de ramificación (branching process), de forma que $X_n$ representa el tamaño de la generación $n$. Asumimos que la generación inicial está formada por un solo individuo y que la distribución del número de descendientes de uno de estos individuos tiene media $\mu$ y varianza $\sigma^2$. Demuestra que el tamaño medio de la generación $n$ satisface la relación de recurrencia
+\[
+\mathbb{E}X_{n+1}=\mu\,\mathbb{E}X_n,\qquad n\ge0,
+\]
+y concluye que $\mathbb{E}X_n=\mu^n,\ n\ge1$. Demuestra también que la varianza satisface
+\[
+\operatorname{Var}(X_{n+1})=\mu^2\operatorname{Var}(X_n)+\sigma^2\mu^n,\qquad n\ge0,
+\]
+y comprueba, a partir de esta relación, que
+\[
+\operatorname{Var}(X_n)=
+\begin{cases}
+n\sigma^2, & \mu=1,\\[6pt]
+\sigma^2\,\dfrac{\mu^{n-1}(\mu^n-1)}{\mu-1}, & \mu\neq1,
+\end{cases}\qquad n\ge1.
+\]
+(Indicación: para obtener las recurrencias estudia la esperanza o la varianza de $X_{n+1}$ condicionada por $X_n$.)
 \end{exercise}
 
-Para calcular la distribución estacionaria partimos de las ecuaciones d eequilibrio global: $\left\{\begin{array}{l}
-    \pi=\pi\mathbb{P}\\
-    \pi\mathds{1}=1
-\end{array}\right.$\\
 
-También tenemos que tener en cuenta que $g_i$ es el grado del nodo $i$. De la primera ecuación de equilibrio sacamos que:
+Por definición del proceso de ramificación,
+\[
+X_{n+1}=\sum_{j=1}^{X_n} Z_n^{(j)},
+\]
+donde $\{Z_n^{(j)}\}$ son iid con media $\mu$ y varianza $\sigma^2$, y para cada $n$ los $Z_n^{(j)}$ son independientes de $X_n$.
 
-$$
-\pi_i\frac{1}{g_i}=\pi_j\frac{1}{g_j}=cte.\Rightarrow\ \frac{\pi_i}{g_i}=cte.\ \forall i\in E
-$$
+Condicionando por $X_n$ obtenemos la esperanza condicional
+\[
+\mathbb{E}(X_{n+1}\mid X_n=k)=\mathbb{E}\Big(\sum_{j=1}^k Z_n^{(j)}\Big)=k\mu,
+\]
+luego
+\[
+\mathbb{E}(X_{n+1}\mid X_n)=\mu X_n.
+\]
+Tomando esperanza en ambos lados (ley de la esperanza total)
+\[
+\mathbb{E}X_{n+1}=\mathbb{E}\big(\mathbb{E}(X_{n+1}\mid X_n)\big)=\mathbb{E}(\mu X_n)=\mu\,\mathbb{E}X_n.
+\]
+Con $X_0=1$ se obtiene por recurrencia $\mathbb{E}X_n=\mu^n$ para $n\ge1$.
 
-De la segunda ecuación de equilibrio sacamos que:
+Para la varianza usamos la descomposición de la varianza condicionada:
+\[
+\operatorname{Var}(X_{n+1})=\mathbb{E}\big(\operatorname{Var}(X_{n+1}\mid X_n)\big)+\operatorname{Var}\big(\mathbb{E}(X_{n+1}\mid X_n)\big).
+\]
+Dado $X_n=k$, la suma de $k$ variables iid tiene varianza $k\sigma^2$, luego
+\[
+\operatorname{Var}(X_{n+1}\mid X_n=k)=k\sigma^2 \quad \operatorname{Var}(X_{n+1}\mid X_n)=X_n\sigma^2.,
+\]
+y por tanto (ley de la esperanza)
+\[
+\mathbb{E}\big(\operatorname{Var}(X_{n+1}\mid X_n)\big)=\mathbb{E}(X_n\sigma^2)=\sigma^2\mathbb{E}X_n=\sigma^2\mu^n.
+\]
+Además
+\[
+\operatorname{Var}\big(\mathbb{E}(X_{n+1}\mid X_n)\big)=\operatorname{Var}(\mu X_n)=\mu^2\operatorname{Var}(X_n).
+\]
+Por tanto se obtiene la recurrencia para la varianza:
+\[
+\operatorname{Var}(X_{n+1})=\mu^2\operatorname{Var}(X_n)+\sigma^2\mu^n,\qquad n\ge0,
+\]
+con condición inicial $\operatorname{Var}(X_0)=0$.
 
-$$
-\sum_{i\in E}\pi_i=1\Rightarrow\sum_{i\in E}cte.\ g_i=1\Rightarrow cte.=\frac{1}{\sum_{i\in E}g_i}
-$$
+Resolvemos esta recurrencia. Sea $v_n=\operatorname{Var}(X_n)$. Entonces
+\[
+v_{n+1}=\mu^2 v_n+\sigma^2\mu^n,\qquad v_0=0.
+\]
+Iterando la relación se obtiene la suma telescópica
+\[
+v_n=\sigma^2\sum_{k=0}^{n-1}\mu^{\,n-1+k}=\sigma^2\mu^{\,n-1}\sum_{k=0}^{n-1}\mu^{k}
+=\sigma^2\mu^{\,n-1}\frac{\mu^{n}-1}{\mu-1},\qquad (\mu\neq1).
+\]
+En el caso $\mu=1$ tomamos límite (o bien observamos la recurrencia \(v_{n+1}=v_n+\sigma^2\) con \(v_0=0\)) y obtenemos
+\[
+v_n=n\sigma^2,\qquad (\mu=1).
+\]
+En resumen,
+\[
+\operatorname{Var}(X_n)=
+\begin{cases}
+n\sigma^2, & \mu=1,\\[6pt]
+\sigma^2\,\dfrac{\mu^{n-1}(\mu^n-1)}{\mu-1}, & \mu\neq1,
+\end{cases}\qquad n\ge1,
+\]
+como pedía el enunciado.
 
-Volviendo a la ecuación anterior, podemos obtener una fórmula para la distribución estacionaria:
 
-$$
-\pi_j=\frac{g_j}{\sum_{i\in E}g_i}
-$$
 
-A partir de este punto, solo tenemos que calcular el número total de nodos y el grado de cada uno de ellos. Como tenemos un tablero $8\times 8$, 
-\begin{itemize}
-    \item Tenemos 4 esquinas, cuyo grado es 3.
-    \item Tenemos 6+6+6+6=24 casillas laterales, cuyo grado es 5
-    \item Tenemos 64-24-4=36 casillas centrales, cuyo grado es 8
-\end{itemize}
 
-En total tendremos un grado total de $4\times3+24\times5+36\times8=420$, por lo que la distribución estacionaria será
 
-$$
-\pi_i=\frac{g_i}{420}
-$$
 
-\subsubsection{Ejercicio 8}
-\subsubsection{Ejercicio 10}
-\subsubsection{Ejercicio 14}
-\subsubsection{Ejercicio 17}
-
+s
